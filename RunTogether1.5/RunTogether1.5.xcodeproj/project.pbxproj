@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		254661F32322F4D8001BAE42 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 254661F22322F4D7001BAE42 /* CloudKit.framework */; };
+		254661F52322F4F3001BAE42 /* Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254661F42322F4F3001BAE42 /* Run.swift */; };
 		25AA4B4423229DE00051C4F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AA4B4323229DE00051C4F9 /* AppDelegate.swift */; };
 		25AA4B4923229DE00051C4F9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25AA4B4723229DE00051C4F9 /* Main.storyboard */; };
 		25AA4B4B23229DE10051C4F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25AA4B4A23229DE10051C4F9 /* Assets.xcassets */; };
@@ -14,6 +16,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		254661F02322F4D4001BAE42 /* RunTogether1.5.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RunTogether1.5.entitlements; sourceTree = "<group>"; };
+		254661F22322F4D7001BAE42 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		254661F42322F4F3001BAE42 /* Run.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Run.swift; sourceTree = "<group>"; };
 		25AA4B4023229DE00051C4F9 /* RunTogether1.5.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RunTogether1.5.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25AA4B4323229DE00051C4F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		25AA4B4823229DE00051C4F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -27,17 +32,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				254661F32322F4D8001BAE42 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		254661F12322F4D7001BAE42 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				254661F22322F4D7001BAE42 /* CloudKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		25AA4B3723229DE00051C4F9 = {
 			isa = PBXGroup;
 			children = (
 				25AA4B4223229DE00051C4F9 /* RunTogether1.5 */,
 				25AA4B4123229DE00051C4F9 /* Products */,
+				254661F12322F4D7001BAE42 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -52,6 +67,7 @@
 		25AA4B4223229DE00051C4F9 /* RunTogether1.5 */ = {
 			isa = PBXGroup;
 			children = (
+				254661F02322F4D4001BAE42 /* RunTogether1.5.entitlements */,
 				25AA4B5923229E340051C4F9 /* UI */,
 				25AA4B5623229E140051C4F9 /* Models */,
 				25AA4B5823229E200051C4F9 /* Controllers */,
@@ -75,6 +91,7 @@
 		25AA4B5623229E140051C4F9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				254661F42322F4F3001BAE42 /* Run.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -141,6 +158,14 @@
 				TargetAttributes = {
 					25AA4B3F23229DE00051C4F9 = {
 						CreatedOnToolsVersion = 10.3;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -181,6 +206,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				25AA4B4423229DE00051C4F9 /* AppDelegate.swift in Sources */,
+				254661F52322F4F3001BAE42 /* Run.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,6 +352,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = RunTogether1.5/RunTogether1.5.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 38AN8KZ7HW;
 				INFOPLIST_FILE = "$(SRCROOT)/RunTogether1.5/Resources/Info.plist";
@@ -344,6 +371,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = RunTogether1.5/RunTogether1.5.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 38AN8KZ7HW;
 				INFOPLIST_FILE = "$(SRCROOT)/RunTogether1.5/Resources/Info.plist";
