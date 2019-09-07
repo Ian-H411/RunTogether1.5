@@ -114,4 +114,7 @@ class RunController{
 
         }
     }
+    func subScribeToNewRuns(completion: @escaping (Bool, Error?) -> Void){
+        
+    }
 }
