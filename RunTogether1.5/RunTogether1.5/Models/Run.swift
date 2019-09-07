@@ -69,7 +69,7 @@ class Run {
     }
 }
 extension CKRecord{
-    convenience init(run: Run){
+    convenience init?(run: Run){
         self.init(recordType: RunKeys.runObjectKey, recordID: run.ckRecordId)
         self.setValue(run.averagePace, forKey: RunKeys.averagePaceKey)
         self.setValue(run.calories, forKey: RunKeys.calorieKey)
