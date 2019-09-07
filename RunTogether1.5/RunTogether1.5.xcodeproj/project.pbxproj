@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		251FAFF123241C8200AD991B /* CKRecordKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251FAFF023241C8200AD991B /* CKRecordKeys.swift */; };
+		251FAFF32324216A00AD991B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251FAFF22324216A00AD991B /* User.swift */; };
 		254661F32322F4D8001BAE42 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 254661F22322F4D7001BAE42 /* CloudKit.framework */; };
 		254661F52322F4F3001BAE42 /* Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254661F42322F4F3001BAE42 /* Run.swift */; };
 		25AA4B4423229DE00051C4F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AA4B4323229DE00051C4F9 /* AppDelegate.swift */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		251FAFF023241C8200AD991B /* CKRecordKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKRecordKeys.swift; sourceTree = "<group>"; };
+		251FAFF22324216A00AD991B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		254661F02322F4D4001BAE42 /* RunTogether1.5.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RunTogether1.5.entitlements; sourceTree = "<group>"; };
 		254661F22322F4D7001BAE42 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		254661F42322F4F3001BAE42 /* Run.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Run.swift; sourceTree = "<group>"; };
@@ -80,7 +84,6 @@
 		25AA4B5523229E000051C4F9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				25AA4B5A23229E410051C4F9 /* HelperFiles */,
 				25AA4B4323229DE00051C4F9 /* AppDelegate.swift */,
 				25AA4B4A23229DE10051C4F9 /* Assets.xcassets */,
 				25AA4B4F23229DE20051C4F9 /* Info.plist */,
@@ -91,7 +94,9 @@
 		25AA4B5623229E140051C4F9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				25AA4B5A23229E410051C4F9 /* HelperFiles */,
 				254661F42322F4F3001BAE42 /* Run.swift */,
+				251FAFF22324216A00AD991B /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -122,6 +127,7 @@
 		25AA4B5A23229E410051C4F9 /* HelperFiles */ = {
 			isa = PBXGroup;
 			children = (
+				251FAFF023241C8200AD991B /* CKRecordKeys.swift */,
 			);
 			path = HelperFiles;
 			sourceTree = "<group>";
@@ -205,8 +211,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				251FAFF32324216A00AD991B /* User.swift in Sources */,
 				25AA4B4423229DE00051C4F9 /* AppDelegate.swift in Sources */,
 				254661F52322F4F3001BAE42 /* Run.swift in Sources */,
+				251FAFF123241C8200AD991B /* CKRecordKeys.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
