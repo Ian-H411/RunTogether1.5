@@ -71,13 +71,13 @@ class Run {
 extension CKRecord{
     convenience init(run: Run){
         self.init(recordType: RunKeys.runObjectKey, recordID: run.ckRecordId)
-        setValue(run.averagePace, forKey: RunKeys.averagePaceKey)
-        setValue(run.calories, forKey: RunKeys.calorieKey)
-        setValue(run.date, forKey: RunKeys.dateKey)
-        setValue(run.distance, forKey: RunKeys.distanceKey)
-        setValue(run.totalTime, forKey: RunKeys.totalTimeKey)
-        setValue(run.coreLocationPoints, forKey: RunKeys.coreLocationsKey)
-        setValue(run.userReference, forKey: RunKeys.userReferenceKey)
+        self.setValue(run.averagePace, forKey: RunKeys.averagePaceKey)
+        self.setValue(run.calories, forKey: RunKeys.calorieKey)
+        self.setValue(run.date, forKey: RunKeys.dateKey)
+        self.setValue(run.distance, forKey: RunKeys.distanceKey)
+        self.setValue(run.totalTime, forKey: RunKeys.totalTimeKey)
+        self.setValue(run.coreLocationPoints, forKey: RunKeys.coreLocationsKey)
+        self.setValue(run.userReference, forKey: RunKeys.userReferenceKey)
     
     }
 }

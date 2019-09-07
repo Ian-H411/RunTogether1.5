@@ -58,3 +58,15 @@ class User{
         self.height = height
     }
 }
+
+extension CKRecord {
+    convenience init?(user: User){
+        self.init(recordType: UserKeys.userObjectKey, recordID: user.recordID)
+        self.setValue(user.name, forKey: UserKeys.nameKey)
+        self.setValue(user.totalMiles, forKey: UserKeys.totalMilesKey)
+        self.setValue(user.weight, forKey: UserKeys.weightKey)
+        self.setValue(user.racesWon, forKey: UserKeys.racesWonKey)
+        self.setValue(user.age, forKey: UserKeys.ageKey)
+        self.setValue(user.height, forKey: UserKeys.heightKey)
+    }
+}
