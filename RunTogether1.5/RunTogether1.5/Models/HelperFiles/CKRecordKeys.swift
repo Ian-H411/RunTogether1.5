@@ -23,7 +23,24 @@ struct RunKeys {
     
     static let coreLocationsKey = "CoreLocations"
     
-    static let recordIdKey = "CkrecordId"
-    
     static let userReferenceKey = "UserReference"
+}
+
+struct UserKeys{
+    
+    static let userObjectKey = "User"
+    
+    static let nameKey = "Name"
+    
+    static let totalMilesKey = "TotalMiles"
+    
+    static let racesWonKey = "RacesWon"
+    
+    static let weightKey = "weight"
+    
+    static let heightKey = "Height"
+    
+    static let ageKey = "Age"
+    
+    
 }

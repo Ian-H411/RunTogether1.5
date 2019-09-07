@@ -56,8 +56,7 @@ class Run {
         let date = record[RunKeys.dateKey] as? Date,
         let distance =  record[RunKeys.dateKey] as? Double,
         let totalTime = record[RunKeys.totalTimeKey] as? Double,
-        let coreLocationPoints = record[RunKeys.coreLocationsKey] as? [CLLocation],
-        let ckRecordId = record[RunKeys.recordIdKey] as? CKRecord.ID
+        let coreLocationPoints = record[RunKeys.coreLocationsKey] as? [CLLocation]
             else {return nil}
         self.averagePace = averagePace
         self.calories = calories
@@ -66,7 +65,7 @@ class Run {
         self.totalTime = totalTime
         self.coreLocationPoints = coreLocationPoints
         self.user = user
-        self.ckRecordId = ckRecordId
+        self.ckRecordId = record.recordID
     }
 }
 extension CKRecord{
