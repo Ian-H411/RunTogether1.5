@@ -21,8 +21,7 @@ class GoOnARunViewController: UIViewController {
     @IBOutlet weak var distanceLabel: UILabel!
     
     @IBOutlet weak var CurrentRouteView: MKMapView!
-    
-    var blue  = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
@@ -41,17 +40,14 @@ class GoOnARunViewController: UIViewController {
     //MARK: -Helpers
     
     func setUpUI(){
-        view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
         CurrentRouteView.layer.cornerRadius = 20.0
         
-        startStopButton.layer.cornerRadius = 5.0
+        startStopButton.layer.cornerRadius = 50
         startStopButton.backgroundColor = .clear
         startStopButton.setTitle("start", for: .normal)
-        startStopButton.setTitleColor(blue, for: .normal)
-        timeLabel.textColor = blue
-        distanceLabel.textColor = blue
-        PaceLabel.textColor = blue
-        
+        distanceLabel.layer.cornerRadius = 10
+        timeLabel.layer.cornerRadius = 10
+        PaceLabel.layer.cornerRadius = 10
         UITabBar.appearance().tintColor = .black
     }
     

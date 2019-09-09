@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -179,7 +180,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="DQ3-k1-cFc">
-                                <rect key="frame" x="0.0" y="114" width="414" height="594.5"/>
+                                <rect key="frame" x="0.0" y="112.5" width="414" height="631"/>
                                 <subviews>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Vz3-B3-339">
                                         <rect key="frame" x="20.5" y="0.0" width="373" height="372.5"/>
@@ -188,41 +189,44 @@
                                         </constraints>
                                     </mapView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="34" translatesAutoresizingMaskIntoConstraints="NO" id="KzT-5v-QRG">
-                                        <rect key="frame" x="0.0" y="382.5" width="414" height="212"/>
+                                        <rect key="frame" x="0.0" y="382.5" width="414" height="248.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="OA3-LS-061">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="89"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="107.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Tye-OK-HNF">
-                                                        <rect key="frame" x="0.0" y="0.0" width="204.5" height="89"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="204.5" height="107.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LIK-ZO-r7B">
-                                                                <rect key="frame" x="0.0" y="0.0" width="204.5" height="36.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="204.5" height="45.5"/>
+                                                                <color key="backgroundColor" name="BloodRed"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                                <color key="textColor" red="0.96470588239999999" green="0.88021263849999998" blue="0.029392639589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pace" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5it-hw-m73">
-                                                                <rect key="frame" x="0.0" y="52.5" width="204.5" height="36.5"/>
+                                                                <rect key="frame" x="0.0" y="61.5" width="204.5" height="46"/>
+                                                                <color key="backgroundColor" name="BloodRed"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                                <color key="textColor" red="0.96470588239999999" green="0.88021263849999998" blue="0.029392639589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="LbD-ID-7lM">
-                                                        <rect key="frame" x="209.5" y="0.0" width="204.5" height="89"/>
+                                                        <rect key="frame" x="209.5" y="0.0" width="204.5" height="107.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tsW-XY-ZTe">
-                                                                <rect key="frame" x="0.0" y="0.0" width="204.5" height="36"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="204.5" height="45"/>
+                                                                <color key="backgroundColor" name="BloodRed"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                                <color key="textColor" red="0.96470588239999999" green="0.88021263849999998" blue="0.029392639589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D1Z-Gn-Lxa">
-                                                                <rect key="frame" x="0.0" y="53" width="204.5" height="36"/>
+                                                                <rect key="frame" x="0.0" y="62" width="204.5" height="45.5"/>
+                                                                <color key="backgroundColor" name="BloodRed"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                                <state key="normal" title="Details"/>
+                                                                <state key="normal" title="Details">
+                                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                                </state>
                                                                 <connections>
                                                                     <segue destination="egY-gO-nH3" kind="show" id="FQi-IA-FIV"/>
                                                                 </connections>
@@ -232,8 +236,8 @@
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YvO-kL-ATk">
-                                                <rect key="frame" x="41.5" y="123" width="331" height="89"/>
-                                                <color key="backgroundColor" red="0.96470588239999999" green="0.88021263849999998" blue="0.029392639589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <rect key="frame" x="41.5" y="141.5" width="331" height="107"/>
+                                                <color key="backgroundColor" name="TrafficLightGreen"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="80" id="X8C-ls-oSS"/>
                                                 </constraints>
@@ -254,7 +258,7 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="DQ3-k1-cFc" firstAttribute="centerY" secondItem="X4n-DH-daA" secondAttribute="centerY" multiplier="0.95" id="0N1-mZ-wPP"/>
                             <constraint firstItem="DQ3-k1-cFc" firstAttribute="centerX" secondItem="X4n-DH-daA" secondAttribute="centerX" id="cc7-Oc-MPr"/>
@@ -281,6 +285,27 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CFw-s4-XVH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="596" y="1380"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="I5p-JM-oQx">
+            <objects>
+                <viewController id="vsL-gx-64K" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yWl-wz-MHd">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="RJR-Ma-C7z">
+                                <rect key="frame" x="10" y="430" width="394" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </pageControl>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="MLA-9B-08b"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tli-hh-Tyz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1586.9565217391305" y="1378.7946428571429"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="TUQ-yM-OfG">
@@ -421,6 +446,14 @@
             <point key="canvasLocation" x="-1507" y="623"/>
         </scene>
     </scenes>
+    <resources>
+        <namedColor name="BloodRed">
+            <color red="0.73333333333333328" green="0.039215686274509803" blue="0.11764705882352941" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TrafficLightGreen">
+            <color red="0.20000000000000001" green="0.6470588235294118" blue="0.19607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="F9H-vc-3TS"/>
     </inferredMetricsTieBreakers>
