@@ -50,6 +50,13 @@ let locationManager = LocationManager.shared
     //MARK: - ACTIONS
     
     @IBAction func startStopButtonTapped(_ sender: Any) {
+        if isRunning{
+            stopRun()
+            isRunning = false
+        } else {
+            startRun()
+            isRunning = true
+        }
     }
     
     
@@ -70,7 +77,49 @@ let locationManager = LocationManager.shared
         UITabBar.appearance().tintColor = .black
     }
     
+    func startLocationTracking(){
+        //set the delegate
+        locationManager.delegate = self
+        //tell it what activity we are doing
+        locationManager.activityType = .fitness
+        //how accurate in meters the device needs to be before giving us an update
+        locationManager.distanceFilter = 10
+        //start the machine
+        locationManager.startUpdatingLocation()
+    }
     
+    func addSecond(){
+        seconds = seconds + 1
+       //update afterwards
+    }
+    func startRun(){
+        //clear everything out and then go
+        seconds = 0
+        calories = 0
+        distance = Measurement(value: 0, unit: UnitLength.meters)
+        listOfLocations.removeAll()
+        //update labels here
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+            self.addSecond()
+            //update calories
+        }
+        startLocationTracking()
+    }
+    
+    func stopRun(){
+        seconds = 0
+        distance = Measurement(value: 0, unit: UnitLength.meters)
+        listOfLocations.removeAll()
+        //update display here
+        timer?.invalidate()
+        locationManager.stopUpdatingLocation()
+    }
+    //TODO: - IMPLEMENT MORE PRECISE CALORIE MEASUREMENT FORMULA
+    func caloriesBurnt (){
+        let distanceInMiles = distance.converted(to: UnitLength.miles)
+        let burnt = 100 * distanceInMiles.value
+        calories = burnt
+    }
     
     
     /*
