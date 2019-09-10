@@ -244,6 +244,9 @@
                                                 <state key="normal" title="Start/Stop">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="startStopButtonTapped:" destination="LXK-GV-JLw" eventType="touchUpInside" id="v4Q-aS-Rcf"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -285,27 +288,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CFw-s4-XVH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="596" y="1380"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="I5p-JM-oQx">
-            <objects>
-                <viewController id="vsL-gx-64K" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="yWl-wz-MHd">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="RJR-Ma-C7z">
-                                <rect key="frame" x="10" y="430" width="394" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </pageControl>
-                        </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="MLA-9B-08b"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tli-hh-Tyz" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1586.9565217391305" y="1378.7946428571429"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="TUQ-yM-OfG">

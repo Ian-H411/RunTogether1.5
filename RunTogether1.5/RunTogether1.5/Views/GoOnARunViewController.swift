@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
 class GoOnARunViewController: UIViewController {
     //MARK: -Outlets
@@ -21,17 +22,35 @@ class GoOnARunViewController: UIViewController {
     @IBOutlet weak var distanceLabel: UILabel!
     
     @IBOutlet weak var CurrentRouteView: MKMapView!
+    
+    
+    ///vars and lets for tracking a run
+    
+let locationManager = LocationManager.shared
 
+    var run: Run?
+    
+    var seconds = 0
+    
+    var isRunning: Bool = false
+    
+    var calories: Double = 0.0
+    
+    var timer: Timer?
+    
+    var distance = Measurement(value: 0, unit: UnitLength.feet)
+    
+    var listOfLocations = [CLLocation]()
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
         
     }
     
-    
-    
     //MARK: - ACTIONS
     
+    @IBAction func startStopButtonTapped(_ sender: Any) {
+    }
     
     
     
@@ -64,4 +83,21 @@ class GoOnARunViewController: UIViewController {
      }
      */
     
+}
+extension GoOnARunViewController: CLLocationManagerDelegate{
+   //this will continually feed me new locations
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        for location in locations {
+            //grab the time
+            let timeOfLocation = location.timestamp.timeIntervalSinceNow
+            guard location.horizontalAccuracy < 20 && abs(timeOfLocation) < 10 else {
+                continue
+            }
+            if let lastLocation = listOfLocations.last{
+                let changeInDistance = location.distance(from: lastLocation)
+                distance = distance + Measurement(value: changeInDistance, unit: UnitLength.feet)
+            }
+            listOfLocations.append(location)
+        }
+    }
 }

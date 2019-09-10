@@ -9,9 +9,9 @@
 import Foundation
 import CloudKit
 
-class RunController{
+class RunCloudController{
     //Singleton
-    static let shared = RunController()
+    static let shared = RunCloudController()
     //source of truth
     var user: User?
     //database local
