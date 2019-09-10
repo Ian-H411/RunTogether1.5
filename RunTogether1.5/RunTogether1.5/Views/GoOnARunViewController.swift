@@ -65,9 +65,9 @@ let locationManager = LocationManager.shared
     
     //MARK: -Helpers
     
+    //initial start up only
     func setUpUI(){
         CurrentRouteView.layer.cornerRadius = 20.0
-        
         startStopButton.layer.cornerRadius = 50
         startStopButton.backgroundColor = .clear
         startStopButton.setTitle("start", for: .normal)
@@ -75,6 +75,12 @@ let locationManager = LocationManager.shared
         timeLabel.layer.cornerRadius = 10
         PaceLabel.layer.cornerRadius = 10
         UITabBar.appearance().tintColor = .black
+    }
+    //to be used to update the label text
+    func updateUIText(){
+        PaceLabel.text = Converter.paceFormatter(distance: distance, seconds: seconds, outputUnit: UnitSpeed.minutesPerMile)
+        timeLabel.text = Converter.formatTime(seconds: seconds)
+        distanceLabel.text = Converter.measureMentFormatter(distance: distance)
     }
     
     func startLocationTracking(){
