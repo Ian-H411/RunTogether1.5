@@ -29,7 +29,9 @@ class User{
     
     var runs: [Run]
     
-    init(name: String, totalMiles: Double = 0.0, racesWon: Int = 0, height: Double, weight: Double, age: Int, ckRecordId: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString), runs: [Run] = []){
+    var gender: String
+    
+    init(name: String, totalMiles: Double = 0.0, racesWon: Int = 0, height: Double, weight: Double, age: Int, gender: String, ckRecordId: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString), runs: [Run] = []){
         self.name = name
         self.totalMiles = totalMiles
         self.racesWon = racesWon
@@ -38,6 +40,7 @@ class User{
         self.recordID = ckRecordId
         self.height = height
         self.runs = runs
+        self.gender = gender
     }
     
     init?(record: CKRecord){
@@ -46,7 +49,8 @@ class User{
         let racesWon = record[UserKeys.racesWonKey] as? Int,
         let weight = record[UserKeys.weightKey] as? Double,
         let age = record[UserKeys.ageKey] as? Int,
-        let height = record[UserKeys.heightKey] as? Double
+        let height = record[UserKeys.heightKey] as? Double,
+        let gender = record[UserKeys.genderKey] as? String
             else {return nil}
         self.runs = []
         self.recordID = record.recordID
@@ -56,6 +60,7 @@ class User{
         self.racesWon = racesWon
         self.age = age
         self.height = height
+        self.gender = gender
     }
 }
 
@@ -68,5 +73,6 @@ extension CKRecord {
         self.setValue(user.racesWon, forKey: UserKeys.racesWonKey)
         self.setValue(user.age, forKey: UserKeys.ageKey)
         self.setValue(user.height, forKey: UserKeys.heightKey)
+        self.setValue(user.gender, forKey: UserKeys.genderKey)
     }
 }

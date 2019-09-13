@@ -21,7 +21,7 @@ class GoOnARunViewController: UIViewController {
     
     @IBOutlet weak var distanceLabel: UILabel!
     
-    @IBOutlet weak var CurrentRouteView: MKMapView!
+   
     
     
     ///vars and lets for tracking a run
@@ -67,7 +67,6 @@ let locationManager = LocationManager.shared
     
     //initial start up only
     func setUpUI(){
-        CurrentRouteView.layer.cornerRadius = 20.0
         startStopButton.layer.cornerRadius = 50
         startStopButton.backgroundColor = .clear
         startStopButton.setTitle("start", for: .normal)
@@ -119,7 +118,7 @@ let locationManager = LocationManager.shared
         updateUIText()
         timer?.invalidate()
         locationManager.stopUpdatingLocation()
-        self.performSegue(withIdentifier: "finished", sender: self)
+        self.performSegue(withIdentifier: "finished", sender: nil)
     }
     //TODO: - IMPLEMENT MORE PRECISE CALORIE MEASUREMENT FORMULA
     func caloriesBurnt (){

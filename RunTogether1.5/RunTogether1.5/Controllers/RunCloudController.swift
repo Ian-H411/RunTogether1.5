@@ -18,9 +18,9 @@ class RunCloudController{
     let privateDB = CKContainer.default().privateCloudDatabase
     
     //used only on creation of a new profile
-    func createNewUserAndPushWith(name: String, height: Double, weight: Double, age: Int, completion: @escaping (Bool) -> Void){
+    func createNewUserAndPushWith(name: String, height: Double, weight: Double, age: Int, gender: String, completion: @escaping (Bool) -> Void){
         //create a user
-        let user = User(name: name, height: height, weight: weight, age: age)
+        let user = User(name: name, height: height, weight: weight, age: age, gender: gender)
         //convert to a record
         guard let record = CKRecord(user: user) else {return}
         privateDB.save(record) { (recordRecieved, error) in
@@ -42,11 +42,11 @@ class RunCloudController{
         }
     }
     
-    func addRunAndPushToCloud(with averagePace: Double, calories: Int, distance: Double, totalTime: Double, coreLocations: [CLLocation], completion: @escaping (Bool) -> Void){
+    func addRunAndPushToCloud(with distance: Double, totalTime: Double, elevationPoints: Int, consistencyPoints: Int, timePoints: Int, coreLocations: [CLLocation], completion: @escaping (Bool) -> Void){
         //unwrap user if no user then yo can run simple as that
         guard let user = user else {return}
         //create a run
-        let run = Run(averagePace: averagePace, calories: calories, distance: distance, totalTime: totalTime, coreLocationPoints: coreLocations, user: user)
+        let run = Run(distance: distance, totalTime: totalTime, coreLocationPoints: coreLocations, user: user, elevationPoints: elevationPoints, consistencyPoints: consistencyPoints, timePoints: timePoints)
         //create a record from it
         guard let recordToPush = CKRecord(run: run) else {return}
         //save it

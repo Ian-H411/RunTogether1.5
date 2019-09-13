@@ -24,6 +24,12 @@ struct RunKeys {
     static let coreLocationsKey = "CoreLocations"
     
     static let userReferenceKey = "UserReference"
+    
+    static let timePointsKey = "TimePoints"
+    
+    static let consistencyPointsKey = "ConsistencyPoints"
+    
+    static let elevationPoints = "ElevationPoints"
 }
 
 struct UserKeys{
@@ -42,5 +48,15 @@ struct UserKeys{
     
     static let ageKey = "Age"
     
+    static let genderKey = "Gender"
     
+}
+
+struct GenderKeys {
+    
+    static let male = "Male"
+    
+    static let female = "Female"
+    
+    static let other = "Other"
 }

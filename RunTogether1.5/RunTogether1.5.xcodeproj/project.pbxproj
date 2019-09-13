@@ -15,7 +15,7 @@
 		251FB0022327DE9400AD991B /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251FB0012327DE9400AD991B /* LocationManager.swift */; };
 		251FB0052327E5DA00AD991B /* ConverterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251FB0042327E5DA00AD991B /* ConverterManager.swift */; };
 		251FB0072327E80700AD991B /* UnitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251FB0062327E80700AD991B /* UnitExtensions.swift */; };
-		251FB009232B192100AD991B /* FinishedRunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251FB008232B192100AD991B /* FinishedRunViewController.swift */; };
+		251FB00B232BF6D800AD991B /* FinishedRunDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251FB00A232BF6D800AD991B /* FinishedRunDetailViewController.swift */; };
 		254661F32322F4D8001BAE42 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 254661F22322F4D7001BAE42 /* CloudKit.framework */; };
 		254661F52322F4F3001BAE42 /* Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254661F42322F4F3001BAE42 /* Run.swift */; };
 		25AA4B4423229DE00051C4F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AA4B4323229DE00051C4F9 /* AppDelegate.swift */; };
@@ -33,7 +33,7 @@
 		251FB0012327DE9400AD991B /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		251FB0042327E5DA00AD991B /* ConverterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterManager.swift; sourceTree = "<group>"; };
 		251FB0062327E80700AD991B /* UnitExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitExtensions.swift; sourceTree = "<group>"; };
-		251FB008232B192100AD991B /* FinishedRunViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedRunViewController.swift; sourceTree = "<group>"; };
+		251FB00A232BF6D800AD991B /* FinishedRunDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedRunDetailViewController.swift; sourceTree = "<group>"; };
 		254661F02322F4D4001BAE42 /* RunTogether1.5.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RunTogether1.5.entitlements; sourceTree = "<group>"; };
 		254661F22322F4D7001BAE42 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		254661F42322F4F3001BAE42 /* Run.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Run.swift; sourceTree = "<group>"; };
@@ -131,7 +131,7 @@
 			children = (
 				251FB0032327DE9A00AD991B /* View Helpers */,
 				251FAFF92324618000AD991B /* GoOnARunViewController.swift */,
-				251FB008232B192100AD991B /* FinishedRunViewController.swift */,
+				251FB00A232BF6D800AD991B /* FinishedRunDetailViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -243,7 +243,6 @@
 			files = (
 				251FAFF52324368200AD991B /* RunCloudController.swift in Sources */,
 				251FAFFA2324618000AD991B /* GoOnARunViewController.swift in Sources */,
-				251FB009232B192100AD991B /* FinishedRunViewController.swift in Sources */,
 				251FAFF32324216A00AD991B /* User.swift in Sources */,
 				251FB0022327DE9400AD991B /* LocationManager.swift in Sources */,
 				251FB0052327E5DA00AD991B /* ConverterManager.swift in Sources */,
@@ -251,6 +250,7 @@
 				254661F52322F4F3001BAE42 /* Run.swift in Sources */,
 				251FB0072327E80700AD991B /* UnitExtensions.swift in Sources */,
 				251FAFF123241C8200AD991B /* CKRecordKeys.swift in Sources */,
+				251FB00B232BF6D800AD991B /* FinishedRunDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
