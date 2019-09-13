@@ -119,8 +119,19 @@ let locationManager = LocationManager.shared
         locationManager.stopUpdatingLocation()
         self.performSegue(withIdentifier: "finished", sender: nil)
     }
-    //TODO: - IMPLEMENT MORE PRECISE CALORIE MEASUREMENT FORMULA
+
     func caloriesBurnt (){
+        guard let user = RunCloudController.shared.user else {calories = -1 ; return}
+        if user.gender == GenderKeys.male {
+            //calc male calories
+            return (((Double(user.age) * 0.2017) + (user.weight * 0.09036) + (150 * 0.6309) - 55.0969) * seconds) / 4.184
+        } else if user.gender == GenderKeys.female {
+            //calc female calories
+            return (((Double(user.age) * 0.074) - (user.weight * 0.05741) + (150 * 0.4472) - 20.4022) * seconds) / 4.184
+        } else{
+            return ((((Double(user.age) * 0.2017) + (user.weight * 0.09036) + (150 * 0.6309) - 55.0969) * seconds) / 4.184) * ((((Double(user.age) * 0.074) - (user.weight * 0.05741) + (150 * 0.4472) - 20.4022) * seconds) / 4.184) / 2
+        }
+
     }
     
    
