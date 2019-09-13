@@ -115,10 +115,11 @@ let locationManager = LocationManager.shared
     func stopRun(){
         seconds = 0
         distance = Measurement(value: 0, unit: UnitLength.meters)
-        listOfLocations.removeAll()
+//        listOfLocations.removeAll()
         updateUIText()
         timer?.invalidate()
         locationManager.stopUpdatingLocation()
+        self.performSegue(withIdentifier: "finished", sender: self)
     }
     //TODO: - IMPLEMENT MORE PRECISE CALORIE MEASUREMENT FORMULA
     func caloriesBurnt (){
@@ -127,16 +128,18 @@ let locationManager = LocationManager.shared
         calories = burnt
     }
     
-    
-    /*
+   
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
+        if segue.identifier == "finished" {
+            if let finishedVC = segue.destination as? FinishedRunViewController {
+                finishedVC.listOfLocations = listOfLocations
+            }
+        }
      }
-     */
+
     
 }
 extension GoOnARunViewController: CLLocationManagerDelegate{

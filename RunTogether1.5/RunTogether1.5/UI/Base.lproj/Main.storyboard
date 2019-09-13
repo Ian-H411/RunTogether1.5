@@ -243,7 +243,7 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="startStopButtonTapped:" destination="LXK-GV-JLw" eventType="touchUpInside" id="v4Q-aS-Rcf"/>
-                                                    <segue destination="egY-gO-nH3" kind="show" id="EhI-B5-HUf"/>
+                                                    <segue destination="egY-gO-nH3" kind="show" identifier="finished" id="EhI-B5-HUf"/>
                                                 </connections>
                                             </button>
                                         </subviews>
