@@ -96,7 +96,7 @@ let locationManager = LocationManager.shared
     
     func addSecond(){
         seconds = seconds + 1
-       //update afterwards
+       updateUIText()
     }
     func startRun(){
         //clear everything out and then go
@@ -104,7 +104,7 @@ let locationManager = LocationManager.shared
         calories = 0
         distance = Measurement(value: 0, unit: UnitLength.meters)
         listOfLocations.removeAll()
-        //update labels here
+        updateUIText()
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
             self.addSecond()
             //update calories
@@ -116,7 +116,7 @@ let locationManager = LocationManager.shared
         seconds = 0
         distance = Measurement(value: 0, unit: UnitLength.meters)
         listOfLocations.removeAll()
-        //update display here
+        updateUIText()
         timer?.invalidate()
         locationManager.stopUpdatingLocation()
     }
