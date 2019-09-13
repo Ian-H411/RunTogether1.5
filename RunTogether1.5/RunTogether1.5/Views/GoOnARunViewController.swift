@@ -34,11 +34,13 @@ let locationManager = LocationManager.shared
     
     var isRunning: Bool = false
     
-    var calories: Double = 0
+    var calories: Int = 0
     
     var timer: Timer?
     
     var distance = Measurement(value: 0, unit: UnitLength.feet)
+    
+    var elevation = Measurement(value: 0, unit: UnitLength.feet)
     
     var listOfLocations = [CLLocation]()
     override func viewDidLoad() {
@@ -121,17 +123,6 @@ let locationManager = LocationManager.shared
     }
 
     func caloriesBurnt (){
-        guard let user = RunCloudController.shared.user else {calories = -1 ; return}
-        if user.gender == GenderKeys.male {
-            //calc male calories
-            return (((Double(user.age) * 0.2017) + (user.weight * 0.09036) + (150 * 0.6309) - 55.0969) * seconds) / 4.184
-        } else if user.gender == GenderKeys.female {
-            //calc female calories
-            return (((Double(user.age) * 0.074) - (user.weight * 0.05741) + (150 * 0.4472) - 20.4022) * seconds) / 4.184
-        } else{
-            return ((((Double(user.age) * 0.2017) + (user.weight * 0.09036) + (150 * 0.6309) - 55.0969) * seconds) / 4.184) * ((((Double(user.age) * 0.074) - (user.weight * 0.05741) + (150 * 0.4472) - 20.4022) * seconds) / 4.184) / 2
-        }
-
     }
     
    
@@ -142,6 +133,10 @@ let locationManager = LocationManager.shared
         if segue.identifier == "finished" {
             if let finishedVC = segue.destination as? FinishedRunDetailViewController {
                 finishedVC.listOfLocations = listOfLocations
+                finishedVC.calories = calories
+                finishedVC.seconds = seconds
+                finishedVC.distance = distance
+                finishedVC.elevationGained = elevation
                 finishedVC.calories = calories
             }
         }
@@ -161,6 +156,8 @@ extension GoOnARunViewController: CLLocationManagerDelegate{
             if let lastLocation = listOfLocations.last{
                 let changeInDistance = location.distance(from: lastLocation)
                 distance = distance + Measurement(value: changeInDistance, unit: UnitLength.feet)
+                let changeInElevation = location.altitude.distance(to: lastLocation.altitude)
+                elevation = elevation + Measurement(value: changeInElevation, unit: UnitLength.feet)
             }
             listOfLocations.append(location)
         }

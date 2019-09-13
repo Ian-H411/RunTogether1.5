@@ -35,9 +35,9 @@ class FinishedRunDetailViewController: UIViewController {
     
     var averagePace: Double?
     
-    var distance: Double?
+    var distance = Measurement(value: 0, unit: UnitLength.feet)
     
-    var elevationGained: Int?
+    var elevationGained = Measurement(value: 0, unit: UnitLength.feet)
     
     var calories: Int?
     

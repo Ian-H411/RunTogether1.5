@@ -62,6 +62,8 @@ class Run {
         self.coreLocationPoints = coreLocationPoints
         self.user = user
         self.ckRecordId = ckRecordId
+        self.calories = calories
+        
     }
     
     
@@ -69,9 +71,6 @@ class Run {
         guard let distance =  record[RunKeys.dateKey] as? Double,
             let totalTime = record[RunKeys.totalTimeKey] as? Double,
             let coreLocationPoints = record[RunKeys.coreLocationsKey] as? [CLLocation],
-            let elevationPoints = record[RunKeys.elevationPoints] as? Int,
-            let consistencyPoints = record[RunKeys.consistencyPointsKey] as? Int,
-            let timePoints = record[RunKeys.timePointsKey] as? Int,
             let calories = record[RunKeys.calorieKey] as? Int
             else {return nil}
         self.distance = distance
@@ -79,11 +78,7 @@ class Run {
         self.coreLocationPoints = coreLocationPoints
         self.user = user
         self.ckRecordId = record.recordID
-        self.elevationPoints = elevationPoints
-        self.timePoints = timePoints
-        self.consistencyPoints = consistencyPoints
         self.calories = calories
-        
     }
 }
 extension CKRecord{
