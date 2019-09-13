@@ -16,19 +16,10 @@ class Run {
         return distance / totalTime
     }
     
+    var didWin: Bool? = nil
+    
     // calories burnt throughout the run
-    var calories: Double {
-        guard let user = user else {return -1}
-        if user.gender == GenderKeys.male {
-            //calc male calories
-            return (((Double(user.age) * 0.2017) + (user.weight * 0.09036) + (150 * 0.6309) - 55.0969) * totalTime) / 4.184
-        } else if user.gender == GenderKeys.female {
-            //calc female calories
-            return (((Double(user.age) * 0.074) - (user.weight * 0.05741) + (150 * 0.4472) - 20.4022) * totalTime) / 4.184
-        } else{
-            return ((((Double(user.age) * 0.2017) + (user.weight * 0.09036) + (150 * 0.6309) - 55.0969) * totalTime) / 4.184) * ((((Double(user.age) * 0.074) - (user.weight * 0.05741) + (150 * 0.4472) - 20.4022) * totalTime) / 4.184) / 2
-        }
-    }
+    var calories: Int
     
     // specific timestamp for when the user hit the start button
     var date: Date {
@@ -49,11 +40,11 @@ class Run {
     
     //now some variables for a point system
     
-    let elevationPoints: Int
+    let elevationPoints: Int = 0
     
-    let consistencyPoints: Int
+    let consistencyPoints: Int = 0
     
-    let timePoints: Int
+    let timePoints: Int = 0
     
     var totalPoints: Int {
         return timePoints + consistencyPoints + elevationPoints
@@ -65,25 +56,23 @@ class Run {
         return CKRecord.Reference(recordID: user.recordID, action: .deleteSelf)
     }
     
-    init(distance: Double, totalTime: Double, coreLocationPoints: [CLLocation], user: User, elevationPoints: Int, consistencyPoints: Int, timePoints: Int, ckRecordId: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString)){
+    init(distance: Double, calories: Int, totalTime: Double, coreLocationPoints: [CLLocation], user: User, ckRecordId: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString)){
         self.distance = distance
         self.totalTime = totalTime
         self.coreLocationPoints = coreLocationPoints
         self.user = user
         self.ckRecordId = ckRecordId
-        self.elevationPoints = elevationPoints
-        self.consistencyPoints = consistencyPoints
-        self.timePoints = timePoints
     }
     
     
     init?(record: CKRecord, user: User){
         guard let distance =  record[RunKeys.dateKey] as? Double,
-        let totalTime = record[RunKeys.totalTimeKey] as? Double,
-        let coreLocationPoints = record[RunKeys.coreLocationsKey] as? [CLLocation],
-        let elevationPoints = record[RunKeys.elevationPoints] as? Int,
-        let consistencyPoints = record[RunKeys.consistencyPointsKey] as? Int,
-        let timePoints = record[RunKeys.timePointsKey] as? Int
+            let totalTime = record[RunKeys.totalTimeKey] as? Double,
+            let coreLocationPoints = record[RunKeys.coreLocationsKey] as? [CLLocation],
+            let elevationPoints = record[RunKeys.elevationPoints] as? Int,
+            let consistencyPoints = record[RunKeys.consistencyPointsKey] as? Int,
+            let timePoints = record[RunKeys.timePointsKey] as? Int,
+            let calories = record[RunKeys.calorieKey] as? Int
             else {return nil}
         self.distance = distance
         self.totalTime = totalTime
@@ -93,6 +82,7 @@ class Run {
         self.elevationPoints = elevationPoints
         self.timePoints = timePoints
         self.consistencyPoints = consistencyPoints
+        self.calories = calories
         
     }
 }
@@ -107,6 +97,6 @@ extension CKRecord{
         self.setValue(run.consistencyPoints, forKey: RunKeys.consistencyPointsKey)
         self.setValue(run.elevationPoints, forKey: RunKeys.elevationPoints)
         self.setValue(run.timePoints, forKey: RunKeys.timePointsKey)
-    
+        self.setValue(run.calories, forKey: RunKeys.calorieKey)
     }
 }

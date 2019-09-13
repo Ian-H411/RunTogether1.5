@@ -42,11 +42,11 @@ class RunCloudController{
         }
     }
     
-    func addRunAndPushToCloud(with distance: Double, totalTime: Double, elevationPoints: Int, consistencyPoints: Int, timePoints: Int, coreLocations: [CLLocation], completion: @escaping (Bool) -> Void){
+    func addRunAndPushToCloud(with distance: Double, calories: Int, totalTime: Double, coreLocations: [CLLocation], completion: @escaping (Bool) -> Void){
         //unwrap user if no user then yo can run simple as that
         guard let user = user else {return}
         //create a run
-        let run = Run(distance: distance, totalTime: totalTime, coreLocationPoints: coreLocations, user: user, elevationPoints: elevationPoints, consistencyPoints: consistencyPoints, timePoints: timePoints)
+        let run = Run(distance: distance, calories:calories , totalTime: totalTime, coreLocationPoints: coreLocations, user: user)
         //create a record from it
         guard let recordToPush = CKRecord(run: run) else {return}
         //save it
@@ -68,6 +68,10 @@ class RunCloudController{
     }
     
     func fetchExistingUser(completion: @escaping (Bool) -> Void){
+        
+    }
+    
+    func updateRunPoints(){
         
     }
     

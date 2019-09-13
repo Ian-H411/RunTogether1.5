@@ -34,7 +34,7 @@ let locationManager = LocationManager.shared
     
     var isRunning: Bool = false
     
-    var calories: Double = 0.0
+    var calories: Double = 0
     
     var timer: Timer?
     
@@ -114,7 +114,6 @@ let locationManager = LocationManager.shared
     func stopRun(){
         seconds = 0
         distance = Measurement(value: 0, unit: UnitLength.meters)
-//        listOfLocations.removeAll()
         updateUIText()
         timer?.invalidate()
         locationManager.stopUpdatingLocation()
@@ -122,9 +121,6 @@ let locationManager = LocationManager.shared
     }
     //TODO: - IMPLEMENT MORE PRECISE CALORIE MEASUREMENT FORMULA
     func caloriesBurnt (){
-        let distanceInMiles = distance.converted(to: UnitLength.miles)
-        let burnt = 100 * distanceInMiles.value
-        calories = burnt
     }
     
    
@@ -133,8 +129,9 @@ let locationManager = LocationManager.shared
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "finished" {
-            if let finishedVC = segue.destination as? FinishedRunViewController {
+            if let finishedVC = segue.destination as? FinishedRunDetailViewController {
                 finishedVC.listOfLocations = listOfLocations
+                finishedVC.calories = calories
             }
         }
      }
