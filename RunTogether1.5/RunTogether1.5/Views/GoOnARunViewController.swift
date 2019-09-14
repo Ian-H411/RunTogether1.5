@@ -25,6 +25,7 @@ class GoOnARunViewController: UIViewController {
     
     @IBOutlet weak var elevationLabel: UILabel!
     
+
     
     ///vars and lets for tracking a run
     
@@ -72,8 +73,36 @@ let locationManager = LocationManager.shared
     //MARK: -Helpers
     
     //initial start up only
+
+
     func setUpUI(){
+        let labelColor: String = "SilverFox"
+        let labelBorderWidth: CGFloat = 1
+        let cornerRadius: CGFloat = 10
         
+        let labelArray: [UILabel] = [timeLabel, paceLabel, caloriesLabel, elevationLabel,distanceLabel]
+        
+        //set  background
+        self.view.backgroundColor = UIColor(named: "DarkSlate")!
+    
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor(named: labelColor)!]
+        for label in labelArray {
+            //set all labels border
+            label.layer.borderWidth = labelBorderWidth
+            //set labels border color
+            label.layer.borderColor = UIColor(named: labelColor)!.cgColor
+            //set labels cornerradius
+            label.layer.cornerRadius = cornerRadius
+            //set text color
+            label.layer.backgroundColor = UIColor(named: "DeepMatteGrey")!.cgColor
+            
+        }
+        startStopButton.layer.cornerRadius = cornerRadius
+  
+    }
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
+        //return UIStatusBarStyle.default   // Make dark again
     }
     //to be used to update the label text
     func updateUIText(){
