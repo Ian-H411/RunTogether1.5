@@ -43,6 +43,8 @@ let locationManager = LocationManager.shared
     var elevation = Measurement(value: 0, unit: UnitLength.feet)
     
     var listOfLocations = [CLLocation]()
+    
+    var arrayOfPaces = [Double]()
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
@@ -114,33 +116,48 @@ let locationManager = LocationManager.shared
     }
     
     func stopRun(){
+        timer?.invalidate()
+        locationManager.stopUpdatingLocation()
+        presentFinishedRunAlert()
+    }
+    
+    func clearUpUI(){
         seconds = 0
         distance = Measurement(value: 0, unit: UnitLength.meters)
         updateUIText()
-        timer?.invalidate()
-        locationManager.stopUpdatingLocation()
-        self.performSegue(withIdentifier: "finished", sender: nil)
     }
 
     func caloriesBurnt (){
     }
-    
-   
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "finished" {
-            if let finishedVC = segue.destination as? FinishedRunDetailViewController {
-                finishedVC.listOfLocations = listOfLocations
-                finishedVC.calories = calories
-                finishedVC.seconds = seconds
-                finishedVC.distance = distance
-                finishedVC.elevationGained = elevation
-                finishedVC.calories = calories
+    func presentFinishedRunAlert(){
+        let alert = UIAlertController(title: "Run complete congratulations!", message: "what would you like to do with this run?", preferredStyle: .actionSheet)
+        let saveAction = UIAlertAction(title: "Save This Run", style: .default) { (_) in
+            //TODO: - save the run but do not send
+            DispatchQueue.main.async {
+                self.clearUpUI()
             }
         }
-     }
+        let deleteAction = UIAlertAction(title: "Delete This Run", style: .destructive) { (_) in
+            //TODO: - present a alert that double checks if this is really what they want
+            DispatchQueue.main.async {
+                self.clearUpUI()
+            }
+        }
+        let saveAndSendAction = UIAlertAction(title: "Save my run and challenge someone", style: .default) { (_) in
+            //TODO: - Send them to a place where they can send this run to a friend
+            DispatchQueue.main.async {
+                self.clearUpUI()
+            }
+        }
+        alert.addAction(saveAction)
+        
+        alert.addAction(saveAndSendAction)
+        
+        alert.addAction(deleteAction)
+        self.present(alert, animated: true)
+    }
+   
+     // MARK: - Navigation
 
     
 }
