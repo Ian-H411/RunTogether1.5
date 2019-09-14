@@ -15,13 +15,15 @@ class GoOnARunViewController: UIViewController {
     
     @IBOutlet weak var startStopButton: UIButton!
     
-    @IBOutlet weak var PaceLabel: UILabel!
+    @IBOutlet weak var paceLabel: UILabel!
     
     @IBOutlet weak var timeLabel: UILabel!
     
     @IBOutlet weak var distanceLabel: UILabel!
     
-   
+    @IBOutlet weak var caloriesLabel: UILabel!
+    
+    @IBOutlet weak var elevationLabel: UILabel!
     
     
     ///vars and lets for tracking a run
@@ -71,17 +73,11 @@ let locationManager = LocationManager.shared
     
     //initial start up only
     func setUpUI(){
-        startStopButton.layer.cornerRadius = 50
-        startStopButton.backgroundColor = .clear
-        startStopButton.setTitle("start", for: .normal)
-        distanceLabel.layer.cornerRadius = 10
-        timeLabel.layer.cornerRadius = 10
-        PaceLabel.layer.cornerRadius = 10
-        UITabBar.appearance().tintColor = .black
+        
     }
     //to be used to update the label text
     func updateUIText(){
-        PaceLabel.text = Converter.paceFormatter(distance: distance, seconds: seconds, outputUnit: UnitSpeed.minutesPerMile)
+        paceLabel.text = Converter.paceFormatter(distance: distance, seconds: seconds, outputUnit: UnitSpeed.minutesPerMile)
         timeLabel.text = Converter.formatTime(seconds: seconds)
         distanceLabel.text = Converter.measureMentFormatter(distance: distance)
     }
@@ -128,6 +124,7 @@ let locationManager = LocationManager.shared
     }
 
     func caloriesBurnt (){
+        //TODO: - calc calories and display
     }
     func presentFinishedRunAlert(){
         let alert = UIAlertController(title: "Run complete congratulations!", message: "what would you like to do with this run?", preferredStyle: .actionSheet)

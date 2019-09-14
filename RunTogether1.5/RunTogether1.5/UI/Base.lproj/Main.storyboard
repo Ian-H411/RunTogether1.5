@@ -179,83 +179,54 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="DQ3-k1-cFc">
-                                <rect key="frame" x="0.0" y="112.5" width="414" height="631"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="34" translatesAutoresizingMaskIntoConstraints="NO" id="KzT-5v-QRG">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="631"/>
-                                        <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="OA3-LS-061">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="298.5"/>
-                                                <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Tye-OK-HNF">
-                                                        <rect key="frame" x="0.0" y="0.0" width="204.5" height="298.5"/>
-                                                        <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LIK-ZO-r7B">
-                                                                <rect key="frame" x="0.0" y="0.0" width="204.5" height="141"/>
-                                                                <color key="backgroundColor" name="BloodRed"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pace" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5it-hw-m73">
-                                                                <rect key="frame" x="0.0" y="157" width="204.5" height="141.5"/>
-                                                                <color key="backgroundColor" name="BloodRed"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                        </subviews>
-                                                    </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="LbD-ID-7lM">
-                                                        <rect key="frame" x="209.5" y="0.0" width="204.5" height="298.5"/>
-                                                        <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tsW-XY-ZTe">
-                                                                <rect key="frame" x="0.0" y="0.0" width="204.5" height="140.5"/>
-                                                                <color key="backgroundColor" name="BloodRed"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calories" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="quR-ov-YPM">
-                                                                <rect key="frame" x="0.0" y="157.5" width="204.5" height="141"/>
-                                                                <color key="backgroundColor" name="BloodRed"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                        </subviews>
-                                                    </stackView>
-                                                </subviews>
-                                            </stackView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YvO-kL-ATk">
-                                                <rect key="frame" x="41.5" y="332.5" width="331" height="298.5"/>
-                                                <color key="backgroundColor" name="TrafficLightGreen"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="80" id="X8C-ls-oSS"/>
-                                                </constraints>
-                                                <state key="normal" title="Start/Stop">
-                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="startStopButtonTapped:" destination="LXK-GV-JLw" eventType="touchUpInside" id="v4Q-aS-Rcf"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="YvO-kL-ATk" firstAttribute="width" secondItem="KzT-5v-QRG" secondAttribute="width" multiplier="0.8" id="Zxj-U8-ku2"/>
-                                            <constraint firstItem="OA3-LS-061" firstAttribute="width" secondItem="KzT-5v-QRG" secondAttribute="width" id="hxu-L5-3Qr"/>
-                                        </constraints>
-                                    </stackView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="KzT-5v-QRG" firstAttribute="width" secondItem="DQ3-k1-cFc" secondAttribute="width" id="me0-9J-Tnx"/>
-                                </constraints>
-                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Calories" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="quR-ov-YPM">
+                                <rect key="frame" x="166" y="298" width="112" height="108"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                <color key="textColor" name="BloodRed"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Distance" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tsW-XY-ZTe">
+                                <rect key="frame" x="166" y="134" width="228" height="156"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                <color key="textColor" name="BloodRed"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pace" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5it-hw-m73">
+                                <rect key="frame" x="20" y="276" width="138" height="153"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                <color key="textColor" name="BloodRed"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LIK-ZO-r7B">
+                                <rect key="frame" x="20" y="134" width="138" height="129"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                <color key="textColor" name="BloodRed"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YvO-kL-ATk">
+                                <rect key="frame" x="120" y="721" width="133" height="64"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" name="TrafficLightGreen"/>
+                                <state key="normal" title="Start/Stop">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="startStopButtonTapped:" destination="LXK-GV-JLw" eventType="touchUpInside" id="v4Q-aS-Rcf"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ElevationGained" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K0h-1p-xcj">
+                                <rect key="frame" x="286" y="298" width="108" height="108"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                <color key="textColor" name="BloodRed"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="DQ3-k1-cFc" firstAttribute="centerY" secondItem="X4n-DH-daA" secondAttribute="centerY" multiplier="0.95" id="0N1-mZ-wPP"/>
-                            <constraint firstItem="DQ3-k1-cFc" firstAttribute="centerX" secondItem="X4n-DH-daA" secondAttribute="centerX" id="cc7-Oc-MPr"/>
-                            <constraint firstItem="DQ3-k1-cFc" firstAttribute="width" secondItem="mH8-bR-4VC" secondAttribute="width" id="izr-5U-1SA"/>
-                            <constraint firstItem="X4n-DH-daA" firstAttribute="bottom" secondItem="DQ3-k1-cFc" secondAttribute="bottom" constant="69.5" id="ntg-rA-ucz"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="X4n-DH-daA"/>
                     </view>
                     <navigationItem key="navigationItem" title="Go On A Run" id="TZH-ma-qep">
@@ -266,15 +237,17 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="PaceLabel" destination="5it-hw-m73" id="YGx-3H-4X3"/>
+                        <outlet property="caloriesLabel" destination="quR-ov-YPM" id="aSc-dZ-2cf"/>
                         <outlet property="distanceLabel" destination="tsW-XY-ZTe" id="8GC-Hv-GTa"/>
+                        <outlet property="elevationLabel" destination="K0h-1p-xcj" id="gBR-JW-5Qc"/>
+                        <outlet property="paceLabel" destination="5it-hw-m73" id="alB-JX-m5W"/>
                         <outlet property="startStopButton" destination="YvO-kL-ATk" id="Pqs-oc-yMs"/>
                         <outlet property="timeLabel" destination="LIK-ZO-r7B" id="b0h-x1-bnv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CFw-s4-XVH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="596" y="1380"/>
+            <point key="canvasLocation" x="595.6521739130435" y="1379.4642857142856"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="4fn-IT-je0">
