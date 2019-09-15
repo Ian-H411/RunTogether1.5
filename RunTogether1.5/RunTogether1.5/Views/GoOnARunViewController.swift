@@ -79,7 +79,7 @@ let locationManager = LocationManager.shared
         setNeedsStatusBarAppearanceUpdate()
         let labelColor: String = "SilverFox"
         let labelBorderWidth: CGFloat = 1
-        let cornerRadius: CGFloat = 10
+        let cornerRadius: CGFloat = 35
         
         let labelArray: [UILabel] = [timeLabel, paceLabel, caloriesLabel, elevationLabel,distanceLabel]
         
@@ -96,9 +96,10 @@ let locationManager = LocationManager.shared
             label.layer.cornerRadius = cornerRadius
             //set text color
             label.layer.backgroundColor = UIColor(named: "DeepMatteGrey")!.cgColor
+           
             
         }
-        startStopButton.layer.cornerRadius = cornerRadius
+        startStopButton.layer.cornerRadius = cornerRadius - 10
   
     }
     //to be used to update the label text
@@ -106,6 +107,8 @@ let locationManager = LocationManager.shared
         paceLabel.text = Converter.paceFormatter(distance: distance, seconds: seconds, outputUnit: UnitSpeed.minutesPerMile)
         timeLabel.text = Converter.formatTime(seconds: seconds)
         distanceLabel.text = Converter.measureMentFormatter(distance: distance)
+        elevationLabel.text = Converter.measureMentFormatter(distance: elevation)
+        caloriesLabel.text = "\(calories) CAL"
     }
     
     func startLocationTracking(){
@@ -132,7 +135,7 @@ let locationManager = LocationManager.shared
         updateUIText()
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
             self.addSecond()
-            //update calories
+            self.caloriesBurnt()
         }
         startLocationTracking()
     }
@@ -150,7 +153,7 @@ let locationManager = LocationManager.shared
     }
 
     func caloriesBurnt (){
-        //TODO: - calc calories and display
+        calories = Int(100 * distance.converted(to: UnitLength.miles).value)
     }
     func presentFinishedRunAlert(){
         let alert = UIAlertController(title: "Run complete congratulations!", message: "what would you like to do with this run?", preferredStyle: .actionSheet)
