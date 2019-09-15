@@ -76,6 +76,7 @@ let locationManager = LocationManager.shared
 
 
     func setUpUI(){
+        setNeedsStatusBarAppearanceUpdate()
         let labelColor: String = "SilverFox"
         let labelBorderWidth: CGFloat = 1
         let cornerRadius: CGFloat = 10
@@ -99,10 +100,6 @@ let locationManager = LocationManager.shared
         }
         startStopButton.layer.cornerRadius = cornerRadius
   
-    }
-    override var preferredStatusBarStyle : UIStatusBarStyle {
-        return UIStatusBarStyle.lightContent
-        //return UIStatusBarStyle.default   // Make dark again
     }
     //to be used to update the label text
     func updateUIText(){
