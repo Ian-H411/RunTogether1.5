@@ -16,7 +16,7 @@ class Run {
         return distance / totalTime
     }
     
-    var didWin: Bool? = nil
+    
     
     // calories burnt throughout the run
     var calories: Int
@@ -40,16 +40,29 @@ class Run {
     
     //now some variables for a point system
     
-    let elevationPoints: Int = 0
+    var elevationPoints: Int = 0
     
-    let consistencyPoints: Int = 0
+    var consistencyPoints: Int = 0
     
-    let timePoints: Int = 0
+    var timePoints: Int = 0
     
     var totalPoints: Int {
         return timePoints + consistencyPoints + elevationPoints
     }
     
+    var opponentsName = ""
+    
+    var opponentsPoints = 0
+    
+    var didWin: Bool? {
+        if totalPoints == opponentsPoints {
+            return nil
+        } else if totalPoints > opponentsPoints {
+            return true
+        } else {
+            return false
+        }
+    }
     //creates a reference to the user
     var userReference: CKRecord.Reference?{
         guard let user  = user else {return nil}
@@ -71,7 +84,12 @@ class Run {
         guard let distance =  record[RunKeys.dateKey] as? Double,
             let totalTime = record[RunKeys.totalTimeKey] as? Double,
             let coreLocationPoints = record[RunKeys.coreLocationsKey] as? [CLLocation],
-            let calories = record[RunKeys.calorieKey] as? Int
+            let calories = record[RunKeys.calorieKey] as? Int,
+            let elevationPoints = record[RunKeys.elevationPoints] as? Int,
+        let consistencyPoints = record[RunKeys.consistencyPointsKey] as? Int,
+        let timePoints = record[RunKeys.consistencyPointsKey] as? Int,
+        let opponentsName = record[RunKeys.opponentName] as? String,
+        let opponentsPoints = record[RunKeys.opponentPoints] as? Int
             else {return nil}
         self.distance = distance
         self.totalTime = totalTime
@@ -79,12 +97,16 @@ class Run {
         self.user = user
         self.ckRecordId = record.recordID
         self.calories = calories
+        self.elevationPoints = elevationPoints
+        self.consistencyPoints = consistencyPoints
+        self.timePoints = timePoints
+        self.opponentsName = opponentsName
+        self.opponentsPoints = opponentsPoints
     }
 }
 extension CKRecord{
     convenience init?(run: Run){
         self.init(recordType: RunKeys.runObjectKey, recordID: run.ckRecordId)
-        self.setValue(run.averagePace, forKey: RunKeys.averagePaceKey)
         self.setValue(run.distance, forKey: RunKeys.distanceKey)
         self.setValue(run.totalTime, forKey: RunKeys.totalTimeKey)
         self.setValue(run.coreLocationPoints, forKey: RunKeys.coreLocationsKey)
@@ -93,5 +115,7 @@ extension CKRecord{
         self.setValue(run.elevationPoints, forKey: RunKeys.elevationPoints)
         self.setValue(run.timePoints, forKey: RunKeys.timePointsKey)
         self.setValue(run.calories, forKey: RunKeys.calorieKey)
+        self.setValue(run.opponentsName, forKey: RunKeys.opponentName)
+        self.setValue(run.opponentsPoints, forKey: RunKeys.opponentPoints)
     }
 }

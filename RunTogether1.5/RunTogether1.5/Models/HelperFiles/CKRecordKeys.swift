@@ -30,6 +30,10 @@ struct RunKeys {
     static let consistencyPointsKey = "ConsistencyPoints"
     
     static let elevationPoints = "ElevationPoints"
+    
+    static let opponentPoints = "OpponentsPoints"
+    
+    static let opponentName = "OpponentName"
 }
 
 struct UserKeys{

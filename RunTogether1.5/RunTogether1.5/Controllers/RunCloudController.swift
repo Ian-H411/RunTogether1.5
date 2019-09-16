@@ -64,11 +64,31 @@ class RunCloudController{
             user.runs.append(runToSave)
             completion(true)
         }
-  
+        
     }
     
     func fetchExistingUser(completion: @escaping (Bool) -> Void){
-        
+        //there should only ever be one user profile so i can just look through the whole thing
+        let predicate = NSPredicate(value: true)
+        //specify that im searching for the userobject
+        let query = CKQuery(recordType: UserKeys.userObjectKey, predicate: predicate)
+        //perform my query
+        privateDB.perform(query, inZoneWith: nil) { (records, error) in
+            if let error = error {
+                print("there was an error in \(#function) :\(error) : \(error.localizedDescription)")
+                completion(false)
+                return
+            }
+            //it returns a list of records make sure it aint empty
+            guard let records = records, records.count > 0
+                else {print("recieved an empty array instead of a user");completion(false);return}
+            //grab the first and only record (i can force unwrap due to previous statement)
+            let userRecordRetrieved = records.first!
+            //create a user from that
+            guard let userRetrieved = User(record: userRecordRetrieved) else {completion(false);return}
+            //set the user
+            self.user = userRetrieved
+        }
     }
     
     func updateRunPoints(){
@@ -115,10 +135,37 @@ class RunCloudController{
             //set the users runs equal to the ones ive fetched
             user.runs = fetchedRuns
             completion(true)
-
+            
         }
     }
     func subScribeToNewRuns(completion: @escaping (Bool, Error?) -> Void){
         
+    }
+    //updates run points
+    func calculatePoints(run1: Run, run2: Run){
+        var winningRunTime:Run = run2
+        var losingRunTime:Run = run1
+        //check time.  run 1 is faster in this case so we give them the points
+        if run1.totalTime < run2.totalTime {
+            winningRunTime = run1
+            losingRunTime = run2
+            winningRunTime.timePoints = 60
+        }
+        //get the difference between the two
+        let timeDifference: Double = winningRunTime.totalTime.distance(to: run2.totalTime)
+        //and then calculate points
+        if timeDifference  < 60 {
+            losingRunTime.timePoints = 55
+        } else if timeDifference < 120 {
+            losingRunTime.timePoints = 50
+        } else if timeDifference < 300 {
+            losingRunTime.timePoints = 45
+        } else if timeDifference < 600 {
+            losingRunTime.timePoints = 35
+        } else if timeDifference < 1200 {
+            losingRunTime.timePoints = 20
+        } else {
+            losingRunTime.timePoints = 10
+        }
     }
 }

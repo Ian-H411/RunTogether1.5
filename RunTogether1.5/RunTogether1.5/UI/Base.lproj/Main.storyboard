@@ -11,7 +11,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item-->
+        <!--View Controller-->
         <scene sceneID="1AQ-LM-Yyn">
             <objects>
                 <viewController id="SjW-tG-iHF" sceneMemberID="viewController">
@@ -30,26 +30,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="3L0-Tm-yXx"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="LWf-kh-Tui"/>
+                    <navigationItem key="navigationItem" id="VKR-cU-fGV"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IYR-k4-ggg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="161" y="2221"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="T88-cp-FF8">
-            <objects>
-                <viewController id="Piq-Ut-Tdn" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="VZD-Dy-EfS">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="rwH-s5-qff"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="c8E-IO-Pye" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1303" y="1390"/>
+            <point key="canvasLocation" x="877" y="1397"/>
         </scene>
         <!--My Runs-->
         <scene sceneID="jNL-xQ-2f9">
@@ -254,13 +239,7 @@
                             <outlet property="delegate" destination="NRr-DT-LPF" id="4ON-px-h3g"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="My Runs" id="9rb-v0-Kkc">
-                        <barButtonItem key="leftBarButtonItem" title="Profile" id="QdL-Yq-TzF">
-                            <connections>
-                                <segue destination="SjW-tG-iHF" kind="show" id="rkd-e5-3vE"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="My Runs" id="9rb-v0-Kkc"/>
                     <connections>
                         <outlet property="RacesWonLabel" destination="Ft6-xH-SYG" id="aCq-IJ-kbk"/>
                         <outlet property="totalDistanceLabel" destination="y9C-dW-KGs" id="Swn-Fa-xnx"/>
@@ -364,14 +343,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="X4n-DH-daA"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Go On A Run" id="TZH-ma-qep">
-                        <barButtonItem key="leftBarButtonItem" title="Profile" id="wFG-RV-RPs">
-                            <color key="tintColor" name="SilverFox"/>
-                            <connections>
-                                <segue destination="SjW-tG-iHF" kind="show" id="F9H-vc-3TS"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Go On A Run" id="TZH-ma-qep"/>
                     <connections>
                         <outlet property="caloriesLabel" destination="quR-ov-YPM" id="aSc-dZ-2cf"/>
                         <outlet property="distanceLabel" destination="tsW-XY-ZTe" id="8GC-Hv-GTa"/>
@@ -383,7 +355,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CFw-s4-XVH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="580" y="1382"/>
+            <point key="canvasLocation" x="190" y="1397"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="4fn-IT-je0">
@@ -399,11 +371,12 @@
                     <connections>
                         <segue destination="fso-eb-Vds" kind="relationship" relationship="viewControllers" id="ygB-oh-WS5"/>
                         <segue destination="2LO-dn-BnM" kind="relationship" relationship="viewControllers" id="wSR-YN-7tB"/>
+                        <segue destination="YW2-MB-d3w" kind="relationship" relationship="viewControllers" id="6B5-J0-jXp"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8T6-Ao-lYL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-409" y="-106"/>
+            <point key="canvasLocation" x="-1261" y="694"/>
         </scene>
         <!--Item 1-->
         <scene sceneID="Nkp-4U-Vkg">
@@ -424,7 +397,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KXM-Qw-C5l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="597" y="623"/>
+            <point key="canvasLocation" x="191" y="694"/>
         </scene>
         <!--Item-->
         <scene sceneID="eNk-To-cVh">
@@ -444,7 +417,26 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2St-Mx-bVu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-512" y="623"/>
+            <point key="canvasLocation" x="-513" y="694"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="LcA-ne-iHp">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="YW2-MB-d3w" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="LWf-kh-Tui"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="W9V-MV-FFX">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="SjW-tG-iHF" kind="relationship" relationship="rootViewController" id="4wg-0s-X8b"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YfJ-B9-uUc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="864" y="694"/>
         </scene>
     </scenes>
     <resources>
@@ -462,7 +454,4 @@
             <color red="0.99607843137254903" green="0.85490196078431369" blue="0.41568627450980394" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="rkd-e5-3vE"/>
-    </inferredMetricsTieBreakers>
 </document>
