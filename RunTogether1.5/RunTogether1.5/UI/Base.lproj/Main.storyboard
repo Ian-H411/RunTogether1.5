@@ -41,36 +41,175 @@
             </objects>
             <point key="canvasLocation" x="1786.9565217391305" y="1396.875"/>
         </scene>
-        <!--View Controller-->
+        <!--Create Profile View Controller-->
         <scene sceneID="K2m-Kn-Zr6">
             <objects>
-                <viewController id="pRM-Oa-nss" sceneMemberID="viewController">
+                <viewController id="pRM-Oa-nss" customClass="CreateProfileViewController" customModule="RunTogether1_5" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="acq-aG-80w">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QDC-p6-0Xg">
-                                <rect key="frame" x="270" y="112" width="94" height="57"/>
-                                <state key="normal" title="Create Profile"/>
-                                <connections>
-                                    <segue destination="htv-ny-qyb" kind="show" id="RcD-gN-x2m"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="39" translatesAutoresizingMaskIntoConstraints="NO" id="Sya-kq-6OH">
+                                <rect key="frame" x="0.0" y="84" width="414" height="696"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="UserName" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wgB-Br-kOs">
+                                        <rect key="frame" x="62" y="0.0" width="290" height="44"/>
+                                        <color key="backgroundColor" name="DeepMatteGrey"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="ge9-ct-ufX"/>
+                                        </constraints>
+                                        <color key="textColor" name="areYaYellow"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="41" translatesAutoresizingMaskIntoConstraints="NO" id="SV1-bm-BFo">
+                                        <rect key="frame" x="52.5" y="83" width="309" height="140"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="HH7-KZ-OfV">
+                                                <rect key="frame" x="0.0" y="0.0" width="134" height="140"/>
+                                                <subviews>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Weight In Pounds" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qqM-h8-heJ">
+                                                        <rect key="frame" x="0.0" y="0.0" width="134" height="38.5"/>
+                                                        <color key="backgroundColor" name="DeepMatteGrey"/>
+                                                        <color key="textColor" name="areYaYellow"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                    </textField>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Nee-i3-1ZR">
+                                                        <rect key="frame" x="0.0" y="50.5" width="134" height="39"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="textColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                    </textField>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Height" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sPX-x2-gyi">
+                                                        <rect key="frame" x="0.0" y="101.5" width="134" height="38.5"/>
+                                                        <color key="backgroundColor" name="DeepMatteGrey"/>
+                                                        <nil key="textColor"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                    </textField>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="MwA-RZ-uf5">
+                                                <rect key="frame" x="175" y="0.0" width="134" height="140"/>
+                                                <subviews>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cbc-7D-Ag0">
+                                                        <rect key="frame" x="0.0" y="0.0" width="134" height="44"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="textColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                    </textField>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Age" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UvP-xZ-YiC">
+                                                        <rect key="frame" x="0.0" y="48" width="134" height="44"/>
+                                                        <color key="backgroundColor" name="DeepMatteGrey"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="44" id="03z-qK-7lg"/>
+                                                        </constraints>
+                                                        <color key="textColor" name="areYaYellow"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                    </textField>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b0Z-Cd-2eZ">
+                                                        <rect key="frame" x="0.0" y="96" width="134" height="44"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="textColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                    </textField>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="140" id="wgV-a4-YpZ"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="44" translatesAutoresizingMaskIntoConstraints="NO" id="Zxs-ke-CMA">
+                                        <rect key="frame" x="119" y="262" width="176" height="220"/>
+                                        <subviews>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="f8N-So-XLK">
+                                                <rect key="frame" x="0.0" y="0.0" width="176" height="45"/>
+                                                <color key="backgroundColor" name="DeepMatteGrey"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="k0a-Ad-t0d"/>
+                                                </constraints>
+                                                <segments>
+                                                    <segment title="Female"/>
+                                                    <segment title="Other"/>
+                                                    <segment title="Male"/>
+                                                </segments>
+                                                <color key="tintColor" name="areYaYellow"/>
+                                                <connections>
+                                                    <action selector="GenderControlTapped:" destination="pRM-Oa-nss" eventType="valueChanged" id="jcU-I5-pjw"/>
+                                                </connections>
+                                            </segmentedControl>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="bdK-58-h6G">
+                                                <rect key="frame" x="7.5" y="88" width="161" height="45"/>
+                                                <color key="backgroundColor" name="DeepMatteGrey"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="op4-Ob-GsH"/>
+                                                </constraints>
+                                                <segments>
+                                                    <segment title="Metric"/>
+                                                    <segment title="Customary"/>
+                                                </segments>
+                                                <color key="tintColor" name="areYaYellow"/>
+                                                <connections>
+                                                    <action selector="measurementControlTapped:" destination="pRM-Oa-nss" eventType="valueChanged" id="j9C-Gr-gGv"/>
+                                                </connections>
+                                            </segmentedControl>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QDC-p6-0Xg">
+                                                <rect key="frame" x="41" y="176" width="94" height="44"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="ti0-Sb-PWq"/>
+                                                </constraints>
+                                                <state key="normal" title="Create Profile">
+                                                    <color key="titleColor" name="SilverFox"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="CreateProfileButtonTapped:" destination="pRM-Oa-nss" eventType="touchUpInside" id="fa9-EC-efe"/>
+                                                    <segue destination="htv-ny-qyb" kind="show" id="RcD-gN-x2m"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xt0-uF-wuk">
+                                        <rect key="frame" x="87" y="521" width="240" height="175"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="175" id="uyh-Ho-QnG"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="wgB-Br-kOs" firstAttribute="width" secondItem="Sya-kq-6OH" secondAttribute="width" multiplier="0.7" id="AW9-cQ-Re6"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="DarkSlate"/>
                         <constraints>
-                            <constraint firstItem="MKp-5k-28a" firstAttribute="trailing" secondItem="QDC-p6-0Xg" secondAttribute="trailing" constant="50" id="2cf-6s-bJh"/>
-                            <constraint firstItem="QDC-p6-0Xg" firstAttribute="leading" secondItem="MKp-5k-28a" secondAttribute="leading" constant="270" id="irA-cA-aDL"/>
-                            <constraint firstItem="MKp-5k-28a" firstAttribute="bottom" secondItem="QDC-p6-0Xg" secondAttribute="bottom" constant="693" id="n66-4p-0zN"/>
-                            <constraint firstItem="QDC-p6-0Xg" firstAttribute="top" secondItem="MKp-5k-28a" secondAttribute="top" constant="68" id="spe-d5-Tia"/>
+                            <constraint firstItem="MKp-5k-28a" firstAttribute="trailing" secondItem="Sya-kq-6OH" secondAttribute="trailing" id="1dD-Jp-XfT"/>
+                            <constraint firstItem="Sya-kq-6OH" firstAttribute="leading" secondItem="MKp-5k-28a" secondAttribute="leading" id="9HZ-VM-Lr5"/>
+                            <constraint firstItem="Sya-kq-6OH" firstAttribute="top" secondItem="MKp-5k-28a" secondAttribute="top" constant="40" id="9jr-yz-xrC"/>
+                            <constraint firstItem="MKp-5k-28a" firstAttribute="bottom" secondItem="Sya-kq-6OH" secondAttribute="bottom" id="WXz-v2-2eP"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="MKp-5k-28a"/>
                     </view>
                     <navigationItem key="navigationItem" id="TAI-RN-YSK"/>
+                    <connections>
+                        <outlet property="DesiredMeasurementSystemControl" destination="bdK-58-h6G" id="i8w-KG-qms"/>
+                        <outlet property="WeightTextField" destination="qqM-h8-heJ" id="o0f-9w-pti"/>
+                        <outlet property="ageTextField" destination="UvP-xZ-YiC" id="aBz-Rj-8JG"/>
+                        <outlet property="createProfileButton" destination="QDC-p6-0Xg" id="RoC-1j-f7f"/>
+                        <outlet property="genderSegmentedControl" destination="f8N-So-XLK" id="Eaw-D7-dBz"/>
+                        <outlet property="heightTextField" destination="sPX-x2-gyi" id="K8a-sV-8Df"/>
+                        <outlet property="userNameTextField" destination="wgB-Br-kOs" id="r3f-eF-bX3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OZQ-sP-aPw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2043" y="694"/>
+            <point key="canvasLocation" x="-1262.3188405797102" y="1409.5982142857142"/>
         </scene>
         <!--My Runs-->
         <scene sceneID="jNL-xQ-2f9">
@@ -281,7 +420,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ll0-zA-vGZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-513" y="2178"/>
+            <point key="canvasLocation" x="864" y="2101"/>
         </scene>
         <!--Go On A Run-->
         <scene sceneID="iRO-tV-ghZ">
