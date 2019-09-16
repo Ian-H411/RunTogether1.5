@@ -34,6 +34,8 @@ struct RunKeys {
     static let opponentPoints = "OpponentsPoints"
     
     static let opponentName = "OpponentName"
+    
+    static let elevationGained = "ElevationGained"
 }
 
 struct UserKeys{

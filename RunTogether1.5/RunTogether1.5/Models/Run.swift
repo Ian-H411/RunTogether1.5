@@ -29,6 +29,9 @@ class Run {
     // amount of distance run by the racer in miles
     let distance: Double
     
+    //in feet
+    let elevationGained: Double
+    
     // time from begining to end
     let totalTime: Double
     
@@ -69,13 +72,14 @@ class Run {
         return CKRecord.Reference(recordID: user.recordID, action: .deleteSelf)
     }
     
-    init(distance: Double, calories: Int, totalTime: Double, coreLocationPoints: [CLLocation], user: User, ckRecordId: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString)){
+    init(distance: Double, elevation: Double, calories: Int, totalTime: Double, coreLocationPoints: [CLLocation], user: User, ckRecordId: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString)){
         self.distance = distance
         self.totalTime = totalTime
         self.coreLocationPoints = coreLocationPoints
         self.user = user
         self.ckRecordId = ckRecordId
         self.calories = calories
+        self.elevationGained = elevation
         
     }
     
@@ -89,7 +93,8 @@ class Run {
         let consistencyPoints = record[RunKeys.consistencyPointsKey] as? Int,
         let timePoints = record[RunKeys.consistencyPointsKey] as? Int,
         let opponentsName = record[RunKeys.opponentName] as? String,
-        let opponentsPoints = record[RunKeys.opponentPoints] as? Int
+        let opponentsPoints = record[RunKeys.opponentPoints] as? Int,
+        let elevationGained = record[RunKeys.elevationGained] as? Double
             else {return nil}
         self.distance = distance
         self.totalTime = totalTime
@@ -102,6 +107,7 @@ class Run {
         self.timePoints = timePoints
         self.opponentsName = opponentsName
         self.opponentsPoints = opponentsPoints
+        self.elevationGained = elevationGained
     }
 }
 extension CKRecord{
@@ -117,5 +123,6 @@ extension CKRecord{
         self.setValue(run.calories, forKey: RunKeys.calorieKey)
         self.setValue(run.opponentsName, forKey: RunKeys.opponentName)
         self.setValue(run.opponentsPoints, forKey: RunKeys.opponentPoints)
+        self.setValue(run.elevationGained, forKey: RunKeys.elevationGained)
     }
 }

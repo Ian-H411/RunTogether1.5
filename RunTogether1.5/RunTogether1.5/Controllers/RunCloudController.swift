@@ -17,6 +17,8 @@ class RunCloudController{
     //database local
     let privateDB = CKContainer.default().privateCloudDatabase
     
+    //MARK: - CLOUD
+    
     //used only on creation of a new profile
     func createNewUserAndPushWith(name: String, height: Double, weight: Double, age: Int, gender: String, completion: @escaping (Bool) -> Void){
         //create a user
@@ -42,11 +44,11 @@ class RunCloudController{
         }
     }
     
-    func addRunAndPushToCloud(with distance: Double, calories: Int, totalTime: Double, coreLocations: [CLLocation], completion: @escaping (Bool) -> Void){
+    func addRunAndPushToCloud(with distance: Double, elevation: Double, calories: Int, totalTime: Double, coreLocations: [CLLocation], completion: @escaping (Bool) -> Void){
         //unwrap user if no user then yo can run simple as that
         guard let user = user else {return}
         //create a run
-        let run = Run(distance: distance, calories:calories , totalTime: totalTime, coreLocationPoints: coreLocations, user: user)
+        let run = Run(distance: distance, elevation: elevation, calories: calories , totalTime: totalTime, coreLocationPoints: coreLocations, user: user)
         //create a record from it
         guard let recordToPush = CKRecord(run: run) else {return}
         //save it
@@ -141,6 +143,9 @@ class RunCloudController{
     func subScribeToNewRuns(completion: @escaping (Bool, Error?) -> Void){
         
     }
+    
+    //MARK: - RUNNING CALCULATIONS
+    
     //updates run points
     func calculatePoints(run1: Run, run2: Run){
         var winningRunTime:Run = run2
@@ -166,6 +171,16 @@ class RunCloudController{
             losingRunTime.timePoints = 20
         } else {
             losingRunTime.timePoints = 10
+        }
+        //dont want to run the same code over and over
+        let runsCompared = [run1,run2]
+        for run in runsCompared{
+            let points = Int((run.elevationGained / 100) * 5)
+            if points > 20{
+                run.elevationPoints = 20
+            } else {
+            run.elevationPoints = points
+            }
         }
     }
 }
