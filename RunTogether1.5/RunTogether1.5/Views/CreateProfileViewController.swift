@@ -22,6 +22,7 @@ class CreateProfileViewController: UIViewController {
     
     @IBOutlet weak var genderSegmentedControl: UISegmentedControl!
     
+    @IBOutlet weak var createAProfileLabel: UILabel!
     
     @IBOutlet weak var DesiredMeasurementSystemControl: UISegmentedControl!
     
@@ -50,24 +51,36 @@ class CreateProfileViewController: UIViewController {
     func setUpUI(){
         setNeedsStatusBarAppearanceUpdate()
         let labelColor: String = "SilverFox"
-        let labelBorderWidth: CGFloat = 1
+        let labelBorderWidth: CGFloat = 3
         let labelArray: [UITextField] = [userNameTextField, WeightTextField,heightTextField,ageTextField]
         
         //set  background
         self.view.backgroundColor = UIColor(named: "DarkSlate")!
+        createAProfileLabel.layer.borderWidth = labelBorderWidth
+        createAProfileLabel.layer.borderColor = UIColor(named: "areYaYellow")!.cgColor
+        createAProfileLabel.layer.cornerRadius = 15
+       createAProfileLabel.layer.masksToBounds = true
         
+        
+        
+        createProfileButton.layer.masksToBounds = true
+        createProfileButton.layer.borderWidth = 2
+        createProfileButton.layer.borderColor = UIColor(named: "areYaYellow")!.cgColor
+        createProfileButton.layer.cornerRadius = 15
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor(named: labelColor)!]
         for label in labelArray {
             //set all labels border
             label.layer.borderWidth = labelBorderWidth
             //set labels border color
-            label.layer.borderColor = UIColor(named: labelColor)!.cgColor
-            //set labels cornerradius
+            label.layer.borderColor = UIColor(named: "areYaYellow")!.cgColor
+            label.layer.cornerRadius = 15
+            label.layer.masksToBounds = true
             //set text color
-            label.layer.backgroundColor = UIColor(named: "DeepMatteGrey")!.cgColor
+            label.layer.backgroundColor = UIColor(named: labelColor)!.cgColor
             
             
         }
+  
     }
     
     

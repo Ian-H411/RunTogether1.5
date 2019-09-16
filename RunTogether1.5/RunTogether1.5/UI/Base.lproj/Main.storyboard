@@ -49,29 +49,39 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="39" translatesAutoresizingMaskIntoConstraints="NO" id="Sya-kq-6OH">
-                                <rect key="frame" x="0.0" y="84" width="414" height="696"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Sya-kq-6OH">
+                                <rect key="frame" x="0.0" y="94" width="414" height="473"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="UserName" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wgB-Br-kOs">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create A Profile" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="13Q-K3-GO6">
                                         <rect key="frame" x="62" y="0.0" width="290" height="44"/>
-                                        <color key="backgroundColor" name="DeepMatteGrey"/>
+                                        <color key="backgroundColor" name="SilverFox"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="MOf-YC-AqP"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <color key="textColor" name="DarkSlate"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="UserName" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wgB-Br-kOs">
+                                        <rect key="frame" x="52.5" y="59" width="309" height="44"/>
+                                        <color key="backgroundColor" name="SilverFox"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="ge9-ct-ufX"/>
                                         </constraints>
-                                        <color key="textColor" name="areYaYellow"/>
+                                        <color key="textColor" name="DarkSlate"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="41" translatesAutoresizingMaskIntoConstraints="NO" id="SV1-bm-BFo">
-                                        <rect key="frame" x="52.5" y="83" width="309" height="140"/>
+                                        <rect key="frame" x="52.5" y="118" width="309" height="140"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="HH7-KZ-OfV">
                                                 <rect key="frame" x="0.0" y="0.0" width="134" height="140"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Weight In Pounds" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qqM-h8-heJ">
                                                         <rect key="frame" x="0.0" y="0.0" width="134" height="38.5"/>
-                                                        <color key="backgroundColor" name="DeepMatteGrey"/>
-                                                        <color key="textColor" name="areYaYellow"/>
+                                                        <color key="backgroundColor" name="SilverFox"/>
+                                                        <color key="textColor" name="DarkSlate"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     </textField>
@@ -84,8 +94,8 @@
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Height" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sPX-x2-gyi">
                                                         <rect key="frame" x="0.0" y="101.5" width="134" height="38.5"/>
-                                                        <color key="backgroundColor" name="DeepMatteGrey"/>
-                                                        <nil key="textColor"/>
+                                                        <color key="backgroundColor" name="SilverFox"/>
+                                                        <color key="textColor" name="DarkSlate"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     </textField>
@@ -103,11 +113,11 @@
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Age" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UvP-xZ-YiC">
                                                         <rect key="frame" x="0.0" y="48" width="134" height="44"/>
-                                                        <color key="backgroundColor" name="DeepMatteGrey"/>
+                                                        <color key="backgroundColor" name="SilverFox"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="44" id="03z-qK-7lg"/>
                                                         </constraints>
-                                                        <color key="textColor" name="areYaYellow"/>
+                                                        <color key="textColor" name="DarkSlate"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     </textField>
@@ -125,8 +135,8 @@
                                             <constraint firstAttribute="height" constant="140" id="wgV-a4-YpZ"/>
                                         </constraints>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="44" translatesAutoresizingMaskIntoConstraints="NO" id="Zxs-ke-CMA">
-                                        <rect key="frame" x="119" y="262" width="176" height="220"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="34" translatesAutoresizingMaskIntoConstraints="NO" id="Zxs-ke-CMA">
+                                        <rect key="frame" x="119" y="273" width="176" height="200"/>
                                         <subviews>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="f8N-So-XLK">
                                                 <rect key="frame" x="0.0" y="0.0" width="176" height="45"/>
@@ -145,7 +155,7 @@
                                                 </connections>
                                             </segmentedControl>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="bdK-58-h6G">
-                                                <rect key="frame" x="7.5" y="88" width="161" height="45"/>
+                                                <rect key="frame" x="7.5" y="78" width="161" height="45"/>
                                                 <color key="backgroundColor" name="DeepMatteGrey"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="op4-Ob-GsH"/>
@@ -160,7 +170,8 @@
                                                 </connections>
                                             </segmentedControl>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QDC-p6-0Xg">
-                                                <rect key="frame" x="41" y="176" width="94" height="44"/>
+                                                <rect key="frame" x="7.5" y="156" width="161" height="44"/>
+                                                <color key="backgroundColor" name="DeepMatteGrey"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="ti0-Sb-PWq"/>
                                                 </constraints>
@@ -173,17 +184,14 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                    </stackView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xt0-uF-wuk">
-                                        <rect key="frame" x="87" y="521" width="240" height="175"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="175" id="uyh-Ho-QnG"/>
+                                            <constraint firstItem="QDC-p6-0Xg" firstAttribute="width" secondItem="bdK-58-h6G" secondAttribute="width" id="MHI-ol-mRD"/>
                                         </constraints>
-                                    </view>
+                                    </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="wgB-Br-kOs" firstAttribute="width" secondItem="Sya-kq-6OH" secondAttribute="width" multiplier="0.7" id="AW9-cQ-Re6"/>
+                                    <constraint firstItem="wgB-Br-kOs" firstAttribute="width" secondItem="SV1-bm-BFo" secondAttribute="width" id="A1J-he-rV7"/>
+                                    <constraint firstItem="13Q-K3-GO6" firstAttribute="width" secondItem="Sya-kq-6OH" secondAttribute="width" multiplier="0.7" id="kAp-6i-faM"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -191,8 +199,7 @@
                         <constraints>
                             <constraint firstItem="MKp-5k-28a" firstAttribute="trailing" secondItem="Sya-kq-6OH" secondAttribute="trailing" id="1dD-Jp-XfT"/>
                             <constraint firstItem="Sya-kq-6OH" firstAttribute="leading" secondItem="MKp-5k-28a" secondAttribute="leading" id="9HZ-VM-Lr5"/>
-                            <constraint firstItem="Sya-kq-6OH" firstAttribute="top" secondItem="MKp-5k-28a" secondAttribute="top" constant="40" id="9jr-yz-xrC"/>
-                            <constraint firstItem="MKp-5k-28a" firstAttribute="bottom" secondItem="Sya-kq-6OH" secondAttribute="bottom" id="WXz-v2-2eP"/>
+                            <constraint firstItem="Sya-kq-6OH" firstAttribute="top" secondItem="MKp-5k-28a" secondAttribute="top" constant="50" id="9jr-yz-xrC"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="MKp-5k-28a"/>
                     </view>
@@ -201,6 +208,7 @@
                         <outlet property="DesiredMeasurementSystemControl" destination="bdK-58-h6G" id="i8w-KG-qms"/>
                         <outlet property="WeightTextField" destination="qqM-h8-heJ" id="o0f-9w-pti"/>
                         <outlet property="ageTextField" destination="UvP-xZ-YiC" id="aBz-Rj-8JG"/>
+                        <outlet property="createAProfileLabel" destination="13Q-K3-GO6" id="jqp-Lz-AGy"/>
                         <outlet property="createProfileButton" destination="QDC-p6-0Xg" id="RoC-1j-f7f"/>
                         <outlet property="genderSegmentedControl" destination="f8N-So-XLK" id="Eaw-D7-dBz"/>
                         <outlet property="heightTextField" destination="sPX-x2-gyi" id="K8a-sV-8Df"/>
@@ -257,12 +265,11 @@
                                 <constraint firstItem="fWn-BR-cyn" firstAttribute="leading" secondItem="nbF-LS-p5u" secondAttribute="leading" constant="20" id="LGB-BE-4Xg"/>
                                 <constraint firstAttribute="trailing" secondItem="fWn-BR-cyn" secondAttribute="trailing" constant="20" id="Zqd-do-TGt"/>
                                 <constraint firstItem="fWn-BR-cyn" firstAttribute="centerY" secondItem="nbF-LS-p5u" secondAttribute="centerY" id="cDC-7z-Jht"/>
-                                <constraint firstAttribute="bottom" secondItem="fWn-BR-cyn" secondAttribute="bottom" constant="40" id="p5R-S1-KSQ"/>
                                 <constraint firstItem="fWn-BR-cyn" firstAttribute="top" secondItem="nbF-LS-p5u" secondAttribute="top" constant="40" id="zlt-o2-igY"/>
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="280" id="rAG-3c-kub" customClass="RunTableViewCell" customModule="RunTogether1_5" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="runCell" rowHeight="280" id="rAG-3c-kub" customClass="RunTableViewCell" customModule="RunTogether1_5" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="291" width="414" height="280"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rAG-3c-kub" id="bXe-Ik-etb">
