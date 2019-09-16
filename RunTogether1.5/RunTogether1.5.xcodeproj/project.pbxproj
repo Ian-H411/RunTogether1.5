@@ -24,6 +24,7 @@
 		25AA4B4923229DE00051C4F9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25AA4B4723229DE00051C4F9 /* Main.storyboard */; };
 		25AA4B4B23229DE10051C4F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25AA4B4A23229DE10051C4F9 /* Assets.xcassets */; };
 		25AA4B4E23229DE20051C4F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25AA4B4C23229DE20051C4F9 /* LaunchScreen.storyboard */; };
+		25C9BB0D2330334C00989DE2 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C9BB0C2330334C00989DE2 /* LoadingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		25AA4B4A23229DE10051C4F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		25AA4B4D23229DE20051C4F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		25AA4B4F23229DE20051C4F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		25C9BB0C2330334C00989DE2 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 				25A65F28232EED5C00B2D64A /* RunHistoryTableViewController.swift */,
 				25A65F2A232FCCF100B2D64A /* RunTableViewCell.swift */,
 				25A65F2C233000E100B2D64A /* CreateProfileViewController.swift */,
+				25C9BB0C2330334C00989DE2 /* LoadingViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 				25A65F29232EED5C00B2D64A /* RunHistoryTableViewController.swift in Sources */,
 				254661F52322F4F3001BAE42 /* Run.swift in Sources */,
 				251FB0072327E80700AD991B /* UnitExtensions.swift in Sources */,
+				25C9BB0D2330334C00989DE2 /* LoadingViewController.swift in Sources */,
 				251FAFF123241C8200AD991B /* CKRecordKeys.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

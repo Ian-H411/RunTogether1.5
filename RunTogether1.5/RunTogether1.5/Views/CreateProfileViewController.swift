@@ -44,12 +44,29 @@ class CreateProfileViewController: UIViewController {
     //MARK: - ACTIONS
     
     @IBAction func CreateProfileButtonTapped(_ sender: Any) {
+        //step one make sure it exists
         guard let username = userNameTextField.text, !username.isEmpty,
-        let weight = WeightTextField.text, !weight.isEmpty,
-        let age = ageTextField.text, !age.isEmpty,
-        let height = heightTextField.text, !height.isEmpty
-            else {presentFillOutAllFieldsAlert();return}
+            let weightAsString = WeightTextField.text, !weightAsString.isEmpty,
+            let ageAsString = ageTextField.text, !ageAsString.isEmpty,
+            let heightAsString = heightTextField.text, !heightAsString.isEmpty
+            else {self.presentFillOutAllFieldsAlert(); return}
+        //step 2 conform to my correct types
+        guard let weight = Int(weightAsString),
+            let age = Int(ageAsString),
+            let height = Int(heightAsString)
+            else {self.presentFillOutAllFieldsAlert(); return}
         
+        RunCloudController.shared.createNewUserAndPushWith(name: username, height: Double(height), weight: Double(weight), age: age, gender: selectedGender, prefersMetric: isMetric) { (success) in
+            if success{
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "toApp", sender: nil)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.presentICloudErrorAlert()
+                }
+            }
+        }
     }
     
     @IBAction func selectedGenderControlTapped(_ sender: UISegmentedControl) {
@@ -74,6 +91,13 @@ class CreateProfileViewController: UIViewController {
     
     //MARK: - HELPER FUNCTIONS
     func presentFillOutAllFieldsAlert(){
+        let alert = UIAlertController(title: "did you fill out everything?", message: "you may have forgotten something look and try again", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Okay!", style: .default, handler: nil))
+    }
+    
+    func presentICloudErrorAlert(){
+        let alert = UIAlertController(title: "ICloud error", message: "check your internet connection, and make sure that ICloud drive is turned on then come back", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
     }
     
     func setUpUI(){
@@ -87,7 +111,7 @@ class CreateProfileViewController: UIViewController {
         createAProfileLabel.layer.borderWidth = labelBorderWidth
         createAProfileLabel.layer.borderColor = UIColor(named: "areYaYellow")!.cgColor
         createAProfileLabel.layer.cornerRadius = 15
-       createAProfileLabel.layer.masksToBounds = true
+        createAProfileLabel.layer.masksToBounds = true
         
         
         
@@ -108,12 +132,12 @@ class CreateProfileViewController: UIViewController {
             
             
         }
-  
+        
     }
     
     //MARK: - NAVIGATION
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    
+        
     }
 }

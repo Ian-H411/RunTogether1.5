@@ -20,9 +20,9 @@ class RunCloudController{
     //MARK: - CLOUD
     
     //used only on creation of a new profile
-    func createNewUserAndPushWith(name: String, height: Double, weight: Double, age: Int, gender: String, completion: @escaping (Bool) -> Void){
+    func createNewUserAndPushWith(name: String, height: Double, weight: Double, age: Int, gender: String,prefersMetric: Bool, completion: @escaping (Bool) -> Void){
         //create a user
-        let user = User(name: name, height: height, weight: weight, age: age, gender: gender)
+        let user = User(name: name, height: height, weight: weight, prefersMetric: prefersMetric, age: age, gender: gender)
         //convert to a record
         guard let record = CKRecord(user: user) else {return}
         privateDB.save(record) { (recordRecieved, error) in
@@ -90,6 +90,8 @@ class RunCloudController{
             guard let userRetrieved = User(record: userRecordRetrieved) else {completion(false);return}
             //set the user
             self.user = userRetrieved
+            completion(true)
+            
         }
     }
     

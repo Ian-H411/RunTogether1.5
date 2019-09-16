@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pRM-Oa-nss">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8Q8-Bg-8VI">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -39,7 +39,53 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IYR-k4-ggg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1786.9565217391305" y="1396.875"/>
+            <point key="canvasLocation" x="864" y="1458"/>
+        </scene>
+        <!--Loading View Controller-->
+        <scene sceneID="jRK-AS-gAm">
+            <objects>
+                <viewController id="8Q8-Bg-8VI" customClass="LoadingViewController" customModule="RunTogether1_5" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="NSq-tF-Xpl">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loading" translatesAutoresizingMaskIntoConstraints="NO" id="KwS-b8-emK">
+                                <rect key="frame" x="0.0" y="246" width="414" height="414"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="KwS-b8-emK" secondAttribute="height" multiplier="1:1" id="xcO-T8-vmm"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Warming Up" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dnk-Ep-MYR">
+                                <rect key="frame" x="0.0" y="154" width="414" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="Wt5-T3-Q3M"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="29"/>
+                                <color key="textColor" name="SilverFox"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" name="DeepMatteGrey"/>
+                        <constraints>
+                            <constraint firstItem="KwS-b8-emK" firstAttribute="top" secondItem="Dnk-Ep-MYR" secondAttribute="bottom" constant="32" id="PRr-o5-UuZ"/>
+                            <constraint firstItem="KwS-b8-emK" firstAttribute="centerX" secondItem="rGh-DL-MBq" secondAttribute="centerX" id="Zbs-wt-uvR"/>
+                            <constraint firstItem="Dnk-Ep-MYR" firstAttribute="centerX" secondItem="rGh-DL-MBq" secondAttribute="centerX" id="bo2-0C-feD"/>
+                            <constraint firstItem="Dnk-Ep-MYR" firstAttribute="width" secondItem="NSq-tF-Xpl" secondAttribute="width" id="drg-LP-QVg"/>
+                            <constraint firstItem="KwS-b8-emK" firstAttribute="width" secondItem="NSq-tF-Xpl" secondAttribute="width" id="fvw-pi-P3D"/>
+                            <constraint firstItem="KwS-b8-emK" firstAttribute="centerY" secondItem="rGh-DL-MBq" secondAttribute="centerY" id="iyq-3g-GS1"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="rGh-DL-MBq"/>
+                    </view>
+                    <connections>
+                        <outlet property="loadingImage" destination="KwS-b8-emK" id="Ihh-5A-4BW"/>
+                        <outlet property="warmingUpLabel" destination="Dnk-Ep-MYR" id="eeI-jD-LaF"/>
+                        <segue destination="pRM-Oa-nss" kind="show" identifier="newUser" id="QJR-dM-74k"/>
+                        <segue destination="LXK-GV-JLw" kind="show" identifier="returningUser" id="qZW-rF-wlp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a49-Bc-DXx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2881" y="1458"/>
         </scene>
         <!--Create Profile View Controller-->
         <scene sceneID="K2m-Kn-Zr6">
@@ -219,7 +265,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OZQ-sP-aPw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1293" y="1381"/>
+            <point key="canvasLocation" x="-2139" y="694"/>
         </scene>
         <!--My Runs-->
         <scene sceneID="jNL-xQ-2f9">
@@ -414,7 +460,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Eqg-wY-HlK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="397.10144927536237" y="1396.875"/>
+            <point key="canvasLocation" x="-513" y="1458"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="35P-WZ-oe2">
@@ -429,30 +475,30 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ll0-zA-vGZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="864" y="2101"/>
+            <point key="canvasLocation" x="-513" y="2217"/>
         </scene>
         <!--Go On A Run-->
         <scene sceneID="iRO-tV-ghZ">
             <objects>
                 <viewController id="LXK-GV-JLw" customClass="GoOnARunViewController" customModule="RunTogether1_5" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mH8-bR-4VC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ngD-Wr-yjs">
-                                <rect key="frame" x="20.5" y="108" width="373" height="414.5"/>
+                                <rect key="frame" x="20.5" y="64" width="373" height="506"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="yGa-Hz-jbh">
-                                        <rect key="frame" x="0.0" y="0.0" width="373" height="131.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="373" height="162"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LIK-ZO-r7B">
-                                                <rect key="frame" x="0.0" y="0.0" width="251" height="131.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="251" height="162"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <color key="textColor" name="SilverFox"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calories" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="quR-ov-YPM">
-                                                <rect key="frame" x="261" y="0.0" width="112" height="131.5"/>
+                                                <rect key="frame" x="261" y="0.0" width="112" height="162"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <color key="textColor" name="SilverFox"/>
                                                 <nil key="highlightedColor"/>
@@ -463,22 +509,22 @@
                                         </constraints>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tsW-XY-ZTe">
-                                        <rect key="frame" x="0.0" y="141.5" width="373" height="131.5"/>
+                                        <rect key="frame" x="0.0" y="172" width="373" height="162"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <color key="textColor" name="SilverFox"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="NQT-gH-Cv8">
-                                        <rect key="frame" x="0.0" y="283" width="373" height="131.5"/>
+                                        <rect key="frame" x="0.0" y="344" width="373" height="162"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Elevation Gained" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K0h-1p-xcj">
-                                                <rect key="frame" x="0.0" y="0.0" width="123" height="131.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="123" height="162"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <color key="textColor" name="SilverFox"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pace" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5it-hw-m73">
-                                                <rect key="frame" x="138" y="0.0" width="235" height="131.5"/>
+                                                <rect key="frame" x="138" y="0.0" width="235" height="162"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <color key="textColor" name="SilverFox"/>
                                                 <nil key="highlightedColor"/>
@@ -499,7 +545,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YvO-kL-ATk">
-                                <rect key="frame" x="62" y="580" width="290" height="60"/>
+                                <rect key="frame" x="62" y="627.5" width="290" height="60"/>
                                 <color key="backgroundColor" name="areYaYellow"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="FMS-PT-xI7"/>
@@ -537,7 +583,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CFw-s4-XVH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1100" y="1396.875"/>
+            <point key="canvasLocation" x="190" y="1458"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="4fn-IT-je0">
@@ -623,6 +669,7 @@
     </scenes>
     <resources>
         <image name="Runicon" width="40" height="40"/>
+        <image name="loading" width="490" height="490"/>
         <namedColor name="DarkSlate">
             <color red="0.11372549019607843" green="0.11764705882352941" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -636,4 +683,7 @@
             <color red="0.99607843137254903" green="0.85490196078431369" blue="0.41568627450980394" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="qZW-rF-wlp"/>
+    </inferredMetricsTieBreakers>
 </document>
