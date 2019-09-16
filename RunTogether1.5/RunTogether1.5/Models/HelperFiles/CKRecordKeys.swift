@@ -56,6 +56,8 @@ struct UserKeys{
     
     static let genderKey = "Gender"
     
+    static let preferedMeasureMent = "PreferedMeasurement"
+    
 }
 
 struct GenderKeys {

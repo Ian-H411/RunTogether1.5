@@ -136,10 +136,10 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="34" translatesAutoresizingMaskIntoConstraints="NO" id="Zxs-ke-CMA">
-                                        <rect key="frame" x="119" y="273" width="176" height="200"/>
+                                        <rect key="frame" x="62" y="273" width="290" height="200"/>
                                         <subviews>
-                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="f8N-So-XLK">
-                                                <rect key="frame" x="0.0" y="0.0" width="176" height="45"/>
+                                            <segmentedControl opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="f8N-So-XLK">
+                                                <rect key="frame" x="0.0" y="0.0" width="290" height="45"/>
                                                 <color key="backgroundColor" name="DeepMatteGrey"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="k0a-Ad-t0d"/>
@@ -151,11 +151,11 @@
                                                 </segments>
                                                 <color key="tintColor" name="areYaYellow"/>
                                                 <connections>
-                                                    <action selector="GenderControlTapped:" destination="pRM-Oa-nss" eventType="valueChanged" id="jcU-I5-pjw"/>
+                                                    <action selector="selectedGenderControlTapped:" destination="pRM-Oa-nss" eventType="valueChanged" id="PUx-Y6-a4x"/>
                                                 </connections>
                                             </segmentedControl>
-                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="bdK-58-h6G">
-                                                <rect key="frame" x="7.5" y="78" width="161" height="45"/>
+                                            <segmentedControl opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="bdK-58-h6G">
+                                                <rect key="frame" x="29" y="78" width="232" height="45"/>
                                                 <color key="backgroundColor" name="DeepMatteGrey"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="op4-Ob-GsH"/>
@@ -166,11 +166,11 @@
                                                 </segments>
                                                 <color key="tintColor" name="areYaYellow"/>
                                                 <connections>
-                                                    <action selector="measurementControlTapped:" destination="pRM-Oa-nss" eventType="valueChanged" id="j9C-Gr-gGv"/>
+                                                    <action selector="selectedMeasurementStyleControlTapped:" destination="pRM-Oa-nss" eventType="valueChanged" id="ooe-HE-9ua"/>
                                                 </connections>
                                             </segmentedControl>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QDC-p6-0Xg">
-                                                <rect key="frame" x="7.5" y="156" width="161" height="44"/>
+                                                <rect key="frame" x="29" y="156" width="232" height="44"/>
                                                 <color key="backgroundColor" name="DeepMatteGrey"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="ti0-Sb-PWq"/>
@@ -180,17 +180,18 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="CreateProfileButtonTapped:" destination="pRM-Oa-nss" eventType="touchUpInside" id="fa9-EC-efe"/>
-                                                    <segue destination="htv-ny-qyb" kind="show" id="RcD-gN-x2m"/>
                                                 </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
+                                            <constraint firstItem="bdK-58-h6G" firstAttribute="width" secondItem="f8N-So-XLK" secondAttribute="width" multiplier="0.8" id="2dR-Lu-1t7"/>
                                             <constraint firstItem="QDC-p6-0Xg" firstAttribute="width" secondItem="bdK-58-h6G" secondAttribute="width" id="MHI-ol-mRD"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="wgB-Br-kOs" firstAttribute="width" secondItem="SV1-bm-BFo" secondAttribute="width" id="A1J-he-rV7"/>
+                                    <constraint firstItem="f8N-So-XLK" firstAttribute="width" secondItem="13Q-K3-GO6" secondAttribute="width" id="VDJ-ZS-kMM"/>
                                     <constraint firstItem="13Q-K3-GO6" firstAttribute="width" secondItem="Sya-kq-6OH" secondAttribute="width" multiplier="0.7" id="kAp-6i-faM"/>
                                 </constraints>
                             </stackView>
@@ -213,11 +214,12 @@
                         <outlet property="genderSegmentedControl" destination="f8N-So-XLK" id="Eaw-D7-dBz"/>
                         <outlet property="heightTextField" destination="sPX-x2-gyi" id="K8a-sV-8Df"/>
                         <outlet property="userNameTextField" destination="wgB-Br-kOs" id="r3f-eF-bX3"/>
+                        <segue destination="htv-ny-qyb" kind="show" identifier="toApp" id="Ouy-jv-cKI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OZQ-sP-aPw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1262.3188405797102" y="1409.5982142857142"/>
+            <point key="canvasLocation" x="-1293" y="1381"/>
         </scene>
         <!--My Runs-->
         <scene sceneID="jNL-xQ-2f9">
@@ -227,18 +229,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="nbF-LS-p5u">
+                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" id="nbF-LS-p5u">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="263"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="39" translatesAutoresizingMaskIntoConstraints="NO" id="fWn-BR-cyn">
-                                    <rect key="frame" x="20" y="40" width="374" height="183"/>
+                                    <rect key="frame" x="20" y="40" width="374" height="100"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="X0l-Ea-gDl">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="72"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="30.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RACES WON:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ft6-xH-SYG">
-                                                    <rect key="frame" x="0.0" y="0.0" width="374" height="72"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="374" height="30.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="SilverFox"/>
                                                     <nil key="highlightedColor"/>
@@ -246,10 +248,10 @@
                                             </subviews>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="seM-kp-kqj">
-                                            <rect key="frame" x="0.0" y="111" width="374" height="72"/>
+                                            <rect key="frame" x="0.0" y="69.5" width="374" height="30.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TOTAL DISTANCE RUN:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y9C-dW-KGs">
-                                                    <rect key="frame" x="0.0" y="0.0" width="374" height="72"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="374" height="30.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="SilverFox"/>
                                                     <nil key="highlightedColor"/>

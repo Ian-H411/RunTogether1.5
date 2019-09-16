@@ -28,6 +28,13 @@ class CreateProfileViewController: UIViewController {
     
     @IBOutlet weak var createProfileButton: UIButton!
     
+    
+    
+    //MARK: - VARIABLES
+    var selectedGender: String = GenderKeys.female
+    
+    var isMetric:Bool = true
+    
     //MARK: - LIFECYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,16 +44,37 @@ class CreateProfileViewController: UIViewController {
     //MARK: - ACTIONS
     
     @IBAction func CreateProfileButtonTapped(_ sender: Any) {
+        guard let username = userNameTextField.text, !username.isEmpty,
+        let weight = WeightTextField.text, !weight.isEmpty,
+        let age = ageTextField.text, !age.isEmpty,
+        let height = heightTextField.text, !height.isEmpty
+            else {presentFillOutAllFieldsAlert();return}
+        
     }
     
-    @IBAction func GenderControlTapped(_ sender: Any) {
+    @IBAction func selectedGenderControlTapped(_ sender: UISegmentedControl) {
+        if sender.tag == 0{
+            selectedGender = GenderKeys.female
+        } else if sender.tag == 1{
+            selectedGender = GenderKeys.other
+        } else {
+            selectedGender = GenderKeys.male
+        }
     }
     
-    @IBAction func measurementControlTapped(_ sender: Any) {
+    
+    @IBAction func selectedMeasurementStyleControlTapped(_ sender: UISegmentedControl) {
+        if sender.tag == 1{
+            isMetric = false
+        } else {
+            isMetric = true
+        }
     }
+    
     
     //MARK: - HELPER FUNCTIONS
-    
+    func presentFillOutAllFieldsAlert(){
+    }
     
     func setUpUI(){
         setNeedsStatusBarAppearanceUpdate()
@@ -83,7 +111,9 @@ class CreateProfileViewController: UIViewController {
   
     }
     
+    //MARK: - NAVIGATION
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     
-    
+    }
 }
