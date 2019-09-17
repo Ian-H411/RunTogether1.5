@@ -34,9 +34,9 @@ class RunHistoryTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "runCell", for: indexPath)
-
-        // Configure the cell...
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "runCell", for: indexPath) as? RunTableViewCell else {return UITableViewCell()}
+        guard let run = RunCloudController.shared.user?.runs[indexPath.row] else {return UITableViewCell()}
+        cell.update(run: run)
 
         return cell
     }

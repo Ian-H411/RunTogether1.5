@@ -9,7 +9,11 @@
 import Foundation
 
 struct Converter{
-    
+    static func formatDate(date:Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        return dateFormatter.string(from: date)
+    }
     
     static func formatTime(seconds: Int) -> String{
         let timeFormatter = DateComponentsFormatter()
