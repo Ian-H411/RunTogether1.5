@@ -647,11 +647,11 @@
             </objects>
             <point key="canvasLocation" x="-513" y="694"/>
         </scene>
-        <!--Item-->
+        <!--Profile-->
         <scene sceneID="LcA-ne-iHp">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="YW2-MB-d3w" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="LWf-kh-Tui"/>
+                    <tabBarItem key="tabBarItem" title="Profile" id="LWf-kh-Tui"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="W9V-MV-FFX">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -685,6 +685,6 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Ouy-jv-cKI"/>
+        <segue reference="T0p-B8-PQR"/>
     </inferredMetricsTieBreakers>
 </document>

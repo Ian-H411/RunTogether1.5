@@ -85,7 +85,7 @@ class Run {
     
     
     init?(record: CKRecord, user: User){
-        guard let distance =  record[RunKeys.dateKey] as? Double,
+        guard let distance =  record[RunKeys.distanceKey] as? Double,
             let totalTime = record[RunKeys.totalTimeKey] as? Double,
             let coreLocationPoints = record[RunKeys.coreLocationsKey] as? [CLLocation],
             let calories = record[RunKeys.calorieKey] as? Int,

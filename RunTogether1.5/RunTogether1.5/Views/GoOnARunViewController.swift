@@ -25,12 +25,12 @@ class GoOnARunViewController: UIViewController {
     
     @IBOutlet weak var elevationLabel: UILabel!
     
-
+    
     
     ///vars and lets for tracking a run
     
-let locationManager = LocationManager.shared
-
+    let locationManager = LocationManager.shared
+    
     var run: Run?
     
     var seconds = 0
@@ -73,8 +73,8 @@ let locationManager = LocationManager.shared
     //MARK: -Helpers
     
     //initial start up only
-
-
+    
+    
     func setUpUI(){
         setNeedsStatusBarAppearanceUpdate()
         let labelColor: String = "SilverFox"
@@ -85,7 +85,7 @@ let locationManager = LocationManager.shared
         
         //set  background
         self.view.backgroundColor = UIColor(named: "DarkSlate")!
-    
+        
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor(named: labelColor)!]
         for label in labelArray {
             //set all labels border
@@ -96,11 +96,11 @@ let locationManager = LocationManager.shared
             label.layer.cornerRadius = cornerRadius
             //set text color
             label.layer.backgroundColor = UIColor(named: "DeepMatteGrey")!.cgColor
-           
+            
             
         }
         startStopButton.layer.cornerRadius = cornerRadius - 10
-  
+        
     }
     //to be used to update the label text
     func updateUIText(){
@@ -124,7 +124,7 @@ let locationManager = LocationManager.shared
     
     func addSecond(){
         seconds = seconds + 1
-       updateUIText()
+        updateUIText()
     }
     func startRun(){
         //clear everything out and then go
@@ -151,17 +151,26 @@ let locationManager = LocationManager.shared
         distance = Measurement(value: 0, unit: UnitLength.meters)
         updateUIText()
     }
-
+    
     func caloriesBurnt (){
         calories = Int(100 * distance.converted(to: UnitLength.miles).value)
     }
     func presentFinishedRunAlert(){
         let alert = UIAlertController(title: "Run complete congratulations!", message: "what would you like to do with this run?", preferredStyle: .actionSheet)
         let saveAction = UIAlertAction(title: "Save This Run", style: .default) { (_) in
-            //TODO: - save the run but do not send
-            DispatchQueue.main.async {
-                self.clearUpUI()
-            }
+            let distanceAsDouble:Double = self.distance.converted(to: UnitLength.miles).value
+            let elevationAsDouble:Double = self.elevation.converted(to: UnitLength.feet).value
+            RunCloudController.shared.addRunAndPushToCloud(with: distanceAsDouble, elevation: elevationAsDouble, calories: self.calories, totalTime: Double(self.seconds), coreLocations: self.listOfLocations, completion: { (success) in
+                if success{
+                    print("saved")
+                    DispatchQueue.main.async {
+                        self.clearUpUI()
+                    }
+                } else {
+                    print("error")
+                }
+            })
+            
         }
         let deleteAction = UIAlertAction(title: "Delete This Run", style: .destructive) { (_) in
             //TODO: - present a alert that double checks if this is really what they want
@@ -182,13 +191,13 @@ let locationManager = LocationManager.shared
         alert.addAction(deleteAction)
         self.present(alert, animated: true)
     }
-   
-     // MARK: - Navigation
-
+    
+    // MARK: - Navigation
+    
     
 }
 extension GoOnARunViewController: CLLocationManagerDelegate{
-   //this will continually feed me new locations
+    //this will continually feed me new locations
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         for location in locations {
             //grab the time

@@ -100,27 +100,11 @@ class RunCloudController{
     }
     
     func fetchRuns(completion: @escaping (Bool) -> Void){
-        //unrwrap user
         guard let user = user else {return}
-        
-        //grab the reference
-        let userReference = user.recordID
-        
-        //create a search for the reference
-        let predicate = NSPredicate(format: "%K == %@", RunKeys.userReferenceKey, userReference)
-        
+        let predicate = NSPredicate(value: true)
+        let query = CKQuery(recordType: RunKeys.runObjectKey, predicate: predicate)
         //grab all of the run ids
-        let runIDs = user.runs.compactMap({$0.ckRecordId})
-        
-        //2nd predicate to make sure im getting the correct data
-        let predicate2 = NSPredicate(format: "NOT(recordID in %@)", runIDs)
-        
-        //put my predicates together
-        let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate,predicate2])
-        
-        //create a query
-        let query = CKQuery(recordType: "Run", predicate: compoundPredicate)
-        
+     
         //perform the query
         privateDB.perform(query, inZoneWith: nil) { (records, error) in
             if let error = error{
