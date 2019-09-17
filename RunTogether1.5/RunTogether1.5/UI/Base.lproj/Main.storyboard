@@ -80,7 +80,7 @@
                         <outlet property="loadingImage" destination="KwS-b8-emK" id="Ihh-5A-4BW"/>
                         <outlet property="warmingUpLabel" destination="Dnk-Ep-MYR" id="eeI-jD-LaF"/>
                         <segue destination="pRM-Oa-nss" kind="show" identifier="newUser" id="QJR-dM-74k"/>
-                        <segue destination="LXK-GV-JLw" kind="show" identifier="returningUser" id="qZW-rF-wlp"/>
+                        <segue destination="htv-ny-qyb" kind="show" identifier="returningUser" id="T0p-B8-PQR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a49-Bc-DXx" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -482,23 +482,23 @@
             <objects>
                 <viewController id="LXK-GV-JLw" customClass="GoOnARunViewController" customModule="RunTogether1_5" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mH8-bR-4VC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ngD-Wr-yjs">
-                                <rect key="frame" x="20.5" y="64" width="373" height="506"/>
+                                <rect key="frame" x="20.5" y="108" width="373" height="414.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="yGa-Hz-jbh">
-                                        <rect key="frame" x="0.0" y="0.0" width="373" height="162"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="373" height="131.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LIK-ZO-r7B">
-                                                <rect key="frame" x="0.0" y="0.0" width="251" height="162"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="251" height="131.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <color key="textColor" name="SilverFox"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calories" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="quR-ov-YPM">
-                                                <rect key="frame" x="261" y="0.0" width="112" height="162"/>
+                                                <rect key="frame" x="261" y="0.0" width="112" height="131.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <color key="textColor" name="SilverFox"/>
                                                 <nil key="highlightedColor"/>
@@ -509,22 +509,22 @@
                                         </constraints>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tsW-XY-ZTe">
-                                        <rect key="frame" x="0.0" y="172" width="373" height="162"/>
+                                        <rect key="frame" x="0.0" y="141.5" width="373" height="131.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <color key="textColor" name="SilverFox"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="NQT-gH-Cv8">
-                                        <rect key="frame" x="0.0" y="344" width="373" height="162"/>
+                                        <rect key="frame" x="0.0" y="283" width="373" height="131.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Elevation Gained" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K0h-1p-xcj">
-                                                <rect key="frame" x="0.0" y="0.0" width="123" height="162"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="123" height="131.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <color key="textColor" name="SilverFox"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pace" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5it-hw-m73">
-                                                <rect key="frame" x="138" y="0.0" width="235" height="162"/>
+                                                <rect key="frame" x="138" y="0.0" width="235" height="131.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <color key="textColor" name="SilverFox"/>
                                                 <nil key="highlightedColor"/>
@@ -545,7 +545,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YvO-kL-ATk">
-                                <rect key="frame" x="62" y="627.5" width="290" height="60"/>
+                                <rect key="frame" x="62" y="580" width="290" height="60"/>
                                 <color key="backgroundColor" name="areYaYellow"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="FMS-PT-xI7"/>
@@ -606,11 +606,11 @@
             </objects>
             <point key="canvasLocation" x="-1261" y="694"/>
         </scene>
-        <!--Item 1-->
+        <!--Go On a Run-->
         <scene sceneID="Nkp-4U-Vkg">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fso-eb-Vds" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item 1" image="Runicon" largeContentSizeImage="Runicon" selectedImage="Runicon" id="dMv-Wr-Qxl"/>
+                    <tabBarItem key="tabBarItem" title="Go On a Run" image="Runicon" largeContentSizeImage="Runicon" selectedImage="Runicon" id="dMv-Wr-Qxl"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="HiV-1l-WD3">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -627,11 +627,11 @@
             </objects>
             <point key="canvasLocation" x="191" y="694"/>
         </scene>
-        <!--Item-->
+        <!--Run History-->
         <scene sceneID="eNk-To-cVh">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2LO-dn-BnM" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="cDt-Kj-VS5"/>
+                    <tabBarItem key="tabBarItem" title="Run History" image="runHistory" selectedImage="runHistory" id="cDt-Kj-VS5"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="AvU-3e-tGd">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -668,8 +668,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Runicon" width="40" height="40"/>
-        <image name="loading" width="490" height="490"/>
+        <image name="Runicon" width="26.666666030883789" height="26.666666030883789"/>
+        <image name="loading" width="256" height="256"/>
+        <image name="runHistory" width="26.666666030883789" height="26.666666030883789"/>
         <namedColor name="DarkSlate">
             <color red="0.11372549019607843" green="0.11764705882352941" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -684,6 +685,6 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="qZW-rF-wlp"/>
+        <segue reference="Ouy-jv-cKI"/>
     </inferredMetricsTieBreakers>
 </document>
