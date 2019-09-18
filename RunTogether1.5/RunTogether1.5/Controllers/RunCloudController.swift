@@ -6,7 +6,7 @@
 //  Copyright © 2019 Ian Hall. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import CloudKit
 
 class RunCloudController{
@@ -129,15 +129,31 @@ class RunCloudController{
     func subScribeToNewRuns(completion: @escaping (Bool, Error?) -> Void){
         
     }
-    
+    //felt cute might delete later
     func createAZone(challengedOpponent:String, completion: @escaping (CKRecordZone?, Error?) -> Void){
         let zone = CKRecordZone(zoneName: challengedOpponent)
         privateDB.save(zone) { (returnRecord, error) in
             completion(returnRecord,error)
         }
     }
-    func shareARun(zone:CKRecordZone, run:Run ,completion: @escaping (Bool) -> Void){
-        run.opponentsName = zone.zoneID.zoneName
+    func createShareAndPresentShareController(run: Run) -> UICloudSharingController? {
+        //create a root record and a share
+        guard let record = CKRecord(run: run) else {return nil}
+        let share = CKShare(rootRecord: record)
+        
+        let sharingController = UICloudSharingController { (controller: UICloudSharingController , prepareCompletionHandler: @escaping (CKShare?, CKContainer?, Error?) -> Void) in
+            let modifyOperation = CKModifyRecordsOperation(recordsToSave: [record,share], recordIDsToDelete: nil)
+            modifyOperation.modifyRecordsCompletionBlock = { (_,_,error) in
+                prepareCompletionHandler(share,CKContainer.default(),error)
+            }
+            self.privateDB.add(modifyOperation)
+        }
+        //set sharing options
+        
+        sharingController.availablePermissions = [.allowPrivate, .allowReadWrite]
+    return sharingController
+    }
+    func shareARunTo(zone:CKRecordZone, run:Run ,completion: @escaping (Bool) -> Void){
         guard let record = CKRecord(run: run, recordZone: zone) else {completion(false);return}
         privateDB.save(record) { (record, error) in
             if let error = error{
@@ -166,32 +182,32 @@ class RunCloudController{
         if run1.totalTime < run2.totalTime {
             winningRunTime = run1
             losingRunTime = run2
-            winningRunTime.myTimePoints = 60
+            winningRunTime.timePoints = 60
         }
         //get the difference between the two
         let timeDifference: Double = winningRunTime.totalTime.distance(to: run2.totalTime)
         //and then calculate points
         if timeDifference  < 60 {
-            losingRunTime.myTimePoints = 55
+            losingRunTime.timePoints = 55
         } else if timeDifference < 120 {
-            losingRunTime.myTimePoints = 50
+            losingRunTime.timePoints = 50
         } else if timeDifference < 300 {
-            losingRunTime.myTimePoints = 45
+            losingRunTime.timePoints = 45
         } else if timeDifference < 600 {
-            losingRunTime.myTimePoints = 35
+            losingRunTime.timePoints = 35
         } else if timeDifference < 1200 {
-            losingRunTime.myTimePoints = 20
+            losingRunTime.timePoints = 20
         } else {
-            losingRunTime.myTimePoints = 10
+            losingRunTime.timePoints = 10
         }
         //dont want to run the same code over and over
         let runsCompared = [run1,run2]
         for run in runsCompared{
             let points = Int((run.elevationGained / 100) * 5)
             if points > 20{
-                run.myElevationPoints = 20
+                run.elevationPoints = 20
             } else {
-            run.myElevationPoints = points
+                run.elevationPoints = points
             }
         }
     }
