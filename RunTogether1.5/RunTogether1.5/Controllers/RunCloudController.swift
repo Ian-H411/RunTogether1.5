@@ -166,32 +166,32 @@ class RunCloudController{
         if run1.totalTime < run2.totalTime {
             winningRunTime = run1
             losingRunTime = run2
-            winningRunTime.timePoints = 60
+            winningRunTime.myTimePoints = 60
         }
         //get the difference between the two
         let timeDifference: Double = winningRunTime.totalTime.distance(to: run2.totalTime)
         //and then calculate points
         if timeDifference  < 60 {
-            losingRunTime.timePoints = 55
+            losingRunTime.myTimePoints = 55
         } else if timeDifference < 120 {
-            losingRunTime.timePoints = 50
+            losingRunTime.myTimePoints = 50
         } else if timeDifference < 300 {
-            losingRunTime.timePoints = 45
+            losingRunTime.myTimePoints = 45
         } else if timeDifference < 600 {
-            losingRunTime.timePoints = 35
+            losingRunTime.myTimePoints = 35
         } else if timeDifference < 1200 {
-            losingRunTime.timePoints = 20
+            losingRunTime.myTimePoints = 20
         } else {
-            losingRunTime.timePoints = 10
+            losingRunTime.myTimePoints = 10
         }
         //dont want to run the same code over and over
         let runsCompared = [run1,run2]
         for run in runsCompared{
             let points = Int((run.elevationGained / 100) * 5)
             if points > 20{
-                run.elevationPoints = 20
+                run.myElevationPoints = 20
             } else {
-            run.elevationPoints = points
+            run.myElevationPoints = points
             }
         }
     }

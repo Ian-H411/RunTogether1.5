@@ -25,6 +25,8 @@ struct RunKeys {
     
     static let userReferenceKey = "UserReference"
     
+    static let opposingRunReferenceKey = "OpposingRunReference"
+    
     static let timePointsKey = "TimePoints"
     
     static let consistencyPointsKey = "ConsistencyPoints"
