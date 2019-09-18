@@ -107,6 +107,28 @@ class Run {
         self.timePoints = timePoints
         self.elevationGained = elevationGained
     }
+    init?(record: CKRecord, user: User, opposingRun:Run){
+        guard let distance =  record[RunKeys.distanceKey] as? Double,
+            let totalTime = record[RunKeys.totalTimeKey] as? Double,
+            let coreLocationPoints = record[RunKeys.coreLocationsKey] as? [CLLocation],
+            let calories = record[RunKeys.calorieKey] as? Int,
+            let elevationPoints = record[RunKeys.elevationPoints] as? Int,
+            let consistencyPoints = record[RunKeys.consistencyPointsKey] as? Int,
+            let timePoints = record[RunKeys.consistencyPointsKey] as? Int,
+            let elevationGained = record[RunKeys.elevationGained] as? Double
+            else {return nil}
+        self.competingRun = opposingRun
+        self.distance = distance
+        self.totalTime = totalTime
+        self.coreLocationPoints = coreLocationPoints
+        self.user = user
+        self.ckRecordId = record.recordID
+        self.calories = calories
+        self.elevationPoints = elevationPoints
+        self.consistencyPoints = consistencyPoints
+        self.timePoints = timePoints
+        self.elevationGained = elevationGained
+    }
 }
 extension CKRecord{
     convenience init?(run: Run){
@@ -122,6 +144,7 @@ extension CKRecord{
         self.setValue(run.elevationGained, forKey: RunKeys.elevationGained)
     }
 }
+
 extension CKRecord{
     convenience init? (run:Run ,recordZone: CKRecordZone){
         self.init(recordType: RunKeys.runObjectKey, recordID: CKRecord.ID(recordName: run.ckRecordId.recordName, zoneID: recordZone.zoneID))
@@ -129,6 +152,7 @@ extension CKRecord{
         self.setValue(run.totalTime, forKey: RunKeys.totalTimeKey)
         self.setValue(run.coreLocationPoints, forKey: RunKeys.coreLocationsKey)
         self.setValue(run.userReference, forKey: RunKeys.userReferenceKey)
+        self.setValue(run.competingRun, forKey: RunKeys.opposingRunReferenceKey)
         self.setValue(run.consistencyPoints, forKey: RunKeys.consistencyPointsKey)
         self.setValue(run.elevationPoints, forKey: RunKeys.elevationPoints)
         self.setValue(run.timePoints, forKey: RunKeys.timePointsKey)
