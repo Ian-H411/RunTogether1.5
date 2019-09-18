@@ -37,7 +37,9 @@ class Run {
     
     let coreLocationPoints: [CLLocation]
     //cloudkit stuff below
-    weak var user: User?
+    var user: User?
+    
+    var opponent: User?
     
     let ckRecordId: CKRecord.ID
     
@@ -70,6 +72,10 @@ class Run {
     var userReference: CKRecord.Reference?{
         guard let user  = user else {return nil}
         return CKRecord.Reference(recordID: user.recordID, action: .deleteSelf)
+    }
+    var opponentUser: CKRecord.Reference?{
+        guard let opposingUser = opponent else {return nil}
+        return CKRecord.Reference(recordID: opposingUser.recordID, action: .none)
     }
     
     init(distance: Double, elevation: Double, calories: Int, totalTime: Double, coreLocationPoints: [CLLocation], user: User, ckRecordId: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString)){

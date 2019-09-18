@@ -149,6 +149,9 @@ class RunCloudController{
             guard let user = self.user else {completion(false); return}
             guard let newRun = Run(record: recordToSave, user: user) else {completion(false); return}
             user.runs.append(newRun)
+            completion(true)
+            print("run shared to zone succesfully")
+            return
         }
         
        

@@ -29,11 +29,13 @@ class User{
     
     var runs: [Run]
     
+    var runsRecieved: [Run]
+    
     var gender: String
     
     var prefersMetric: Bool
     
-    init(name: String, totalMiles: Double = 0.0, racesWon: Int = 0, height: Double, weight: Double, prefersMetric: Bool, age: Int, gender: String, ckRecordId: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString), runs: [Run] = []){
+    init(name: String, totalMiles: Double = 0.0, racesWon: Int = 0, height: Double, weight: Double, prefersMetric: Bool, age: Int, gender: String, ckRecordId: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString), runs: [Run] = [],recievedRuns: [Run] = []){
         self.name = name
         self.totalMiles = totalMiles
         self.racesWon = racesWon
@@ -44,6 +46,7 @@ class User{
         self.runs = runs
         self.gender = gender
         self.prefersMetric = prefersMetric
+        self.runsRecieved = recievedRuns
     }
     
     init?(record: CKRecord){
@@ -57,6 +60,7 @@ class User{
         let prefersMetric = record[UserKeys.preferedMeasureMent] as? Bool
             else {return nil}
         self.runs = []
+        self.runsRecieved = []
         self.recordID = record.recordID
         self.name = name
         self.totalMiles = totalMiles
