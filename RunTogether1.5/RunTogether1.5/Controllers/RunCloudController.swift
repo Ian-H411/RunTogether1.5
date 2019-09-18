@@ -130,6 +130,29 @@ class RunCloudController{
         
     }
     
+    func createAZone(challengedOpponent:String, completion: @escaping (CKRecordZone?, Error?) -> Void){
+        let zone = CKRecordZone(zoneName: challengedOpponent)
+        privateDB.save(zone) { (returnRecord, error) in
+            completion(returnRecord,error)
+        }
+    }
+    func shareARun(zone:CKRecordZone, run:Run ,completion: @escaping (Bool) -> Void){
+        run.opponentsName = zone.zoneID.zoneName
+        guard let record = CKRecord(run: run, recordZone: zone) else {completion(false);return}
+        privateDB.save(record) { (record, error) in
+            if let error = error{
+                print("there was an error in \(#function) :\(error) : \(error.localizedDescription)")
+                completion(false)
+                return
+            }
+            guard let recordToSave = record else {completion(false); return}
+            guard let user = self.user else {completion(false); return}
+            guard let newRun = Run(record: recordToSave, user: user) else {completion(false); return}
+            user.runs.append(newRun)
+        }
+        
+       
+    }
     //MARK: - RUNNING CALCULATIONS
     
     //updates run points

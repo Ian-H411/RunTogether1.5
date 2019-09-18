@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import CloudKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         let locationManager = LocationManager.shared
         locationManager.requestWhenInUseAuthorization()
+        requestUserDiscoverability()
         return true
     }
 
@@ -43,6 +44,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
+    func requestUserDiscoverability(){
+CKContainer.default().requestApplicationPermission(CKContainer_Application_Permissions.userDiscoverability) { (status, error) in
+            switch status {
+            case .granted:
+                print("granted")
+            case .denied:
+                print("denied")
+            case .initialState:
+                print("initial state")
+            case .couldNotComplete:
+                print("an error as occurred: ", error ?? "Unknown error")
+            @unknown default:
+                print("not even cloud kit knows what happened")
+            }
+        }
+    }
 }
 
