@@ -23,6 +23,13 @@ class RunHistoryTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
+        CloudController.shared.retrieveRuns { (success) in
+            if success{
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+        }
     }
 
     // MARK: - Table view data source
@@ -30,12 +37,12 @@ class RunHistoryTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return RunCloudController.shared.user?.runs.count ?? 0
+        return CloudController.shared.user?.runs.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "runCell", for: indexPath) as? RunTableViewCell else {return UITableViewCell()}
-        guard let run = RunCloudController.shared.user?.runs[indexPath.row] else {return UITableViewCell()}
+        guard let run = CloudController.shared.user?.runs[indexPath.row] else {return UITableViewCell()}
         cell.update(run: run)
 
         return cell

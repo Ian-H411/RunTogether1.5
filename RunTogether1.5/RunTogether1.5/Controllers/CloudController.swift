@@ -118,7 +118,21 @@ class CloudController {
     }
     
     func retrieveRuns(completion: @escaping (Bool) -> Void){
-        
+        guard let user = user else  {completion(false);return}
+        let predicate = NSPredicate(format: "UserReference = %@", user.recordID)
+        let query = CKQuery(recordType: RunKeys.runObjectKey, predicate: predicate)
+        publicDatabase.perform(query, inZoneWith: nil) { (recordList, error) in
+            if let error = error {
+                print("there was an error in \(#function) :\(error) : \(error.localizedDescription)")
+                completion(false)
+                return
+            }
+            guard let records = recordList else {completion(false); return}
+            let runs:[Run] = records.compactMap({Run(record: $0, user: user)})
+            user.runs = runs
+            completion(true)
+            return
+        }
     }
     
 }

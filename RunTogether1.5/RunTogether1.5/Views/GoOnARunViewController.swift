@@ -168,7 +168,7 @@ class GoOnARunViewController: UIViewController, UICloudSharingControllerDelegate
         let saveAction = UIAlertAction(title: "Save This Run", style: .default) { (_) in
             let distanceAsDouble:Double = self.distance.converted(to: UnitLength.miles).value
             let elevationAsDouble:Double = self.elevation.converted(to: UnitLength.feet).value
-            RunCloudController.shared.addRunAndPushToCloud(with: distanceAsDouble, elevation: elevationAsDouble, calories: self.calories, totalTime: Double(self.seconds), coreLocations: self.listOfLocations, completion: { (success) in
+            CloudController.shared.addRunAndPushToCloud(with: distanceAsDouble, elevation: elevationAsDouble, calories: self.calories, totalTime: Double(self.seconds), coreLocations: self.listOfLocations, completion: { (success) in
                 if success{
                     print("saved")
                     DispatchQueue.main.async {
@@ -187,21 +187,7 @@ class GoOnARunViewController: UIViewController, UICloudSharingControllerDelegate
             }
         }
         let saveAndSendAction = UIAlertAction(title: "Save my run and challenge someone", style: .default) { (_) in
-            let distanceAsDouble:Double = self.distance.converted(to: UnitLength.miles).value
-            let elevationAsDouble:Double = self.elevation.converted(to: UnitLength.feet).value
-            
-            RunCloudController.shared.shareARun(distance: distanceAsDouble, elevation: elevationAsDouble, Calories: self.calories, timeInSeconds: self.seconds, coreLocationPoints: self.listOfLocations, completion: { (cloudController) in
-                if let shareController = cloudController {
-                    DispatchQueue.main.async {
-                        self.clearUpUI()
-                        shareController.popoverPresentationController?.sourceView = self.startStopButton
-                        shareController.delegate = self
-                        self.present(shareController,animated: true,completion: nil)
-                    }
-                }
-            })
-            
-            
+        
         }
         alert.addAction(saveAction)
         
