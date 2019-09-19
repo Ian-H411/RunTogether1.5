@@ -31,7 +31,22 @@ class User{
     
     var runsRecieved: [Run]
     
+    var runsRecievedReferenceList:[CKRecord.Reference]{
+        var referenceList:[CKRecord.Reference] = []
+        for run in runsRecieved{
+            referenceList.append(CKRecord.Reference(recordID: run.ckRecordId, action: .none))
+        }
+    }
+    
     var friends:[User] = []
+    
+    var friendReferenceList: [CKRecord.Reference]{
+        var referenceList:[CKRecord.Reference] = []
+        for friend in friends{
+            referenceList.append(CKRecord.Reference(recordID: friend.recordID, action: .none))
+        }
+        return referenceList
+    }
     
     var userReference: String?
     

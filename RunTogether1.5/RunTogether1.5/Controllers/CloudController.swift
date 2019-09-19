@@ -135,4 +135,9 @@ class CloudController {
         }
     }
     
+    func retrieveRunsToDO(completion: @escaping (Bool) -> Void){
+        guard let user = user else {completion(false);return}
+        let predicate = NSPredicate(format: "", <#T##args: CVarArg...##CVarArg#>)
+    }
+    
 }

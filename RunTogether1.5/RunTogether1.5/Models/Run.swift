@@ -69,6 +69,7 @@ class Run {
         guard let user  = user else {return nil}
         return CKRecord.Reference(recordID: user.recordID, action: .deleteSelf)
     }
+    
     var opponentRunReference: CKRecord.Reference?{
         guard let opposingRun = competingRun else {return nil}
         return CKRecord.Reference(recordID: opposingRun.ckRecordId, action: .none)
