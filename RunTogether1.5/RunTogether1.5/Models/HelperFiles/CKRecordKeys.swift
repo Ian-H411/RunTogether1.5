@@ -62,6 +62,8 @@ struct UserKeys{
     
     static let friendReferenceIDKey = "FriendIDs"
     
+    static let runsToDoReferenceIDs = "RunInbox"
+    
     static let userReferenceKey = "UserID"
 }
 

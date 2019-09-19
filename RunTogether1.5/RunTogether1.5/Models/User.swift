@@ -31,22 +31,11 @@ class User{
     
     var runsRecieved: [Run]
     
-    var runsRecievedReferenceList:[CKRecord.Reference]{
-        var referenceList:[CKRecord.Reference] = []
-        for run in runsRecieved{
-            referenceList.append(CKRecord.Reference(recordID: run.ckRecordId, action: .none))
-        }
-    }
+    var runsRecievedReferenceList:[CKRecord.Reference] = []
     
     var friends:[User] = []
     
-    var friendReferenceList: [CKRecord.Reference]{
-        var referenceList:[CKRecord.Reference] = []
-        for friend in friends{
-            referenceList.append(CKRecord.Reference(recordID: friend.recordID, action: .none))
-        }
-        return referenceList
-    }
+    var friendReferenceList: [CKRecord.Reference] = []
     
     var userReference: String?
     
@@ -76,7 +65,9 @@ class User{
         let age = record[UserKeys.ageKey] as? Int,
         let height = record[UserKeys.heightKey] as? Double,
         let gender = record[UserKeys.genderKey] as? String,
-        let prefersMetric = record[UserKeys.preferedMeasureMent] as? Bool
+        let prefersMetric = record[UserKeys.preferedMeasureMent] as? Bool,
+        let userFriendIds = record[UserKeys.friendReferenceIDKey] as? [CKRecord.Reference],
+        let runsToDoIds = record[UserKeys.runsToDoReferenceIDs] as? [CKRecord.Reference]
             else {return nil}
         self.runs = []
         self.runsRecieved = []
@@ -89,6 +80,8 @@ class User{
         self.height = height
         self.gender = gender
         self.prefersMetric = prefersMetric
+        self.friendReferenceList = userFriendIds
+        self.runsRecievedReferenceList = runsToDoIds
     }
 }
 
@@ -104,5 +97,7 @@ extension CKRecord {
         self.setValue(user.gender, forKey: UserKeys.genderKey)
         self.setValue(user.prefersMetric, forKey: UserKeys.preferedMeasureMent)
         self.setValue(user.userReference, forKey: RunKeys.userReferenceKey)
+        self.setValue(user.friendReferenceList, forKey: UserKeys.friendReferenceIDKey)
+        self.setValue(user.runsRecieved, forKey: UserKeys.runsToDoReferenceIDs)
     }
 }
