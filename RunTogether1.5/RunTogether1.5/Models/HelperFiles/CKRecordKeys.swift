@@ -60,7 +60,9 @@ struct UserKeys{
     
     static let preferedMeasureMent = "PreferedMeasurement"
     
+    static let friendReferenceIDKey = "FriendIDs"
     
+    static let userReferenceKey = "UserID"
 }
 
 struct GenderKeys {

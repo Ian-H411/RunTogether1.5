@@ -31,6 +31,10 @@ class User{
     
     var runsRecieved: [Run]
     
+    var friends:[User] = []
+    
+    var userReference: String?
+    
     var gender: String
     
     var prefersMetric: Bool
@@ -84,5 +88,6 @@ extension CKRecord {
         self.setValue(user.height, forKey: UserKeys.heightKey)
         self.setValue(user.gender, forKey: UserKeys.genderKey)
         self.setValue(user.prefersMetric, forKey: UserKeys.preferedMeasureMent)
+        self.setValue(user.userReference, forKey: RunKeys.userReferenceKey)
     }
 }

@@ -56,7 +56,7 @@ class CreateProfileViewController: UIViewController {
             let height = Int(heightAsString)
             else {self.presentFillOutAllFieldsAlert(); return}
         
-        RunCloudController.shared.createNewUserAndPushWith(name: username, height: Double(height), weight: Double(weight), age: age, gender: selectedGender, prefersMetric: isMetric) { (success) in
+        CloudController.shared.createNewUserAndPushWith(name:username, height: Double(height), weight: Double(weight), age: age, gender:self.selectedGender, prefersMetric: self.isMetric) { (success) in
             if success{
                 DispatchQueue.main.async {
                     self.performSegue(withIdentifier: "toApp", sender: nil)

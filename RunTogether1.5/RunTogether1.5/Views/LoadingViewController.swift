@@ -21,26 +21,30 @@ class LoadingViewController: UIViewController {
         super.viewDidLoad()
         updateUI()
         retrieveUser()
+        
     }
     
     func updateUI(){
-    loadingImage.rotate360Degrees()
-    }
-    
-    func retrieveUser(){
-        RunCloudController.shared.fetchExistingUser { (success) in
-            if success {
-                RunCloudController.shared.fetchRuns(completion: { (success) in
-                    if success{
-                        self.performSegue(withIdentifier: "returningUser", sender: nil)
-                    }
-                })
-            } else if !success{
-                self.performSegue(withIdentifier: "newUser", sender: nil)
-            }
+        DispatchQueue.main.async {
+            
+            self.loadingImage.rotate360Degrees()
         }
     }
-
+    func retrieveUser(){
+        CloudController.shared.retrieveUserID { (success) in
+            if success{
+                CloudController.shared.retrieveUserProfile(completion: { (success, _) in
+                    if success{
+                        self.performSegue(withIdentifier: "returningUser", sender: nil)
+                    } else if !success{
+                        self.performSegue(withIdentifier: "newUser", sender: nil)
+                    }
+                })
+            }
+        }
+        
+        
+    }
     
 }
 extension UIView {

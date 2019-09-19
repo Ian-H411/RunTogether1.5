@@ -10,7 +10,15 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class GoOnARunViewController: UIViewController {
+class GoOnARunViewController: UIViewController, UICloudSharingControllerDelegate {
+    func cloudSharingController(_ csc: UICloudSharingController, failedToSaveShareWithError error: Error) {
+        print("there was an error in \(#function) :\(error) : \(error.localizedDescription)")
+    }
+    
+    func itemTitle(for csc: UICloudSharingController) -> String? {
+        return "Challenge Someone"
+    }
+    
     //MARK: -Outlets
     
     @IBOutlet weak var startStopButton: UIButton!
@@ -179,10 +187,21 @@ class GoOnARunViewController: UIViewController {
             }
         }
         let saveAndSendAction = UIAlertAction(title: "Save my run and challenge someone", style: .default) { (_) in
-            //TODO: - Send them to a place where they can send this run to a friend
-            DispatchQueue.main.async {
-                self.clearUpUI()
-            }
+            let distanceAsDouble:Double = self.distance.converted(to: UnitLength.miles).value
+            let elevationAsDouble:Double = self.elevation.converted(to: UnitLength.feet).value
+            
+            RunCloudController.shared.shareARun(distance: distanceAsDouble, elevation: elevationAsDouble, Calories: self.calories, timeInSeconds: self.seconds, coreLocationPoints: self.listOfLocations, completion: { (cloudController) in
+                if let shareController = cloudController {
+                    DispatchQueue.main.async {
+                        self.clearUpUI()
+                        shareController.popoverPresentationController?.sourceView = self.startStopButton
+                        shareController.delegate = self
+                        self.present(shareController,animated: true,completion: nil)
+                    }
+                }
+            })
+            
+            
         }
         alert.addAction(saveAction)
         
