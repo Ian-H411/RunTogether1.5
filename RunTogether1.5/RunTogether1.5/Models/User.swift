@@ -98,19 +98,26 @@ extension CKRecord {
         self.setValue(user.prefersMetric, forKey: UserKeys.preferedMeasureMent)
         self.setValue(user.userReference, forKey: RunKeys.userReferenceKey)
         
-        guard let friendList = user.friendReferenceList,
-        let runsToDo = user.runsRecievedReferenceList
-        else {return}
-        if !friendList.isEmpty{
-        self.setValue(user.friendReferenceList, forKey: UserKeys.friendReferenceIDKey)
-        
+        if let friendList = user.friendReferenceList {
+            if !friendList.isEmpty{
+                self.setValue(user.friendReferenceList, forKey: UserKeys.friendReferenceIDKey)
+                
+            } else {
+                self.setValue(nil, forKey: UserKeys.friendReferenceIDKey)
+            }
         } else {
             self.setValue(nil, forKey: UserKeys.friendReferenceIDKey)
         }
-        if !runsToDo.isEmpty{
-            self.setValue(user.runsRecieved, forKey: UserKeys.runsToDoReferenceIDs)
+        if let runsToDo = user.runsRecievedReferenceList{
+            if !runsToDo.isEmpty{
+                self.setValue(user.runsRecieved, forKey: UserKeys.runsToDoReferenceIDs)
+            } else {
+                self.setValue(nil, forKey: UserKeys.runsToDoReferenceIDs)
+            }
         } else {
-            self.setValue(nil, forKey: UserKeys.runsToDoReferenceIDs)
+            self.setValue(nil, forKey: UserKeys.friendReferenceIDKey)
         }
+       
+        
     }
 }

@@ -41,13 +41,44 @@ class CloudController {
             //create a user from that record
             guard let newUser = User(record: record) else {completion(false);return}
             //set it to my source of truth
-            newUser.userReference = ID.recordName
             self.user = newUser
             completion(true)
             return
         }
     }
     
+    func searchUsers(searchTerm:String, completion: @escaping ([User]) -> Void){
+        guard let user = user else {completion([]);return}
+        let cleanedTerm = searchTerm
+        let predicate1 = NSPredicate(format: "\(UserKeys.nameKey) BEGINSWITH '\(cleanedTerm)'")
+        let predicate2 = NSPredicate(format: "\(UserKeys.nameKey) != %@", user.name)
+        let compPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate1, predicate2])
+        let query = CKQuery(recordType: UserKeys.userObjectKey, predicate: compPredicate)
+        
+        publicDatabase.perform(query, inZoneWith: nil) { (recordResults, error) in
+            if let error = error {
+                print("there was an error in \(#function) :\(error) : \(error.localizedDescription)")
+                completion([])
+                return
+            } else {
+                guard let unwrappedRecords = recordResults else {completion([]); return}
+                if unwrappedRecords.isEmpty{
+                    completion([])
+                    print("no records found")
+                    return
+                } else {
+                    var foundUsers = [User]()
+                    for record in unwrappedRecords{
+                        guard let newUser = User(record: record) else {completion([]); return}
+                        foundUsers.append(newUser)
+                    }
+                    completion(foundUsers)
+                    print("Results found")
+                    return
+                }
+            }
+        }
+    }
     func addRunAndPushToCloud(with distance: Double, elevation: Double, calories: Int, totalTime: Double, coreLocations: [CLLocation], completion: @escaping (Bool) -> Void){
         //unwrap user if no user then yo can run simple as that
         guard let user = user else {return}
@@ -72,7 +103,17 @@ class CloudController {
         }
     }
     
-    func addFriend(){
+    func addFriend(friend: User,completion: @escaping (Bool) -> Void){
+        guard let user = user else {return}
+        user.friends.append(friend)
+        user.friendReferenceList?.append(CKRecord.Reference(recordID: friend.recordID, action: .none))
+        guard let userID = userID else {completion(false); return}
+        user.userReference = userID.recordName
+        guard let record = CKRecord(user: user) else {return}
+        let op = CKModifyRecordsOperation(recordsToSave: [record], recordIDsToDelete: nil)
+        op.savePolicy = .changedKeys
+        op.queuePriority = .normal
+        publicDatabase.add(op)
         
     }
     
@@ -87,16 +128,15 @@ class CloudController {
     func performStartUpFetchs(completion: @escaping (Bool) -> Void){
         retrieveUserID { (success) in
             if success{
-                self.retrieveUserProfile(completion: { (success, _) in
-                    if success{
-                        completion(true)
-                        return
-                    } else {
-                        completion(false)
-                        return
+                self.retrieveUserProfile(completion: { (success, error) in
+                    if let error = error{
+                    print("there was an error in \(#function) :\(error) : \(error.localizedDescription)")
                     }
+                    completion(success)
+                    return
                 })
             } else {
+                print("hit")
                 completion(false)
                 return
             }
@@ -111,16 +151,19 @@ class CloudController {
                 completion(false)
                 return
             }
-            completion(true)
+            
+            
             self.userID = usersRecord
+            completion(true)
+            return
         }
     }
     // to be called every time the app starts up
     func retrieveUserProfile(completion: @escaping (Bool,Error?) -> Void){
         
-        guard let userID = userID else {completion(false,nil); return}
+        guard let userID = userID else {completion(false,nil);print("no user ID"); return}
         let predicate = NSPredicate(format: "UserReference = %@", userID.recordName)
-    let query = CKQuery(recordType: UserKeys.userObjectKey, predicate: predicate)
+        let query = CKQuery(recordType: UserKeys.userObjectKey, predicate: predicate)
         
         publicDatabase.perform(query, inZoneWith: nil) { (record, error) in
             if let error = error{
@@ -128,10 +171,11 @@ class CloudController {
                 completion(false,error)
                 return
             }
-            guard let recordList = record else {completion(false,nil);return}
-            guard let record = recordList.first else {completion(false,nil);return}
-            guard let user = User(record: record) else {completion(false,nil);return}
+            guard let recordList = record else {completion(false,nil);print("recordList in fetch user is nil");return}
+            guard let record = recordList.first else {completion(false,nil);print("first failure");return}
+            guard let user = User(record: record) else {completion(false,nil);print("cant make a user");return}
             self.user = user
+            print("user found succesfully")
             completion(true,nil)
             return
         }
@@ -159,8 +203,25 @@ class CloudController {
         
     }
     
-    func retrieveFriends(){
+    func retrieveFriends(completion: @escaping (Bool) -> Void){
+        guard let user = user else {return}
+        guard let referenceArray = user.friendReferenceList else {completion(true);print("no friends");return}
+        let predicate = NSPredicate(format: "\(UserKeys.friendReferenceIDKey) == %@", argumentArray: referenceArray)
+        let query = CKQuery(recordType: UserKeys.userObjectKey, predicate: predicate)
         
+        publicDatabase.perform(query, inZoneWith: nil) { (records, error) in
+            if let error = error {
+                print("there was an error in \(#function) :\(error) : \(error.localizedDescription)")
+                completion(false)
+                return
+            }
+            guard let recordList = records else {completion(true);print("error decoding friends");return}
+            for record in recordList{
+               guard let friend = User(record: record) else {completion(true);print("error decoding friends");return}
+                user.friends.append(friend)
+                
+            }
+        }
     }
     
 }

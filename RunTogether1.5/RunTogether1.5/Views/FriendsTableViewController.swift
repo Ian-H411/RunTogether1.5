@@ -8,36 +8,77 @@
 
 import UIKit
 
-class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
+class FriendsTableViewController: UITableViewController, UISearchBarDelegate, FriendTableViewCellDelegate {
+    func cellSettingHasChanged(_ sender: FriendTableViewCell) {
+        guard let newFriend = sender.userInCell else {return}
+        
+        CloudController.shared.addFriend(friend: newFriend) { (success) in
+            if success{
+                print("made a friend")
+            }
+        }
+    }
+    
 
     //MARK: - outlets
     
-    @IBOutlet weak var friendSearchControl: UISegmentedControl!
     
     @IBOutlet weak var findNewFriendsSearchBar: UISearchBar!
     
+    @IBOutlet weak var cancelButton: UIButton!
     
     
     var isInSearchMode: Bool = false
     
+    var results:[User] = []
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+findNewFriendsSearchBar.delegate = self
+        CloudController.shared.retrieveFriends { (success) in
+            if success{
+                DispatchQueue.main.async {
+                self.tableView.reloadData()
+                }
+            }
+        }
+ 
 
     }
 
     // MARK: - Table view data source
 
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if isInSearchMode{
+            return "Searching for new friends...."
+        } else {
+            return "My Friends"
+        }
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return 0
+        guard let friendList = CloudController.shared.user?.friends else {return 0}
+        if isInSearchMode{
+        }
+        if isInSearchMode{
+            return results.count
+        }
+        return friendList.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SearchCell", for: indexPath)
-
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchCell", for: indexPath) as? FriendTableViewCell else {return UITableViewCell()}
+        cell.delegate = self
+        cell.isASearchResult = isInSearchMode
+        if isInSearchMode{
+            let user = results[indexPath.row]
+        cell.update(user: user)
+        } else {
+            guard let user = CloudController.shared.user else {return UITableViewCell()}
+            let friend = user.friends[indexPath.row]
+            cell.update(user: friend)
+        }
         // Configure the cell...
 
         return cell
@@ -58,19 +99,27 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     
     
     //MARK: - ACTIONS
-    
-    //changes to search mode or back and then
-    @IBAction func friendSearchControlTapped(_ sender: UISegmentedControl) {
-        if sender.tag == 0 {
-            isInSearchMode = true
-            updateUI()
-        } else if sender.tag == 1{
-            isInSearchMode = false
-            updateUI()
-        }
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        isInSearchMode = true
+        tableView.reloadData()
+    }
+    @IBAction func cancelButtonTapped(_ sender: Any) {
+        isInSearchMode = false
+        findNewFriendsSearchBar.text = ""
+        tableView.reloadData()
     }
     
-    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        guard let term = searchBar.text, !term.isEmpty else {return}
+        CloudController.shared.searchUsers(searchTerm: term ) { (users) in
+            self.results = users
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+        
+    }
     
     
     
@@ -83,17 +132,15 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate {
     //MARK: - HELPER FUNCTIONS
     
     func updateUI(){
+        
         if !isInSearchMode{
-            findNewFriendsSearchBar.isHidden = true
+
             tableView.reloadData()
         } else {
-            findNewFriendsSearchBar.isHidden = false
+
             tableView.reloadData()
         }
     }
     
-
-}
-extension UISearchBar {
 
 }

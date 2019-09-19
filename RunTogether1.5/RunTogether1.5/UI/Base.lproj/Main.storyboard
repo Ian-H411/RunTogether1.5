@@ -55,7 +55,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a49-Bc-DXx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2881" y="1458"/>
+            <point key="canvasLocation" x="-2916" y="1351"/>
         </scene>
         <!--Create Profile View Controller-->
         <scene sceneID="K2m-Kn-Zr6">
@@ -264,7 +264,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kWC-cA-VRy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="351" y="2216"/>
+            <point key="canvasLocation" x="190" y="2223"/>
         </scene>
         <!--My Runs-->
         <scene sceneID="jNL-xQ-2f9">
@@ -689,81 +689,76 @@
         <scene sceneID="aZX-Q0-1CC">
             <objects>
                 <tableViewController id="xl8-fX-oog" customClass="FriendsTableViewController" customModule="RunTogether1_5" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="6PV-e9-QY9">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="6PV-e9-QY9">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" name="DeepMatteGrey"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="IYu-T1-geY">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="vuS-vQ-gaj">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="53"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Odb-zf-BKa">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="108"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fam-Q1-KUA">
+                                    <rect key="frame" x="20.5" y="0.0" width="373" height="53"/>
                                     <subviews>
-                                        <searchBar contentMode="redraw" placeholder="Find New Friends" translatesAutoresizingMaskIntoConstraints="NO" id="bIf-WB-dCN">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
-                                            <color key="barTintColor" name="SilverFox"/>
+                                        <searchBar contentMode="redraw" placeholder="Search For new Friends" translatesAutoresizingMaskIntoConstraints="NO" id="q5j-pa-64T">
+                                            <rect key="frame" x="0.0" y="0.0" width="264" height="53"/>
+                                            <color key="backgroundColor" name="DeepMatteGrey"/>
+                                            <color key="barTintColor" name="DeepMatteGrey"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </searchBar>
-                                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Peg-Ga-fND">
-                                            <rect key="frame" x="62" y="64" width="290" height="45"/>
-                                            <color key="backgroundColor" name="DeepMatteGrey"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="44" id="JFh-O0-OiS"/>
-                                            </constraints>
-                                            <segments>
-                                                <segment title="MyFriends"/>
-                                                <segment title="FindFriends"/>
-                                            </segments>
-                                            <color key="tintColor" name="areYaYellow"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uLC-X1-jRk">
+                                            <rect key="frame" x="305" y="0.0" width="68" height="53"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                            <state key="normal" title="Cancel">
+                                                <color key="titleColor" name="SilverFox"/>
+                                            </state>
                                             <connections>
-                                                <action selector="friendSearchControlTapped:" destination="xl8-fX-oog" eventType="valueChanged" id="xot-qq-CQy"/>
+                                                <action selector="cancelButtonTapped:" destination="xl8-fX-oog" eventType="touchUpInside" id="nrI-Ud-wyY"/>
                                             </connections>
-                                        </segmentedControl>
+                                        </button>
                                     </subviews>
-                                    <color key="backgroundColor" name="DeepMatteGrey"/>
-                                    <constraints>
-                                        <constraint firstItem="Peg-Ga-fND" firstAttribute="width" secondItem="Odb-zf-BKa" secondAttribute="width" multiplier="0.7" id="fs5-GK-k9C"/>
-                                    </constraints>
                                 </stackView>
                             </subviews>
                             <color key="backgroundColor" name="DeepMatteGrey"/>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="Odb-zf-BKa" secondAttribute="trailing" id="6jB-IJ-u29"/>
-                                <constraint firstItem="Odb-zf-BKa" firstAttribute="leading" secondItem="IYu-T1-geY" secondAttribute="leading" id="7J7-YP-Ucw"/>
-                                <constraint firstItem="Odb-zf-BKa" firstAttribute="top" secondItem="IYu-T1-geY" secondAttribute="top" id="9Yc-Bm-EpD"/>
-                                <constraint firstAttribute="bottom" secondItem="Odb-zf-BKa" secondAttribute="bottom" constant="20" id="jkI-kX-UyC"/>
+                                <constraint firstItem="fam-Q1-KUA" firstAttribute="centerX" secondItem="vuS-vQ-gaj" secondAttribute="centerX" id="Gmw-zK-Z5x"/>
+                                <constraint firstItem="fam-Q1-KUA" firstAttribute="centerY" secondItem="vuS-vQ-gaj" secondAttribute="centerY" id="dol-JE-WKS"/>
+                                <constraint firstItem="fam-Q1-KUA" firstAttribute="height" secondItem="vuS-vQ-gaj" secondAttribute="height" id="jkd-WI-pFA"/>
+                                <constraint firstItem="fam-Q1-KUA" firstAttribute="width" secondItem="vuS-vQ-gaj" secondAttribute="width" multiplier="0.9" id="tQS-NR-TlC"/>
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchCell" rowHeight="73" id="Z6z-Ln-1nR">
-                                <rect key="frame" x="0.0" y="156" width="414" height="73"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchCell" rowHeight="109" id="Z6z-Ln-1nR" customClass="FriendTableViewCell" customModule="RunTogether1_5" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="81" width="414" height="109"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Z6z-Ln-1nR" id="tjo-cK-7oi">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="72.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="109"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="CJC-52-jAM">
-                                            <rect key="frame" x="20" y="11" width="374" height="51"/>
+                                            <rect key="frame" x="20" y="11" width="374" height="87"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UserName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pVp-nl-nTi">
-                                                    <rect key="frame" x="0.0" y="0.0" width="144" height="51"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="144" height="87"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="SilverFox"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Points" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vxy-SQ-TVY">
-                                                    <rect key="frame" x="169" y="0.0" width="105" height="51"/>
+                                                    <rect key="frame" x="169" y="0.0" width="105" height="87"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="SilverFox"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pSC-Nx-0Fx">
-                                                    <rect key="frame" x="299" y="0.0" width="75" height="51"/>
+                                                    <rect key="frame" x="299" y="0.0" width="75" height="87"/>
                                                     <color key="backgroundColor" name="areYaYellow"/>
                                                     <state key="normal" title="ADD">
                                                         <color key="titleColor" name="DarkSlate"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="updateButtonTapped:" destination="Z6z-Ln-1nR" eventType="touchUpInside" id="7sf-bS-2y7"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -779,6 +774,11 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" name="DeepMatteGrey"/>
+                                <connections>
+                                    <outlet property="addButton" destination="pSC-Nx-0Fx" id="G9f-2O-CdX"/>
+                                    <outlet property="pointsLabel" destination="vxy-SQ-TVY" id="wMN-JR-i8z"/>
+                                    <outlet property="usernameLabel" destination="pVp-nl-nTi" id="W4H-QU-AKe"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -795,13 +795,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="findNewFriendsSearchBar" destination="bIf-WB-dCN" id="Qzl-ad-GkU"/>
-                        <outlet property="friendSearchControl" destination="Peg-Ga-fND" id="dRb-Bd-6LU"/>
+                        <outlet property="cancelButton" destination="uLC-X1-jRk" id="kYl-vW-PA5"/>
+                        <outlet property="findNewFriendsSearchBar" destination="q5j-pa-64T" id="x0J-te-Cdv"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0mN-nS-2yB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="864" y="1458"/>
+            <point key="canvasLocation" x="863.768115942029" y="1457.8125"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="4fn-IT-je0">

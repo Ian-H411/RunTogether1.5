@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		251580442333DE490011B8B7 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251580432333DE490011B8B7 /* FriendsTableViewController.swift */; };
+		25158047233421420011B8B7 /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25158046233421420011B8B7 /* FriendTableViewCell.swift */; };
 		251FAFF123241C8200AD991B /* CKRecordKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251FAFF023241C8200AD991B /* CKRecordKeys.swift */; };
 		251FAFF32324216A00AD991B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251FAFF22324216A00AD991B /* User.swift */; };
 		251FAFF52324368200AD991B /* RunCloudController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251FAFF42324368200AD991B /* RunCloudController.swift */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		251580432333DE490011B8B7 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
+		25158046233421420011B8B7 /* FriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
 		251FAFF023241C8200AD991B /* CKRecordKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKRecordKeys.swift; sourceTree = "<group>"; };
 		251FAFF22324216A00AD991B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		251FAFF42324368200AD991B /* RunCloudController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunCloudController.swift; sourceTree = "<group>"; };
@@ -67,6 +69,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		25158045233421180011B8B7 /* CustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				25A65F2A232FCCF100B2D64A /* RunTableViewCell.swift */,
+				25158046233421420011B8B7 /* FriendTableViewCell.swift */,
+			);
+			path = CustomCell;
+			sourceTree = "<group>";
+		};
 		251FB0032327DE9A00AD991B /* View Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,11 +150,11 @@
 		25AA4B5723229E1E0051C4F9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				25158045233421180011B8B7 /* CustomCell */,
 				251FB0032327DE9A00AD991B /* View Helpers */,
 				251FAFF92324618000AD991B /* GoOnARunViewController.swift */,
 				25A65F28232EED5C00B2D64A /* RunHistoryTableViewController.swift */,
 				251580432333DE490011B8B7 /* FriendsTableViewController.swift */,
-				25A65F2A232FCCF100B2D64A /* RunTableViewCell.swift */,
 				25A65F2C233000E100B2D64A /* CreateProfileViewController.swift */,
 				25C9BB0C2330334C00989DE2 /* LoadingViewController.swift */,
 			);
@@ -271,6 +282,7 @@
 				25C9BB0D2330334C00989DE2 /* LoadingViewController.swift in Sources */,
 				251FAFF123241C8200AD991B /* CKRecordKeys.swift in Sources */,
 				251580442333DE490011B8B7 /* FriendsTableViewController.swift in Sources */,
+				25158047233421420011B8B7 /* FriendTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
