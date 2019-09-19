@@ -31,11 +31,11 @@ class User{
     
     var runsRecieved: [Run]
     
-    var runsRecievedReferenceList:[CKRecord.Reference] = []
+    var runsRecievedReferenceList:[CKRecord.Reference]? = []
     
     var friends:[User] = []
     
-    var friendReferenceList: [CKRecord.Reference] = []
+    var friendReferenceList: [CKRecord.Reference]? = []
     
     var userReference: String?
     
@@ -65,10 +65,10 @@ class User{
         let age = record[UserKeys.ageKey] as? Int,
         let height = record[UserKeys.heightKey] as? Double,
         let gender = record[UserKeys.genderKey] as? String,
-        let prefersMetric = record[UserKeys.preferedMeasureMent] as? Bool,
-        let userFriendIds = record[UserKeys.friendReferenceIDKey] as? [CKRecord.Reference],
-        let runsToDoIds = record[UserKeys.runsToDoReferenceIDs] as? [CKRecord.Reference]
+        let prefersMetric = record[UserKeys.preferedMeasureMent] as? Bool
             else {return nil}
+        let userFriendIds = record[UserKeys.friendReferenceIDKey] as? [CKRecord.Reference]
+        let runsToDoIds = record[UserKeys.runsToDoReferenceIDs] as? [CKRecord.Reference]
         self.runs = []
         self.runsRecieved = []
         self.recordID = record.recordID
@@ -97,7 +97,20 @@ extension CKRecord {
         self.setValue(user.gender, forKey: UserKeys.genderKey)
         self.setValue(user.prefersMetric, forKey: UserKeys.preferedMeasureMent)
         self.setValue(user.userReference, forKey: RunKeys.userReferenceKey)
+        
+        guard let friendList = user.friendReferenceList,
+        let runsToDo = user.runsRecievedReferenceList
+        else {return}
+        if !friendList.isEmpty{
         self.setValue(user.friendReferenceList, forKey: UserKeys.friendReferenceIDKey)
-        self.setValue(user.runsRecieved, forKey: UserKeys.runsToDoReferenceIDs)
+        
+        } else {
+            self.setValue(nil, forKey: UserKeys.friendReferenceIDKey)
+        }
+        if !runsToDo.isEmpty{
+            self.setValue(user.runsRecieved, forKey: UserKeys.runsToDoReferenceIDs)
+        } else {
+            self.setValue(nil, forKey: UserKeys.runsToDoReferenceIDs)
+        }
     }
 }

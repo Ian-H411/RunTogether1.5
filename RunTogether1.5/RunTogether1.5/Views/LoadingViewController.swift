@@ -31,32 +31,26 @@ class LoadingViewController: UIViewController {
         }
     }
     func retrieveUser(){
-        CloudController.shared.retrieveUserID { (success) in
+        CloudController.shared.performStartUpFetchs { (success) in
             if success{
-                CloudController.shared.retrieveUserProfile(completion: { (success, _) in
-                    if success{
-                        self.performSegue(withIdentifier: "returningUser", sender: nil)
-                    } else if !success{
-                        self.performSegue(withIdentifier: "newUser", sender: nil)
-                    }
-                })
+                self.performSegue(withIdentifier: "returningUser", sender: nil)
+            } else {
+                self.performSegue(withIdentifier: "newUser", sender: nil)
             }
         }
         
-        
     }
-    
 }
-extension UIView {
-    func rotate360Degrees(duration: CFTimeInterval = 20.0, completionDelegate: AnyObject? = nil) {
-        let rotateAnimation = CABasicAnimation(keyPath: "transform.rotation")
-        rotateAnimation.fromValue = 0.0
-        rotateAnimation.toValue = CGFloat(.pi * 2.0)
-        rotateAnimation.duration = duration
-        
-        if let delegate: AnyObject = completionDelegate {
-            rotateAnimation.delegate = (delegate as! CAAnimationDelegate)
+    extension UIView {
+        func rotate360Degrees(duration: CFTimeInterval = 20.0, completionDelegate: AnyObject? = nil) {
+            let rotateAnimation = CABasicAnimation(keyPath: "transform.rotation")
+            rotateAnimation.fromValue = 0.0
+            rotateAnimation.toValue = CGFloat(.pi * 2.0)
+            rotateAnimation.duration = duration
+            
+            if let delegate: AnyObject = completionDelegate {
+                rotateAnimation.delegate = (delegate as! CAAnimationDelegate)
+            }
+            self.layer.add(rotateAnimation, forKey: nil)
         }
-        self.layer.add(rotateAnimation, forKey: nil)
-    }
 }

@@ -70,7 +70,6 @@ class CloudController {
             user.runs.append(runToSave)
             completion(true)
         }
-        
     }
     
     func addFriend(){
@@ -85,6 +84,26 @@ class CloudController {
     
     //MARK: - RETRIEVE FROM SERVER FUNCTIONS
     
+    func performStartUpFetchs(completion: @escaping (Bool) -> Void){
+        retrieveUserID { (success) in
+            if success{
+                self.retrieveUserProfile(completion: { (success, _) in
+                    if success{
+                        completion(true)
+                        return
+                    } else {
+                        completion(false)
+                        return
+                    }
+                })
+            } else {
+                completion(false)
+                return
+            }
+        }
+    }
+    
+    
     func retrieveUserID(completion: @escaping (Bool) -> Void){
         CKContainer.default().fetchUserRecordID { (usersRecord, error) in
             if let error = error{
@@ -94,7 +113,6 @@ class CloudController {
             }
             completion(true)
             self.userID = usersRecord
-            return
         }
     }
     // to be called every time the app starts up
