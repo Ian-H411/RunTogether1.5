@@ -84,15 +84,26 @@ class RunHistoryTableViewController: UITableViewController {
     }
     
     
-    
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "toDetailRun" {
+            if let indexPath = tableView.indexPathForSelectedRow{
+                if let destination = segue.destination as? RunDetailViewController{
+                    guard let user = CloudController.shared.user else {return}
+                    let run = user.runs[indexPath.row]
+                    if let competingRun = run.competingRun{
+                        destination.isAChallenge = true
+                        destination.landingPadUserRun = run
+                        destination.landingPadOpponentRun = competingRun
+                    } else {
+                        destination.isAChallenge = false
+                        destination.landingPadUserRun = run
+                    }
+                }
+            }
+        }
     }
-    */
 
 }

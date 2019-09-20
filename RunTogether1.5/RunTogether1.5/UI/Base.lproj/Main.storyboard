@@ -242,7 +242,7 @@
             <objects>
                 <viewController id="9Pl-td-hRs" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sO4-e0-Bbn">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="(UserName)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6N7-va-6EY">
@@ -266,7 +266,7 @@
             <objects>
                 <tableViewController id="NRr-DT-LPF" customClass="RunHistoryTableViewController" customModule="RunTogether1_5" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="EB6-4f-UVf">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" id="nbF-LS-p5u">
@@ -446,7 +446,7 @@
                                     <outlet property="opponentsUsernameLabel" destination="uGo-sc-bdj" id="Gps-r6-Vbe"/>
                                     <outlet property="playerVsPlayerLabel" destination="kcu-KC-xJg" id="MXC-pb-Hpz"/>
                                     <outlet property="usernameLabel" destination="4UD-Ra-ru6" id="qVa-cH-oqT"/>
-                                    <segue destination="NXH-Ok-dyt" kind="show" id="7Xl-Pk-FAE"/>
+                                    <segue destination="NXH-Ok-dyt" kind="show" identifier="toDetailRun" id="7Xl-Pk-FAE"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="runInboxCell" rowHeight="153" id="NB3-Vk-TJd">
@@ -543,23 +543,23 @@
             <objects>
                 <viewController id="NXH-Ok-dyt" customClass="RunDetailViewController" customModule="RunTogether1_5" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fOf-ts-Sd0">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="UnC-0w-EmG">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="UnC-0w-EmG">
                                 <rect key="frame" x="20.5" y="94" width="373" height="569"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="nMm-k9-3fz">
-                                        <rect key="frame" x="0.0" y="0.0" width="373" height="51.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="373" height="44"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UserName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k3v-Ff-9qb">
-                                                <rect key="frame" x="0.0" y="0.0" width="182.5" height="51.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="182.5" height="44"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <color key="textColor" name="SilverFox"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SaK-1j-IiW">
-                                                <rect key="frame" x="190.5" y="0.0" width="182.5" height="51.5"/>
+                                                <rect key="frame" x="190.5" y="0.0" width="182.5" height="44"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <color key="textColor" name="SilverFox"/>
                                                 <nil key="highlightedColor"/>
@@ -567,31 +567,31 @@
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Distance" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NNg-jn-Rph">
-                                        <rect key="frame" x="0.0" y="52.5" width="373" height="62.5"/>
+                                        <rect key="frame" x="0.0" y="54" width="373" height="53"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <color key="textColor" name="SilverFox"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nnx-gg-Oc5">
-                                        <rect key="frame" x="0.0" y="116" width="373" height="62"/>
+                                        <rect key="frame" x="0.0" y="117" width="373" height="53"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <color key="textColor" name="SilverFox"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" ElevationGain" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N4u-78-LcN">
-                                        <rect key="frame" x="0.0" y="179" width="373" height="62.5"/>
+                                        <rect key="frame" x="0.0" y="180" width="373" height="53"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <color key="textColor" name="SilverFox"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Pace" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h6K-k6-Hns">
-                                        <rect key="frame" x="0.0" y="242.5" width="373" height="62"/>
+                                        <rect key="frame" x="0.0" y="243" width="373" height="53"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <color key="textColor" name="SilverFox"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Calories" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QNf-Uc-va7">
-                                        <rect key="frame" x="0.0" y="305.5" width="373" height="62.5"/>
+                                        <rect key="frame" x="0.0" y="306" width="373" height="53"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <color key="textColor" name="SilverFox"/>
                                         <nil key="highlightedColor"/>
@@ -720,7 +720,7 @@
             <objects>
                 <viewController id="LXK-GV-JLw" customClass="GoOnARunViewController" customModule="RunTogether1_5" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mH8-bR-4VC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ngD-Wr-yjs">
@@ -833,7 +833,7 @@
             <objects>
                 <tableViewController id="xl8-fX-oog" customClass="FriendsTableViewController" customModule="RunTogether1_5" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="6PV-e9-QY9">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" name="DeepMatteGrey"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" id="vuS-vQ-gaj">

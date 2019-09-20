@@ -35,6 +35,12 @@ class RunDetailViewController: UIViewController {
     
     var isAChallenge = true
     
+    var isDisplayingUser = true
+    
+    var landingPadUserRun:Run?
+    
+    var landingPadOpponentRun:Run?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         InitialUISetUp()
@@ -58,7 +64,14 @@ class RunDetailViewController: UIViewController {
     //MARK: - ACTIONS
     
     @IBAction func statsSelectorTapped(_ sender: UISegmentedControl) {
-        print("HEY")
+        if isDisplayingUser{
+            isDisplayingUser = false
+             changeColors(borderColor: "areYaYellow")
+        } else {
+            isDisplayingUser = true
+            changeColors(borderColor: "SilverFox")
+        }
+        changeStatsUpdate()
     }
     
     
@@ -68,21 +81,23 @@ class RunDetailViewController: UIViewController {
     //MARK: - HELPERS
     
     func InitialUISetUp(){
+         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor(named: "SilverFox")!]
         if isAChallenge{
             sendARunButton.isHidden = true
         } else {
             statsSelector.isHidden = true
         }
-        let labelColor: String = "SilverFox"
+        changeColors(borderColor: "SilverFox")
+        changeStatsUpdate()
+    }
+    
+    func changeColors(borderColor: String){
+        let labelColor: String = borderColor
         let labelBorderWidth: CGFloat = 1
         let cornerRadius: CGFloat = 27
         
-        let labelArray: [UILabel] = [dateLabel,usernameLabel,distanceLabel,timeLabel,elevationGainedLabel,averagePaceLabel,caloriesLabel,timePointsLabel,elevationPointsLabel]
-        
-        //set  background
-        self.view.backgroundColor = UIColor(named: "DarkSlate")!
-        
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor(named: labelColor)!]
+        let labelArray: [UILabel] = [distanceLabel,timeLabel,elevationGainedLabel,averagePaceLabel,caloriesLabel,timePointsLabel,elevationPointsLabel]
+   
         for label in labelArray {
             //set all labels border
             label.layer.borderWidth = labelBorderWidth
@@ -90,14 +105,32 @@ class RunDetailViewController: UIViewController {
             label.layer.borderColor = UIColor(named: labelColor)!.cgColor
             //set labels cornerradius
             label.layer.cornerRadius = cornerRadius
-            
-            
+
         }
+        dateLabel.layer.borderWidth = labelBorderWidth
+        usernameLabel.layer.borderWidth = labelBorderWidth
+        dateLabel.layer.borderColor = UIColor(named: labelColor)!.cgColor
+        usernameLabel.layer.borderColor = UIColor(named: labelColor)!.cgColor
+        usernameLabel.layer.cornerRadius = 22
+        dateLabel.layer.cornerRadius = 22
     }
     
-    
     func changeStatsUpdate(){
-        
+        guard let run = landingPadUserRun else {return}
+        var selectedRun = run
+        if !isDisplayingUser{
+            guard let opponentRun = landingPadOpponentRun else {return}
+            selectedRun = opponentRun
+        }
+        usernameLabel.text = selectedRun.user?.name ?? ""
+        dateLabel.text = Converter.formatDate(date: selectedRun.date)
+        timeLabel.text = "  Time: \(Converter.formatTime(seconds: Int(selectedRun.totalTime)))"
+        elevationGainedLabel.text = "  ElevationGained: \(Converter.measureMentFormatter(distance: Measurement(value: selectedRun.elevationGained, unit: UnitLength.feet)) )"
+        averagePaceLabel.text = "  AveragePace: \(Converter.paceFormatter(distance: Measurement(value: selectedRun.distance, unit: UnitLength.feet), seconds: Int(selectedRun.totalTime), outputUnit: UnitSpeed.minutesPerMile))"
+        caloriesLabel.text = "  CaloriesBurned: \(selectedRun.calories)"
+        timePointsLabel.text = "\(selectedRun.timePoints)"
+        elevationPointsLabel.text = "\(selectedRun.elevationPoints)"
+        distanceLabel.text = "  Distance:  \(Converter.measureMentFormatter(distance: Measurement(value: selectedRun.distance, unit: UnitLength.miles)))"
     }
     
 }
