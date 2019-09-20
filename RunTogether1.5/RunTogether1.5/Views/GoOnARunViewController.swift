@@ -88,7 +88,6 @@ class GoOnARunViewController: UIViewController, UICloudSharingControllerDelegate
     
     
     func setUpUI(){
-        setNeedsStatusBarAppearanceUpdate()
         let labelColor: String = "SilverFox"
         let labelBorderWidth: CGFloat = 1
         let cornerRadius: CGFloat = 35
