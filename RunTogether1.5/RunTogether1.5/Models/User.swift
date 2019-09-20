@@ -113,7 +113,7 @@ extension CKRecord {
         }
         if let runsToDo = user.runsRecievedReferenceList{
             if !runsToDo.isEmpty{
-                self.setValue(user.runsRecieved, forKey: UserKeys.runsToDoReferenceIDs)
+                self.setValue(user.runsRecievedReferenceList, forKey: UserKeys.runsToDoReferenceIDs)
             }
             
         }

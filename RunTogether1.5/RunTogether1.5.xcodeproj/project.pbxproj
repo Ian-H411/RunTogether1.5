@@ -27,6 +27,8 @@
 		25AA4B4B23229DE10051C4F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25AA4B4A23229DE10051C4F9 /* Assets.xcassets */; };
 		25AA4B4E23229DE20051C4F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25AA4B4C23229DE20051C4F9 /* LaunchScreen.storyboard */; };
 		25B10A4D23354E2500F1F72A /* RunDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B10A4C23354E2500F1F72A /* RunDetailViewController.swift */; };
+		25B10A4F2335839500F1F72A /* ChallengeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B10A4E2335839500F1F72A /* ChallengeTableViewController.swift */; };
+		25B10A5123358C8E00F1F72A /* ChallengeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B10A5023358C8E00F1F72A /* ChallengeTableViewCell.swift */; };
 		25C9BB0D2330334C00989DE2 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C9BB0C2330334C00989DE2 /* LoadingViewController.swift */; };
 		25DC5CF12332E5CC005C44A2 /* CloudController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DC5CF02332E5CC005C44A2 /* CloudController.swift */; };
 /* End PBXBuildFile section */
@@ -55,6 +57,8 @@
 		25AA4B4D23229DE20051C4F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		25AA4B4F23229DE20051C4F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		25B10A4C23354E2500F1F72A /* RunDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunDetailViewController.swift; sourceTree = "<group>"; };
+		25B10A4E2335839500F1F72A /* ChallengeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChallengeTableViewController.swift; path = "View Helpers/ChallengeTableViewController.swift"; sourceTree = "<group>"; };
+		25B10A5023358C8E00F1F72A /* ChallengeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeTableViewCell.swift; sourceTree = "<group>"; };
 		25C9BB0C2330334C00989DE2 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		25DC5CF02332E5CC005C44A2 /* CloudController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -76,6 +80,7 @@
 			children = (
 				25A65F2A232FCCF100B2D64A /* RunTableViewCell.swift */,
 				25158046233421420011B8B7 /* FriendTableViewCell.swift */,
+				25B10A5023358C8E00F1F72A /* ChallengeTableViewCell.swift */,
 			);
 			path = CustomCell;
 			sourceTree = "<group>";
@@ -155,6 +160,7 @@
 				25158045233421180011B8B7 /* CustomCell */,
 				251FB0032327DE9A00AD991B /* View Helpers */,
 				251FAFF92324618000AD991B /* GoOnARunViewController.swift */,
+				25B10A4E2335839500F1F72A /* ChallengeTableViewController.swift */,
 				25A65F28232EED5C00B2D64A /* RunHistoryTableViewController.swift */,
 				251580432333DE490011B8B7 /* FriendsTableViewController.swift */,
 				25A65F2C233000E100B2D64A /* CreateProfileViewController.swift */,
@@ -283,10 +289,12 @@
 				251FB0072327E80700AD991B /* UnitExtensions.swift in Sources */,
 				25DC5CF12332E5CC005C44A2 /* CloudController.swift in Sources */,
 				25C9BB0D2330334C00989DE2 /* LoadingViewController.swift in Sources */,
+				25B10A4F2335839500F1F72A /* ChallengeTableViewController.swift in Sources */,
 				251FAFF123241C8200AD991B /* CKRecordKeys.swift in Sources */,
 				25B10A4D23354E2500F1F72A /* RunDetailViewController.swift in Sources */,
 				251580442333DE490011B8B7 /* FriendsTableViewController.swift in Sources */,
 				25158047233421420011B8B7 /* FriendTableViewCell.swift in Sources */,
+				25B10A5123358C8E00F1F72A /* ChallengeTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

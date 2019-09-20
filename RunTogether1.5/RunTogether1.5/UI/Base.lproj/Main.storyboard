@@ -55,7 +55,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a49-Bc-DXx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2916" y="1351"/>
+            <point key="canvasLocation" x="-3054" y="1458"/>
         </scene>
         <!--Create Profile View Controller-->
         <scene sceneID="K2m-Kn-Zr6">
@@ -235,7 +235,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OZQ-sP-aPw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2139" y="694"/>
+            <point key="canvasLocation" x="-2286" y="675"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="9QV-Bd-c1f">
@@ -245,101 +245,133 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="UserName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="usI-tx-9bc">
-                                <rect key="frame" x="33" y="109" width="208" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                <color key="textColor" name="SilverFox"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Height" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8TE-VJ-Ble">
-                                <rect key="frame" x="33" y="208" width="134" height="38.5"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" name="SilverFox"/>
-                                <color key="textColor" name="DarkSlate"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Weight" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PLv-mf-ECv">
-                                <rect key="frame" x="33" y="280" width="134" height="38.5"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" name="SilverFox"/>
-                                <color key="textColor" name="DarkSlate"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Age" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TNC-8u-vLz">
-                                <rect key="frame" x="33" y="347" width="134" height="38.5"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" name="SilverFox"/>
-                                <color key="textColor" name="DarkSlate"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                            </textField>
-                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="rKp-bg-tOZ">
-                                <rect key="frame" x="0.0" y="576" width="414" height="105.5"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="27" translatesAutoresizingMaskIntoConstraints="NO" id="ZXK-Jf-Bj1">
+                                <rect key="frame" x="20.5" y="159" width="373" height="502"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="BNF-kP-WUC">
-                                        <rect key="frame" x="0.0" y="0.0" width="132" height="105.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UserName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="usI-tx-9bc">
+                                        <rect key="frame" x="0.0" y="0.0" width="373" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="6rM-2Y-o9z"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                        <color key="textColor" name="SilverFox"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dME-FT-ha0">
+                                        <rect key="frame" x="0.0" y="87" width="373" height="44"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Elevation Points" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cNA-Bw-3CL">
-                                                <rect key="frame" x="0.0" y="0.0" width="132" height="26.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                                <color key="textColor" name="SilverFox"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w9I-za-fvT">
-                                                <rect key="frame" x="0.0" y="26.5" width="132" height="79"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="66"/>
-                                                <color key="textColor" name="SilverFox"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <viewLayoutGuide key="safeArea" id="eWb-1J-rxw"/>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="4go-Zh-tjP">
-                                        <rect key="frame" x="141" y="0.0" width="132" height="105.5"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TimePoints" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5M9-xc-ZnB">
-                                                <rect key="frame" x="0.0" y="0.0" width="132" height="26.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                                <color key="textColor" name="SilverFox"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="55" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="azf-7Y-qNP">
-                                                <rect key="frame" x="0.0" y="26.5" width="132" height="79"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="66"/>
-                                                <color key="textColor" name="SilverFox"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Height" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8TE-VJ-Ble">
+                                                <rect key="frame" x="0.0" y="0.0" width="182.5" height="44"/>
+                                                <color key="backgroundColor" name="SilverFox"/>
+                                                <color key="textColor" name="DarkSlate"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                            </textField>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="znh-Dh-tqJ">
+                                                <rect key="frame" x="190.5" y="0.0" width="182.5" height="44"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Ryg-wJ-7xS">
-                                        <rect key="frame" x="282" y="0.0" width="132" height="105.5"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="sSj-hS-ado">
+                                        <rect key="frame" x="0.0" y="158" width="373" height="44"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Elevation Points" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DU2-aU-Jtx">
-                                                <rect key="frame" x="0.0" y="0.0" width="132" height="26.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                                <color key="textColor" name="SilverFox"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5sv-Vb-gB6">
-                                                <rect key="frame" x="0.0" y="26.5" width="132" height="79"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="66"/>
-                                                <color key="textColor" name="SilverFox"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Weight" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PLv-mf-ECv">
+                                                <rect key="frame" x="0.0" y="0.0" width="182.5" height="44"/>
+                                                <color key="backgroundColor" name="SilverFox"/>
+                                                <color key="textColor" name="DarkSlate"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                            </textField>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V8X-q4-PU4">
+                                                <rect key="frame" x="190.5" y="0.0" width="182.5" height="44"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                     </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="f3H-du-1m1">
+                                        <rect key="frame" x="0.0" y="229" width="373" height="44"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Age" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TNC-8u-vLz">
+                                                <rect key="frame" x="0.0" y="0.0" width="182.5" height="44"/>
+                                                <color key="backgroundColor" name="SilverFox"/>
+                                                <color key="textColor" name="DarkSlate"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                            </textField>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BOb-Gc-sOz">
+                                                <rect key="frame" x="190.5" y="0.0" width="182.5" height="44"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <segmentedControl opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="dZH-MC-bBe">
+                                        <rect key="frame" x="0.0" y="300" width="373" height="45"/>
+                                        <color key="backgroundColor" name="DeepMatteGrey"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="MxQ-XT-Vul"/>
+                                        </constraints>
+                                        <segments>
+                                            <segment title="Female"/>
+                                            <segment title="Other"/>
+                                            <segment title="Male"/>
+                                        </segments>
+                                        <color key="tintColor" name="areYaYellow"/>
+                                        <connections>
+                                            <action selector="selectedGenderControlTapped:" destination="pRM-Oa-nss" eventType="valueChanged" id="Add-xe-it9"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <segmentedControl opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="eC4-vA-OOr">
+                                        <rect key="frame" x="19" y="371" width="335" height="45"/>
+                                        <color key="backgroundColor" name="DeepMatteGrey"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="JlG-AX-bED"/>
+                                        </constraints>
+                                        <segments>
+                                            <segment title="Metric"/>
+                                            <segment title="Customary"/>
+                                        </segments>
+                                        <color key="tintColor" name="areYaYellow"/>
+                                        <connections>
+                                            <action selector="selectedMeasurementStyleControlTapped:" destination="pRM-Oa-nss" eventType="valueChanged" id="zgM-sJ-MTU"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4qh-YC-OkP">
+                                        <rect key="frame" x="74.5" y="442" width="224" height="60"/>
+                                        <color key="backgroundColor" name="areYaYellow"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="Wpd-GC-BNr"/>
+                                        </constraints>
+                                        <state key="normal" title="Save">
+                                            <color key="titleColor" name="DeepMatteGrey"/>
+                                        </state>
+                                    </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="5M9-xc-ZnB" firstAttribute="height" secondItem="DU2-aU-Jtx" secondAttribute="height" id="Vh5-9O-2sd"/>
+                                    <constraint firstItem="4qh-YC-OkP" firstAttribute="width" secondItem="ZXK-Jf-Bj1" secondAttribute="width" multiplier="0.6" id="2Ij-Tt-X2x"/>
+                                    <constraint firstItem="eC4-vA-OOr" firstAttribute="width" secondItem="ZXK-Jf-Bj1" secondAttribute="width" multiplier="0.9" id="5TM-8I-qL9"/>
+                                    <constraint firstItem="sSj-hS-ado" firstAttribute="width" secondItem="ZXK-Jf-Bj1" secondAttribute="width" id="6YT-Nd-YT2"/>
+                                    <constraint firstItem="dME-FT-ha0" firstAttribute="height" secondItem="dZH-MC-bBe" secondAttribute="height" id="IrU-qf-o1B"/>
+                                    <constraint firstItem="dME-FT-ha0" firstAttribute="width" secondItem="ZXK-Jf-Bj1" secondAttribute="width" id="Pdp-DJ-KWM"/>
+                                    <constraint firstItem="f3H-du-1m1" firstAttribute="width" secondItem="ZXK-Jf-Bj1" secondAttribute="width" id="UM3-kj-TMB"/>
+                                    <constraint firstItem="usI-tx-9bc" firstAttribute="width" secondItem="ZXK-Jf-Bj1" secondAttribute="width" id="VLF-xC-idj"/>
+                                    <constraint firstItem="sSj-hS-ado" firstAttribute="height" secondItem="dZH-MC-bBe" secondAttribute="height" id="hJ0-lu-uyY"/>
+                                    <constraint firstItem="f3H-du-1m1" firstAttribute="height" secondItem="eC4-vA-OOr" secondAttribute="height" id="ic8-9R-ely"/>
+                                    <constraint firstItem="dZH-MC-bBe" firstAttribute="width" secondItem="ZXK-Jf-Bj1" secondAttribute="width" id="zIc-M6-xXi"/>
                                 </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" name="DeepMatteGrey"/>
                         <constraints>
-                            <constraint firstItem="rKp-bg-tOZ" firstAttribute="width" secondItem="sO4-e0-Bbn" secondAttribute="width" id="wIB-f6-LHD"/>
+                            <constraint firstItem="ZXK-Jf-Bj1" firstAttribute="width" secondItem="sO4-e0-Bbn" secondAttribute="width" multiplier="0.9" id="WYC-eQ-fcP"/>
+                            <constraint firstItem="ZXK-Jf-Bj1" firstAttribute="centerY" secondItem="DFe-ap-xeo" secondAttribute="centerY" multiplier="0.91" id="bzW-A3-caT"/>
+                            <constraint firstItem="ZXK-Jf-Bj1" firstAttribute="centerX" secondItem="DFe-ap-xeo" secondAttribute="centerX" id="dPZ-b3-r9e"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="DFe-ap-xeo"/>
                     </view>
@@ -347,6 +379,81 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kWC-cA-VRy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="189.85507246376812" y="2215.8482142857142"/>
+        </scene>
+        <!--Challenge Table View Controller-->
+        <scene sceneID="924-jA-abZ">
+            <objects>
+                <tableViewController id="Zw1-Lx-K1z" customClass="ChallengeTableViewController" customModule="RunTogether1_5" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="RfL-Hr-bwU">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="challengeCell" rowHeight="109" id="W08-pt-ktV" customClass="ChallengeTableViewCell" customModule="RunTogether1_5" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="109"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="W08-pt-ktV" id="rOb-MT-nN9">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="108.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="WRt-hd-goh">
+                                            <rect key="frame" x="20" y="11" width="374" height="87"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="UserName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EfO-tL-OtD">
+                                                    <rect key="frame" x="0.0" y="0.0" width="164.5" height="87"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="87" id="29d-3e-d4p"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" name="SilverFox"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Points" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dZP-Zj-gkF">
+                                                    <rect key="frame" x="189.5" y="0.0" width="47.5" height="87"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" name="SilverFox"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oH6-UZ-Dqg">
+                                                    <rect key="frame" x="262" y="0.0" width="112" height="87"/>
+                                                    <color key="backgroundColor" name="areYaYellow"/>
+                                                    <state key="normal" title="CHALLENGE">
+                                                        <color key="titleColor" name="DarkSlate"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="challengeButtonTapped:" destination="W08-pt-ktV" eventType="touchUpInside" id="t4O-tj-o1u"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="oH6-UZ-Dqg" firstAttribute="width" secondItem="WRt-hd-goh" secondAttribute="width" multiplier="0.3" id="dDt-kV-kDA"/>
+                                            </constraints>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="WRt-hd-goh" firstAttribute="top" secondItem="rOb-MT-nN9" secondAttribute="topMargin" id="hqP-Yu-iTh"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="WRt-hd-goh" secondAttribute="trailing" id="vEr-G1-4SY"/>
+                                        <constraint firstItem="WRt-hd-goh" firstAttribute="leading" secondItem="rOb-MT-nN9" secondAttribute="leadingMargin" id="vdi-UC-abs"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="WRt-hd-goh" secondAttribute="bottom" id="yC9-ey-VXT"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" name="DeepMatteGrey"/>
+                                <connections>
+                                    <outlet property="challengeLabel" destination="oH6-UZ-Dqg" id="whV-da-oRR"/>
+                                    <outlet property="pointsLabel" destination="dZP-Zj-gkF" id="UHH-rX-4dE"/>
+                                    <outlet property="usernameLabel" destination="EfO-tL-OtD" id="EdU-9S-e5U"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Zw1-Lx-K1z" id="0Zu-Kg-RTE"/>
+                            <outlet property="delegate" destination="Zw1-Lx-K1z" id="zB5-qu-WPr"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Khm-sn-zXG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1665.217391304348" y="2215.8482142857142"/>
         </scene>
         <!--My Runs-->
         <scene sceneID="jNL-xQ-2f9">
@@ -752,6 +859,9 @@
                                         <state key="normal" title="Challenge Someone">
                                             <color key="titleColor" name="DarkSlate"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="Zw1-Lx-K1z" kind="show" identifier="toChallenge" id="7f6-5A-gyl"/>
+                                        </connections>
                                     </button>
                                     <segmentedControl opaque="NO" tag="1" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="5yQ-yN-6Vf">
                                         <rect key="frame" x="0.0" y="30" width="373" height="15"/>
@@ -970,6 +1080,9 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UserName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pVp-nl-nTi">
                                                     <rect key="frame" x="0.0" y="0.0" width="144" height="87"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="87" id="sDh-Ff-a5L"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="SilverFox"/>
                                                     <nil key="highlightedColor"/>
@@ -1134,7 +1247,7 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Ouy-jv-cKI"/>
+        <segue reference="T0p-B8-PQR"/>
         <segue reference="h9X-Mm-i6g"/>
     </inferredMetricsTieBreakers>
 </document>

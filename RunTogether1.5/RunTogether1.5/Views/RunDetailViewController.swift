@@ -46,20 +46,7 @@ class RunDetailViewController: UIViewController {
         InitialUISetUp()
     }
     
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
-    
-    
-    
+
     
     //MARK: - ACTIONS
     
@@ -132,5 +119,17 @@ class RunDetailViewController: UIViewController {
         elevationPointsLabel.text = "\(selectedRun.elevationPoints)"
         distanceLabel.text = "  Distance:  \(Converter.measureMentFormatter(distance: Measurement(value: selectedRun.distance, unit: UnitLength.miles)))"
     }
+    // MARK: - Navigation
     
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toChallenge" {
+            if let destination = segue.destination as? ChallengeTableViewController {
+                guard let run = landingPadUserRun else {return}
+                destination.runToSend = run
+            }
+        }
+    }
+    
+  
 }

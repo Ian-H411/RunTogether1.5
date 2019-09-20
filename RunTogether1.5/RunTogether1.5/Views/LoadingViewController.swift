@@ -34,8 +34,9 @@ class LoadingViewController: UIViewController {
         CloudController.shared.performStartUpFetchs { (success) in
             if success{
                 self.performSegue(withIdentifier: "returningUser", sender: nil)
-            }
+            } else {
             self.performSegue(withIdentifier: "newUser", sender: nil)
+            }
         }
         
     }

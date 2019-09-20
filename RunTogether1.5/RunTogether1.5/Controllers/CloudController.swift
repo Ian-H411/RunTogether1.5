@@ -19,6 +19,8 @@ class CloudController {
     
     let publicDatabase = CKContainer.default().publicCloudDatabase
     
+    
+    
     //MARK: - PUSH TO SERVER FUNCTIONS
     
     ///must call fetch userID first
@@ -121,7 +123,18 @@ class CloudController {
         
     }
     
-    
+    func sendARunToAfriend(run:Run, friend:User){
+        if var friendReferecneList = friend.runsRecievedReferenceList{
+            friendReferecneList.append(CKRecord.Reference(recordID: run.ckRecordId, action: .none))
+        } else {
+            friend.runsRecievedReferenceList = [CKRecord.Reference(recordID: run.ckRecordId, action: .none)]
+        }
+        guard let record = CKRecord(user: friend) else {return}
+        let op = CKModifyRecordsOperation(recordsToSave: [record], recordIDsToDelete: nil)
+        op.savePolicy = .changedKeys
+        op.queuePriority = .low
+        publicDatabase.add(op)
+    }
     
     
     
