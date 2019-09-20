@@ -106,7 +106,12 @@ class CloudController {
     func addFriend(friend: User,completion: @escaping (Bool) -> Void){
         guard let user = user else {return}
         user.friends.append(friend)
-        user.friendReferenceList?.append(CKRecord.Reference(recordID: friend.recordID, action: .none))
+        if var userFriendReferenceList = user.friendReferenceList{
+            userFriendReferenceList.append(CKRecord.Reference(recordID: friend.recordID, action: .none))
+        } else {
+            user.friendReferenceList = [CKRecord.Reference(recordID: friend.recordID, action: .none)]
+        }
+        
         guard let userID = userID else {completion(false); return}
         user.userReference = userID.recordName
         guard let record = CKRecord(user: user) else {return}
@@ -206,9 +211,8 @@ class CloudController {
     func retrieveFriends(completion: @escaping (Bool) -> Void){
         guard let user = user else {return}
         guard let referenceArray = user.friendReferenceList else {completion(true);print("no friends");return}
-        let predicate = NSPredicate(format: "\(UserKeys.friendReferenceIDKey) == %@", argumentArray: referenceArray)
+        let predicate = NSPredicate(format: "\(UserKeys.friendReferenceIDKey) CONTAINS %@", argumentArray: referenceArray)
         let query = CKQuery(recordType: UserKeys.userObjectKey, predicate: predicate)
-        
         publicDatabase.perform(query, inZoneWith: nil) { (records, error) in
             if let error = error {
                 print("there was an error in \(#function) :\(error) : \(error.localizedDescription)")

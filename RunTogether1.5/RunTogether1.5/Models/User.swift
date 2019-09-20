@@ -31,11 +31,11 @@ class User{
     
     var runsRecieved: [Run]
     
-    var runsRecievedReferenceList:[CKRecord.Reference]? = []
+    var runsRecievedReferenceList:[CKRecord.Reference]?
     
     var friends:[User] = []
     
-    var friendReferenceList: [CKRecord.Reference]? = []
+    var friendReferenceList: [CKRecord.Reference]?
     
     var userReference: String?
     
@@ -59,13 +59,13 @@ class User{
     
     init?(record: CKRecord){
         guard let name = record[UserKeys.nameKey] as? String,
-        let totalMiles = record[UserKeys.totalMilesKey] as? Double,
-        let racesWon = record[UserKeys.racesWonKey] as? Int,
-        let weight = record[UserKeys.weightKey] as? Double,
-        let age = record[UserKeys.ageKey] as? Int,
-        let height = record[UserKeys.heightKey] as? Double,
-        let gender = record[UserKeys.genderKey] as? String,
-        let prefersMetric = record[UserKeys.preferedMeasureMent] as? Bool
+            let totalMiles = record[UserKeys.totalMilesKey] as? Double,
+            let racesWon = record[UserKeys.racesWonKey] as? Int,
+            let weight = record[UserKeys.weightKey] as? Double,
+            let age = record[UserKeys.ageKey] as? Int,
+            let height = record[UserKeys.heightKey] as? Double,
+            let gender = record[UserKeys.genderKey] as? String,
+            let prefersMetric = record[UserKeys.preferedMeasureMent] as? Bool
             else {return nil}
         let userFriendIds = record[UserKeys.friendReferenceIDKey] as? [CKRecord.Reference]
         let runsToDoIds = record[UserKeys.runsToDoReferenceIDs] as? [CKRecord.Reference]
@@ -102,22 +102,13 @@ extension CKRecord {
             if !friendList.isEmpty{
                 self.setValue(user.friendReferenceList, forKey: UserKeys.friendReferenceIDKey)
                 
-            } else {
-                self.setValue(nil, forKey: UserKeys.friendReferenceIDKey)
             }
-        } else {
-            self.setValue(nil, forKey: UserKeys.friendReferenceIDKey)
         }
         if let runsToDo = user.runsRecievedReferenceList{
             if !runsToDo.isEmpty{
                 self.setValue(user.runsRecieved, forKey: UserKeys.runsToDoReferenceIDs)
-            } else {
-                self.setValue(nil, forKey: UserKeys.runsToDoReferenceIDs)
             }
-        } else {
-            self.setValue(nil, forKey: UserKeys.friendReferenceIDKey)
+            
         }
-       
-        
     }
 }

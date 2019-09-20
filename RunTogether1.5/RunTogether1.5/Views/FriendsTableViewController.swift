@@ -107,6 +107,7 @@ findNewFriendsSearchBar.delegate = self
         isInSearchMode = false
         findNewFriendsSearchBar.text = ""
         tableView.reloadData()
+        findNewFriendsSearchBar.resignFirstResponder()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
