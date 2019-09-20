@@ -21,7 +21,7 @@ class Run {
     
     // specific timestamp for when the user hit the start button
     var date: Date {
-        return coreLocationPoints[0].timestamp
+        return Date()
     }
     
     // amount of distance run by the racer in miles

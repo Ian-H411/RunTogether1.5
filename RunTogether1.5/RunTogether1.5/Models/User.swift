@@ -9,7 +9,11 @@
 import Foundation
 import CloudKit
 
-class User{
+class User: Equatable{
+    static func == (lhs: User, rhs: User) -> Bool {
+        return lhs.recordID == rhs.recordID
+    }
+    
     
     let name:String
     
@@ -37,13 +41,13 @@ class User{
     
     var friendReferenceList: [CKRecord.Reference]?
     
-    var userReference: String?
+    var userReference: String
     
     var gender: String
     
     var prefersMetric: Bool
     
-    init(name: String, totalMiles: Double = 0.0, racesWon: Int = 0, height: Double, weight: Double, prefersMetric: Bool, age: Int, gender: String, ckRecordId: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString), runs: [Run] = [],recievedRuns: [Run] = []){
+    init(name: String, totalMiles: Double = 0.0, racesWon: Int = 0, height: Double, weight: Double, prefersMetric: Bool, age: Int, gender: String, userReference:String, ckRecordId: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString), runs: [Run] = [],recievedRuns: [Run] = []){
         self.name = name
         self.totalMiles = totalMiles
         self.racesWon = racesWon
@@ -55,6 +59,7 @@ class User{
         self.gender = gender
         self.prefersMetric = prefersMetric
         self.runsRecieved = recievedRuns
+        self.userReference = userReference
     }
     
     init?(record: CKRecord){
@@ -65,7 +70,8 @@ class User{
             let age = record[UserKeys.ageKey] as? Int,
             let height = record[UserKeys.heightKey] as? Double,
             let gender = record[UserKeys.genderKey] as? String,
-            let prefersMetric = record[UserKeys.preferedMeasureMent] as? Bool
+            let prefersMetric = record[UserKeys.preferedMeasureMent] as? Bool,
+            let userReference = record[RunKeys.userReferenceKey] as? String
             else {return nil}
         let userFriendIds = record[UserKeys.friendReferenceIDKey] as? [CKRecord.Reference]
         let runsToDoIds = record[UserKeys.runsToDoReferenceIDs] as? [CKRecord.Reference]
@@ -82,6 +88,7 @@ class User{
         self.prefersMetric = prefersMetric
         self.friendReferenceList = userFriendIds
         self.runsRecievedReferenceList = runsToDoIds
+        self.userReference = userReference
     }
 }
 

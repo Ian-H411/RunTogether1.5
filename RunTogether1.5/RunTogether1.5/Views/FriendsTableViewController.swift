@@ -19,7 +19,7 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate, Fr
         }
     }
     
-
+    
     //MARK: - outlets
     
     
@@ -30,25 +30,37 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate, Fr
     
     var isInSearchMode: Bool = false
     
+    
+    
     var results:[User] = []
+    
+    var dataSource:[User] {
+        if isInSearchMode{
+            return results
+        } else {
+            guard let user = CloudController.shared.user else {return []}
+            return user.friends
+        }
+    }
+    
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-findNewFriendsSearchBar.delegate = self
+        findNewFriendsSearchBar.delegate = self
         CloudController.shared.retrieveFriends { (success) in
             if success{
-                DispatchQueue.main.async {
+                
                 self.tableView.reloadData()
-                }
+                
             }
         }
- 
-
+        
+        
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if isInSearchMode{
             return "Searching for new friends...."
@@ -56,46 +68,35 @@ findNewFriendsSearchBar.delegate = self
             return "My Friends"
         }
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let friendList = CloudController.shared.user?.friends else {return 0}
-        if isInSearchMode{
-        }
-        if isInSearchMode{
-            return results.count
-        }
-        return friendList.count
+        return dataSource.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchCell", for: indexPath) as? FriendTableViewCell else {return UITableViewCell()}
         cell.delegate = self
         cell.isASearchResult = isInSearchMode
-        if isInSearchMode{
-            let user = results[indexPath.row]
+        let user = dataSource[indexPath.row]
         cell.update(user: user)
-        } else {
-            guard let user = CloudController.shared.user else {return UITableViewCell()}
-            let friend = user.friends[indexPath.row]
-            cell.update(user: friend)
-        }
+        
         // Configure the cell...
-
+        
         return cell
     }
-
-
+    
+    
     /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
+     // Override to support editing the table view.
+     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+     if editingStyle == .delete {
+     // Delete the row from the data source
+     tableView.deleteRows(at: [indexPath], with: .fade)
+     } else if editingStyle == .insert {
+     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+     }
+     }
+     */
     
     
     //MARK: - ACTIONS
@@ -122,26 +123,18 @@ findNewFriendsSearchBar.delegate = self
         
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
     //MARK: - HELPER FUNCTIONS
     
     func updateUI(){
         
         if !isInSearchMode{
-
+            
             tableView.reloadData()
         } else {
-
+            
             tableView.reloadData()
         }
     }
     
-
+    
 }

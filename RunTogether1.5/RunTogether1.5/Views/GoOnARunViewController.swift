@@ -56,9 +56,13 @@ class GoOnARunViewController: UIViewController, UICloudSharingControllerDelegate
     var listOfLocations = [CLLocation]()
     
     var arrayOfPaces = [Double]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
+        CloudController.shared.retrieveFriends { (_) in
+            
+        }
         
     }
     

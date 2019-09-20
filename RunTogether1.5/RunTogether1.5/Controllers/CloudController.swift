@@ -25,8 +25,7 @@ class CloudController {
     func createNewUserAndPushWith(name: String, height: Double, weight: Double, age: Int, gender: String,prefersMetric: Bool, completion: @escaping (Bool) -> Void){
         //create a user
         guard let ID = userID else {return}
-        let user = User(name: name, height: height, weight: weight, prefersMetric: prefersMetric, age: age, gender: gender)
-        user.userReference = ID.recordName
+        let user = User(name: name, height: height, weight: weight, prefersMetric: prefersMetric, age: age, gender: gender, userReference: ID.recordName)
         //convert to a record
         guard let record = CKRecord(user: user) else {return}
         publicDatabase.save(record) { (recordRecieved, error) in
@@ -52,7 +51,9 @@ class CloudController {
         let cleanedTerm = searchTerm
         let predicate1 = NSPredicate(format: "\(UserKeys.nameKey) BEGINSWITH '\(cleanedTerm)'")
         let predicate2 = NSPredicate(format: "\(UserKeys.nameKey) != %@", user.name)
-        let compPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate1, predicate2])
+        let predicate3 = NSPredicate(format: "NOT (\(UserKeys.friendReferenceIDKey) CONTAINS %@)", user.recordID)
+        //add a predicate to not include friends
+        let compPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate1, predicate2, predicate3])
         let query = CKQuery(recordType: UserKeys.userObjectKey, predicate: compPredicate)
         
         publicDatabase.perform(query, inZoneWith: nil) { (recordResults, error) in
@@ -106,15 +107,13 @@ class CloudController {
     func addFriend(friend: User,completion: @escaping (Bool) -> Void){
         guard let user = user else {return}
         user.friends.append(friend)
-        if var userFriendReferenceList = user.friendReferenceList{
-            userFriendReferenceList.append(CKRecord.Reference(recordID: friend.recordID, action: .none))
+        if var userFriendReferenceList = friend.friendReferenceList{
+            userFriendReferenceList.append(CKRecord.Reference(recordID: user.recordID, action: .none))
         } else {
-            user.friendReferenceList = [CKRecord.Reference(recordID: friend.recordID, action: .none)]
+            friend.friendReferenceList = [CKRecord.Reference(recordID: user.recordID, action: .none)]
         }
         
-        guard let userID = userID else {completion(false); return}
-        user.userReference = userID.recordName
-        guard let record = CKRecord(user: user) else {return}
+        guard let record = CKRecord(user: friend) else {return}
         let op = CKModifyRecordsOperation(recordsToSave: [record], recordIDsToDelete: nil)
         op.savePolicy = .changedKeys
         op.queuePriority = .normal
@@ -210,8 +209,7 @@ class CloudController {
     
     func retrieveFriends(completion: @escaping (Bool) -> Void){
         guard let user = user else {return}
-        guard let referenceArray = user.friendReferenceList else {completion(true);print("no friends");return}
-        let predicate = NSPredicate(format: "\(UserKeys.friendReferenceIDKey) CONTAINS %@", argumentArray: referenceArray)
+        let predicate = NSPredicate(format: "\(UserKeys.friendReferenceIDKey) CONTAINS %@", user.recordID)
         let query = CKQuery(recordType: UserKeys.userObjectKey, predicate: predicate)
         publicDatabase.perform(query, inZoneWith: nil) { (records, error) in
             if let error = error {
@@ -222,8 +220,9 @@ class CloudController {
             guard let recordList = records else {completion(true);print("error decoding friends");return}
             for record in recordList{
                guard let friend = User(record: record) else {completion(true);print("error decoding friends");return}
+                if !user.friends.contains(friend){
                 user.friends.append(friend)
-                
+                }
             }
         }
     }
