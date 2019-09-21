@@ -20,11 +20,13 @@ class ChallengeTableViewCell: UITableViewCell {
     @IBOutlet weak var pointsLabel: UILabel!
     
     @IBOutlet weak var challengeLabel: UIButton!
-
+    
+    @IBOutlet weak var cardView: UIView!
+    
     var userInCell:User?
     
     weak var delegate: ChallengeTableViewCellDelegate?
-
+    
     @IBAction func challengeButtonTapped(_ sender: Any) {
         delegate?.cellSettingHasChanged(self)
         challengeLabel.setTitle("Sent", for: .normal)
@@ -35,6 +37,14 @@ class ChallengeTableViewCell: UITableViewCell {
 }
 extension ChallengeTableViewCell {
     func update (user: User){
+        cardView.layer.shadowColor = UIColor(named: "areYaYellow")!.cgColor
+        cardView.layer.shadowRadius = 10
+        cardView.layer.shadowOffset = .zero
+        cardView.layer.shadowOpacity = 0.5
+        cardView.layer.cornerRadius = 5
+        challengeLabel.layer.cornerRadius = 5
+        
+        
         userInCell = user
         usernameLabel.text = user.name
         pointsLabel.text = "\(user.totalMiles)"

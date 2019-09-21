@@ -72,9 +72,11 @@ class GoOnARunViewController: UIViewController, UICloudSharingControllerDelegate
         if isRunning{
             stopRun()
             isRunning = false
+            startStopButton.setTitle("Start", for: .normal)
         } else {
             startRun()
             isRunning = true
+            startStopButton.setTitle("Stop", for: .normal)
         }
     }
     
@@ -111,7 +113,7 @@ class GoOnARunViewController: UIViewController, UICloudSharingControllerDelegate
             
         }
         startStopButton.layer.cornerRadius = cornerRadius - 10
-        
+        startStopButton.setTitle("Start", for: .normal)
     }
     //to be used to update the label text
     func updateUIText(){

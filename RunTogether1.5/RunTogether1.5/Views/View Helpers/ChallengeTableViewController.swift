@@ -39,7 +39,7 @@ class ChallengeTableViewController: UITableViewController ,ChallengeTableViewCel
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "challengeCell", for: indexPath) as? ChallengeTableViewCell else {return UITableViewCell()}
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "Challenge", for: indexPath) as? ChallengeTableViewCell else {return UITableViewCell()}
         guard let user = CloudController.shared.user else {return UITableViewCell()}
         let friend = user.friends[indexPath.row]
         cell.delegate = self

@@ -37,6 +37,7 @@ class RunHistoryTableViewController: UITableViewController {
             if success{
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
+                    self.setUpTotalDistance()
                 }
             }
         }
@@ -69,7 +70,8 @@ class RunHistoryTableViewController: UITableViewController {
     //MARK: - HELPER FUNCTIONS
     
     func setUpUI(){
-        setNeedsStatusBarAppearanceUpdate()
+        guard let user = CloudController.shared.user else {return}
+        RacesWonLabel.text = "RACES WON: \(user.racesWon)"
         let labelColor: String = "SilverFox"
         let labelBorderWidth: CGFloat = 1
         let cornerRadius: CGFloat = 10
@@ -96,6 +98,16 @@ class RunHistoryTableViewController: UITableViewController {
         
     }
     
+    
+    func setUpTotalDistance(){
+        var distance = Measurement(value: 0.0, unit: UnitLength.miles)
+        guard let user = CloudController.shared.user else {return}
+        for run in user.runs{
+            distance = distance + Measurement(value: run.distance, unit: UnitLength.miles)
+        }
+        let formattedDistance = Converter.measureMentFormatter(distance: distance)
+        totalDistanceLabel.text = "Total Distance Ran: \(formattedDistance)"
+    }
     
     // MARK: - Navigation
 

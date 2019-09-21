@@ -19,7 +19,7 @@ class CloudController {
     
     let publicDatabase = CKContainer.default().publicCloudDatabase
     
-    
+    var testID = "huiuljoijiokjik"
     
     //MARK: - PUSH TO SERVER FUNCTIONS
     
@@ -138,7 +138,7 @@ class CloudController {
         guard let record = CKRecord(run: run) else {return}
         let op = CKModifyRecordsOperation(recordsToSave: [record], recordIDsToDelete: nil)
         op.savePolicy = .changedKeys
-        op.queuePriority = .low
+        op.queuePriority = .normal
         publicDatabase.add(op)
     }
     
@@ -221,9 +221,9 @@ class CloudController {
             return
         }
     }
-    //TODO: - CHECK TO SEE IF I WORK
+    
     func retrieveRunsToDO(completion: @escaping (Bool) -> Void){
-        guard let user = user else {return}
+        guard let user = user else {completion(false); print("no user");return}
         let predicate = NSPredicate(format: "\(RunKeys.sendToKey) == %@", user.recordID)
         let query = CKQuery(recordType: RunKeys.runObjectKey, predicate: predicate)
         publicDatabase.perform(query, inZoneWith: nil) { (records, error) in
@@ -232,7 +232,7 @@ class CloudController {
                 completion(false)
                 return
             }
-            guard let recordListRuns = records else {return}
+            guard let recordListRuns = records else {completion(false);print("recordList was nil");return}
             var recordIDList:[CKRecord.ID] = []
             for record in recordListRuns{
                 recordIDList.append(record.recordID)
@@ -245,7 +245,7 @@ class CloudController {
                     completion(false)
                     return
                 }
-                guard let recordListUsers = recordsUsers else {return}
+                guard let recordListUsers = recordsUsers else {completion(false); print("record list of users was nil");return}
                 var users:[User] = []
                 for record in recordListUsers{
                     guard let newUser = User(record: record) else {return}
@@ -263,6 +263,7 @@ class CloudController {
                 }
                 user.runsRecieved = runs
                 completion(true)
+                return
             })
         }
     }

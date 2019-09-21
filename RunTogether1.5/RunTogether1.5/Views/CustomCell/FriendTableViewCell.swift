@@ -26,6 +26,8 @@ class FriendTableViewCell: UITableViewCell {
     
     var userInCell:User?
     
+    @IBOutlet weak var cardView: UIView!
+    
     var isInChallengeMode = false
     
     @IBAction func updateButtonTapped(_ sender: Any) {
@@ -41,6 +43,12 @@ class FriendTableViewCell: UITableViewCell {
 }
 extension FriendTableViewCell {
     func update(user: User){
+        cardView.layer.shadowColor = UIColor(named: "areYaYellow")!.cgColor
+        cardView.layer.shadowRadius = 10
+        cardView.layer.shadowOffset = .zero
+        cardView.layer.shadowOpacity = 0.5
+        cardView.layer.cornerRadius = 5
+        
         pointsLabel.text = "\(user.totalMiles)"
         userInCell = user
         usernameLabel.text = user.name

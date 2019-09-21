@@ -61,6 +61,11 @@ class RunDetailViewController: UIViewController {
         changeStatsUpdate()
     }
     
+    @IBAction func challengeSomeOneButtonTapped(_ sender: Any) {
+        if !isAChallenge{
+            performSegue(withIdentifier: "toChallenge", sender: nil)
+        }
+    }
     
     
     
