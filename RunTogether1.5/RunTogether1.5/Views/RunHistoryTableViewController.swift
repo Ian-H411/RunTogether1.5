@@ -19,6 +19,16 @@ class RunHistoryTableViewController: UITableViewController {
     @IBOutlet weak var totalDistanceLabel: UILabel!
     
     
+    var displayInbox: Bool = false
+    
+    var dataSource: [Run]{
+        if displayInbox{
+            return []
+        } else {
+            guard let user = CloudController.shared.user else {return []}
+            return user.runsRecieved
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

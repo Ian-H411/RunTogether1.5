@@ -38,6 +38,8 @@ struct RunKeys {
     static let opponentName = "OpponentName"
     
     static let elevationGained = "ElevationGained"
+    
+    static let sendToKey = "SentToReferenceKey"
 }
 
 struct UserKeys{
@@ -65,6 +67,8 @@ struct UserKeys{
     static let runsToDoReferenceIDs = "RunInbox"
     
     static let userReferenceKey = "UserID"
+    
+    static let runsReferenceList = "Runs"
 }
 
 struct GenderKeys {

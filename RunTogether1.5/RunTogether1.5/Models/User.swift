@@ -41,6 +41,8 @@ class User: Equatable{
     
     var friendReferenceList: [CKRecord.Reference]?
     
+    var runsReferenceList: [CKRecord.Reference]?
+    
     var userReference: String
     
     var gender: String
@@ -75,6 +77,7 @@ class User: Equatable{
             else {return nil}
         let userFriendIds = record[UserKeys.friendReferenceIDKey] as? [CKRecord.Reference]
         let runsToDoIds = record[UserKeys.runsToDoReferenceIDs] as? [CKRecord.Reference]
+        let runInboxs = record[UserKeys.runsReferenceList] as? [CKRecord.Reference]
         self.runs = []
         self.runsRecieved = []
         self.recordID = record.recordID
@@ -89,6 +92,7 @@ class User: Equatable{
         self.friendReferenceList = userFriendIds
         self.runsRecievedReferenceList = runsToDoIds
         self.userReference = userReference
+        self.runsReferenceList = runInboxs
     }
 }
 
@@ -116,6 +120,11 @@ extension CKRecord {
                 self.setValue(user.runsRecievedReferenceList, forKey: UserKeys.runsToDoReferenceIDs)
             }
             
+        }
+        if let runsReferences = user.runsReferenceList{
+            if !runsReferences.isEmpty{
+                self.setValue(user.runsReferenceList, forKey: UserKeys.runsReferenceList)
+            }
         }
     }
 }

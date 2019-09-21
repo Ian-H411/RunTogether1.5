@@ -88,6 +88,15 @@ class CloudController {
         //create a run
         let run = Run(distance: distance, elevation: elevation, calories: calories , totalTime: totalTime, coreLocationPoints: coreLocations, user: user)
         //create a record from it
+        if var userReferences = user.runsReferenceList{
+            userReferences.append(CKRecord.Reference(recordID: run.ckRecordId, action: .none))
+        } else {
+            user.runsReferenceList = [CKRecord.Reference(recordID: run.ckRecordId, action: .none)]
+        }
+        guard let recordUser = CKRecord(user: user) else {return}
+        let operation = CKModifyRecordsOperation(recordsToSave: [recordUser], recordIDsToDelete: nil)
+        operation.savePolicy = .changedKeys
+        operation.queuePriority = .low
         guard let recordToPush = CKRecord(run: run) else {return}
         //save it
         publicDatabase.save(recordToPush) { (recordToSave, error) in
@@ -102,6 +111,7 @@ class CloudController {
             guard let recordToSave = recordToSave else {completion(false);return}
             guard let runToSave = Run(record: recordToSave, user: user) else {completion(false);return}
             user.runs.append(runToSave)
+            self.publicDatabase.add(operation)
             completion(true)
         }
     }
@@ -124,12 +134,8 @@ class CloudController {
     }
     
     func sendARunToAfriend(run:Run, friend:User){
-        if var friendReferecneList = friend.runsRecievedReferenceList{
-            friendReferecneList.append(CKRecord.Reference(recordID: run.ckRecordId, action: .none))
-        } else {
-            friend.runsRecievedReferenceList = [CKRecord.Reference(recordID: run.ckRecordId, action: .none)]
-        }
-        guard let record = CKRecord(user: friend) else {return}
+        run.sendTo = CKRecord.Reference(recordID: friend.recordID, action: .none)
+        guard let record = CKRecord(run: run) else {return}
         let op = CKModifyRecordsOperation(recordsToSave: [record], recordIDsToDelete: nil)
         op.savePolicy = .changedKeys
         op.queuePriority = .low
@@ -215,9 +221,50 @@ class CloudController {
             return
         }
     }
-    
+    //TODO: - CHECK TO SEE IF I WORK
     func retrieveRunsToDO(completion: @escaping (Bool) -> Void){
-        
+        guard let user = user else {return}
+        let predicate = NSPredicate(format: "\(RunKeys.sendToKey) == %@", user.recordID)
+        let query = CKQuery(recordType: RunKeys.runObjectKey, predicate: predicate)
+        publicDatabase.perform(query, inZoneWith: nil) { (records, error) in
+            if let error = error{
+                print("there was an error in \(#function) :\(error) : \(error.localizedDescription)")
+                completion(false)
+                return
+            }
+            guard let recordListRuns = records else {return}
+            var recordIDList:[CKRecord.ID] = []
+            for record in recordListRuns{
+                recordIDList.append(record.recordID)
+            }
+            let predicate2 = NSPredicate(format: "\(UserKeys.runsReferenceList) CONTAINS %@", argumentArray: recordIDList)
+            let query2 = CKQuery(recordType: UserKeys.userObjectKey, predicate: predicate2)
+            self.publicDatabase.perform(query2, inZoneWith: nil, completionHandler: { (recordsUsers, error) in
+                if let error = error{
+                    print("there was an error in \(#function) :\(error) : \(error.localizedDescription)")
+                    completion(false)
+                    return
+                }
+                guard let recordListUsers = recordsUsers else {return}
+                var users:[User] = []
+                for record in recordListUsers{
+                    guard let newUser = User(record: record) else {return}
+                    users.append(newUser)
+                }
+                var runs = [Run]()
+                for record in recordListRuns{
+                    guard let id = record[RunKeys.userReferenceKey] as? CKRecord.Reference else {return}
+                    for user in users{
+                        if id == user.recordID{
+                            guard let newRun = Run(record: record, user: user) else {return}
+                            runs.append(newRun)
+                        }
+                   }
+                }
+                user.runsRecieved = runs
+                completion(true)
+            })
+        }
     }
     
     func retrieveFriends(completion: @escaping (Bool) -> Void){

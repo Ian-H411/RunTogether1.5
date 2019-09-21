@@ -49,6 +49,8 @@ class Run {
     
     var timePoints: Int = 0
     
+    var sendTo:CKRecord.Reference?
+    
     var totalPoints: Int {
         return timePoints + consistencyPoints + elevationPoints
     }
@@ -143,21 +145,7 @@ extension CKRecord{
         self.setValue(run.timePoints, forKey: RunKeys.timePointsKey)
         self.setValue(run.calories, forKey: RunKeys.calorieKey)
         self.setValue(run.elevationGained, forKey: RunKeys.elevationGained)
-    }
-}
-
-extension CKRecord{
-    convenience init? (run:Run ,recordZone: CKRecordZone){
-        self.init(recordType: RunKeys.runObjectKey, recordID: CKRecord.ID(recordName: run.ckRecordId.recordName, zoneID: recordZone.zoneID))
-        self.setValue(run.distance, forKey: RunKeys.distanceKey)
-        self.setValue(run.totalTime, forKey: RunKeys.totalTimeKey)
-        self.setValue(run.coreLocationPoints, forKey: RunKeys.coreLocationsKey)
-        self.setValue(run.userReference, forKey: RunKeys.userReferenceKey)
-        self.setValue(run.competingRun, forKey: RunKeys.opposingRunReferenceKey)
-        self.setValue(run.consistencyPoints, forKey: RunKeys.consistencyPointsKey)
-        self.setValue(run.elevationPoints, forKey: RunKeys.elevationPoints)
-        self.setValue(run.timePoints, forKey: RunKeys.timePointsKey)
-        self.setValue(run.calories, forKey: RunKeys.calorieKey)
-        self.setValue(run.elevationGained, forKey: RunKeys.elevationGained)
+        guard let reciever = run.sendTo else {return}
+        self.setValue(reciever, forKey: RunKeys.sendToKey)
     }
 }

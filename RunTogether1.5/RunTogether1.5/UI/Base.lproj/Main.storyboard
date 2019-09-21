@@ -387,7 +387,10 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="RfL-Hr-bwU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="DeepMatteGrey"/>
+                        <color key="separatorColor" name="DeepMatteGrey"/>
+                        <color key="sectionIndexColor" name="SilverFox"/>
+                        <color key="sectionIndexBackgroundColor" name="DeepMatteGrey"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="challengeCell" rowHeight="109" id="W08-pt-ktV" customClass="ChallengeTableViewCell" customModule="RunTogether1_5" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="109"/>
@@ -463,27 +466,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" id="nbF-LS-p5u">
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="nbF-LS-p5u">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="263"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="fWn-BR-cyn">
-                                    <rect key="frame" x="20" y="40" width="374" height="120"/>
+                                    <rect key="frame" x="41.5" y="20" width="331" height="223"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RACES WON:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ft6-xH-SYG">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="28.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="331" height="52.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" name="SilverFox"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TOTAL DISTANCE RUN:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y9C-dW-KGs">
-                                            <rect key="frame" x="0.0" y="37.5" width="374" height="29.5"/>
+                                            <rect key="frame" x="0.0" y="61.5" width="331" height="108.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" name="SilverFox"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <segmentedControl opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="OFr-Z7-4jv">
-                                            <rect key="frame" x="0.0" y="76" width="374" height="45"/>
+                                            <rect key="frame" x="0.0" y="179" width="331" height="45"/>
                                             <color key="backgroundColor" name="DeepMatteGrey"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="44" id="BEz-Ok-Wv1"/>
@@ -491,7 +494,6 @@
                                             <segments>
                                                 <segment title="COMPLETED RUNS"/>
                                                 <segment title="RUN INBOX"/>
-                                                <segment title="PENDING RUNS"/>
                                             </segments>
                                             <color key="tintColor" name="areYaYellow"/>
                                             <connections>
@@ -503,11 +505,10 @@
                             </subviews>
                             <color key="backgroundColor" name="DarkSlate"/>
                             <constraints>
-                                <constraint firstItem="fWn-BR-cyn" firstAttribute="centerX" secondItem="nbF-LS-p5u" secondAttribute="centerX" id="88i-Hf-un3"/>
-                                <constraint firstItem="fWn-BR-cyn" firstAttribute="leading" secondItem="nbF-LS-p5u" secondAttribute="leading" constant="20" id="LGB-BE-4Xg"/>
-                                <constraint firstAttribute="trailing" secondItem="fWn-BR-cyn" secondAttribute="trailing" constant="20" id="Zqd-do-TGt"/>
-                                <constraint firstAttribute="bottom" secondItem="fWn-BR-cyn" secondAttribute="bottom" constant="20" id="w0J-Zg-jN5"/>
-                                <constraint firstItem="fWn-BR-cyn" firstAttribute="top" secondItem="nbF-LS-p5u" secondAttribute="top" constant="40" id="zlt-o2-igY"/>
+                                <constraint firstItem="fWn-BR-cyn" firstAttribute="top" secondItem="nbF-LS-p5u" secondAttribute="top" constant="20" id="6Sh-i1-SOJ"/>
+                                <constraint firstItem="fWn-BR-cyn" firstAttribute="centerX" secondItem="nbF-LS-p5u" secondAttribute="centerX" id="7FE-V0-o4O"/>
+                                <constraint firstItem="fWn-BR-cyn" firstAttribute="centerY" secondItem="nbF-LS-p5u" secondAttribute="centerY" id="IhW-be-eY2"/>
+                                <constraint firstItem="fWn-BR-cyn" firstAttribute="width" secondItem="nbF-LS-p5u" secondAttribute="width" multiplier="0.8" id="TdE-fd-Q2c"/>
                             </constraints>
                         </view>
                         <prototypes>
@@ -859,9 +860,6 @@
                                         <state key="normal" title="Challenge Someone">
                                             <color key="titleColor" name="DarkSlate"/>
                                         </state>
-                                        <connections>
-                                            <segue destination="Zw1-Lx-K1z" kind="show" identifier="toChallenge" id="7f6-5A-gyl"/>
-                                        </connections>
                                     </button>
                                     <segmentedControl opaque="NO" tag="1" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="5yQ-yN-6Vf">
                                         <rect key="frame" x="0.0" y="30" width="373" height="15"/>
@@ -906,11 +904,13 @@
                         <outlet property="timeLabel" destination="nnx-gg-Oc5" id="HJD-fH-cvL"/>
                         <outlet property="timePointsLabel" destination="3pu-Ey-gQD" id="h2A-V5-VkY"/>
                         <outlet property="usernameLabel" destination="k3v-Ff-9qb" id="voT-at-e5a"/>
+                        <segue destination="Zw1-Lx-K1z" kind="show" identifier="toChallenge" id="lYb-BP-OSZ"/>
+                        <segue destination="LXK-GV-JLw" kind="show" id="i8f-ya-Pvy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ll0-zA-vGZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-546.37681159420299" y="2215.8482142857142"/>
+            <point key="canvasLocation" x="-733" y="2204"/>
         </scene>
         <!--Go On A Run-->
         <scene sceneID="iRO-tV-ghZ">
@@ -1033,21 +1033,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" name="DeepMatteGrey"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" id="vuS-vQ-gaj">
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="vuS-vQ-gaj">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="53"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fam-Q1-KUA">
-                                    <rect key="frame" x="20.5" y="0.0" width="373" height="0.0"/>
+                                    <rect key="frame" x="41.5" y="0.0" width="331" height="53"/>
                                     <subviews>
                                         <searchBar contentMode="redraw" placeholder="Search For new Friends" translatesAutoresizingMaskIntoConstraints="NO" id="q5j-pa-64T">
-                                            <rect key="frame" x="0.0" y="0.0" width="264" height="0.0"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="264" height="53"/>
                                             <color key="backgroundColor" name="DeepMatteGrey"/>
                                             <color key="barTintColor" name="DeepMatteGrey"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </searchBar>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uLC-X1-jRk">
-                                            <rect key="frame" x="264" y="0.0" width="109" height="0.0"/>
+                                            <rect key="frame" x="264" y="0.0" width="67" height="53"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                             <state key="normal" title="Cancel">
                                                 <color key="titleColor" name="SilverFox"/>
@@ -1061,10 +1061,10 @@
                             </subviews>
                             <color key="backgroundColor" name="DeepMatteGrey"/>
                             <constraints>
-                                <constraint firstItem="fam-Q1-KUA" firstAttribute="centerX" secondItem="vuS-vQ-gaj" secondAttribute="centerX" id="Gmw-zK-Z5x"/>
-                                <constraint firstItem="fam-Q1-KUA" firstAttribute="centerY" secondItem="vuS-vQ-gaj" secondAttribute="centerY" id="dol-JE-WKS"/>
-                                <constraint firstItem="fam-Q1-KUA" firstAttribute="height" secondItem="vuS-vQ-gaj" secondAttribute="height" id="jkd-WI-pFA"/>
-                                <constraint firstItem="fam-Q1-KUA" firstAttribute="width" secondItem="vuS-vQ-gaj" secondAttribute="width" multiplier="0.9" id="tQS-NR-TlC"/>
+                                <constraint firstItem="fam-Q1-KUA" firstAttribute="height" secondItem="vuS-vQ-gaj" secondAttribute="height" id="EW9-bX-Z8T"/>
+                                <constraint firstItem="fam-Q1-KUA" firstAttribute="centerX" secondItem="vuS-vQ-gaj" secondAttribute="centerX" id="Qk4-HB-NTu"/>
+                                <constraint firstItem="fam-Q1-KUA" firstAttribute="width" secondItem="vuS-vQ-gaj" secondAttribute="width" multiplier="0.8" id="fT6-DL-zpn"/>
+                                <constraint firstItem="fam-Q1-KUA" firstAttribute="centerY" secondItem="vuS-vQ-gaj" secondAttribute="centerY" id="tdm-zy-7fe"/>
                             </constraints>
                         </view>
                         <prototypes>
@@ -1248,6 +1248,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="T0p-B8-PQR"/>
-        <segue reference="h9X-Mm-i6g"/>
+        <segue reference="i8f-ya-Pvy"/>
+        <segue reference="pu6-5z-4jb"/>
     </inferredMetricsTieBreakers>
 </document>
