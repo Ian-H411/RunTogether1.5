@@ -22,11 +22,11 @@ class RunHistoryTableViewController: UITableViewController {
     var displayInbox: Bool = false
     
     var dataSource: [Run]{
+        guard let user = CloudController.shared.user else {return []}
         if displayInbox{
-            return []
-        } else {
-            guard let user = CloudController.shared.user else {return []}
             return user.runsRecieved
+        } else {
+            return user.runs
         }
     }
     
@@ -40,6 +40,9 @@ class RunHistoryTableViewController: UITableViewController {
                 }
             }
         }
+        CloudController.shared.retrieveRunsToDO { (_) in
+           
+        }
     }
 
     // MARK: - Table view data source
@@ -47,12 +50,12 @@ class RunHistoryTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return CloudController.shared.user?.runs.count ?? 0
+        return dataSource.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "runCell", for: indexPath) as? RunTableViewCell else {return UITableViewCell()}
-        guard let run = CloudController.shared.user?.runs[indexPath.row] else {return UITableViewCell()}
+        let run = dataSource[indexPath.row]
         cell.update(run: run)
 
         return cell

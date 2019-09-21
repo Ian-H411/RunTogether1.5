@@ -32,10 +32,12 @@ class LoadingViewController: UIViewController {
     }
     func retrieveUser(){
         CloudController.shared.performStartUpFetchs { (success) in
+            DispatchQueue.main.async {
             if success{
                 self.performSegue(withIdentifier: "returningUser", sender: nil)
             } else {
             self.performSegue(withIdentifier: "newUser", sender: nil)
+                }
             }
         }
         
