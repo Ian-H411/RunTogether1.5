@@ -69,14 +69,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next Question" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Bn-oD-Ric">
-                                <rect key="frame" x="115" y="186" width="184.5" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <rect key="frame" x="20.5" y="182" width="373" height="44"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" name="SilverFox"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="ANSWERFIELD" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oGj-77-drn">
-                                <rect key="frame" x="115" y="261" width="185" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="ANSWERFIELD" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oGj-77-drn">
+                                <rect key="frame" x="58" y="250" width="298" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="dJI-Qv-R6O"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -153,34 +155,23 @@
                                     <action selector="letsRunButtonTapped:" destination="WGL-EN-GdM" eventType="touchUpInside" id="HKz-X0-nUX"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0sd-3N-mnH">
-                                <rect key="frame" x="269" y="703" width="124.5" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="PXo-vV-336"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                <state key="normal" title="Go Back">
-                                    <color key="titleColor" name="SilverFox"/>
-                                </state>
-                                <connections>
-                                    <action selector="goBackButtonTapped:" destination="WGL-EN-GdM" eventType="touchUpInside" id="QM4-KG-fQP"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" name="DarkSlate"/>
                         <constraints>
-                            <constraint firstItem="0sd-3N-mnH" firstAttribute="centerY" secondItem="zMr-fX-aKi" secondAttribute="centerY" multiplier="1.6" id="6gZ-B4-8kJ"/>
-                            <constraint firstItem="0sd-3N-mnH" firstAttribute="width" secondItem="zMr-fX-aKi" secondAttribute="width" multiplier="0.3" id="DPj-1z-2qA"/>
+                            <constraint firstItem="oGj-77-drn" firstAttribute="width" secondItem="5Bn-oD-Ric" secondAttribute="width" multiplier="0.8" id="Etg-1L-0AV"/>
+                            <constraint firstItem="oGj-77-drn" firstAttribute="centerY" secondItem="zMr-fX-aKi" secondAttribute="centerY" multiplier="0.6" id="HJx-Ux-80Y"/>
+                            <constraint firstItem="5Bn-oD-Ric" firstAttribute="height" secondItem="oGj-77-drn" secondAttribute="height" id="N7j-lw-tmO"/>
                             <constraint firstItem="oni-gt-x9f" firstAttribute="width" secondItem="zMr-fX-aKi" secondAttribute="width" multiplier="0.6" id="NAd-4b-d93"/>
                             <constraint firstItem="oni-gt-x9f" firstAttribute="centerY" secondItem="zMr-fX-aKi" secondAttribute="centerY" multiplier="1.47" id="P9F-Fi-FBw"/>
                             <constraint firstItem="GYM-fz-3b6" firstAttribute="centerX" secondItem="zMr-fX-aKi" secondAttribute="centerX" id="QfE-ef-pBh"/>
-                            <constraint firstItem="0sd-3N-mnH" firstAttribute="centerX" secondItem="zMr-fX-aKi" secondAttribute="centerX" multiplier="1.6" id="Qwn-dr-IHZ"/>
                             <constraint firstItem="5Bn-oD-Ric" firstAttribute="centerX" secondItem="zMr-fX-aKi" secondAttribute="centerX" id="RLe-nG-UhH"/>
+                            <constraint firstItem="oGj-77-drn" firstAttribute="centerX" secondItem="zMr-fX-aKi" secondAttribute="centerX" id="TEd-Zm-pf0"/>
                             <constraint firstItem="oni-gt-x9f" firstAttribute="centerX" secondItem="zMr-fX-aKi" secondAttribute="centerX" id="VWP-8h-vot"/>
                             <constraint firstItem="Xfw-6V-J0C" firstAttribute="centerY" secondItem="zMr-fX-aKi" secondAttribute="centerY" multiplier="0.3" id="Xra-W9-qtJ"/>
                             <constraint firstItem="GYM-fz-3b6" firstAttribute="width" secondItem="zMr-fX-aKi" secondAttribute="width" multiplier="0.9" id="Zij-Uy-WN2"/>
                             <constraint firstItem="GYM-fz-3b6" firstAttribute="centerY" secondItem="zMr-fX-aKi" secondAttribute="centerY" multiplier="1.05" id="cOo-3v-zFx"/>
                             <constraint firstItem="Xfw-6V-J0C" firstAttribute="centerX" secondItem="zMr-fX-aKi" secondAttribute="centerX" id="kMx-dw-mMp"/>
+                            <constraint firstItem="5Bn-oD-Ric" firstAttribute="width" secondItem="zMr-fX-aKi" secondAttribute="width" multiplier="0.9" id="n7I-qa-N0i"/>
                             <constraint firstItem="5Bn-oD-Ric" firstAttribute="centerY" secondItem="zMr-fX-aKi" secondAttribute="centerY" multiplier="0.45" id="sxH-mO-QT5"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zMr-fX-aKi"/>
@@ -189,7 +180,6 @@
                         <outlet property="ageLabel" destination="fls-Yl-onR" id="WKs-vg-6tz"/>
                         <outlet property="answerTextField" destination="oGj-77-drn" id="0Gp-nh-OPB"/>
                         <outlet property="genderLabel" destination="rnf-U6-gOP" id="6ie-fz-s9C"/>
-                        <outlet property="gobackButton" destination="0sd-3N-mnH" id="te1-Bq-rj2"/>
                         <outlet property="heightLabel" destination="etS-CL-ISc" id="sGE-YN-Y86"/>
                         <outlet property="letsGoButton" destination="oni-gt-x9f" id="gcx-rD-50u"/>
                         <outlet property="measurementLabel" destination="DrU-y0-Eha" id="uhv-m2-S6p"/>

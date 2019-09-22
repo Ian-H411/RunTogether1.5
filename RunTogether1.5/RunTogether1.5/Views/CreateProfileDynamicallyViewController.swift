@@ -24,8 +24,7 @@ class CreateProfileDynamicallyViewController: UIViewController {
     @IBOutlet weak var measurementLabel: UILabel!
     
     @IBOutlet weak var letsGoButton: UIButton!
-    
-    @IBOutlet weak var gobackButton: UIButton!
+
     
     @IBOutlet weak var answerTextField: UITextField!
     
@@ -38,9 +37,13 @@ class CreateProfileDynamicallyViewController: UIViewController {
     //inchs or centimeters depending on user choice
     var height:Int = 0
     
+    var heightAsString:String = ""
+    
     var age:Int = 0
     
     var weight:Int = 0
+    
+    var weightAsString:String = ""
     
     var gender:String = ""
     
@@ -51,7 +54,7 @@ class CreateProfileDynamicallyViewController: UIViewController {
     
     var isMetric = false
     
-    var questions:[String] = ["Choose a Username","whats your preffered measurement System?", "Whats your Height?", "How old are you?", "Approxametly how much do you weigh?", "Whats your gender?"]
+    var questions:[String] = ["Choose a Username","whats your preffered measurement System?", "Whats your Height?", "How old are you?", "Approxametly how much do you weigh?", "Whats your gender?","EverythingLook Okay?"]
     var placeHolderPrompts:[String] = ["Username", "Metric/Customary", "Height", "Age", "Weight", "Gender"]
     
     var currentQuestion:String{
@@ -107,7 +110,7 @@ class CreateProfileDynamicallyViewController: UIViewController {
         return [ages,["Years Old"]]
     }
     
-    var genderStylePicker: [[String]] = [["\(GenderKeys.female)","\(GenderKeys.other)","\(GenderKeys.male)"]]
+    var genderStylePicker: [[String]] = [["I Identify as a"],["\(GenderKeys.female)","\(GenderKeys.other)","\(GenderKeys.male)"]]
     
     var currentPickerData:[[String]] {
         let pickers = [userNamePicker,measurementStylePicker,heightStylePicker,ageStylePicker,weightStlyePicker,genderStylePicker]
@@ -125,15 +128,14 @@ class CreateProfileDynamicallyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         InitialSetUP()
+        createPicker()
+        createToolBar()
         
     }
     
     //MARK: - ACTIONS
     
-    @IBAction func goBackButtonTapped(_ sender: Any) {
-        goBackAstep()
-        refreshUI()
-    }
+  
     
     
     @IBAction func letsRunButtonTapped(_ sender: Any) {
@@ -145,13 +147,13 @@ class CreateProfileDynamicallyViewController: UIViewController {
     //MARK: - HELPERS
     
     func InitialSetUP(){
+        answerTextField.text = ""
         let labelArray: [UILabel] = [usernameLabel,heightLabel,ageLabel,weightLabel,genderLabel,measurementLabel]
         //first make everything disappear
         for label in labelArray{
             label.isHidden = true
         }
         letsGoButton.isHidden = true
-        gobackButton.isHidden = true
         questionLabel.text = questions[step]
         
     }
@@ -169,15 +171,22 @@ class CreateProfileDynamicallyViewController: UIViewController {
         let toolBar = UIToolbar()
         toolBar.sizeToFit()
         let button = UIBarButtonItem(title: "Next Question", style: .plain, target: self, action: #selector(CreateProfileDynamicallyViewController.toolbarButtonTapped))
-        toolBar.setItems([button], animated: false)
+        let backButton = UIBarButtonItem(title: "GoBack", style: .plain, target: self, action: #selector(CreateProfileDynamicallyViewController.backButtonTapped))
+        toolBar.setItems([backButton,button], animated: false)
         toolBar.isUserInteractionEnabled = true
         answerTextField.inputAccessoryView = toolBar
         toolbar = toolBar
         
     }
+    @objc func backButtonTapped(){
+        goBackAstep()
+        refreshUI()
+    }
     
     @objc func toolbarButtonTapped(){
         addToStep()
+        refreshUI()
+        view.reloadInputViews()
     }
     
     func addToStep(){
@@ -188,18 +197,58 @@ class CreateProfileDynamicallyViewController: UIViewController {
     
     func goBackAstep(){
         if step > 1{
-            step = step + 1
+            step = step - 1
         }
     }
     
-   func refreshUI(){
-    if step == 6{
-        //congrats review everything and move on
-    } else {
+    func refreshUI(){
+        answerTextField.text = ""
+        if step == 1{
+        guard let picker = picker else {return}
+        answerTextField.inputView = picker
+            questionLabel.text = questions[step]
+            view.reloadInputViews()
+            view.endEditing(true)
+    
+        } else if step == 6{
+            //congrats review everything and move on
+            view.endEditing(true)
+            unhideLabels()
+            usernameLabel.text = username
+            heightLabel.text = heightAsString
+            weightLabel.text = weightAsString
+            ageLabel.text = "\(age) years old"
+            genderLabel.text = gender
+            if isMetric{
+                measurementLabel.text = "Metric"
+            } else {
+                measurementLabel.text = "Customary"
+            }
+        } else {
+            questionLabel.text = questions[step]
+            view.endEditing(true)
+            
+        }
         
     }
-    questionLabel.text = questions[step]
     
+    func unhideLabels(){
+        let labelArray: [UILabel] = [usernameLabel,heightLabel,ageLabel,weightLabel,genderLabel,measurementLabel]
+        //first make everything disappear
+        for label in labelArray{
+            label.isHidden = false
+        }
+        letsGoButton.isHidden = false
+        
+    }
+    
+    func rehideLabels(){
+        let labelArray: [UILabel] = [usernameLabel,heightLabel,ageLabel,weightLabel,genderLabel,measurementLabel]
+        //first make everything disappear
+        for label in labelArray{
+            label.isHidden = true
+        }
+        letsGoButton.isHidden = true
     }
     
 }
@@ -217,7 +266,13 @@ extension CreateProfileDynamicallyViewController: UIPickerViewDelegate,UIPickerV
         return currentPickerData[component][row]
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
+        var returnString:[String] = []
+        for i in 0...currentPickerData.count - 1 {
+            returnString.append(currentPickerData[i][pickerView.selectedRow(inComponent: i)])
+            returnString.append(" ")
+        }
+        let finalstring = returnString.joined()
+        answerTextField.text = finalstring
     }
     
     
