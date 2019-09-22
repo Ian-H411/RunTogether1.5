@@ -8,7 +8,23 @@
 
 import UIKit
 
-class CreateProfileViewController: UIViewController {
+class CreateProfileViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return heightDataSourceForPicker.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return heightDataSourceForPicker[row]
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        guard let textField = selectedTextField else {return}
+        textField.text = heightDataSourceForPicker[row]
+    }
+    
     //MARK: - Outlets
     
     @IBOutlet weak var userNameTextField: UITextField!
@@ -35,10 +51,25 @@ class CreateProfileViewController: UIViewController {
     
     var isMetric:Bool = true
     
+    var heightDataSourceForPicker:[String]{
+        if isMetric{
+            var centimeterList:[String] = []
+            for i in 120...203{
+                centimeterList.append("\(i)")
+            }
+        } else {
+            return []
+        }
+        return []
+    }
+    
+    var selectedTextField:UITextField?
+    
     //MARK: - LIFECYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
+        createHeightPicker()
     }
     
     //MARK: - ACTIONS
@@ -134,6 +165,25 @@ class CreateProfileViewController: UIViewController {
         }
         
     }
+    
+    
+    func createHeightPicker(){
+        let heightPicker = UIPickerView()
+        heightPicker.delegate = self
+        heightTextField.inputView = heightPicker
+        createToolBar(selectedTextField: heightTextField)
+        
+    }
+    func createToolBar(selectedTextField: UITextField){
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(UIViewController.resignFirstResponder))
+        toolBar.setItems([doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        selectedTextField.inputAccessoryView = toolBar
+    }
+    
+   
     
     //MARK: - NAVIGATION
     
