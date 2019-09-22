@@ -68,7 +68,7 @@
                                 <color key="textColor" name="SilverFox"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next Question" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Bn-oD-Ric">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next Question" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Bn-oD-Ric">
                                 <rect key="frame" x="115" y="186" width="184.5" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <color key="textColor" name="SilverFox"/>
@@ -81,51 +81,54 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="41" translatesAutoresizingMaskIntoConstraints="NO" id="GYM-fz-3b6">
-                                <rect key="frame" x="103.5" y="340.5" width="207.5" height="225"/>
+                                <rect key="frame" x="20.5" y="326" width="373" height="299"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UserName:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qXV-GC-1RW">
-                                        <rect key="frame" x="0.0" y="0.0" width="207.5" height="25.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UserName:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qXV-GC-1RW">
+                                        <rect key="frame" x="0.0" y="0.0" width="373" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="3HG-LT-hNc"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                         <color key="textColor" name="SilverFox"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="7iv-Hj-q6c">
-                                        <rect key="frame" x="0.0" y="66.5" width="207.5" height="25.5"/>
+                                        <rect key="frame" x="0.0" y="85" width="373" height="44"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Height:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="etS-CL-ISc">
-                                                <rect key="frame" x="0.0" y="0.0" width="99.5" height="25.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="182.5" height="44"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 <color key="textColor" name="SilverFox"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fls-Yl-onR">
-                                                <rect key="frame" x="107.5" y="0.0" width="100" height="25.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                                <rect key="frame" x="190.5" y="0.0" width="182.5" height="44"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 <color key="textColor" name="SilverFox"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cqk-1W-kop">
-                                        <rect key="frame" x="0.0" y="133" width="207.5" height="25.5"/>
+                                        <rect key="frame" x="0.0" y="170" width="373" height="44"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weight:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d2q-hT-V1v">
-                                                <rect key="frame" x="0.0" y="0.0" width="99.5" height="25.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="182.5" height="44"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 <color key="textColor" name="SilverFox"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gender:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rnf-U6-gOP">
-                                                <rect key="frame" x="107.5" y="0.0" width="100" height="25.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                                <rect key="frame" x="190.5" y="0.0" width="182.5" height="44"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 <color key="textColor" name="SilverFox"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PreferedMeasurement:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DrU-y0-Eha">
-                                        <rect key="frame" x="0.0" y="199.5" width="207.5" height="25.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                        <rect key="frame" x="0.0" y="255" width="373" height="44"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <color key="textColor" name="SilverFox"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -133,21 +136,67 @@
                                 <constraints>
                                     <constraint firstItem="qXV-GC-1RW" firstAttribute="width" secondItem="GYM-fz-3b6" secondAttribute="width" id="5YZ-O6-NsZ"/>
                                     <constraint firstItem="cqk-1W-kop" firstAttribute="width" secondItem="GYM-fz-3b6" secondAttribute="width" id="BBX-oJ-xgT"/>
+                                    <constraint firstItem="cqk-1W-kop" firstAttribute="height" secondItem="qXV-GC-1RW" secondAttribute="height" id="I0b-e9-J9s"/>
+                                    <constraint firstItem="7iv-Hj-q6c" firstAttribute="height" secondItem="qXV-GC-1RW" secondAttribute="height" id="NS9-Ru-exo"/>
+                                    <constraint firstItem="DrU-y0-Eha" firstAttribute="height" secondItem="qXV-GC-1RW" secondAttribute="height" id="ZNH-Dp-ycl"/>
                                     <constraint firstItem="7iv-Hj-q6c" firstAttribute="width" secondItem="GYM-fz-3b6" secondAttribute="width" id="cGu-88-6jT"/>
+                                    <constraint firstItem="DrU-y0-Eha" firstAttribute="width" secondItem="GYM-fz-3b6" secondAttribute="width" id="oeC-qp-22L"/>
                                 </constraints>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oni-gt-x9f">
+                                <rect key="frame" x="83" y="644" width="248" height="44"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <state key="normal" title="LETS RUN!">
+                                    <color key="titleColor" name="SilverFox"/>
+                                </state>
+                                <connections>
+                                    <action selector="letsRunButtonTapped:" destination="WGL-EN-GdM" eventType="touchUpInside" id="HKz-X0-nUX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0sd-3N-mnH">
+                                <rect key="frame" x="269" y="703" width="124.5" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="PXo-vV-336"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <state key="normal" title="Go Back">
+                                    <color key="titleColor" name="SilverFox"/>
+                                </state>
+                                <connections>
+                                    <action selector="goBackButtonTapped:" destination="WGL-EN-GdM" eventType="touchUpInside" id="QM4-KG-fQP"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" name="DarkSlate"/>
                         <constraints>
+                            <constraint firstItem="0sd-3N-mnH" firstAttribute="centerY" secondItem="zMr-fX-aKi" secondAttribute="centerY" multiplier="1.6" id="6gZ-B4-8kJ"/>
+                            <constraint firstItem="0sd-3N-mnH" firstAttribute="width" secondItem="zMr-fX-aKi" secondAttribute="width" multiplier="0.3" id="DPj-1z-2qA"/>
+                            <constraint firstItem="oni-gt-x9f" firstAttribute="width" secondItem="zMr-fX-aKi" secondAttribute="width" multiplier="0.6" id="NAd-4b-d93"/>
+                            <constraint firstItem="oni-gt-x9f" firstAttribute="centerY" secondItem="zMr-fX-aKi" secondAttribute="centerY" multiplier="1.47" id="P9F-Fi-FBw"/>
                             <constraint firstItem="GYM-fz-3b6" firstAttribute="centerX" secondItem="zMr-fX-aKi" secondAttribute="centerX" id="QfE-ef-pBh"/>
+                            <constraint firstItem="0sd-3N-mnH" firstAttribute="centerX" secondItem="zMr-fX-aKi" secondAttribute="centerX" multiplier="1.6" id="Qwn-dr-IHZ"/>
                             <constraint firstItem="5Bn-oD-Ric" firstAttribute="centerX" secondItem="zMr-fX-aKi" secondAttribute="centerX" id="RLe-nG-UhH"/>
+                            <constraint firstItem="oni-gt-x9f" firstAttribute="centerX" secondItem="zMr-fX-aKi" secondAttribute="centerX" id="VWP-8h-vot"/>
                             <constraint firstItem="Xfw-6V-J0C" firstAttribute="centerY" secondItem="zMr-fX-aKi" secondAttribute="centerY" multiplier="0.3" id="Xra-W9-qtJ"/>
-                            <constraint firstItem="GYM-fz-3b6" firstAttribute="centerY" secondItem="zMr-fX-aKi" secondAttribute="centerY" id="cOo-3v-zFx"/>
+                            <constraint firstItem="GYM-fz-3b6" firstAttribute="width" secondItem="zMr-fX-aKi" secondAttribute="width" multiplier="0.9" id="Zij-Uy-WN2"/>
+                            <constraint firstItem="GYM-fz-3b6" firstAttribute="centerY" secondItem="zMr-fX-aKi" secondAttribute="centerY" multiplier="1.05" id="cOo-3v-zFx"/>
                             <constraint firstItem="Xfw-6V-J0C" firstAttribute="centerX" secondItem="zMr-fX-aKi" secondAttribute="centerX" id="kMx-dw-mMp"/>
                             <constraint firstItem="5Bn-oD-Ric" firstAttribute="centerY" secondItem="zMr-fX-aKi" secondAttribute="centerY" multiplier="0.45" id="sxH-mO-QT5"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zMr-fX-aKi"/>
                     </view>
+                    <connections>
+                        <outlet property="ageLabel" destination="fls-Yl-onR" id="WKs-vg-6tz"/>
+                        <outlet property="answerTextField" destination="oGj-77-drn" id="0Gp-nh-OPB"/>
+                        <outlet property="genderLabel" destination="rnf-U6-gOP" id="6ie-fz-s9C"/>
+                        <outlet property="gobackButton" destination="0sd-3N-mnH" id="te1-Bq-rj2"/>
+                        <outlet property="heightLabel" destination="etS-CL-ISc" id="sGE-YN-Y86"/>
+                        <outlet property="letsGoButton" destination="oni-gt-x9f" id="gcx-rD-50u"/>
+                        <outlet property="measurementLabel" destination="DrU-y0-Eha" id="uhv-m2-S6p"/>
+                        <outlet property="questionLabel" destination="5Bn-oD-Ric" id="Hc4-3a-oaH"/>
+                        <outlet property="usernameLabel" destination="qXV-GC-1RW" id="1Rd-o2-nHw"/>
+                        <outlet property="weightLabel" destination="d2q-hT-V1v" id="vuq-vx-0Ep"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UU4-OE-H1Z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
