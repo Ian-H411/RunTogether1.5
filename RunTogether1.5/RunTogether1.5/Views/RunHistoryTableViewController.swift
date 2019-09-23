@@ -41,6 +41,7 @@ class RunHistoryTableViewController: UITableViewController {
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                     self.setUpTotalDistance()
+                    self.tableView.tableFooterView = UIView()
                 }
             }
         }
@@ -62,6 +63,9 @@ class RunHistoryTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "runCell", for: indexPath) as? RunTableViewCell else {return UITableViewCell()}
         let run = dataSource[indexPath.row]
+        if displayInbox{
+            cell.isAChallengeRecieved = true
+        }
         cell.update(run: run)
         
         return cell
@@ -77,11 +81,15 @@ class RunHistoryTableViewController: UITableViewController {
                     self.displayInbox = true
                     self.hasFiredRunInbox = true
                     print("successfullyrecieved")
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
                 }
             }
         } else {
             displayInbox = true
         }
+        tableView.reloadData()
     }
     
     
@@ -137,12 +145,14 @@ class RunHistoryTableViewController: UITableViewController {
         if segue.identifier == "toDetailRun" {
             if let indexPath = tableView.indexPathForSelectedRow{
                 if let destination = segue.destination as? RunDetailViewController{
-                    guard let user = CloudController.shared.user else {return}
-                    let run = user.runs[indexPath.row]
+                    let run = dataSource[indexPath.row]
                     if let competingRun = run.competingRun{
                         destination.isAChallenge = true
                         destination.landingPadUserRun = run
                         destination.landingPadOpponentRun = competingRun
+                    } else if displayInbox {
+                        destination.userIsAcceptingChallenge = true
+                        destination.landingPadOpponentRun = run
                     } else {
                         destination.isAChallenge = false
                         destination.landingPadUserRun = run

@@ -260,7 +260,9 @@ class CloudController {
                 for record in recordListRuns{
                     guard let id = record[RunKeys.userReferenceKey] as? CKRecord.Reference else {return}
                     for user in users{
-                        if id == user.recordID{
+                        print(id.recordID.recordName)
+                        print(user.recordID.recordName)
+                        if id.recordID.recordName == user.recordID.recordName{
                             guard let newRun = Run(record: record, user: user) else {return}
                             runs.append(newRun)
                         }

@@ -37,6 +37,8 @@ class RunDetailViewController: UIViewController {
     
     var isDisplayingUser = true
     
+    var userIsAcceptingChallenge = false
+    
     var landingPadUserRun:Run?
     
     var landingPadOpponentRun:Run?
@@ -62,6 +64,9 @@ class RunDetailViewController: UIViewController {
     }
     
     @IBAction func challengeSomeOneButtonTapped(_ sender: Any) {
+        if userIsAcceptingChallenge{
+            //perform the segue here
+        }
         if !isAChallenge{
             performSegue(withIdentifier: "toChallenge", sender: nil)
         }

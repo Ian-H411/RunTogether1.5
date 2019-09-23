@@ -29,6 +29,8 @@ class RunTableViewCell: UITableViewCell {
     
     var runLandingPad:Run?
     
+    var isAChallengeRecieved:Bool = false
+    
     
     func update(run: Run){
         
@@ -37,6 +39,8 @@ class RunTableViewCell: UITableViewCell {
         cardView.layer.shadowOffset = .zero
         cardView.layer.shadowOpacity = 0.5
         cardView.layer.cornerRadius = 5
+        
+        
         
         runLandingPad = run
         //if the run is complete on both ends
@@ -51,10 +55,14 @@ class RunTableViewCell: UITableViewCell {
             
             //if the run is not complete
         } else {
-            
             usernameLabel.isHidden = true
             playerVsPlayerLabel.isHidden = true
             opponentsUsernameLabel.isHidden = true
+            if isAChallengeRecieved{
+                guard let opponent = run.user else {return}
+                usernameLabel.isHidden = false
+                usernameLabel.text = "Run From: \(opponent.name)"
+            }
             
             let dateFormatted = Converter.formatDate(date: run.date)
             dateLabel.text = "\(dateFormatted)"
