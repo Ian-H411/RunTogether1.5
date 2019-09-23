@@ -54,7 +54,7 @@ class CreateProfileDynamicallyViewController: UIViewController {
     
     var isMetric = false
     
-    var questions:[String] = ["Choose a Username","whats your preffered measurement System?", "Whats your Height?", "How old are you?", "Approxametly how much do you weigh?", "Whats your gender?","EverythingLook Okay?"]
+    var questions:[String] = ["Choose a Username","whats your preffered measurement System?", "Whats your Height?", "How old are you?", "Approxametly how much do you weigh?", "Whats your gender?","Everything look okay?"]
     var placeHolderPrompts:[String] = ["Username", "Metric/Customary", "Height", "Age", "Weight", "Gender"]
     
     var currentQuestion:String{
@@ -147,6 +147,7 @@ class CreateProfileDynamicallyViewController: UIViewController {
     //MARK: - HELPERS
     
     func InitialSetUP(){
+        answerTextField.becomeFirstResponder()
         answerTextField.text = ""
         let labelArray: [UILabel] = [usernameLabel,heightLabel,ageLabel,weightLabel,genderLabel,measurementLabel]
         //first make everything disappear
@@ -172,7 +173,8 @@ class CreateProfileDynamicallyViewController: UIViewController {
         toolBar.sizeToFit()
         let button = UIBarButtonItem(title: "Next Question", style: .plain, target: self, action: #selector(CreateProfileDynamicallyViewController.toolbarButtonTapped))
         let backButton = UIBarButtonItem(title: "GoBack", style: .plain, target: self, action: #selector(CreateProfileDynamicallyViewController.backButtonTapped))
-        toolBar.setItems([backButton,button], animated: false)
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        toolBar.setItems([backButton, flexibleSpace ,button], animated: false)
         toolBar.isUserInteractionEnabled = true
         answerTextField.inputAccessoryView = toolBar
         toolbar = toolBar
@@ -203,12 +205,16 @@ class CreateProfileDynamicallyViewController: UIViewController {
     
     func refreshUI(){
         answerTextField.text = ""
+        
         if step == 1{
+            guard let usernamerecieved = answerTextField.text else {return}
+            username = usernamerecieved
+            usernameLabel.text = username
         guard let picker = picker else {return}
         answerTextField.inputView = picker
             questionLabel.text = questions[step]
-            view.reloadInputViews()
             view.endEditing(true)
+            picker.reloadAllComponents()
     
         } else if step == 6{
             //congrats review everything and move on
@@ -225,9 +231,26 @@ class CreateProfileDynamicallyViewController: UIViewController {
                 measurementLabel.text = "Customary"
             }
         } else {
-            questionLabel.text = questions[step]
-            view.endEditing(true)
             
+            questionLabel.text = questions[step]
+            guard let picker = picker else {return}
+            picker.reloadAllComponents()
+            
+            
+        }
+        let labelCarousel:[UILabel] = [usernameLabel,heightLabel,ageLabel,weightLabel,genderLabel,measurementLabel]
+        if step >= 1 {
+            if step == 1 {
+                usernameLabel.text = username
+            }
+            labelCarousel[step - 1].isHidden = false
+            labelCarousel[step - 1].layer.shadowColor = UIColor(named: "areYaYellow")!.cgColor
+            labelCarousel[step - 1].layer.shadowRadius = 10
+            labelCarousel[step - 1].layer.shadowOffset = .zero
+            labelCarousel[step - 1].layer.shadowOpacity = 0.5
+            labelCarousel[step - 1].layer.cornerRadius = 20
+            labelCarousel[step - 1].layer.borderColor = UIColor(named: "SilverFox")!.cgColor
+            labelCarousel[step - 1].layer.borderWidth = 5
         }
         
     }
@@ -273,6 +296,47 @@ extension CreateProfileDynamicallyViewController: UIPickerViewDelegate,UIPickerV
         }
         let finalstring = returnString.joined()
         answerTextField.text = finalstring
+        if step == 1{
+            print(finalstring)
+            if finalstring == "Metric "{
+                print("SelectedMetric")
+                isMetric = true
+                measurementLabel.text = "Metric"
+            } else {
+                isMetric = false
+                measurementLabel.text = "Customary"
+            }
+        } else if step == 2 {
+            heightAsString = finalstring
+            if !isMetric{
+                print("height in customary")
+                print(returnString)
+                guard let feet = Int(returnString[0]) else {return}
+                guard let inches = Int(returnString[4]) else {return}
+                height = (feet * 12) + inches
+                print("\(height) inches")
+            } else {
+                print("height in CM")
+                print(returnString)
+                guard let centimeters = Int(returnString[0]) else {return}
+                height = centimeters
+            }
+        } else if step == 3{
+            guard let ageFound = Int(returnString[0]) else {return}
+            print(ageFound)
+            age = ageFound
+        } else if step == 4 {
+            guard let weightFound = Int(returnString[0]) else {return}
+            weight = weightFound
+        } else if step == 5 {
+            if returnString[0] == "\(GenderKeys.male) "{
+                gender = GenderKeys.male
+            } else if returnString[0] == "\(GenderKeys.female) " {
+                gender = GenderKeys.female
+            } else {
+                gender = GenderKeys.other
+            }
+        }
     }
     
     
