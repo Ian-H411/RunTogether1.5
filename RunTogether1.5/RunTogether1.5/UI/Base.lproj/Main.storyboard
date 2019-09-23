@@ -151,20 +151,20 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fyA-Fj-N0j">
-                                <rect key="frame" x="261" y="716.5" width="99" height="44"/>
+                                <rect key="frame" x="248.5" y="730" width="124" height="44"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                 <state key="normal" title="Go Back">
                                     <color key="titleColor" name="areYaYellow"/>
                                 </state>
                                 <connections>
-                                    <action selector="letsRunButtonTapped:" destination="WGL-EN-GdM" eventType="touchUpInside" id="VuX-4o-N3p"/>
+                                    <action selector="goBackButtonTapped:" destination="WGL-EN-GdM" eventType="touchUpInside" id="bAj-ed-2bh"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" name="DarkSlate"/>
                         <constraints>
-                            <constraint firstItem="fyA-Fj-N0j" firstAttribute="centerY" secondItem="zMr-fX-aKi" secondAttribute="centerY" multiplier="1.63" id="Dk0-VX-FKR"/>
-                            <constraint firstItem="fyA-Fj-N0j" firstAttribute="width" secondItem="oni-gt-x9f" secondAttribute="width" multiplier="0.4" id="DpV-5F-FOo"/>
+                            <constraint firstItem="fyA-Fj-N0j" firstAttribute="centerY" secondItem="zMr-fX-aKi" secondAttribute="centerY" multiplier="1.66" id="Dk0-VX-FKR"/>
+                            <constraint firstItem="fyA-Fj-N0j" firstAttribute="width" secondItem="oni-gt-x9f" secondAttribute="width" multiplier="0.5" id="DpV-5F-FOo"/>
                             <constraint firstItem="oGj-77-drn" firstAttribute="width" secondItem="5Bn-oD-Ric" secondAttribute="width" multiplier="0.8" id="Etg-1L-0AV"/>
                             <constraint firstItem="oGj-77-drn" firstAttribute="centerY" secondItem="zMr-fX-aKi" secondAttribute="centerY" multiplier="0.6" id="HJx-Ux-80Y"/>
                             <constraint firstItem="fyA-Fj-N0j" firstAttribute="centerX" secondItem="zMr-fX-aKi" secondAttribute="centerX" multiplier="1.5" id="IoJ-aa-fYT"/>
@@ -684,6 +684,7 @@
                                             <color key="tintColor" name="areYaYellow"/>
                                             <color key="selectedSegmentTintColor" name="areYaYellow"/>
                                             <connections>
+                                                <action selector="runInboxControlTapped:" destination="NRr-DT-LPF" eventType="valueChanged" id="jHu-El-9qj"/>
                                                 <action selector="selectedGenderControlTapped:" destination="pRM-Oa-nss" eventType="valueChanged" id="p3l-7j-g0d"/>
                                             </connections>
                                         </segmentedControl>
@@ -1405,6 +1406,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="ZYh-jL-z0D"/>
         <segue reference="i8f-ya-Pvy"/>
-        <segue reference="h9X-Mm-i6g"/>
+        <segue reference="hNl-jx-9bH"/>
     </inferredMetricsTieBreakers>
 </document>

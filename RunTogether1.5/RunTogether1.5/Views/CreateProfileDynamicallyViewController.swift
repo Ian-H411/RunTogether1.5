@@ -59,6 +59,8 @@ class CreateProfileDynamicallyViewController: UIViewController {
     
     var isMetric = false
     
+    var textFieldstuff:[String] = ["","Customary ","3 Ft 0 In ","16 Years Old ","93 Lbs. ", "Sex Female "]
+    
     var questions:[String] = ["Choose a Username","preffered measurement System?", "Whats your Height?", "How old are you?", "Approxametly how much do you weigh?", "Whats your sex?","Everything look okay?"]
     var placeHolderPrompts:[String] = ["Username", "Metric/Customary", "Height", "Age", "Weight", "Gender"]
     
@@ -144,6 +146,17 @@ class CreateProfileDynamicallyViewController: UIViewController {
     //MARK: - ACTIONS
     
     
+    @IBAction func goBackButtonTapped(_ sender: Any) {
+       let labelCarousel:[UILabel] = [usernameLabel,measurementLabel, heightLabel,ageLabel,weightLabel,genderLabel]
+       labelCarousel[step - 1].isHidden = true
+       goBackAstep()
+       refreshUI()
+        answerTextField.becomeFirstResponder()
+        gobackButton.isHidden = true
+    }
+    
+    
+    
     
     
     @IBAction func letsRunButtonTapped(_ sender: Any) {
@@ -202,8 +215,16 @@ class CreateProfileDynamicallyViewController: UIViewController {
         
     }
     @objc func backButtonTapped(){
+        let labelCarousel:[UILabel] = [usernameLabel,measurementLabel, heightLabel,ageLabel,weightLabel,genderLabel]
+        labelCarousel[step - 1].isHidden = true
         goBackAstep()
+        
         refreshUI()
+        if step == 0{
+            answerTextField.resignFirstResponder()
+            answerTextField.inputView = nil
+            answerTextField.becomeFirstResponder()
+        }
     }
     
     @objc func toolbarButtonTapped(){
@@ -238,7 +259,7 @@ class CreateProfileDynamicallyViewController: UIViewController {
     }
     
     func goBackAstep(){
-        if step > 1{
+        if step >= 1{
             step = step - 1
         }
     }
@@ -248,12 +269,13 @@ class CreateProfileDynamicallyViewController: UIViewController {
         
         if step == 1{
             guard let usernamerecieved = answerTextField.text else {return}
+            if username.count == 0{
             username = usernamerecieved
+            }
             usernameLabel.isHidden = false
-            answerTextField.text = ""
+            answerTextField.text = textFieldstuff[step]
             guard let picker = picker else {return}
             answerTextField.inputView = picker
-            questionLabel.text = questions[step]
             view.endEditing(true)
             picker.reloadAllComponents()
             answerTextField.becomeFirstResponder()
@@ -263,13 +285,18 @@ class CreateProfileDynamicallyViewController: UIViewController {
             //congrats review everything and move on
             view.endEditing(true)
             letsGoButton.isHidden = false
+            gobackButton.isHidden = false
+            gobackButton.backgroundColor = UIColor(named: "DarkSlate")!
             letsGoButton.backgroundColor = UIColor(named: "DarkSlate")!
             letsGoButton.layer.cornerRadius = 20
+            gobackButton.layer.cornerRadius = 20
             letsGoButton.layer.borderColor = UIColor(named: "SilverFox")!.cgColor
+            gobackButton.layer.borderColor = UIColor(named: "SilverFox")!.cgColor
             letsGoButton.layer.borderWidth = 3
+            gobackButton.layer.borderWidth = 3
             
         } else {
-            answerTextField.text = ""
+            
             questionLabel.text = questions[step]
             guard let picker = picker else {return}
             picker.reloadAllComponents()

@@ -9,7 +9,7 @@
 import UIKit
 
 class RunHistoryTableViewController: UITableViewController {
-
+    
     //MARK: - OUTLETS
     
     
@@ -21,12 +21,14 @@ class RunHistoryTableViewController: UITableViewController {
     
     var displayInbox: Bool = false
     
+    var hasFiredRunInbox = false
+    
     var dataSource: [Run]{
         guard let user = CloudController.shared.user else {return []}
         if displayInbox{
             return user.runsRecieved
         } else {
-       
+            
             return user.runs
         }
     }
@@ -42,28 +44,45 @@ class RunHistoryTableViewController: UITableViewController {
                 }
             }
         }
-        //TODO: - ASK FOR HELP WITH THIS ERROR
-//        CloudController.shared.retrieveRunsToDO { (_) in
-//
-//        }
+        
     }
-
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        hasFiredRunInbox = false
+    }
+    
     // MARK: - Table view data source
-
-
+    
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return dataSource.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "runCell", for: indexPath) as? RunTableViewCell else {return UITableViewCell()}
         let run = dataSource[indexPath.row]
         cell.update(run: run)
-
+        
         return cell
     }
-  
+    //MARK: - ACTIONS
+    
+    @IBAction func runInboxControlTapped(_ sender: Any) {
+        if displayInbox{
+            displayInbox = false
+        } else if !hasFiredRunInbox{
+            CloudController.shared.retrieveRunsToDO { (success) in
+                if success{
+                    self.displayInbox = true
+                    self.hasFiredRunInbox = true
+                    print("successfullyrecieved")
+                }
+            }
+        } else {
+            displayInbox = true
+        }
+    }
     
     
     
@@ -112,7 +131,7 @@ class RunHistoryTableViewController: UITableViewController {
     }
     
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toDetailRun" {
@@ -132,5 +151,5 @@ class RunHistoryTableViewController: UITableViewController {
             }
         }
     }
-
+    
 }

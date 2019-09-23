@@ -237,6 +237,11 @@ class CloudController {
             for record in recordListRuns{
                 recordIDList.append(record.recordID)
             }
+            if recordIDList.isEmpty{
+                completion(true)
+                print("Inbox empty")
+                return
+            }
             let predicate2 = NSPredicate(format: "\(UserKeys.runsReferenceList) CONTAINS %@", argumentArray: recordIDList)
             let query2 = CKQuery(recordType: UserKeys.userObjectKey, predicate: predicate2)
             self.publicDatabase.perform(query2, inZoneWith: nil, completionHandler: { (recordsUsers, error) in
