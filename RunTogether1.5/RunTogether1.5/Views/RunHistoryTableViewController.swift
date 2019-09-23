@@ -26,6 +26,7 @@ class RunHistoryTableViewController: UITableViewController {
         if displayInbox{
             return user.runsRecieved
         } else {
+       
             return user.runs
         }
     }
@@ -41,9 +42,10 @@ class RunHistoryTableViewController: UITableViewController {
                 }
             }
         }
-        CloudController.shared.retrieveRunsToDO { (_) in
-           
-        }
+        //TODO: - ASK FOR HELP WITH THIS ERROR
+//        CloudController.shared.retrieveRunsToDO { (_) in
+//
+//        }
     }
 
     // MARK: - Table view data source

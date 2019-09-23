@@ -153,7 +153,7 @@ class CloudController {
             if success{
                 self.retrieveUserProfile(completion: { (success, error) in
                     if let error = error{
-                    print("there was an error in \(#function) :\(error) : \(error.localizedDescription)")
+                        print("there was an error in \(#function) :\(error) : \(error.localizedDescription)")
                     }
                     completion(success)
                     return
@@ -259,7 +259,7 @@ class CloudController {
                             guard let newRun = Run(record: record, user: user) else {return}
                             runs.append(newRun)
                         }
-                   }
+                    }
                 }
                 user.runsRecieved = runs
                 completion(true)
@@ -280,10 +280,31 @@ class CloudController {
             }
             guard let recordList = records else {completion(true);print("error decoding friends");return}
             for record in recordList{
-               guard let friend = User(record: record) else {completion(true);print("error decoding friends");return}
+                guard let friend = User(record: record) else {completion(true);print("error decoding friends");return}
                 if !user.friends.contains(friend){
-                user.friends.append(friend)
+                    user.friends.append(friend)
                 }
+            }
+        }
+    }
+    
+    func checkIfUserExists(username:String,completion: @escaping (Bool) -> Void){
+        let predicate = NSPredicate(format: "\(UserKeys.nameKey) == %@", username)
+        let query = CKQuery(recordType: UserKeys.userObjectKey, predicate: predicate)
+        CloudController.shared.publicDatabase.perform(query, inZoneWith: nil) { (records, error) in
+            if let error = error{
+                print("there was an error in \(#function) :\(error) : \(error.localizedDescription)")
+                completion(false)
+                return
+            }
+            guard let records = records else {completion(true);return}
+            if records.isEmpty{
+                completion(true)
+                return
+            } else {
+                completion(false)
+                print("User exists")
+                return
             }
         }
     }
