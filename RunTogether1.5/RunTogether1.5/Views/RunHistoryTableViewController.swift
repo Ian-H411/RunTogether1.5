@@ -153,6 +153,7 @@ class RunHistoryTableViewController: UITableViewController {
                     } else if displayInbox {
                         destination.userIsAcceptingChallenge = true
                         destination.landingPadOpponentRun = run
+                        destination.isAChallenge = false
                     } else {
                         destination.isAChallenge = false
                         destination.landingPadUserRun = run

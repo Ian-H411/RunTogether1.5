@@ -10,14 +10,8 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class GoOnARunViewController: UIViewController, UICloudSharingControllerDelegate {
-    func cloudSharingController(_ csc: UICloudSharingController, failedToSaveShareWithError error: Error) {
-        print("there was an error in \(#function) :\(error) : \(error.localizedDescription)")
-    }
+class GoOnARunViewController: UIViewController {
     
-    func itemTitle(for csc: UICloudSharingController) -> String? {
-        return "Challenge Someone"
-    }
     
     //MARK: -Outlets
     
@@ -56,6 +50,12 @@ class GoOnARunViewController: UIViewController, UICloudSharingControllerDelegate
     var listOfLocations = [CLLocation]()
     
     var arrayOfPaces = [Double]()
+    
+    //MARK: - CHALLENGING VARIABLES
+    
+    var landingPadOpponentRun:Run?
+    
+    var isAcceptingChallenge:Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()

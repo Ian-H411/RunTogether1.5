@@ -65,7 +65,7 @@ class RunDetailViewController: UIViewController {
     
     @IBAction func challengeSomeOneButtonTapped(_ sender: Any) {
         if userIsAcceptingChallenge{
-            //perform the segue here
+            performSegue(withIdentifier: "challengeAccepted", sender: nil)
         }
         if !isAChallenge{
             performSegue(withIdentifier: "toChallenge", sender: nil)
@@ -83,6 +83,14 @@ class RunDetailViewController: UIViewController {
             sendARunButton.isHidden = true
         } else {
             statsSelector.isHidden = true
+        }
+        if userIsAcceptingChallenge{
+            changeColors(borderColor: "areYaYellow")
+            guard let run = landingPadOpponentRun else {return}
+            landingPadUserRun = run
+            sendARunButton.setTitle("ACCEPT THIS CHALLENGE", for: .normal)
+            changeStatsUpdate()
+            return
         }
         changeColors(borderColor: "SilverFox")
         changeStatsUpdate()
@@ -137,6 +145,12 @@ class RunDetailViewController: UIViewController {
             if let destination = segue.destination as? ChallengeTableViewController {
                 guard let run = landingPadUserRun else {return}
                 destination.runToSend = run
+            }
+        } else if segue.identifier == "challengeAccepted"{
+            if let destination = segue.destination as? GoOnARunViewController{
+                guard let run = landingPadOpponentRun else {return}
+                destination.isAcceptingChallenge = true
+                destination.landingPadOpponentRun = run
             }
         }
     }
