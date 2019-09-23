@@ -1,44 +1,46 @@
 //
-//  GoOnARunViewController.swift
+//  ChallengeAcceptedViewController.swift
 //  RunTogether1.5
 //
-//  Created by Ian Hall on 9/7/19.
+//  Created by Ian Hall on 9/23/19.
 //  Copyright © 2019 Ian Hall. All rights reserved.
 //
 
 import UIKit
-
 import CoreLocation
-
-class GoOnARunViewController: UIViewController {
-    
-    
-    //MARK: -Outlets
-    
-    @IBOutlet weak var startStopButton: UIButton!
-    
-    @IBOutlet weak var paceLabel: UILabel!
+class ChallengeAcceptedViewController: UIViewController {
+    //MARK: -OUTLETS
     
     @IBOutlet weak var timeLabel: UILabel!
     
-    @IBOutlet weak var distanceLabel: UILabel!
     
     @IBOutlet weak var caloriesLabel: UILabel!
     
-    @IBOutlet weak var elevationLabel: UILabel!
+    @IBOutlet weak var distanceLabel: UILabel!
+    
+    @IBOutlet weak var elevationGained: UILabel!
+    
+    @IBOutlet weak var paceLabel: UILabel!
+    
+    @IBOutlet weak var timeToBeatLabel: UILabel!
+    
+    @IBOutlet weak var challengerLabel: UILabel!
+    
+    @IBOutlet weak var startStopButton: UIButton!
     
     
-    ///vars and lets for tracking a run
-    
+    //MARK: - CORELOCATION VARIABLES
     let locationManager = LocationManager.shared
     
     var run: Run?
     
+    var opponentRun:Run?
+    
     var seconds = 0
     
-    var isRunning: Bool = false
+    var isRunning:Bool = false
     
-    var calories: Int = 0
+    var calories:Int = 0
     
     var timer: Timer?
     
@@ -50,55 +52,30 @@ class GoOnARunViewController: UIViewController {
     
     var arrayOfPaces = [Double]()
     
-    //MARK: - CHALLENGING VARIABLES
-    
-    var landingPadOpponentRun:Run?
-    
-    var isAcceptingChallenge:Bool = false
-    
+    //MARK: - LIFECYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpUI()
-        CloudController.shared.retrieveFriends { (_) in
-            
-        }
+        initialUISetUP()
         
     }
     
-    //MARK: - ACTIONS
-    
-    @IBAction func startStopButtonTapped(_ sender: Any) {
-        if isRunning{
-            stopRun()
-            isRunning = false
-            startStopButton.setTitle("Start", for: .normal)
-        } else {
-            startRun()
-            isRunning = true
-            startStopButton.setTitle("Stop", for: .normal)
-        }
+    override func viewWillDisappear(_ animated: Bool) {
+        timer?.invalidate()
+        locationManager.stopUpdatingLocation()
     }
     
     
     
     
     
-    //MARK: -Helpers
-    
-    //initial start up only
-    
-    
-    func setUpUI(){
+    //MARK: - ACTIONS
+    func initialUISetUP(){
         let labelColor: String = "SilverFox"
         let labelBorderWidth: CGFloat = 1
         let cornerRadius: CGFloat = 35
         
-        let labelArray: [UILabel] = [timeLabel, paceLabel, caloriesLabel, elevationLabel,distanceLabel]
-        
-        //set  background
+        let labelArray: [UILabel] = [timeLabel,caloriesLabel,distanceLabel,elevationGained,paceLabel,timeToBeatLabel,challengerLabel]
         self.view.backgroundColor = UIColor(named: "DarkSlate")!
-        
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor(named: labelColor)!]
         for label in labelArray {
             //set all labels border
             label.layer.borderWidth = labelBorderWidth
@@ -111,18 +88,41 @@ class GoOnARunViewController: UIViewController {
             
             
         }
+        guard let run = opponentRun else {return}
         startStopButton.layer.cornerRadius = cornerRadius - 10
-        startStopButton.setTitle("Start", for: .normal)
-    }
-    //to be used to update the label text
-    func updateUIText(){
-        paceLabel.text = Converter.paceFormatter(distance: distance, seconds: seconds, outputUnit: UnitSpeed.minutesPerMile)
-        timeLabel.text = Converter.formatTime(seconds: seconds)
-        distanceLabel.text = Converter.measureMentFormatter(distance: distance)
-        elevationLabel.text = Converter.measureMentFormatter(distance: elevation)
-        caloriesLabel.text = "\(calories) CAL"
+        startStopButton.setTitle("BEGIN", for: .normal)
+        let time = Converter.formatTime(seconds: Int(run.totalTime))
+        timeToBeatLabel.text = "Time to Beat:\n\(time)"
+        guard let user = run.user else {return}
+        challengerLabel.text = "Challenger:\n\(user.name)"
     }
     
+    func updateUI(){
+        let pace = Converter.paceFormatter(distance: distance, seconds: seconds, outputUnit: UnitSpeed.minutesPerMile)
+        let time = Converter.formatTime(seconds: seconds)
+        let distanceString = Converter.measureMentFormatter(distance: distance)
+        let elevationString = Converter.measureMentFormatter(distance: elevation)
+        caloriesLabel.text = "\(calories) CAL"
+        paceLabel.text = pace
+        timeLabel.text = time
+        distanceLabel.text = distanceString
+        elevationGained.text = elevationString
+        
+        
+    }
+    
+    @IBAction func startStopButtonTapped(_ sender: Any) {
+        if isRunning{
+            stopRun()
+            isRunning = false
+            startStopButton.setTitle("Start", for: .normal)
+        } else {
+            startRun()
+            isRunning = true
+            startStopButton.setTitle("Stop", for: .normal)
+        }
+        
+    }
     func startLocationTracking(){
         //set the delegate
         locationManager.delegate = self
@@ -136,7 +136,10 @@ class GoOnARunViewController: UIViewController {
     
     func addSecond(){
         seconds = seconds + 1
-        updateUIText()
+        updateUI()
+    }
+    func caloriesBurnt (){
+        calories = Int(100 * distance.converted(to: UnitLength.miles).value)
     }
     func startRun(){
         //clear everything out and then go
@@ -144,7 +147,7 @@ class GoOnARunViewController: UIViewController {
         calories = 0
         distance = Measurement(value: 0, unit: UnitLength.meters)
         listOfLocations.removeAll()
-        updateUIText()
+        updateUI()
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
             self.addSecond()
             self.caloriesBurnt()
@@ -158,54 +161,32 @@ class GoOnARunViewController: UIViewController {
         presentFinishedRunAlert()
     }
     
-    func clearUpUI(){
-        seconds = 0
-        distance = Measurement(value: 0, unit: UnitLength.meters)
-        updateUIText()
-    }
     
-    func caloriesBurnt (){
-        calories = Int(100 * distance.converted(to: UnitLength.miles).value)
-    }
     func presentFinishedRunAlert(){
         let alert = UIAlertController(title: "Run complete congratulations!", message: "what would you like to do with this run?", preferredStyle: .actionSheet)
-        let saveAction = UIAlertAction(title: "Save This Run", style: .default) { (_) in
-            let distanceAsDouble:Double = self.distance.converted(to: UnitLength.miles).value
-            let elevationAsDouble:Double = self.elevation.converted(to: UnitLength.feet).value
-            CloudController.shared.addRunAndPushToCloud(with: distanceAsDouble, elevation: elevationAsDouble, calories: self.calories, totalTime: Double(self.seconds), coreLocations: self.listOfLocations, completion: { (success) in
-                if success{
-                    print("saved")
-                    DispatchQueue.main.async {
-                        self.clearUpUI()
-                    }
-                } else {
-                    print("error")
-                }
-            })
-            
-        }
+        
         let deleteAction = UIAlertAction(title: "Delete This Run", style: .destructive) { (_) in
             //TODO: - present a alert that double checks if this is really what they want
-            DispatchQueue.main.async {
-                self.clearUpUI()
+            
+        }
+        let saveAction = UIAlertAction(title: "Save", style: .default) { (_) in
+            guard let opponentsRun = self.opponentRun else {return}
+            CloudController.shared.completeTheChallenge(opponentsRun: opponentsRun, distance: self.distance.value, elevation: self.elevation.value, calories: self.calories, totalTime: Double(self.seconds), coreLocations: self.listOfLocations) { (success) in
+                if success{
+                    print("donesies")
+                }
             }
         }
-        let saveAndSendAction = UIAlertAction(title: "Save my run and challenge someone", style: .default) { (_) in
-        
-        }
         alert.addAction(saveAction)
-        
-        alert.addAction(saveAndSendAction)
         
         alert.addAction(deleteAction)
         self.present(alert, animated: true)
     }
     
-    // MARK: - EXTENSIONS
-    
+    //MARK: - HELPER FUNCTIONS
     
 }
-extension GoOnARunViewController: CLLocationManagerDelegate{
+extension ChallengeAcceptedViewController: CLLocationManagerDelegate{
     //this will continually feed me new locations
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         for location in locations {

@@ -66,7 +66,7 @@ class RunDetailViewController: UIViewController {
     @IBAction func challengeSomeOneButtonTapped(_ sender: Any) {
         if userIsAcceptingChallenge{
             performSegue(withIdentifier: "challengeAccepted", sender: nil)
-        }
+        } else 
         if !isAChallenge{
             performSegue(withIdentifier: "toChallenge", sender: nil)
         }
@@ -147,10 +147,10 @@ class RunDetailViewController: UIViewController {
                 destination.runToSend = run
             }
         } else if segue.identifier == "challengeAccepted"{
-            if let destination = segue.destination as? GoOnARunViewController{
+            if let destination = segue.destination as? ChallengeAcceptedViewController{
                 guard let run = landingPadOpponentRun else {return}
-                destination.isAcceptingChallenge = true
-                destination.landingPadOpponentRun = run
+                
+                destination.opponentRun = run
             }
         }
     }

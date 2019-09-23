@@ -394,54 +394,40 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="67" translatesAutoresizingMaskIntoConstraints="NO" id="ZXK-Jf-Bj1">
-                                <rect key="frame" x="41.5" y="211.5" width="331" height="311"/>
+                                <rect key="frame" x="154" y="252" width="106" height="311"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UserName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="usI-tx-9bc">
-                                        <rect key="frame" x="0.0" y="0.0" width="331" height="27.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="106" height="27.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <color key="textColor" name="SilverFox"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wLU-Yw-97n">
-                                        <rect key="frame" x="0.0" y="94.5" width="331" height="27.5"/>
+                                        <rect key="frame" x="33" y="94.5" width="40" height="27.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <color key="textColor" name="SilverFox"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weight" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y9L-QW-P90">
-                                        <rect key="frame" x="0.0" y="189" width="331" height="27.5"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="PKF-4Y-S31"/>
-                                        </constraints>
+                                        <rect key="frame" x="17.5" y="189" width="71" height="27.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <color key="textColor" name="SilverFox"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Height" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S2B-Lz-Hrv">
-                                        <rect key="frame" x="0.0" y="283.5" width="331" height="27.5"/>
+                                        <rect key="frame" x="19.5" y="283.5" width="67" height="27.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <color key="textColor" name="SilverFox"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstItem="usI-tx-9bc" firstAttribute="width" secondItem="ZXK-Jf-Bj1" secondAttribute="width" id="2LZ-HK-nON"/>
-                                    <constraint firstItem="usI-tx-9bc" firstAttribute="height" secondItem="wLU-Yw-97n" secondAttribute="height" id="5o0-nL-Rhi"/>
-                                    <constraint firstItem="S2B-Lz-Hrv" firstAttribute="width" secondItem="ZXK-Jf-Bj1" secondAttribute="width" id="HPx-nf-5BM"/>
-                                    <constraint firstItem="y9L-QW-P90" firstAttribute="width" secondItem="ZXK-Jf-Bj1" secondAttribute="width" id="fdp-Zg-O89"/>
-                                    <constraint firstItem="S2B-Lz-Hrv" firstAttribute="height" secondItem="y9L-QW-P90" secondAttribute="height" id="iKH-D3-Pep"/>
-                                    <constraint firstItem="wLU-Yw-97n" firstAttribute="width" secondItem="ZXK-Jf-Bj1" secondAttribute="width" id="p9r-4L-60K"/>
-                                    <constraint firstItem="wLU-Yw-97n" firstAttribute="height" secondItem="y9L-QW-P90" secondAttribute="height" id="ueu-eD-rUg"/>
-                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" name="DeepMatteGrey"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="ZXK-Jf-Bj1" firstAttribute="centerX" secondItem="DFe-ap-xeo" secondAttribute="centerX" id="8fl-d2-DSF"/>
-                            <constraint firstItem="ZXK-Jf-Bj1" firstAttribute="height" secondItem="DFe-ap-xeo" secondAttribute="height" multiplier="0.5" id="ICz-Ir-eaH"/>
-                            <constraint firstItem="ZXK-Jf-Bj1" firstAttribute="centerY" secondItem="DFe-ap-xeo" secondAttribute="centerY" id="q9M-Gg-ofw"/>
-                            <constraint firstItem="ZXK-Jf-Bj1" firstAttribute="width" secondItem="DFe-ap-xeo" secondAttribute="width" multiplier="0.8" id="vtd-es-fuw"/>
+                            <constraint firstItem="ZXK-Jf-Bj1" firstAttribute="centerY" secondItem="DFe-ap-xeo" secondAttribute="centerY" id="3Nc-D6-SWv"/>
+                            <constraint firstItem="ZXK-Jf-Bj1" firstAttribute="centerX" secondItem="DFe-ap-xeo" secondAttribute="centerX" id="9r0-ZA-zwH"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="DFe-ap-xeo"/>
                         <connections>
@@ -770,7 +756,7 @@
                     <viewLayoutGuide key="safeArea" id="HCA-Gp-QTy"/>
                 </stackView>
             </objects>
-            <point key="canvasLocation" x="-513.04347826086962" y="1457.8125"/>
+            <point key="canvasLocation" x="-878" y="1458"/>
         </scene>
         <!--Run Detail View Controller-->
         <scene sceneID="35P-WZ-oe2">
@@ -949,36 +935,35 @@
                         <outlet property="timePointsLabel" destination="3pu-Ey-gQD" id="h2A-V5-VkY"/>
                         <outlet property="usernameLabel" destination="k3v-Ff-9qb" id="voT-at-e5a"/>
                         <segue destination="Zw1-Lx-K1z" kind="show" identifier="toChallenge" id="lYb-BP-OSZ"/>
-                        <segue destination="LXK-GV-JLw" kind="show" id="i8f-ya-Pvy"/>
-                        <segue destination="fso-eb-Vds" kind="show" identifier="challengeAccepted" id="jDn-w5-4xi"/>
+                        <segue destination="cqA-64-aGb" kind="show" identifier="challengeAccepted" id="Z0s-Cn-jGT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ll0-zA-vGZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-672" y="2198"/>
+            <point key="canvasLocation" x="-752" y="2216"/>
         </scene>
         <!--Go On A Run-->
         <scene sceneID="iRO-tV-ghZ">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="LXK-GV-JLw" customClass="GoOnARunViewController" customModule="RunTogether1_5" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="currentContext" id="LXK-GV-JLw" customClass="GoOnARunViewController" customModule="RunTogether1_5" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mH8-bR-4VC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="759"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ngD-Wr-yjs">
-                                <rect key="frame" x="20.5" y="108" width="373" height="414.5"/>
+                                <rect key="frame" x="20.5" y="76" width="373" height="418.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="yGa-Hz-jbh">
-                                        <rect key="frame" x="0.0" y="0.0" width="373" height="131.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="373" height="133"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LIK-ZO-r7B">
-                                                <rect key="frame" x="0.0" y="0.0" width="251" height="131.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="251" height="133"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <color key="textColor" name="SilverFox"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calories" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="quR-ov-YPM">
-                                                <rect key="frame" x="261" y="0.0" width="112" height="131.5"/>
+                                                <rect key="frame" x="261" y="0.0" width="112" height="133"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <color key="textColor" name="SilverFox"/>
                                                 <nil key="highlightedColor"/>
@@ -989,22 +974,22 @@
                                         </constraints>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tsW-XY-ZTe">
-                                        <rect key="frame" x="0.0" y="141.5" width="373" height="131.5"/>
+                                        <rect key="frame" x="0.0" y="143" width="373" height="132.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <color key="textColor" name="SilverFox"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="NQT-gH-Cv8">
-                                        <rect key="frame" x="0.0" y="283" width="373" height="131.5"/>
+                                        <rect key="frame" x="0.0" y="285.5" width="373" height="133"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Elevation Gained" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K0h-1p-xcj">
-                                                <rect key="frame" x="0.0" y="0.0" width="123" height="131.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="123" height="133"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <color key="textColor" name="SilverFox"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pace" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5it-hw-m73">
-                                                <rect key="frame" x="138" y="0.0" width="235" height="131.5"/>
+                                                <rect key="frame" x="138" y="0.0" width="235" height="133"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <color key="textColor" name="SilverFox"/>
                                                 <nil key="highlightedColor"/>
@@ -1025,7 +1010,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YvO-kL-ATk">
-                                <rect key="frame" x="62" y="580" width="290" height="60"/>
+                                <rect key="frame" x="62" y="552" width="290" height="60"/>
                                 <color key="backgroundColor" name="areYaYellow"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="FMS-PT-xI7"/>
@@ -1068,7 +1053,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CFw-s4-XVH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="190" y="1458"/>
+            <point key="canvasLocation" x="189.85507246376812" y="1457.8125"/>
         </scene>
         <!--MyFriends-->
         <scene sceneID="aZX-Q0-1CC">
@@ -1249,7 +1234,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="4kc-CH-tqS"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="HiV-1l-WD3">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" name="DeepMatteGrey"/>
@@ -1303,6 +1288,134 @@
             </objects>
             <point key="canvasLocation" x="864" y="694"/>
         </scene>
+        <!--Go On A Run-->
+        <scene sceneID="Dyd-Y3-eJX">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="cqA-64-aGb" customClass="ChallengeAcceptedViewController" customModule="RunTogether1_5" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SjZ-Ia-yKK">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="759"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="UhC-im-J8O">
+                                <rect key="frame" x="20.5" y="76" width="373" height="418.5"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="TBK-LM-Sie">
+                                        <rect key="frame" x="0.0" y="0.0" width="373" height="97"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vKf-cY-FMh">
+                                                <rect key="frame" x="0.0" y="0.0" width="251" height="97"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                                <color key="textColor" name="SilverFox"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calories" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OsI-om-yoi">
+                                                <rect key="frame" x="261" y="0.0" width="112" height="97"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                                <color key="textColor" name="SilverFox"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="OsI-om-yoi" firstAttribute="width" secondItem="TBK-LM-Sie" secondAttribute="width" multiplier="0.3" id="Ivq-9G-gVT"/>
+                                        </constraints>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ip-lE-dzn">
+                                        <rect key="frame" x="0.0" y="107" width="373" height="97.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                        <color key="textColor" name="SilverFox"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="X7a-YQ-eUR">
+                                        <rect key="frame" x="0.0" y="214.5" width="373" height="97"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Elevation Gained" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dVY-QT-H6E">
+                                                <rect key="frame" x="0.0" y="0.0" width="123" height="97"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                                <color key="textColor" name="SilverFox"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pace" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gzg-jb-MzN">
+                                                <rect key="frame" x="138" y="0.0" width="235" height="97"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                                <color key="textColor" name="SilverFox"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="dVY-QT-H6E" firstAttribute="width" secondItem="X7a-YQ-eUR" secondAttribute="width" multiplier="0.33" id="2uz-K3-mza"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="EDC-00-RRL">
+                                        <rect key="frame" x="0.0" y="321.5" width="373" height="97"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time to Beat:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f8T-YO-Iaf">
+                                                <rect key="frame" x="0.0" y="0.0" width="181.5" height="97"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <color key="textColor" name="SilverFox"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Challenger:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8NX-uZ-Yez">
+                                                <rect key="frame" x="191.5" y="0.0" width="181.5" height="97"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <color key="textColor" name="SilverFox"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="2ip-lE-dzn" firstAttribute="leading" secondItem="UhC-im-J8O" secondAttribute="leading" id="BJe-Lh-Je3"/>
+                                    <constraint firstItem="X7a-YQ-eUR" firstAttribute="leading" secondItem="UhC-im-J8O" secondAttribute="leading" id="Mtq-wY-j2E"/>
+                                    <constraint firstItem="EDC-00-RRL" firstAttribute="width" secondItem="UhC-im-J8O" secondAttribute="width" id="SsK-Nf-KRG"/>
+                                    <constraint firstItem="TBK-LM-Sie" firstAttribute="leading" secondItem="UhC-im-J8O" secondAttribute="leading" id="aIo-UT-WnV"/>
+                                    <constraint firstAttribute="trailing" secondItem="2ip-lE-dzn" secondAttribute="trailing" id="dFM-RK-Hba"/>
+                                    <constraint firstAttribute="trailing" secondItem="TBK-LM-Sie" secondAttribute="trailing" id="kzm-JT-WTQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="X7a-YQ-eUR" secondAttribute="trailing" id="thb-jm-6IV"/>
+                                </constraints>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ncl-U2-L9v">
+                                <rect key="frame" x="62" y="552" width="290" height="60"/>
+                                <color key="backgroundColor" name="areYaYellow"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="1dW-Gc-dk3"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <state key="normal" title="Start/Stop">
+                                    <color key="titleColor" name="DeepMatteGrey"/>
+                                </state>
+                                <connections>
+                                    <action selector="startStopButtonTapped:" destination="cqA-64-aGb" eventType="touchUpInside" id="RIX-fk-KrH"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="UhC-im-J8O" firstAttribute="centerY" secondItem="eos-IC-MhN" secondAttribute="centerY" multiplier="0.7" id="R5u-nx-XkJ"/>
+                            <constraint firstItem="ncl-U2-L9v" firstAttribute="top" secondItem="UhC-im-J8O" secondAttribute="bottom" constant="57.5" id="TJB-cb-zLk"/>
+                            <constraint firstItem="ncl-U2-L9v" firstAttribute="centerX" secondItem="eos-IC-MhN" secondAttribute="centerX" id="Xw0-co-nZr"/>
+                            <constraint firstItem="UhC-im-J8O" firstAttribute="top" secondItem="eos-IC-MhN" secondAttribute="top" constant="20" id="aAM-du-lWz"/>
+                            <constraint firstItem="UhC-im-J8O" firstAttribute="width" secondItem="SjZ-Ia-yKK" secondAttribute="width" multiplier="0.9" id="csE-3D-YrK"/>
+                            <constraint firstItem="ncl-U2-L9v" firstAttribute="width" secondItem="SjZ-Ia-yKK" secondAttribute="width" multiplier="0.7" id="gPZ-7k-Zip"/>
+                            <constraint firstItem="UhC-im-J8O" firstAttribute="centerX" secondItem="eos-IC-MhN" secondAttribute="centerX" id="pbo-e8-scL"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="eos-IC-MhN"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Go On A Run" id="7kW-cF-EgW"/>
+                    <connections>
+                        <outlet property="caloriesLabel" destination="OsI-om-yoi" id="d4a-ry-Jgu"/>
+                        <outlet property="challengerLabel" destination="8NX-uZ-Yez" id="26I-6i-vSx"/>
+                        <outlet property="distanceLabel" destination="2ip-lE-dzn" id="AAh-mH-AdM"/>
+                        <outlet property="elevationGained" destination="dVY-QT-H6E" id="5HX-bB-Pj8"/>
+                        <outlet property="paceLabel" destination="gzg-jb-MzN" id="FPn-qm-dtw"/>
+                        <outlet property="startStopButton" destination="ncl-U2-L9v" id="1dM-1H-4Ag"/>
+                        <outlet property="timeLabel" destination="vKf-cY-FMh" id="IdD-1z-lKc"/>
+                        <outlet property="timeToBeatLabel" destination="f8T-YO-Iaf" id="IVd-sG-4qa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qgm-e4-ucB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-752" y="2984"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Runicon" width="26.666666030883789" height="26.666666030883789"/>
@@ -1322,9 +1435,7 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jDn-w5-4xi"/>
         <segue reference="ZYh-jL-z0D"/>
-        <segue reference="9AV-dC-4Ga"/>
-        <segue reference="hNl-jx-9bH"/>
+        <segue reference="Dbd-pf-KME"/>
     </inferredMetricsTieBreakers>
 </document>

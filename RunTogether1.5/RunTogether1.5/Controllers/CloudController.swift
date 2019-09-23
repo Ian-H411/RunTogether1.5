@@ -142,6 +142,42 @@ class CloudController {
         publicDatabase.add(op)
     }
     
+    func completeTheChallenge(opponentsRun:Run, distance: Double, elevation: Double, calories: Int, totalTime: Double, coreLocations: [CLLocation], completion: @escaping (Bool) -> Void){
+        guard let user = user else {completion(false);print("user not found");return}
+        let myRun = Run(distance: distance, elevation: elevation, calories: calories, totalTime: totalTime, coreLocationPoints: coreLocations, user: user)
+        myRun.competingRun = opponentsRun
+        opponentsRun.competingRun = myRun
+        //first total up the points
+        calculatePoints(run1: opponentsRun, run2: myRun)
+        //save my run
+        if var userReferences = user.runsReferenceList{
+            userReferences.append(CKRecord.Reference(recordID: myRun.ckRecordId, action: .none))
+        } else {
+            user.runsReferenceList = [CKRecord.Reference(recordID: myRun.ckRecordId, action: .none)]
+        }
+        guard let recordUser = CKRecord(user: user) else {return}
+        guard let recordOpponentRun = CKRecord(run: opponentsRun) else {return}
+        let operation = CKModifyRecordsOperation(recordsToSave: [recordUser,recordOpponentRun], recordIDsToDelete: nil)
+        operation.savePolicy = .changedKeys
+        operation.queuePriority = .high
+        guard let recordToPush = CKRecord(run: myRun) else {return}
+        //save it
+        publicDatabase.save(recordToPush) { (recordToSave, error) in
+            if let error = error {
+                //fingers crossed there wasnt an error
+                print("there was an error in \(#function) :\(error) : \(error.localizedDescription)")
+                //TODO: - Find a way to save run and upload later in case of lack of connection??
+                //TODO: - also if fails here tell user
+                completion(false)
+                return
+            }
+            guard let recordToSave = recordToSave else {completion(false);return}
+            guard let runToSave = Run(record: recordToSave, user: user) else {completion(false);return}
+            user.runs.append(runToSave)
+            self.publicDatabase.add(operation)
+            completion(true)
+                    }
+    }
     
     
     
@@ -353,6 +389,6 @@ class CloudController {
             }
         }
     }
-
+    
     
 }

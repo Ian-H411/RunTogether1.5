@@ -20,6 +20,7 @@
 		254661F32322F4D8001BAE42 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 254661F22322F4D7001BAE42 /* CloudKit.framework */; };
 		254661F52322F4F3001BAE42 /* Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254661F42322F4F3001BAE42 /* Run.swift */; };
 		258BEF612339294E009B5801 /* ProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258BEF602339294E009B5801 /* ProfileDetailViewController.swift */; };
+		258CEF5D233973F200EAE21C /* ChallengeAcceptedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258CEF5C233973F200EAE21C /* ChallengeAcceptedViewController.swift */; };
 		25A65F29232EED5C00B2D64A /* RunHistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A65F28232EED5C00B2D64A /* RunHistoryTableViewController.swift */; };
 		25A65F2B232FCCF100B2D64A /* RunTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A65F2A232FCCF100B2D64A /* RunTableViewCell.swift */; };
 		25AA4B4423229DE00051C4F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AA4B4323229DE00051C4F9 /* AppDelegate.swift */; };
@@ -49,6 +50,7 @@
 		254661F22322F4D7001BAE42 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		254661F42322F4F3001BAE42 /* Run.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Run.swift; sourceTree = "<group>"; };
 		258BEF602339294E009B5801 /* ProfileDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewController.swift; sourceTree = "<group>"; };
+		258CEF5C233973F200EAE21C /* ChallengeAcceptedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeAcceptedViewController.swift; sourceTree = "<group>"; };
 		25A65F28232EED5C00B2D64A /* RunHistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunHistoryTableViewController.swift; sourceTree = "<group>"; };
 		25A65F2A232FCCF100B2D64A /* RunTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunTableViewCell.swift; sourceTree = "<group>"; };
 		25AA4B4023229DE00051C4F9 /* RunTogether1.5.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RunTogether1.5.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -169,6 +171,7 @@
 				251580432333DE490011B8B7 /* FriendsTableViewController.swift */,
 				25C9BB0C2330334C00989DE2 /* LoadingViewController.swift */,
 				25B10A4C23354E2500F1F72A /* RunDetailViewController.swift */,
+				258CEF5C233973F200EAE21C /* ChallengeAcceptedViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -290,6 +293,7 @@
 				25AA4B4423229DE00051C4F9 /* AppDelegate.swift in Sources */,
 				25A65F29232EED5C00B2D64A /* RunHistoryTableViewController.swift in Sources */,
 				254661F52322F4F3001BAE42 /* Run.swift in Sources */,
+				258CEF5D233973F200EAE21C /* ChallengeAcceptedViewController.swift in Sources */,
 				251FB0072327E80700AD991B /* UnitExtensions.swift in Sources */,
 				25DC5CF12332E5CC005C44A2 /* CloudController.swift in Sources */,
 				25C9BB0D2330334C00989DE2 /* LoadingViewController.swift in Sources */,
