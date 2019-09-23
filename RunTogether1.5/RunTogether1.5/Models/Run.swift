@@ -145,7 +145,9 @@ extension CKRecord{
         self.setValue(run.timePoints, forKey: RunKeys.timePointsKey)
         self.setValue(run.calories, forKey: RunKeys.calorieKey)
         self.setValue(run.elevationGained, forKey: RunKeys.elevationGained)
+        self.setValue(run.opponentRunReference, forKey: RunKeys.opposingRunReferenceKey)
         guard let reciever = run.sendTo else {return}
         self.setValue(reciever, forKey: RunKeys.sendToKey)
+       
     }
 }
