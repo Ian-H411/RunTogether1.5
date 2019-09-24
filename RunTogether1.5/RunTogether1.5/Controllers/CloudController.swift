@@ -178,7 +178,22 @@ class CloudController {
             completion(true)
                     }
     }
+    //MARK: - REPORTING FUNCTIONS
     
+    
+    func blockUser(userToBlock:User){
+        guard let user = user else {return}
+        if var userToBlockList = userToBlock.blockedByReferenceList{
+           userToBlockList.append(CKRecord.Reference(recordID: user.recordID, action: .none))
+        } else {
+            userToBlock.blockedByReferenceList = [CKRecord.Reference(recordID: user.recordID, action: .none)]
+        }
+        guard let recordOfBlockedUser = CKRecord(user: userToBlock) else {return}
+        let operation = CKModifyRecordsOperation(recordsToSave: [recordOfBlockedUser], recordIDsToDelete: nil)
+        operation.savePolicy = .changedKeys
+        operation.queuePriority = .high
+        publicDatabase.add(operation)
+    }
     
     
     

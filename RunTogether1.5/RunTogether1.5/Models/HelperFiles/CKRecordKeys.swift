@@ -69,6 +69,9 @@ struct UserKeys{
     static let userReferenceKey = "UserID"
     
     static let runsReferenceList = "Runs"
+    
+    static let blockedByUsers = "BlockedByList"
+    
 }
 
 struct GenderKeys {

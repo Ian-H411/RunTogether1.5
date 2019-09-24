@@ -43,6 +43,8 @@ class User: Equatable{
     
     var runsReferenceList: [CKRecord.Reference]?
     
+    var blockedByReferenceList: [CKRecord.Reference]?
+    
     var userReference: String
     
     var gender: String
@@ -124,6 +126,11 @@ extension CKRecord {
         if let runsReferences = user.runsReferenceList{
             if !runsReferences.isEmpty{
                 self.setValue(user.runsReferenceList, forKey: UserKeys.runsReferenceList)
+            }
+        }
+        if let blockedByReferences = user.blockedByReferenceList{
+            if !blockedByReferences.isEmpty{
+                self.setValue(user.blockedByReferenceList, forKey: UserKeys.blockedByUsers)
             }
         }
     }
