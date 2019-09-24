@@ -21,7 +21,8 @@ class Run {
     
     // specific timestamp for when the user hit the start button
     var date: Date {
-        return Date()
+         let date = coreLocationPoints[0].timestamp
+        return date
     }
     
     // amount of distance run by the racer in miles
@@ -85,6 +86,7 @@ class Run {
         self.ckRecordId = ckRecordId
         self.calories = calories
         self.elevationGained = elevation
+        
         
     }
     

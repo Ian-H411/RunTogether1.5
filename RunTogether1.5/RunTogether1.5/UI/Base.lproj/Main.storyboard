@@ -22,10 +22,10 @@
                                     <constraint firstAttribute="width" secondItem="KwS-b8-emK" secondAttribute="height" multiplier="1:1" id="xcO-T8-vmm"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Warming Up" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dnk-Ep-MYR">
-                                <rect key="frame" x="0.0" y="154" width="414" height="60"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Warming Up" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dnk-Ep-MYR">
+                                <rect key="frame" x="0.0" y="134" width="414" height="80"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="Wt5-T3-Q3M"/>
+                                    <constraint firstAttribute="height" constant="80" id="Wt5-T3-Q3M"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="29"/>
                                 <color key="textColor" name="SilverFox"/>

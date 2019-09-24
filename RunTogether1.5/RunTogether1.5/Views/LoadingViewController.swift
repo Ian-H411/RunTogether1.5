@@ -19,10 +19,16 @@ class LoadingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         updateUI()
+        if Reachability.isConnectedToNetwork(){
         retrieveUser()
+        } else {
+            warmingUpLabel.text = "Check your internet then \n try again"
+        }
         
     }
+    
     
     func updateUI(){
         DispatchQueue.main.async {
@@ -41,6 +47,11 @@ class LoadingViewController: UIViewController {
             }
         }
         
+    }
+    func notConnectedToInternetAlert(){
+        let alertController = UIAlertController(title: "Connection Error", message: "are you connected to the internet? RunTogether requires an internet connection", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "okay", style: .default, handler: nil))
+        self.present(alertController, animated: true)
     }
 }
     extension UIView {

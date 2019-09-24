@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		250B77C5233AB88000CD6C04 /* ReachAbility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250B77C4233AB88000CD6C04 /* ReachAbility.swift */; };
 		251580442333DE490011B8B7 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251580432333DE490011B8B7 /* FriendsTableViewController.swift */; };
 		25158047233421420011B8B7 /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25158046233421420011B8B7 /* FriendTableViewCell.swift */; };
 		251FAFF123241C8200AD991B /* CKRecordKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251FAFF023241C8200AD991B /* CKRecordKeys.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		250B77C4233AB88000CD6C04 /* ReachAbility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachAbility.swift; sourceTree = "<group>"; };
 		251580432333DE490011B8B7 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		25158046233421420011B8B7 /* FriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
 		251FAFF023241C8200AD991B /* CKRecordKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKRecordKeys.swift; sourceTree = "<group>"; };
@@ -92,7 +94,6 @@
 			children = (
 				251FB0012327DE9400AD991B /* LocationManager.swift */,
 				251FB0042327E5DA00AD991B /* ConverterManager.swift */,
-				251FB0062327E80700AD991B /* UnitExtensions.swift */,
 			);
 			path = "View Helpers";
 			sourceTree = "<group>";
@@ -195,6 +196,8 @@
 			isa = PBXGroup;
 			children = (
 				251FAFF023241C8200AD991B /* CKRecordKeys.swift */,
+				251FB0062327E80700AD991B /* UnitExtensions.swift */,
+				250B77C4233AB88000CD6C04 /* ReachAbility.swift */,
 			);
 			path = HelperFiles;
 			sourceTree = "<group>";
@@ -282,6 +285,7 @@
 				251FAFFA2324618000AD991B /* GoOnARunViewController.swift in Sources */,
 				251FAFF32324216A00AD991B /* User.swift in Sources */,
 				251FB0022327DE9400AD991B /* LocationManager.swift in Sources */,
+				250B77C5233AB88000CD6C04 /* ReachAbility.swift in Sources */,
 				251FB0052327E5DA00AD991B /* ConverterManager.swift in Sources */,
 				258BEF612339294E009B5801 /* ProfileDetailViewController.swift in Sources */,
 				25F19EBF233817410083BF5E /* CreateProfileDynamicallyViewController.swift in Sources */,

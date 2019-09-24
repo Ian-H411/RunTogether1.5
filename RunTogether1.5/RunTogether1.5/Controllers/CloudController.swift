@@ -257,10 +257,11 @@ class CloudController {
                 }
             }
             let runs:[Run] = records.compactMap({Run(record: $0, user: user)})
-            user.runs = runs
+            user.runs = self.organizeRunsByDate(runs: runs)
+            
             if opposingRunReferences.isEmpty{
-            completion(true)
-            return
+                completion(true)
+                return
             } else {
                 self.retrieveOpposingRuns() { (success) in
                     completion(success)
@@ -291,7 +292,7 @@ class CloudController {
                 runRecordIDs.append(record.recordID)
             }
             let predicate2 = NSPredicate(format: "\(UserKeys.runsReferenceList) CONTAINS %@", argumentArray: runRecordIDs)
-//            let predicate3 = NSPredicate(format: "NOT (\(UserKeys.blockedByUsers) CONTAINS %@)", user.recordID)
+            //            let predicate3 = NSPredicate(format: "NOT (\(UserKeys.blockedByUsers) CONTAINS %@)", user.recordID)
             let compoundpredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate2])
             let query2 = CKQuery(recordType: UserKeys.userObjectKey, predicate: compoundpredicate)
             self.publicDatabase.perform(query2, inZoneWith: nil) { (userRecords, error) in
@@ -307,29 +308,35 @@ class CloudController {
                     usersList.append(newUser)
                 }
                 //now that we have users we can have runs
-
-                for record in recordsOfRuns {
-                    guard let id = record[RunKeys.userReferenceKey] as? CKRecord.Reference else {return}
-                    for userOpponent in usersList{
-                        if id.recordID.recordName == userOpponent.recordID.recordName{
-                            guard let newRun = Run(record: record, user: userOpponent) else {return}
-                            for runOwned in user.runs{
-                                guard let opposingRunKey = record[RunKeys.opposingRunReferenceKey] as?  CKRecord.Reference else {return}
-                                if opposingRunKey.recordID.recordName == runOwned.ckRecordId.recordName{
-                                    runOwned.competingRun = newRun
-                                }
-                            }
-                        }
-                    }
-                    
-                }
                 
+                let isAttached = self.organizeAndAttachOpposingRuns(recordOfRuns: recordsOfRuns, listOfRetrievedUsers: usersList)
+                completion(isAttached)
                 
             }
             
         }
-    
+        
     }
+    func organizeAndAttachOpposingRuns(recordOfRuns:[CKRecord],listOfRetrievedUsers:[User]) -> Bool{
+        guard let owner = user else {return false}
+        for record in recordOfRuns {
+            guard let id = record[RunKeys.userReferenceKey] as? CKRecord.Reference else {return false}
+            for userOpponent in listOfRetrievedUsers{
+                if id.recordID.recordName == userOpponent.recordID.recordName{
+                    guard let newRun = Run(record: record, user: userOpponent) else {return false}
+                    for runOwned in owner.runs{
+                        guard let opposingRunKey = record[RunKeys.opposingRunReferenceKey] as?  CKRecord.Reference else {return false}
+                        if opposingRunKey.recordID.recordName == runOwned.ckRecordId.recordName{
+                            runOwned.competingRun = newRun
+                        }
+                    }
+                }
+            }
+            
+        }
+        return true
+    }
+    
     
     func retrieveRunsToDO(completion: @escaping (Bool) -> Void){
         guard let user = user else {completion(false); print("no user");return}
@@ -358,8 +365,8 @@ class CloudController {
                 return
             }
             let predicate2 = NSPredicate(format: "\(UserKeys.runsReferenceList) CONTAINS %@", argumentArray: recordIDList)
-            let predicate3 = NSPredicate(format: "NOT (\(UserKeys.blockedByUsers) CONTAINS %@)", user.recordID)
-            let compoundpredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate2,predicate3   ])
+//            let predicate3 = NSPredicate(format: "NOT (\(UserKeys.blockedByUsers) CONTAINS %@)", user.recordID)
+            let compoundpredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate2])
             let query2 = CKQuery(recordType: UserKeys.userObjectKey, predicate: compoundpredicate)
             self.publicDatabase.perform(query2, inZoneWith: nil, completionHandler: { (recordsUsers, error) in
                 if let error = error{
@@ -395,7 +402,7 @@ class CloudController {
                         }
                     }
                 }
-                user.runsRecieved = runs
+                user.runsRecieved = self.organizeRunsByDate(runs: runs)
                 completion(true)
                 return
             })
@@ -418,6 +425,10 @@ class CloudController {
                 if !user.friends.contains(friend){
                     user.friends.append(friend)
                 }
+                let friendsSorted = self.organizeUsersAlphabetically(users: user.friends)
+                user.friends = friendsSorted
+                completion(true)
+                return
             }
         }
     }
@@ -451,9 +462,8 @@ class CloudController {
         let predicate1 = NSPredicate(format: "\(UserKeys.nameKey) BEGINSWITH '\(cleanedTerm)'")
         let predicate2 = NSPredicate(format: "\(UserKeys.nameKey) != %@", user.name)
         let predicate3 = NSPredicate(format: "NOT (\(UserKeys.friendReferenceIDKey) CONTAINS %@)", user.recordID)
-        let predicate4 = NSPredicate(format: "NOT(\(UserKeys.blockedByUsers) CONTAINS %@)", user.recordID)
         //add a predicate to not include friends
-        let compPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate1, predicate2, predicate3, predicate4])
+        let compPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate1, predicate2, predicate3])
         let query = CKQuery(recordType: UserKeys.userObjectKey, predicate: compPredicate)
         
         publicDatabase.perform(query, inZoneWith: nil) { (recordResults, error) in
@@ -473,7 +483,7 @@ class CloudController {
                         guard let newUser = User(record: record) else {completion([]); return}
                         foundUsers.append(newUser)
                     }
-                    completion(foundUsers)
+                    completion(self.organizeUsersAlphabetically(users: foundUsers))
                     print("Results found")
                     return
                 }
@@ -518,6 +528,17 @@ class CloudController {
             }
         }
     }
+    //MARK: - MISC HELPERS
+    
+    func organizeRunsByDate(runs:[Run]) -> [Run]{
+        let newArray = runs.sorted(by: { $0.date > $1.date })
+        return newArray
+    }
+    
+    func organizeUsersAlphabetically(users:[User]) -> [User]{
+        return users.sorted(by: { $0.name.lowercased() < $1.name.lowercased() })
+    }
     
     
 }
+

@@ -158,6 +158,9 @@ class ChallengeAcceptedViewController: UIViewController {
     func stopRun(){
         timer?.invalidate()
         locationManager.stopUpdatingLocation()
+        if listOfLocations.isEmpty{
+            return
+        }
         presentFinishedRunAlert()
     }
     
@@ -171,6 +174,7 @@ class ChallengeAcceptedViewController: UIViewController {
         }
         let saveAction = UIAlertAction(title: "Save", style: .default) { (_) in
             guard let opponentsRun = self.opponentRun else {return}
+            
             CloudController.shared.completeTheChallenge(opponentsRun: opponentsRun, distance: self.distance.value, elevation: self.elevation.value, calories: self.calories, totalTime: Double(self.seconds), coreLocations: self.listOfLocations) { (success) in
                 if success{
                     print("donesies")

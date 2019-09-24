@@ -39,9 +39,9 @@ class RunHistoryTableViewController: UITableViewController {
         CloudController.shared.retrieveRuns { (success) in
             if success{
                 DispatchQueue.main.async {
-                    self.tableView.reloadData()
                     self.setUpTotalDistance()
                     self.tableView.tableFooterView = UIView()
+                    self.tableView.reloadData()
                 }
             }
         }
@@ -75,10 +75,13 @@ class RunHistoryTableViewController: UITableViewController {
     @IBAction func runInboxControlTapped(_ sender: Any) {
         if displayInbox{
             displayInbox = false
+            tableView.reloadData()
         } else if !hasFiredRunInbox{
+            self.displayInbox = true
+            tableView.reloadData()
             CloudController.shared.retrieveRunsToDO { (success) in
                 if success{
-                    self.displayInbox = true
+                    
                     self.hasFiredRunInbox = true
                     print("successfullyrecieved")
                     DispatchQueue.main.async {
@@ -88,8 +91,9 @@ class RunHistoryTableViewController: UITableViewController {
             }
         } else {
             displayInbox = true
+            tableView.reloadData()
         }
-        tableView.reloadData()
+        
     }
     
     
