@@ -338,7 +338,6 @@ class CloudController {
         for run in user.runs{
             retrievedRuns.append(CKRecord.Reference(recordID: run.ckRecordId, action: .none))
         }
-//        let filterOutCompleteRunsPredicate = NSPredicate(format: "NOT (%@ CONTAINS \(RunKeys.opposingRunReferenceKey))", argumentArray: retrievedRuns)
         let predicate = NSPredicate(format: "\(RunKeys.sendToKey) == %@", user.recordID)
         let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate])
         let query = CKQuery(recordType: RunKeys.runObjectKey, predicate: compoundPredicate)
@@ -359,8 +358,8 @@ class CloudController {
                 return
             }
             let predicate2 = NSPredicate(format: "\(UserKeys.runsReferenceList) CONTAINS %@", argumentArray: recordIDList)
-//            let predicate3 = NSPredicate(format: "NOT (\(UserKeys.blockedByUsers) CONTAINS %@)", user.recordID)
-            let compoundpredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate2])
+            let predicate3 = NSPredicate(format: "NOT (\(UserKeys.blockedByUsers) CONTAINS %@)", user.recordID)
+            let compoundpredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate2,predicate3   ])
             let query2 = CKQuery(recordType: UserKeys.userObjectKey, predicate: compoundpredicate)
             self.publicDatabase.perform(query2, inZoneWith: nil, completionHandler: { (recordsUsers, error) in
                 if let error = error{
@@ -371,6 +370,13 @@ class CloudController {
                 guard let recordListUsers = recordsUsers else {completion(false); print("record list of users was nil");return}
                 var users:[User] = []
                 for record in recordListUsers{
+                    if let BlockedByList = record[UserKeys.blockedByUsers] as? [CKRecord.Reference]{
+                        for userWhoBlocked in BlockedByList{
+                            if userWhoBlocked.recordID.recordName == user.recordID.recordName{
+                                continue
+                            }
+                        }
+                    }
                     guard let newUser = User(record: record) else {return}
                     users.append(newUser)
                 }
