@@ -48,40 +48,7 @@ class CloudController {
         }
     }
     
-    func searchUsers(searchTerm:String, completion: @escaping ([User]) -> Void){
-        guard let user = user else {completion([]);return}
-        let cleanedTerm = searchTerm
-        let predicate1 = NSPredicate(format: "\(UserKeys.nameKey) BEGINSWITH '\(cleanedTerm)'")
-        let predicate2 = NSPredicate(format: "\(UserKeys.nameKey) != %@", user.name)
-        let predicate3 = NSPredicate(format: "NOT (\(UserKeys.friendReferenceIDKey) CONTAINS %@)", user.recordID)
-        //add a predicate to not include friends
-        let compPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate1, predicate2, predicate3])
-        let query = CKQuery(recordType: UserKeys.userObjectKey, predicate: compPredicate)
-        
-        publicDatabase.perform(query, inZoneWith: nil) { (recordResults, error) in
-            if let error = error {
-                print("there was an error in \(#function) :\(error) : \(error.localizedDescription)")
-                completion([])
-                return
-            } else {
-                guard let unwrappedRecords = recordResults else {completion([]); return}
-                if unwrappedRecords.isEmpty{
-                    completion([])
-                    print("no records found")
-                    return
-                } else {
-                    var foundUsers = [User]()
-                    for record in unwrappedRecords{
-                        guard let newUser = User(record: record) else {completion([]); return}
-                        foundUsers.append(newUser)
-                    }
-                    completion(foundUsers)
-                    print("Results found")
-                    return
-                }
-            }
-        }
-    }
+    
     func addRunAndPushToCloud(with distance: Double, elevation: Double, calories: Int, totalTime: Double, coreLocations: [CLLocation], completion: @escaping (Bool) -> Void){
         //unwrap user if no user then yo can run simple as that
         guard let user = user else {return}
@@ -176,18 +143,35 @@ class CloudController {
             user.runs.append(runToSave)
             self.publicDatabase.add(operation)
             completion(true)
-                    }
+        }
     }
     //MARK: - REPORTING FUNCTIONS
     
     
     func blockUser(userToBlock:User){
         guard let user = user else {return}
+        //add to the blocked list
         if var userToBlockList = userToBlock.blockedByReferenceList{
-           userToBlockList.append(CKRecord.Reference(recordID: user.recordID, action: .none))
+            userToBlockList.append(CKRecord.Reference(recordID: user.recordID, action: .none))
         } else {
             userToBlock.blockedByReferenceList = [CKRecord.Reference(recordID: user.recordID, action: .none)]
         }
+        //remove from friendList references and objects
+        if var friendList = userToBlock.friendReferenceList{
+            for i in 0...friendList.count - 1{
+                if friendList[i] == CKRecord.Reference(recordID: user.recordID, action: .none){
+                    friendList.remove(at: i)
+                }
+            }
+        }
+        
+        for i in 0...user.friends.count{
+            if user.friends[i] == userToBlock{
+                user.friends.remove(at: i)
+            }
+        }
+        
+        //and then push to the server
         guard let recordOfBlockedUser = CKRecord(user: userToBlock) else {return}
         let operation = CKModifyRecordsOperation(recordsToSave: [recordOfBlockedUser], recordIDsToDelete: nil)
         operation.savePolicy = .changedKeys
@@ -266,17 +250,98 @@ class CloudController {
                 return
             }
             guard let records = recordList else {completion(false); return}
+            var opposingRunReferences:[CKRecord.Reference] = []
+            for record in records{
+                if let opposingRunKey = record[RunKeys.opposingRunReferenceKey] as? CKRecord.Reference {
+                    opposingRunReferences.append(opposingRunKey)
+                }
+            }
             let runs:[Run] = records.compactMap({Run(record: $0, user: user)})
             user.runs = runs
+            if opposingRunReferences.isEmpty{
             completion(true)
             return
+            } else {
+                self.retrieveOpposingRuns() { (success) in
+                    completion(success)
+                    return
+                }
+            }
         }
+    }
+    
+    func retrieveOpposingRuns(completion: @escaping (Bool) -> Void){
+        guard let user = user else {return}
+        var runIds:[CKRecord.ID] = []
+        for run in user.runs{
+            runIds.append(run.ckRecordId)
+        }
+        let findRunsPredicate = NSPredicate(format: "%@ CONTAINS \(RunKeys.opposingRunReferenceKey)", runIds )
+        let query = CKQuery(recordType: RunKeys.runObjectKey, predicate: findRunsPredicate)
+        publicDatabase.perform(query, inZoneWith: nil) { (records, error) in
+            if let error = error {
+                print("there was an error in \(#function) :\(error) : \(error.localizedDescription)")
+                completion(false)
+                return
+            }
+            //now that weve found the runs we need to grab the users associated with them
+            guard let recordsOfRuns = records else {return}
+            var runRecordIDs:[CKRecord.ID] = []
+            for record in recordsOfRuns{
+                runRecordIDs.append(record.recordID)
+            }
+            let predicate2 = NSPredicate(format: "\(UserKeys.runsReferenceList) CONTAINS %@", argumentArray: runRecordIDs)
+//            let predicate3 = NSPredicate(format: "NOT (\(UserKeys.blockedByUsers) CONTAINS %@)", user.recordID)
+            let compoundpredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate2])
+            let query2 = CKQuery(recordType: UserKeys.userObjectKey, predicate: compoundpredicate)
+            self.publicDatabase.perform(query2, inZoneWith: nil) { (userRecords, error) in
+                if let error = error{
+                    print("there was an error in \(#function) :\(error) : \(error.localizedDescription)")
+                    completion(false)
+                    return
+                }
+                guard let recordListUsers = userRecords else {completion(false); print("record of users was nil"); return}
+                var usersList = [User]()
+                for record in recordListUsers{
+                    guard let newUser = User(record: record) else {return}
+                    usersList.append(newUser)
+                }
+                //now that we have users we can have runs
+
+                for record in recordsOfRuns {
+                    guard let id = record[RunKeys.userReferenceKey] as? CKRecord.Reference else {return}
+                    for userOpponent in usersList{
+                        if id.recordID.recordName == userOpponent.recordID.recordName{
+                            guard let newRun = Run(record: record, user: userOpponent) else {return}
+                            for runOwned in user.runs{
+                                guard let opposingRunKey = record[RunKeys.opposingRunReferenceKey] as?  CKRecord.Reference else {return}
+                                if opposingRunKey.recordID.recordName == runOwned.ckRecordId.recordName{
+                                    runOwned.competingRun = newRun
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+                
+                
+            }
+            
+        }
+    
     }
     
     func retrieveRunsToDO(completion: @escaping (Bool) -> Void){
         guard let user = user else {completion(false); print("no user");return}
+        //make a reference of the runs i already have so i can look up the completed runs and not pull them here
+        var retrievedRuns:[CKRecord.Reference] = []
+        for run in user.runs{
+            retrievedRuns.append(CKRecord.Reference(recordID: run.ckRecordId, action: .none))
+        }
+//        let filterOutCompleteRunsPredicate = NSPredicate(format: "NOT (%@ CONTAINS \(RunKeys.opposingRunReferenceKey))", argumentArray: retrievedRuns)
         let predicate = NSPredicate(format: "\(RunKeys.sendToKey) == %@", user.recordID)
-        let query = CKQuery(recordType: RunKeys.runObjectKey, predicate: predicate)
+        let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate])
+        let query = CKQuery(recordType: RunKeys.runObjectKey, predicate: compoundPredicate)
         publicDatabase.perform(query, inZoneWith: nil) { (records, error) in
             if let error = error{
                 print("there was an error in \(#function) :\(error) : \(error.localizedDescription)")
@@ -294,7 +359,9 @@ class CloudController {
                 return
             }
             let predicate2 = NSPredicate(format: "\(UserKeys.runsReferenceList) CONTAINS %@", argumentArray: recordIDList)
-            let query2 = CKQuery(recordType: UserKeys.userObjectKey, predicate: predicate2)
+//            let predicate3 = NSPredicate(format: "NOT (\(UserKeys.blockedByUsers) CONTAINS %@)", user.recordID)
+            let compoundpredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate2])
+            let query2 = CKQuery(recordType: UserKeys.userObjectKey, predicate: compoundpredicate)
             self.publicDatabase.perform(query2, inZoneWith: nil, completionHandler: { (recordsUsers, error) in
                 if let error = error{
                     print("there was an error in \(#function) :\(error) : \(error.localizedDescription)")
@@ -309,6 +376,9 @@ class CloudController {
                 }
                 var runs = [Run]()
                 for record in recordListRuns{
+                    if let _ = record[RunKeys.opposingRunReferenceKey] as? CKRecord.Reference{
+                        continue
+                    }
                     guard let id = record[RunKeys.userReferenceKey] as? CKRecord.Reference else {return}
                     for user in users{
                         print(id.recordID.recordName)
@@ -347,6 +417,7 @@ class CloudController {
     }
     
     func checkIfUserExists(username:String,completion: @escaping (Bool) -> Void){
+        
         let predicate = NSPredicate(format: "\(UserKeys.nameKey) == %@", username)
         let query = CKQuery(recordType: UserKeys.userObjectKey, predicate: predicate)
         CloudController.shared.publicDatabase.perform(query, inZoneWith: nil) { (records, error) in
@@ -363,6 +434,43 @@ class CloudController {
                 completion(false)
                 print("User exists")
                 return
+            }
+            
+        }
+    }
+    
+    func searchUsers(searchTerm:String, completion: @escaping ([User]) -> Void){
+        guard let user = user else {completion([]);return}
+        let cleanedTerm = searchTerm
+        let predicate1 = NSPredicate(format: "\(UserKeys.nameKey) BEGINSWITH '\(cleanedTerm)'")
+        let predicate2 = NSPredicate(format: "\(UserKeys.nameKey) != %@", user.name)
+        let predicate3 = NSPredicate(format: "NOT (\(UserKeys.friendReferenceIDKey) CONTAINS %@)", user.recordID)
+        let predicate4 = NSPredicate(format: "NOT(\(UserKeys.blockedByUsers) CONTAINS %@)", user.recordID)
+        //add a predicate to not include friends
+        let compPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate1, predicate2, predicate3, predicate4])
+        let query = CKQuery(recordType: UserKeys.userObjectKey, predicate: compPredicate)
+        
+        publicDatabase.perform(query, inZoneWith: nil) { (recordResults, error) in
+            if let error = error {
+                print("there was an error in \(#function) :\(error) : \(error.localizedDescription)")
+                completion([])
+                return
+            } else {
+                guard let unwrappedRecords = recordResults else {completion([]); return}
+                if unwrappedRecords.isEmpty{
+                    completion([])
+                    print("no records found")
+                    return
+                } else {
+                    var foundUsers = [User]()
+                    for record in unwrappedRecords{
+                        guard let newUser = User(record: record) else {completion([]); return}
+                        foundUsers.append(newUser)
+                    }
+                    completion(foundUsers)
+                    print("Results found")
+                    return
+                }
             }
         }
     }

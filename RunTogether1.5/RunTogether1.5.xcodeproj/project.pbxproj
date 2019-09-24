@@ -11,7 +11,6 @@
 		25158047233421420011B8B7 /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25158046233421420011B8B7 /* FriendTableViewCell.swift */; };
 		251FAFF123241C8200AD991B /* CKRecordKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251FAFF023241C8200AD991B /* CKRecordKeys.swift */; };
 		251FAFF32324216A00AD991B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251FAFF22324216A00AD991B /* User.swift */; };
-		251FAFF52324368200AD991B /* RunCloudController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251FAFF42324368200AD991B /* RunCloudController.swift */; };
 		251FAFFA2324618000AD991B /* GoOnARunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251FAFF92324618000AD991B /* GoOnARunViewController.swift */; };
 		251FAFFC232712FC00AD991B /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 251FAFFB232712FC00AD991B /* Colors.xcassets */; };
 		251FB0022327DE9400AD991B /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251FB0012327DE9400AD991B /* LocationManager.swift */; };
@@ -40,7 +39,6 @@
 		25158046233421420011B8B7 /* FriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
 		251FAFF023241C8200AD991B /* CKRecordKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKRecordKeys.swift; sourceTree = "<group>"; };
 		251FAFF22324216A00AD991B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		251FAFF42324368200AD991B /* RunCloudController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunCloudController.swift; sourceTree = "<group>"; };
 		251FAFF92324618000AD991B /* GoOnARunViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoOnARunViewController.swift; sourceTree = "<group>"; };
 		251FAFFB232712FC00AD991B /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		251FB0012327DE9400AD991B /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -179,7 +177,6 @@
 		25AA4B5823229E200051C4F9 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				251FAFF42324368200AD991B /* RunCloudController.swift */,
 				25DC5CF02332E5CC005C44A2 /* CloudController.swift */,
 			);
 			path = Controllers;
@@ -282,7 +279,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				251FAFF52324368200AD991B /* RunCloudController.swift in Sources */,
 				251FAFFA2324618000AD991B /* GoOnARunViewController.swift in Sources */,
 				251FAFF32324216A00AD991B /* User.swift in Sources */,
 				251FB0022327DE9400AD991B /* LocationManager.swift in Sources */,

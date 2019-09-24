@@ -109,6 +109,7 @@ class Run {
         self.consistencyPoints = consistencyPoints
         self.timePoints = timePoints
         self.elevationGained = elevationGained
+       
     }
     init?(record: CKRecord, user: User, opposingRun:Run){
         guard let distance =  record[RunKeys.distanceKey] as? Double,
