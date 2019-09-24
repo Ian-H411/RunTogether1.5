@@ -10,6 +10,9 @@ import UIKit
 
 class ChallengeTableViewController: UITableViewController ,ChallengeTableViewCellDelegate{
     func cellSettingHasChanged(_ sender: ChallengeTableViewCell) {
+        if !Reachability.isConnectedToNetwork(){
+            presentNoInternetAlert()
+        }
         guard let friend = sender.userInCell else {return}
         guard let run = runToSend else {return}
         CloudController.shared.sendARunToAfriend(run: run, friend: friend)
@@ -47,6 +50,13 @@ class ChallengeTableViewController: UITableViewController ,ChallengeTableViewCel
 
         return cell
     }
+    //MARK: - HELPERS
+    
+    func presentNoInternetAlert(){
+          let alertController = UIAlertController(title: "Connection Error", message: "are you connected to the internet? RunTogether requires an internet connection so come back later when you have one!", preferredStyle: .alert)
+          alertController.addAction(UIAlertAction(title: "okay", style: .default, handler: nil))
+          self.present(alertController, animated: true)
+      }
 
 
 }

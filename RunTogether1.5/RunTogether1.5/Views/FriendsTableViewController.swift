@@ -50,9 +50,9 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate, Fr
         findNewFriendsSearchBar.delegate = self
         CloudController.shared.retrieveFriends { (success) in
             if success{
-                
+                DispatchQueue.main.async {
                 self.tableView.reloadData()
-                
+                }
             }
         }
         
@@ -85,22 +85,14 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate, Fr
         return cell
     }
     
-    
-    /*
-     // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-     if editingStyle == .delete {
-     // Delete the row from the data source
-     tableView.deleteRows(at: [indexPath], with: .fade)
-     } else if editingStyle == .insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
+   
     
     
     //MARK: - ACTIONS
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        if !Reachability.isConnectedToNetwork(){
+            presentNoInternetAlert()
+        }
         isInSearchMode = true
         tableView.reloadData()
     }
@@ -124,6 +116,12 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate, Fr
     }
     
     //MARK: - HELPER FUNCTIONS
+    
+    func presentNoInternetAlert(){
+          let alertController = UIAlertController(title: "Connection Error", message: "are you connected to the internet? RunTogether requires an internet connection so come back later when you have one!", preferredStyle: .alert)
+          alertController.addAction(UIAlertAction(title: "okay", style: .default, handler: nil))
+          self.present(alertController, animated: true)
+      }
     
     func updateUI(){
         

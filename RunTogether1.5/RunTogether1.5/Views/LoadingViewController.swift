@@ -48,11 +48,7 @@ class LoadingViewController: UIViewController {
         }
         
     }
-    func notConnectedToInternetAlert(){
-        let alertController = UIAlertController(title: "Connection Error", message: "are you connected to the internet? RunTogether requires an internet connection", preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "okay", style: .default, handler: nil))
-        self.present(alertController, animated: true)
-    }
+    
 }
     extension UIView {
         func rotate360Degrees(duration: CFTimeInterval = 20.0, completionDelegate: AnyObject? = nil) {

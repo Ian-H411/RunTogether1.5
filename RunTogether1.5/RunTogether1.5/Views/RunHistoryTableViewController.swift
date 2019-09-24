@@ -36,6 +36,10 @@ class RunHistoryTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
+        if !Reachability.isConnectedToNetwork(){
+            totalDistanceLabel.text = "No Internet Connection"
+            RacesWonLabel.text = ""
+        }
         CloudController.shared.retrieveRuns { (success) in
             if success{
                 DispatchQueue.main.async {
@@ -130,6 +134,7 @@ class RunHistoryTableViewController: UITableViewController {
         }
         
     }
+  
     
     
     func setUpTotalDistance(){
@@ -140,6 +145,7 @@ class RunHistoryTableViewController: UITableViewController {
         }
         let formattedDistance = Converter.measureMentFormatter(distance: distance)
         totalDistanceLabel.text = "Total Distance Ran: \(formattedDistance)"
+        
     }
     
     // MARK: - Navigation

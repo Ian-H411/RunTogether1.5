@@ -52,9 +52,8 @@ class GoOnARunViewController: UIViewController {
     
     //MARK: - CHALLENGING VARIABLES
     
-    var landingPadOpponentRun:Run?
+    var hasInternetBeenChecked:Bool = false
     
-    var isAcceptingChallenge:Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,6 +67,10 @@ class GoOnARunViewController: UIViewController {
     //MARK: - ACTIONS
     
     @IBAction func startStopButtonTapped(_ sender: Any) {
+        if !Reachability.isConnectedToNetwork(){
+            presentNoInternetAlert()
+            return
+        }
         if isRunning{
             stopRun()
             isRunning = false
@@ -84,6 +87,14 @@ class GoOnARunViewController: UIViewController {
     
     
     //MARK: -Helpers
+    
+    func presentNoInternetAlert(){
+        let alertController = UIAlertController(title: "Connection Error", message: "are you connected to the internet? RunTogether requires an internet connection so come back later when you have one!", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "okay", style: .default, handler: nil))
+        self.present(alertController, animated: true)
+    }
+    
+    
     
     //initial start up only
     
@@ -191,7 +202,7 @@ class GoOnARunViewController: UIViewController {
             }
         }
         let saveAndSendAction = UIAlertAction(title: "Save my run and challenge someone", style: .default) { (_) in
-        
+            
         }
         alert.addAction(saveAction)
         

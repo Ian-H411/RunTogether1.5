@@ -16,7 +16,8 @@ class FriendTableViewCell: UITableViewCell {
     
     @IBOutlet weak var addButton: UIButton!
     
-    @IBOutlet weak var pointsLabel: UILabel!
+    @IBOutlet weak var iconView: UIImageView!
+    
     
     @IBOutlet weak var usernameLabel: UILabel!
     
@@ -48,12 +49,18 @@ extension FriendTableViewCell {
         cardView.layer.shadowOffset = .zero
         cardView.layer.shadowOpacity = 0.5
         cardView.layer.cornerRadius = 5
-        
-        pointsLabel.text = "\(user.totalMiles)"
+        iconView.layer.cornerRadius = 15
+        iconView.layer.masksToBounds = true
+        iconView.layer.shadowColor = UIColor(named: "DeepMatteGrey")!.cgColor
+        iconView.layer.shadowRadius = 5
+        iconView.layer.shadowOffset = .zero
+        iconView.layer.shadowOpacity = 0.5
         userInCell = user
-        usernameLabel.text = user.name
+        usernameLabel.text = "Username: \(user.name)"
+        addButton.layer.cornerRadius = 10
         if !isASearchResult{
-            addButton.isHidden = true
+            addButton.layer.backgroundColor = UIColor(named: "BloodRed")!.cgColor
+            addButton.setTitle("RemoveFriend?", for: .normal)
         }
     }
 }
