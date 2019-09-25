@@ -34,10 +34,12 @@ class FriendTableViewCell: UITableViewCell {
     @IBAction func updateButtonTapped(_ sender: Any) {
         
         delegate?.cellSettingHasChanged(self, wasBlockPressed: false)
-            addButton.setTitle("Friend!", for: .normal)
+            
+        if isASearchResult{
+        addButton.setTitle("Friend!", for: .normal)
         addButton.tintColor = UIColor(named: "areYaYellow")
         addButton.layer.backgroundColor = UIColor(named: "DeepMatteGrey")?.cgColor
-        
+        }
     }
     @IBAction func blockButtonTapped(_ sender: Any) {
         delegate?.cellSettingHasChanged(self, wasBlockPressed: true)
@@ -64,6 +66,9 @@ extension FriendTableViewCell {
         if !isASearchResult{
             addButton.layer.backgroundColor = UIColor(named: "BloodRed")!.cgColor
             addButton.setTitle("RemoveFriend?", for: .normal)
+        } else {
+            addButton.layer.backgroundColor = UIColor(named: "areYaYellow")!.cgColor
+            addButton.setTitle("add friend", for: .normal)
         }
     }
 }

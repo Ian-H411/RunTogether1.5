@@ -64,13 +64,17 @@ class RunHistoryTableViewController: UITableViewController {
         return dataSource.count
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 180
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "runCell", for: indexPath) as? RunTableViewCell else {return UITableViewCell()}
         let run = dataSource[indexPath.row]
         if displayInbox{
             cell.isAChallengeRecieved = true
         }
-        cell.update(run: run)
+        cell.update(runRecieved: run)
         
         return cell
     }

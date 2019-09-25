@@ -27,7 +27,7 @@ class CloudController {
     func createNewUserAndPushWith(name: String, height: Double, weight: Double, age: Int, gender: String,prefersMetric: Bool, completion: @escaping (Bool) -> Void){
         //create a user
         guard let ID = userID else {return}
-        let user = User(name: name, height: height, weight: weight, prefersMetric: prefersMetric, age: age, gender: gender, userReference: ID.recordName)
+        let user = User(name: name, prefersMetric: prefersMetric, age: age, gender: gender, userReference: ID.recordName)
         //convert to a record
         guard let record = CKRecord(user: user) else {return}
         publicDatabase.save(record) { (recordRecieved, error) in
@@ -165,7 +165,7 @@ class CloudController {
             }
         }
         
-        for i in 0...user.friends.count{
+        for i in 0...user.friends.count - 1{
             if user.friends[i] == userToBlock{
                 user.friends.remove(at: i)
             }
@@ -220,6 +220,10 @@ class CloudController {
     func retrieveUserProfile(completion: @escaping (Bool,Error?) -> Void){
         
         guard let userID = userID else {completion(false,nil);print("no user ID"); return}
+        
+        //fake account login uncomment to login under dummy profile
+//        let fakeID = CKRecord.ID(recordName: "HIdummyprofile")
+//        userID = fakeID
         let predicate = NSPredicate(format: "UserReference = %@", userID.recordName)
         let query = CKQuery(recordType: UserKeys.userObjectKey, predicate: predicate)
         
@@ -291,8 +295,7 @@ class CloudController {
             for record in recordsOfRuns{
                 runRecordIDs.append(record.recordID)
             }
-            let predicate2 = NSPredicate(format: "\(UserKeys.runsReferenceList) CONTAINS %@", argumentArray: runRecordIDs)
-            //            let predicate3 = NSPredicate(format: "NOT (\(UserKeys.blockedByUsers) CONTAINS %@)", user.recordID)
+            let predicate2 = NSPredicate(format: "\(UserKeys.friendReferenceIDKey) CONTAINS %@", user.recordID)
             let compoundpredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate2])
             let query2 = CKQuery(recordType: UserKeys.userObjectKey, predicate: compoundpredicate)
             self.publicDatabase.perform(query2, inZoneWith: nil) { (userRecords, error) in
@@ -364,10 +367,9 @@ class CloudController {
                 print("Inbox empty")
                 return
             }
-            let predicate2 = NSPredicate(format: "\(UserKeys.runsReferenceList) CONTAINS %@", argumentArray: recordIDList)
-//            let predicate3 = NSPredicate(format: "NOT (\(UserKeys.blockedByUsers) CONTAINS %@)", user.recordID)
-            let compoundpredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate2])
-            let query2 = CKQuery(recordType: UserKeys.userObjectKey, predicate: compoundpredicate)
+
+            let predicate = NSPredicate(format: "\(UserKeys.friendReferenceIDKey) CONTAINS %@", user.recordID)
+            let query2 = CKQuery(recordType: UserKeys.userObjectKey, predicate: predicate)
             self.publicDatabase.perform(query2, inZoneWith: nil, completionHandler: { (recordsUsers, error) in
                 if let error = error{
                     print("there was an error in \(#function) :\(error) : \(error.localizedDescription)")
@@ -457,11 +459,11 @@ class CloudController {
     }
     
     func searchUsers(searchTerm:String, completion: @escaping ([User]) -> Void){
-        guard let user = user else {completion([]);return}
+        guard let userOwner = user else {completion([]);return}
         let cleanedTerm = searchTerm
         let predicate1 = NSPredicate(format: "\(UserKeys.nameKey) BEGINSWITH '\(cleanedTerm)'")
-        let predicate2 = NSPredicate(format: "\(UserKeys.nameKey) != %@", user.name)
-        let predicate3 = NSPredicate(format: "NOT (\(UserKeys.friendReferenceIDKey) CONTAINS %@)", user.recordID)
+        let predicate2 = NSPredicate(format: "\(UserKeys.nameKey) != %@", userOwner.name)
+        let predicate3 = NSPredicate(format: "NOT (\(UserKeys.friendReferenceIDKey) CONTAINS %@)", userOwner.recordID)
         //add a predicate to not include friends
         let compPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate1, predicate2, predicate3])
         let query = CKQuery(recordType: UserKeys.userObjectKey, predicate: compPredicate)
@@ -478,10 +480,21 @@ class CloudController {
                     print("no records found")
                     return
                 } else {
+                    var tripwire = false
                     var foundUsers = [User]()
                     for record in unwrappedRecords{
+                        if let blockedList = record[UserKeys.blockedByUsers] as? [CKRecord.Reference]{
+                            for blocked in blockedList{
+                                if blocked.recordID.recordName == userOwner.recordID.recordName{
+                                    tripwire = true
+                                }
+                            }
+                        }
+                        if !tripwire{
                         guard let newUser = User(record: record) else {completion([]); return}
                         foundUsers.append(newUser)
+                        }
+                        tripwire = false
                     }
                     completion(self.organizeUsersAlphabetically(users: foundUsers))
                     print("Results found")

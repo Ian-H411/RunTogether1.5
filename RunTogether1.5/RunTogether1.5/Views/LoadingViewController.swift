@@ -19,16 +19,27 @@ class LoadingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        if isICloudContainerAvailable(){
         updateUI()
         if Reachability.isConnectedToNetwork(){
         retrieveUser()
         } else {
             warmingUpLabel.text = "Check your internet then \n try again"
         }
-        
+        } else{
+            warmingUpLabel.text = "Sign into icloud,\n and check that your icloud drive is turned on.  then afterwards try again."
+            warmingUpLabel.font = UIFont(name: "System Bold", size: 23)
+        }
     }
-    
+
+    func isICloudContainerAvailable()->Bool {
+        if let _ = FileManager.default.ubiquityIdentityToken {
+            return true
+        }
+        else {
+            return false
+        }
+    }
     
     func updateUI(){
         DispatchQueue.main.async {
@@ -48,6 +59,13 @@ class LoadingViewController: UIViewController {
         }
         
     }
+    func presentNotConnectedToIcloudAlert(){
+        let alertController = UIAlertController(title: "ICloud Error", message: "it looks like your not signed into icloud, or your icloud drive may be turned off.  check that and then come back later", preferredStyle: .alert)
+        let okayButton = UIAlertAction(title: "Okay", style: .default, handler: nil)
+        alertController.addAction(okayButton)
+        self.present(alertController,animated: true)
+    }
+    
     
 }
     extension UIView {

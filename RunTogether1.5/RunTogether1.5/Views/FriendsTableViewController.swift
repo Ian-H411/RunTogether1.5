@@ -99,15 +99,17 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate, Fr
     
     //MARK: - ACTIONS
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        isInSearchMode = true
         if !Reachability.isConnectedToNetwork(){
             presentNoInternetAlert()
         }
-        isInSearchMode = true
+        
         tableView.reloadData()
     }
     @IBAction func cancelButtonTapped(_ sender: Any) {
         isInSearchMode = false
         findNewFriendsSearchBar.text = ""
+        results.removeAll()
         tableView.reloadData()
         findNewFriendsSearchBar.resignFirstResponder()
     }
@@ -117,6 +119,10 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate, Fr
         let cancelButton = UIAlertAction(title: "Cancel", style: .default, handler: nil)
         let blockButton = UIAlertAction(title: "BLOCK", style: .destructive) { (_) in
             CloudController.shared.blockUser(userToBlock: user)
+            self.isInSearchMode = false
+            self.findNewFriendsSearchBar.text = ""
+            self.results.removeAll()
+            self.tableView.reloadData()
             
         }
         alertcontroller.addAction(blockButton)

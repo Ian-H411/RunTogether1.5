@@ -16,6 +16,7 @@ class ChallengeTableViewController: UITableViewController ,ChallengeTableViewCel
         guard let friend = sender.userInCell else {return}
         guard let run = runToSend else {return}
         CloudController.shared.sendARunToAfriend(run: run, friend: friend)
+        navigationController?.popViewController(animated: true)
     }
     
     var runToSend:Run?

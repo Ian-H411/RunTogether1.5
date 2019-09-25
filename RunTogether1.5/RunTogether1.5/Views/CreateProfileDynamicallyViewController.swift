@@ -14,14 +14,6 @@ class CreateProfileDynamicallyViewController: UIViewController {
     
     @IBOutlet weak var usernameLabel: UILabel!
     
-    @IBOutlet weak var heightLabel: UILabel!
-    
-    @IBOutlet weak var ageLabel: UILabel!
-    
-    @IBOutlet weak var weightLabel: UILabel!
-    
-    @IBOutlet weak var genderLabel: UILabel!
-    
     @IBOutlet weak var measurementLabel: UILabel!
     
     @IBOutlet weak var letsGoButton: UIButton!
@@ -61,66 +53,21 @@ class CreateProfileDynamicallyViewController: UIViewController {
     
     var textFieldstuff:[String] = ["","Customary ","3 Ft 0 In ","16 Years Old ","93 Lbs. ", "Sex Female "]
     
-    var questions:[String] = ["Choose a Username","preffered measurement System?", "Whats your Height?", "How old are you?", "Approxametly how much do you weigh?", "Whats your sex?","Everything look okay?"]
-    var placeHolderPrompts:[String] = ["Username", "Metric/Customary", "Height", "Age", "Weight", "Gender"]
-    
+    var questions:[String] = ["Choose a Username","preffered measurement System?","Everything look okay?"]
+  
     var currentQuestion:String{
         return questions[step]
     }
-    var currentPlaceHolder:String{
-        return placeHolderPrompts[step]
-    }
+
     
     var userNamePicker = [["PLACEHOLDER YOU SHOULD NOT SEE THIS"]]
     
     var measurementStylePicker:[[String]] = [["Customary", "Metric"]]
     
-    var heightStylePicker:[[String]]{
-        if isMetric{
-            var centimeterList:[String] = []
-            for i in 120...203{
-                centimeterList.append("\(i)")
-            }
-            let centemeter = ["CM"]
-            return [centimeterList, centemeter]
-        } else {
-            let footList = ["3","4","5","6","7","8"]
-            let foot = ["Ft"]
-            let inchList = ["0","1","2","3","4","5","6","7","8","9","10","11"]
-            let inch = ["In"]
-            return [footList,foot,inchList,inch]
-        }
-    }
-    
-    var weightStlyePicker:[[String]]{
-        if isMetric{
-            var kilogramList:[String] = []
-            for i in 40...130{
-                kilogramList.append("\(i)")
-            }
-            return [kilogramList,["Kg"]]
-            
-        } else {
-            var poundList:[String] = []
-            for i in 90...285{
-                poundList.append("\(i)")
-            }
-            return [poundList,["Lbs."]]
-        }
-    }
-    
-    var ageStylePicker:[[String]]{
-        var ages:[String] = []
-        for i in 16...80{
-            ages.append("\(i)")
-        }
-        return [ages,["Years Old"]]
-    }
-    
-    var genderStylePicker: [[String]] = [["Sex"],["\(GenderKeys.female)","\(GenderKeys.other)","\(GenderKeys.male)"]]
+   
     
     var currentPickerData:[[String]] {
-        let pickers = [userNamePicker,measurementStylePicker,heightStylePicker,ageStylePicker,weightStlyePicker,genderStylePicker]
+        let pickers = [userNamePicker,measurementStylePicker]
         return pickers[step]
     }
     
@@ -147,10 +94,10 @@ class CreateProfileDynamicallyViewController: UIViewController {
     
     
     @IBAction func goBackButtonTapped(_ sender: Any) {
-       let labelCarousel:[UILabel] = [usernameLabel,measurementLabel, heightLabel,ageLabel,weightLabel,genderLabel]
-       labelCarousel[step - 1].isHidden = true
-       goBackAstep()
-       refreshUI()
+        let labelCarousel:[UILabel] = [usernameLabel,measurementLabel]
+        labelCarousel[step - 1].isHidden = true
+        goBackAstep()
+        refreshUI()
         answerTextField.becomeFirstResponder()
         gobackButton.isHidden = true
     }
@@ -160,8 +107,7 @@ class CreateProfileDynamicallyViewController: UIViewController {
     
     
     @IBAction func letsRunButtonTapped(_ sender: Any) {
-        if !username.isEmpty && height != 0 && weight != 0 && age != 0 && !gender.isEmpty{
-            
+        if !username.isEmpty{
             CloudController.shared.createNewUserAndPushWith(name: self.username, height: Double(self.height), weight: Double(self.weight), age: self.age, gender: self.gender, prefersMetric: self.isMetric) { (success) in
                 if success{
                     DispatchQueue.main.async {
@@ -182,7 +128,7 @@ class CreateProfileDynamicallyViewController: UIViewController {
     func InitialSetUP(){
         answerTextField.becomeFirstResponder()
         answerTextField.text = ""
-        let labelArray: [UILabel] = [usernameLabel,heightLabel,ageLabel,weightLabel,genderLabel,measurementLabel]
+        let labelArray: [UILabel] = [usernameLabel,measurementLabel]
         //first make everything disappear
         for label in labelArray{
             label.isHidden = true
@@ -215,7 +161,7 @@ class CreateProfileDynamicallyViewController: UIViewController {
         
     }
     @objc func backButtonTapped(){
-        let labelCarousel:[UILabel] = [usernameLabel,measurementLabel, heightLabel,ageLabel,weightLabel,genderLabel]
+        let labelCarousel:[UILabel] = [usernameLabel,measurementLabel]
         labelCarousel[step - 1].isHidden = true
         goBackAstep()
         
@@ -245,15 +191,15 @@ class CreateProfileDynamicallyViewController: UIViewController {
                 }
             }
         } else
-        if !answer.isEmpty{
-            addToStep()
-            refreshUI()
-            view.reloadInputViews()
+            if !answer.isEmpty{
+                addToStep()
+                refreshUI()
+                view.reloadInputViews()
         }
     }
     
     func addToStep(){
-        if step < 6 {
+        if step <= 1 {
             step = step + 1
         }
     }
@@ -270,7 +216,7 @@ class CreateProfileDynamicallyViewController: UIViewController {
         if step == 1{
             guard let usernamerecieved = answerTextField.text else {return}
             if username.count == 0{
-            username = usernamerecieved
+                username = usernamerecieved
             }
             usernameLabel.isHidden = false
             answerTextField.text = textFieldstuff[step]
@@ -280,7 +226,7 @@ class CreateProfileDynamicallyViewController: UIViewController {
             picker.reloadAllComponents()
             answerTextField.becomeFirstResponder()
             
-        } else if step == 6{
+        } else if step == 2{
             answerTextField.text = ""
             //congrats review everything and move on
             view.endEditing(true)
@@ -303,7 +249,7 @@ class CreateProfileDynamicallyViewController: UIViewController {
             
             
         }
-        let labelCarousel:[UILabel] = [usernameLabel,measurementLabel, heightLabel,ageLabel,weightLabel,genderLabel]
+        let labelCarousel:[UILabel] = [usernameLabel,measurementLabel]
         if step >= 1 {
             if step == 1 {
                 usernameLabel.text = "Username: \(username)"
@@ -324,7 +270,7 @@ class CreateProfileDynamicallyViewController: UIViewController {
     }
     
     func unhideLabels(){
-        let labelArray: [UILabel] = [usernameLabel,heightLabel,ageLabel,weightLabel,genderLabel,measurementLabel]
+        let labelArray: [UILabel] = [usernameLabel,measurementLabel]
         //first make everything disappear
         for label in labelArray{
             label.isHidden = false
@@ -334,7 +280,7 @@ class CreateProfileDynamicallyViewController: UIViewController {
     }
     
     func rehideLabels(){
-        let labelArray: [UILabel] = [usernameLabel,measurementLabel, heightLabel,ageLabel,weightLabel,genderLabel]
+        let labelArray: [UILabel] = [usernameLabel,measurementLabel]
         //first make everything disappear
         for label in labelArray{
             label.isHidden = true
@@ -381,41 +327,7 @@ extension CreateProfileDynamicallyViewController: UIPickerViewDelegate,UIPickerV
                 isMetric = false
                 measurementLabel.text = "  Customary"
             }
-        } else if step == 2 {
-            heightAsString = finalstring
-            heightLabel.text = "  Height: \(finalstring)"
-            if !isMetric{
-                print("height in customary")
-                print(returnString)
-                guard let feet = Int(returnString[0]) else {return}
-                guard let inches = Int(returnString[4]) else {return}
-                height = (feet * 12) + inches
-                print("\(height) inches")
-            } else {
-                print("height in CM")
-                print(returnString)
-                guard let centimeters = Int(returnString[0]) else {return}
-                height = centimeters
-            }
-        } else if step == 3{
-            ageLabel.text = "  \(finalstring)"
-            guard let ageFound = Int(returnString[0]) else {return}
-            print(ageFound)
-            age = ageFound
-        } else if step == 4 {
-            weightLabel.text = "  \(finalstring)"
-            guard let weightFound = Int(returnString[0]) else {return}
-            weight = weightFound
-        } else if step == 5 {
-            print(returnString)
-            genderLabel.text = "  \(finalstring)"
-            if returnString[2] == "\(GenderKeys.male)"{
-                gender = GenderKeys.male
-            } else if returnString[2] == "\(GenderKeys.female)" {
-                gender = GenderKeys.female
-            } else {
-                gender = GenderKeys.other
-            }
+            
         }
     }
     

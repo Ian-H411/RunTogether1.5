@@ -39,7 +39,7 @@ class ChallengeAcceptedViewController: UIViewController {
     var distanceGoal = Measurement(value: 0, unit: UnitLength.feet)
     
     var hasPassedDistance:Bool{
-        if distanceGoal > distance{
+        if distanceGoal < distance{
             return true
         } else {
             return false
@@ -116,7 +116,7 @@ class ChallengeAcceptedViewController: UIViewController {
         }
         let distanceToDisplay = distanceAsOpponentPreferedMeasurement.converted(to: ownerPreference)
         distanceGoal = distanceAsOpponentPreferedMeasurement.converted(to: UnitLength.feet)
-        challengerLabel.text = "DistanceToRun:\n\(Converter.distance(distanceToDisplay)))"
+        challengerLabel.text = "DistanceToRun:\n\(Converter.distance(distanceToDisplay))"
     }
     
     func updateUI(){
@@ -133,6 +133,9 @@ class ChallengeAcceptedViewController: UIViewController {
         
         
     }
+    
+ 
+    
     
     @IBAction func startStopButtonTapped(_ sender: Any) {
         if isRunning{
@@ -152,7 +155,7 @@ class ChallengeAcceptedViewController: UIViewController {
         }
         
     }
-    
+    //MARK: - HELPER FUNCTIONS
     func presentDistanceNotAchievedAlert(){
         let alert = UIAlertController(title: "Not Quite there", message: "you havent met your distance goal would you like to give up for now?", preferredStyle: .alert)
         let falseStartAction = UIAlertAction(title: "False start let me try again", style: .default) { (_) in
@@ -228,6 +231,10 @@ class ChallengeAcceptedViewController: UIViewController {
             CloudController.shared.completeTheChallenge(opponentsRun: opponentsRun, distance: self.distance.value, elevation: self.elevation.value, calories: self.calories, totalTime: Double(self.seconds), coreLocations: self.listOfLocations) { (success) in
                 if success{
                     print("donesies")
+                    DispatchQueue.main.async {
+                     
+                    self.navigationController? .popViewController(animated: true)
+                    }
                 }
             }
         }
@@ -237,9 +244,11 @@ class ChallengeAcceptedViewController: UIViewController {
         self.present(alert, animated: true)
     }
     
-    //MARK: - HELPER FUNCTIONS
+    
     
 }
+//MARK: - EXTENSIONS
+
 extension ChallengeAcceptedViewController: CLLocationManagerDelegate{
     //this will continually feed me new locations
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

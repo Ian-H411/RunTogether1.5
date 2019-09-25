@@ -47,6 +47,7 @@ class RunDetailViewController: UIViewController {
         super.viewDidLoad()
         InitialUISetUp()
     }
+
     
 
     
@@ -64,6 +65,15 @@ class RunDetailViewController: UIViewController {
     }
     
     @IBAction func challengeSomeOneButtonTapped(_ sender: Any) {
+        guard let run = landingPadUserRun else {return}
+        guard let owner = CloudController.shared.user else {return}
+        guard let runowner = run.user else {return}
+        if runowner == owner {
+        if let _ = run.sendTo{
+                presentAwaitingOtherUserAlert()
+                return
+            }
+        }
         if userIsAcceptingChallenge{
             performSegue(withIdentifier: "challengeAccepted", sender: nil)
         } else 
@@ -76,6 +86,14 @@ class RunDetailViewController: UIViewController {
     
     
     //MARK: - HELPERS
+    
+    func presentAwaitingOtherUserAlert(){
+        let alertController = UIAlertController(title: "Wait up!", message: "This run has already been sent to another user.  come back later when the've completed their run", preferredStyle: .alert)
+        let alertOkay = UIAlertAction(title: "okay ", style: .default, handler: nil)
+        alertController.addAction(alertOkay)
+        self.present(alertController, animated: true)
+    }
+    
     
     func InitialUISetUp(){
          navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor(named: "SilverFox")!]
@@ -99,7 +117,7 @@ class RunDetailViewController: UIViewController {
     func changeColors(borderColor: String){
         let labelColor: String = borderColor
         let labelBorderWidth: CGFloat = 1
-        let cornerRadius: CGFloat = 27
+        let cornerRadius: CGFloat = 10
         
         let labelArray: [UILabel] = [distanceLabel,timeLabel,elevationGainedLabel,averagePaceLabel,caloriesLabel,timePointsLabel,elevationPointsLabel]
    
@@ -116,8 +134,8 @@ class RunDetailViewController: UIViewController {
         usernameLabel.layer.borderWidth = labelBorderWidth
         dateLabel.layer.borderColor = UIColor(named: labelColor)!.cgColor
         usernameLabel.layer.borderColor = UIColor(named: labelColor)!.cgColor
-        usernameLabel.layer.cornerRadius = 22
-        dateLabel.layer.cornerRadius = 22
+        usernameLabel.layer.cornerRadius = 10
+        dateLabel.layer.cornerRadius = 10
     }
     
     func changeStatsUpdate(){

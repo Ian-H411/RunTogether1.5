@@ -23,8 +23,6 @@ class GoOnARunViewController: UIViewController {
     
     @IBOutlet weak var distanceLabel: UILabel!
     
-    @IBOutlet weak var caloriesLabel: UILabel!
-    
     @IBOutlet weak var elevationLabel: UILabel!
     
     
@@ -104,7 +102,7 @@ class GoOnARunViewController: UIViewController {
         let labelBorderWidth: CGFloat = 1
         let cornerRadius: CGFloat = 35
         
-        let labelArray: [UILabel] = [timeLabel, paceLabel, caloriesLabel, elevationLabel,distanceLabel]
+        let labelArray: [UILabel] = [timeLabel, paceLabel, elevationLabel,distanceLabel]
         
         //set  background
         self.view.backgroundColor = UIColor(named: "DarkSlate")!
@@ -132,7 +130,6 @@ class GoOnARunViewController: UIViewController {
         timeLabel.text = Converter.formatTime(seconds: seconds)
         distanceLabel.text = Converter.distance(distance)
         elevationLabel.text = Converter.distance(elevation)
-        caloriesLabel.text = "\(calories) CAL"
     }
     
     func startLocationTracking(){
@@ -159,7 +156,6 @@ class GoOnARunViewController: UIViewController {
         updateUIText()
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
             self.addSecond()
-            self.caloriesBurnt()
         }
         startLocationTracking()
     }
@@ -168,7 +164,7 @@ class GoOnARunViewController: UIViewController {
         timer?.invalidate()
         locationManager.stopUpdatingLocation()
         if !listOfLocations.isEmpty{
-        presentFinishedRunAlert()
+            presentFinishedRunAlert()
         }
     }
     
@@ -178,42 +174,78 @@ class GoOnARunViewController: UIViewController {
         updateUIText()
     }
     
-    func caloriesBurnt (){
-        calories = Int(100 * distance.converted(to: UnitLength.miles).value)
+ 
+    
+    func saveAndShare(){
+        guard let user = CloudController.shared.user else {return}
+        let distanceAsDouble:Double = self.distance.converted(to: UnitLength.miles).value
+        let elevationAsDouble:Double = self.elevation.converted(to: UnitLength.feet).value
+        
+        CloudController.shared.addRunAndPushToCloud(with: distanceAsDouble, elevation: elevationAsDouble, calories: self.calories, totalTime: Double(self.seconds), coreLocations: self.listOfLocations, completion: { (success) in
+            if success{
+                print("saved")
+                self.run = user.runs.last
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "sendThisRun", sender: nil)
+                }
+            } else {
+                print("error")
+            }
+        })
+    }
+    
+    
+    func saveTheRun(){
+        let distanceAsDouble:Double = self.distance.converted(to: UnitLength.miles).value
+        let elevationAsDouble:Double = self.elevation.converted(to: UnitLength.feet).value
+        
+        CloudController.shared.addRunAndPushToCloud(with: distanceAsDouble, elevation: elevationAsDouble, calories: self.calories, totalTime: Double(self.seconds), coreLocations: self.listOfLocations, completion: { (success) in
+            if success{
+                print("saved")
+                DispatchQueue.main.async {
+                    self.clearUpUI()
+                }
+            } else {
+                print("error")
+            }
+        })
     }
     func presentFinishedRunAlert(){
         let alert = UIAlertController(title: "Run complete congratulations!", message: "what would you like to do with this run?", preferredStyle: .actionSheet)
-        let saveAction = UIAlertAction(title: "Save This Run", style: .default) { (_) in
-            let distanceAsDouble:Double = self.distance.converted(to: UnitLength.miles).value
-            let elevationAsDouble:Double = self.elevation.converted(to: UnitLength.feet).value
-            CloudController.shared.addRunAndPushToCloud(with: distanceAsDouble, elevation: elevationAsDouble, calories: self.calories, totalTime: Double(self.seconds), coreLocations: self.listOfLocations, completion: { (success) in
-                if success{
-                    print("saved")
-                    DispatchQueue.main.async {
-                        self.clearUpUI()
-                    }
-                } else {
-                    print("error")
-                }
-            })
-            
+        let saveAction = UIAlertAction(title: "just sve the run", style: .default) { (_) in
+            self.saveTheRun()
+        }
+        let shareAction = UIAlertAction(title: "Save and share this run", style: .default) { (_) in
+            self.saveAndShare()
         }
         let deleteAction = UIAlertAction(title: "Delete This Run", style: .destructive) { (_) in
             //TODO: - present a alert that double checks if this is really what they want
             DispatchQueue.main.async {
                 self.clearUpUI()
             }
+         
         }
-        let saveAndSendAction = UIAlertAction(title: "Save my run and challenge someone", style: .default) { (_) in
-            
+        guard let user = CloudController.shared.user else {return}
+        if !user.friends.isEmpty{
+            alert.addAction(shareAction)
         }
         alert.addAction(saveAction)
-        
-        alert.addAction(saveAndSendAction)
-        
         alert.addAction(deleteAction)
         self.present(alert, animated: true)
     }
+    //MARK: - NAVIGATION
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "sendThisRun"{
+            if let destination = segue.destination as? ChallengeTableViewController {
+                guard let run = run else {return}
+                destination.runToSend = run
+                clearUpUI()
+            }
+        }
+    }
+    
+    
     
     // MARK: - EXTENSIONS
     

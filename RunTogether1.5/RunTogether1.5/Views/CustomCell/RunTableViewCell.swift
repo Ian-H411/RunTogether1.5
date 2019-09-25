@@ -10,18 +10,17 @@ import UIKit
 
 class RunTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var playerVsPlayerLabel: UILabel!
     
 
     @IBOutlet weak var cardView: UIView!
     
     @IBOutlet weak var usernameLabel: UILabel!
     
-    @IBOutlet weak var opponentsUsernameLabel: UILabel!
+    var run:Run?
     
-    @IBOutlet weak var myPointsLabel: UILabel!
+    @IBOutlet weak var envelopeImage: UIImageView!
     
-    @IBOutlet weak var opponentsLabel: UILabel!
+    @IBOutlet weak var distanceLabel: UILabel!
     
     
     @IBOutlet weak var dateLabel: UILabel!
@@ -31,52 +30,56 @@ class RunTableViewCell: UITableViewCell {
     
     var isAChallengeRecieved:Bool = false
     
+    //this also works with the inbox but it is a run that has been sent/retrieved or sitting there
+    func isASoloRun(){
+        guard let ownerOfApp = CloudController.shared.user else {return}
+        guard let runRecieved = runLandingPad else {return}
+        guard let ownerOfRun = runRecieved.user else {return}
+        //now we need to determine if its the user whos run this belongs to
+        if ownerOfApp.name == ownerOfRun.name{
+            usernameLabel.text = "My Personal Run"
+            if let _ = runRecieved.sendTo{
+                envelopeImage.isHidden = false
+            }
+        } else {
+            usernameLabel.text = "Run from: \(ownerOfRun.name)"
+        }
+        let dateAsString = Converter.date(runRecieved.date)
+        dateLabel.text = dateAsString
+        let distanceAsString = Converter.distance(Measurement(value: runRecieved.distance, unit: UnitLength.meters))
+        distanceLabel.text = distanceAsString
+    }
     
-    func update(run: Run){
-        
+    //meaning that both runs have been done
+    func isACompleteRun(){
+        guard let runRecieved = run else {return}
+        guard let opponent = runRecieved.competingRun?.user else {return}
+        let dateAsString = Converter.date(runRecieved.date)
+        dateLabel.text = dateAsString
+        usernameLabel.text = "My run  against: \(opponent.name)"
+        let distanceAsString = Converter.distance(Measurement(value: runRecieved.distance, unit: UnitLength.meters))
+        distanceLabel.text = distanceAsString
+   
+    }
+    
+    func update(runRecieved: Run){
+        envelopeImage.isHidden = true
+        run = runRecieved
         cardView.layer.shadowColor = UIColor(named: "areYaYellow")!.cgColor
         cardView.layer.shadowRadius = 10
         cardView.layer.shadowOffset = .zero
         cardView.layer.shadowOpacity = 0.5
         cardView.layer.cornerRadius = 5
         
-        
-        
         runLandingPad = run
-        //if the run is complete on both ends
-        if let opposingRun = run.competingRun{
-            guard let user = CloudController.shared.user else {return}
-            playerVsPlayerLabel.isHidden = false
-            opponentsUsernameLabel.isHidden = false
-            myPointsLabel.text = "\(run.totalPoints)"
-            opponentsLabel.text = "\(opposingRun.totalPoints)"
-            usernameLabel.text = user.name
-            
-            
-            //if the run is not complete
-        } else {
-            usernameLabel.isHidden = true
-            playerVsPlayerLabel.isHidden = true
-            opponentsUsernameLabel.isHidden = true
-            if isAChallengeRecieved{
-                guard let opponent = run.user else {return}
-                usernameLabel.isHidden = false
-                usernameLabel.text = "Run From: \(opponent.name)"
-            }
-            
-            let dateFormatted = Converter.date(run.date)
-            dateLabel.text = "\(dateFormatted)"
-            
-            
-            let timeFormatted = Converter.formatTime(seconds: Int(run.totalTime))
-            opponentsLabel.text = "Time: \n \(timeFormatted)"
-            guard let selectedUser = run.user else {return}
-            let distanceFormatted = Converter.distance(run.distance, user: selectedUser) 
-            myPointsLabel.text = "Distance: \(distanceFormatted)"
-            
-           
+        //if there is a competeing run then it is a complete run
+        if let _ = runRecieved.competingRun{
+            isACompleteRun()
+            return
         }
-      
+            isASoloRun()
+        
+        
     }
     
 }

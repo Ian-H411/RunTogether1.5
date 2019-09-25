@@ -101,6 +101,7 @@ class Run {
         let timePoints = record[RunKeys.consistencyPointsKey] as? Int,
         let elevationGained = record[RunKeys.elevationGained] as? Double
             else {return nil}
+        let sentToKey = record[RunKeys.sendToKey] as? CKRecord.Reference
         self.distance = distance
         self.totalTime = totalTime
         self.coreLocationPoints = coreLocationPoints
@@ -111,6 +112,7 @@ class Run {
         self.consistencyPoints = consistencyPoints
         self.timePoints = timePoints
         self.elevationGained = elevationGained
+        self.sendTo = sentToKey
        
     }
     init?(record: CKRecord, user: User, opposingRun:Run){

@@ -52,13 +52,6 @@ struct UserKeys{
     
     static let racesWonKey = "RacesWon"
     
-    static let weightKey = "weight"
-    
-    static let heightKey = "Height"
-    
-    static let ageKey = "Age"
-    
-    static let genderKey = "Gender"
     
     static let preferedMeasureMent = "PreferedMeasurement"
     
