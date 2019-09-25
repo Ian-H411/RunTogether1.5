@@ -42,5 +42,21 @@ class ProfileDetailViewController: UIViewController {
             }
   
     @IBAction func deleteProfileButtonTapped(_ sender: Any) {
+        presentDeleteProfileAlert()
+    }
+    
+    
+    
+    //MARK: - HELPERS
+    
+    func presentDeleteProfileAlert(){
+        let alertController = UIAlertController(title: "DELETE PROFILE", message: "THIS WILL REMOVE YOUR ENITRE PROFILE AND CANNOT BE UNDONE", preferredStyle: .alert)
+        let yesDeleteAction = UIAlertAction(title: "Yes delete my profile", style: .destructive) { (_) in
+            CloudController.shared.deleteUser()
+        }
+        let noAction = UIAlertAction(title: "Keep my profile", style: .default, handler: nil)
+        alertController.addAction(yesDeleteAction)
+        alertController.addAction(noAction)
+        self.present(alertController,animated: true)
     }
 }

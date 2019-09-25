@@ -34,6 +34,7 @@ class ChallengeTableViewCell: UITableViewCell {
         challengeLabel.layer.backgroundColor = UIColor(named: "DeepMatteGrey")?.cgColor
     }
     
+ 
 }
 extension ChallengeTableViewCell {
     func update (user: User){

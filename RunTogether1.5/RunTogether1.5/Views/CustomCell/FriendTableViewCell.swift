@@ -9,7 +9,7 @@
 import UIKit
 
 protocol FriendTableViewCellDelegate: class  {
-    func cellSettingHasChanged(_ sender: FriendTableViewCell)
+    func cellSettingHasChanged(_ sender: FriendTableViewCell,wasBlockPressed:Bool)
 }
 
 class FriendTableViewCell: UITableViewCell {
@@ -33,10 +33,13 @@ class FriendTableViewCell: UITableViewCell {
     
     @IBAction func updateButtonTapped(_ sender: Any) {
         
-            delegate?.cellSettingHasChanged(self)
+        delegate?.cellSettingHasChanged(self, wasBlockPressed: false)
             addButton.setTitle("Friend!", for: .normal)
         addButton.tintColor = UIColor(named: "areYaYellow")
         addButton.layer.backgroundColor = UIColor(named: "DeepMatteGrey")?.cgColor
+        
+    }
+    @IBAction func blockButtonTapped(_ sender: Any) {
         
     }
     

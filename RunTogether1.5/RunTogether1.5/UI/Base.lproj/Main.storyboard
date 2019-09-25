@@ -957,6 +957,9 @@
                                                                     <state key="normal" title="BLOCK" image="flag.fill" catalog="system">
                                                                         <color key="titleColor" name="BloodRed"/>
                                                                     </state>
+                                                                    <connections>
+                                                                        <action selector="blockButtonTapped:" destination="Z6z-Ln-1nR" eventType="touchUpInside" id="p0e-Nw-Cid"/>
+                                                                    </connections>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pSC-Nx-0Fx">
                                                                     <rect key="frame" x="76.5" y="0.0" width="221.5" height="57.5"/>
