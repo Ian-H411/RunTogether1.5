@@ -9,15 +9,24 @@
 import UIKit
 
 class FriendsTableViewController: UITableViewController, UISearchBarDelegate, FriendTableViewCellDelegate {
-    func cellSettingHasChanged(_ sender: FriendTableViewCell) {
-        guard let newFriend = sender.userInCell else {return}
-        
-        CloudController.shared.addFriend(friend: newFriend) { (success) in
-            if success{
-                print("made a friend")
+    func cellSettingHasChanged(_ sender: FriendTableViewCell, wasBlockPressed: Bool) {
+      guard let newFriend = sender.userInCell else {return}
+        if !wasBlockPressed{
+            if !sender.isASearchResult{
+                presentRemoveFriend(oldFriend: newFriend)
+            } else {
+            CloudController.shared.addFriend(friend: newFriend) { (success) in
+                if success{
+                    print("made a friend")
+                }
+                }
             }
+        } else if wasBlockPressed {
+            presentBlockUserAlert(user: newFriend)
         }
     }
+    
+
     
     
     //MARK: - outlets
@@ -51,7 +60,7 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate, Fr
         CloudController.shared.retrieveFriends { (success) in
             if success{
                 DispatchQueue.main.async {
-                self.tableView.reloadData()
+                    self.tableView.reloadData()
                 }
             }
         }
@@ -85,7 +94,7 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate, Fr
         return cell
     }
     
-   
+    
     
     
     //MARK: - ACTIONS
@@ -103,6 +112,29 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate, Fr
         findNewFriendsSearchBar.resignFirstResponder()
     }
     
+    func presentBlockUserAlert(user: User){
+        let alertcontroller = UIAlertController(title: "Block User?", message: "This will block this user permenently", preferredStyle: .alert)
+        let cancelButton = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        let blockButton = UIAlertAction(title: "BLOCK", style: .destructive) { (_) in
+            CloudController.shared.blockUser(userToBlock: user)
+            
+        }
+        alertcontroller.addAction(blockButton)
+        alertcontroller.addAction(cancelButton)
+        self.present(alertcontroller, animated: true)
+    }
+    
+    func presentRemoveFriend(oldFriend: User){
+        let alertcontroller = UIAlertController(title: "Remove Friend", message: "This Will remove \(oldFriend.name) from your friend list", preferredStyle: .alert)
+        let removeAction = UIAlertAction(title: "Remove", style: .destructive) { (_) in
+            CloudController.shared.removeFriend(friend: oldFriend)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        alertcontroller.addAction(removeAction)
+        alertcontroller.addAction(cancelAction)
+        self.present(alertcontroller, animated: true)
+    }
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         guard let term = searchBar.text, !term.isEmpty else {return}
@@ -118,10 +150,10 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate, Fr
     //MARK: - HELPER FUNCTIONS
     
     func presentNoInternetAlert(){
-          let alertController = UIAlertController(title: "Connection Error", message: "are you connected to the internet? RunTogether requires an internet connection so come back later when you have one!", preferredStyle: .alert)
-          alertController.addAction(UIAlertAction(title: "okay", style: .default, handler: nil))
-          self.present(alertController, animated: true)
-      }
+        let alertController = UIAlertController(title: "Connection Error", message: "are you connected to the internet? RunTogether requires an internet connection so come back later when you have one!", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "okay", style: .default, handler: nil))
+        self.present(alertController, animated: true)
+    }
     
     func updateUI(){
         

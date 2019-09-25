@@ -40,7 +40,7 @@ class FriendTableViewCell: UITableViewCell {
         
     }
     @IBAction func blockButtonTapped(_ sender: Any) {
-        
+        delegate?.cellSettingHasChanged(self, wasBlockPressed: true)
     }
     
     
@@ -59,7 +59,7 @@ extension FriendTableViewCell {
         iconView.layer.shadowOffset = .zero
         iconView.layer.shadowOpacity = 0.5
         userInCell = user
-        usernameLabel.text = "Username: \(user.name)"
+        usernameLabel.text = "\(user.name)"
         addButton.layer.cornerRadius = 10
         if !isASearchResult{
             addButton.layer.backgroundColor = UIColor(named: "BloodRed")!.cgColor
