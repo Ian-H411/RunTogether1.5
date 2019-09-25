@@ -36,6 +36,16 @@ class ChallengeAcceptedViewController: UIViewController {
     
     var opponentRun:Run?
     
+    var distanceGoal = Measurement(value: 0, unit: UnitLength.feet)
+    
+    var hasPassedDistance:Bool{
+        if distanceGoal > distance{
+            return true
+        } else {
+            return false
+        }
+    }
+    
     var seconds = 0
     
     var isRunning:Bool = false
@@ -94,14 +104,27 @@ class ChallengeAcceptedViewController: UIViewController {
         let time = Converter.formatTime(seconds: Int(run.totalTime))
         timeToBeatLabel.text = "Time to Beat:\n\(time)"
         guard let user = run.user else {return}
-        challengerLabel.text = "Challenger:\n\(user.name)"
+        var preferedMetric = UnitLength.kilometers
+        if !user.prefersMetric{
+            preferedMetric = UnitLength.miles
+        }
+        let distanceAsOpponentPreferedMeasurement = Measurement(value: run.distance, unit: preferedMetric)
+        guard let owner = CloudController.shared.user else {return}
+        var ownerPreference = UnitLength.kilometers
+        if !owner.prefersMetric{
+            ownerPreference = UnitLength.miles
+        }
+        let distanceToDisplay = distanceAsOpponentPreferedMeasurement.converted(to: ownerPreference)
+        distanceGoal = distanceAsOpponentPreferedMeasurement.converted(to: UnitLength.feet)
+        challengerLabel.text = "DistanceToRun:\n\(Converter.distance(distanceToDisplay)))"
     }
     
     func updateUI(){
-        let pace = Converter.paceFormatter(distance: distance, seconds: seconds, outputUnit: UnitSpeed.minutesPerMile)
+        guard let user = CloudController.shared.user else {return}
+        let pace = Converter.pace(distance: distance, seconds: seconds, user: user)
         let time = Converter.formatTime(seconds: seconds)
-        let distanceString = Converter.measureMentFormatter(distance: distance)
-        let elevationString = Converter.measureMentFormatter(distance: elevation)
+        let distanceString = Converter.distance(distance)
+        let elevationString = Converter.distance(elevation)
         caloriesLabel.text = "\(calories) CAL"
         paceLabel.text = pace
         timeLabel.text = time
@@ -113,14 +136,38 @@ class ChallengeAcceptedViewController: UIViewController {
     
     @IBAction func startStopButtonTapped(_ sender: Any) {
         if isRunning{
-            stopRun()
-            isRunning = false
-            startStopButton.setTitle("Start", for: .normal)
+            if hasPassedDistance{
+                stopRun()
+                isRunning = false
+                startStopButton.setTitle("Start", for: .normal)
+            } else {
+                presentDistanceNotAchievedAlert()
+                stopRun()
+                isRunning = false
+            }
         } else {
             startRun()
             isRunning = true
             startStopButton.setTitle("Stop", for: .normal)
         }
+        
+    }
+    
+    func presentDistanceNotAchievedAlert(){
+        let alert = UIAlertController(title: "Not Quite there", message: "you havent met your distance goal would you like to give up for now?", preferredStyle: .alert)
+        let falseStartAction = UIAlertAction(title: "False start let me try again", style: .default) { (_) in
+            self.tryAgain()
+            
+            
+        }
+        let giveUpForNowAction = UIAlertAction(title: "ill try again later", style: .destructive) { (_) in
+            self.navigationController?.popViewController(animated: true)
+        }
+        alert.addAction(giveUpForNowAction)
+        alert.addAction(falseStartAction)
+        self.present(alert,animated: true)
+    }
+    func tryAgain(){
         
     }
     func startLocationTracking(){
@@ -161,8 +208,11 @@ class ChallengeAcceptedViewController: UIViewController {
         if listOfLocations.isEmpty{
             return
         }
+        if hasPassedDistance{
         presentFinishedRunAlert()
+        }
     }
+    
     
     
     func presentFinishedRunAlert(){

@@ -154,3 +154,12 @@ extension CKRecord{
        
     }
 }
+
+extension Run: Equatable{
+    static func == (lhs: Run, rhs: Run) -> Bool {
+        return lhs.ckRecordId.recordName == rhs.ckRecordId.recordName
+    }
+    
+    
+    
+}

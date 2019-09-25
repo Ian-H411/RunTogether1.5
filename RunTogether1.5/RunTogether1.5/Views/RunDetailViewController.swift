@@ -128,14 +128,15 @@ class RunDetailViewController: UIViewController {
             selectedRun = opponentRun
         }
         usernameLabel.text = selectedRun.user?.name ?? ""
-        dateLabel.text = Converter.formatDate(date: selectedRun.date)
+        dateLabel.text = Converter.date(selectedRun.date)
         timeLabel.text = "  Time: \(Converter.formatTime(seconds: Int(selectedRun.totalTime)))"
-        elevationGainedLabel.text = "  ElevationGained: \(Converter.measureMentFormatter(distance: Measurement(value: selectedRun.elevationGained, unit: UnitLength.feet)) )"
-        averagePaceLabel.text = "  AveragePace: \(Converter.paceFormatter(distance: Measurement(value: selectedRun.distance, unit: UnitLength.feet), seconds: Int(selectedRun.totalTime), outputUnit: UnitSpeed.minutesPerMile))"
+        guard let selectedUser = selectedRun.user else {return}
+        elevationGainedLabel.text = "  ElevationGained: \(Converter.distance(selectedRun.elevationGained,user:selectedUser))"
+        averagePaceLabel.text = "  AveragePace: \(Converter.pace(distance: Measurement(value: selectedRun.distance, unit: UnitLength.miles), seconds: Int(selectedRun.totalTime), user: selectedUser))"
         caloriesLabel.text = "  CaloriesBurned: \(selectedRun.calories)"
         timePointsLabel.text = "\(selectedRun.timePoints)"
         elevationPointsLabel.text = "\(selectedRun.elevationPoints)"
-        distanceLabel.text = "  Distance:  \(Converter.measureMentFormatter(distance: Measurement(value: selectedRun.distance, unit: UnitLength.miles)))"
+        distanceLabel.text = "  Distance:  \(Converter.distance(selectedRun.distance,user: selectedUser))"
     }
     // MARK: - Navigation
     

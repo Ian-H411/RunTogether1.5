@@ -41,4 +41,6 @@ class ProfileDetailViewController: UIViewController {
         ageLabel.text = "\(user.age) years old"
             }
   
+    @IBAction func deleteProfileButtonTapped(_ sender: Any) {
+    }
 }

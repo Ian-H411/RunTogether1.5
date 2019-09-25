@@ -204,7 +204,7 @@
             </objects>
             <point key="canvasLocation" x="-2549" y="710"/>
         </scene>
-        <!--Profile Detail View Controller-->
+        <!--Profile-->
         <scene sceneID="9QV-Bd-c1f">
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="9Pl-td-hRs" customClass="ProfileDetailViewController" customModule="RunTogether1_5" customModuleProvider="target" sceneMemberID="viewController">
@@ -213,28 +213,28 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="67" translatesAutoresizingMaskIntoConstraints="NO" id="ZXK-Jf-Bj1">
-                                <rect key="frame" x="154" y="252" width="106" height="311"/>
+                                <rect key="frame" x="41.5" y="252" width="331" height="311"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UserName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="usI-tx-9bc">
-                                        <rect key="frame" x="0.0" y="0.0" width="106" height="27.5"/>
+                                        <rect key="frame" x="112.5" y="0.0" width="106" height="27.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <color key="textColor" name="SilverFox"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wLU-Yw-97n">
-                                        <rect key="frame" x="33" y="94.5" width="40" height="27.5"/>
+                                        <rect key="frame" x="145.5" y="94.5" width="40" height="27.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <color key="textColor" name="SilverFox"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weight" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y9L-QW-P90">
-                                        <rect key="frame" x="17.5" y="189" width="71" height="27.5"/>
+                                        <rect key="frame" x="130" y="189" width="71" height="27.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <color key="textColor" name="SilverFox"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Height" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S2B-Lz-Hrv">
-                                        <rect key="frame" x="19.5" y="283.5" width="67" height="27.5"/>
+                                        <rect key="frame" x="132" y="283.5" width="67" height="27.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <color key="textColor" name="SilverFox"/>
                                         <nil key="highlightedColor"/>
@@ -247,13 +247,20 @@
                         <constraints>
                             <constraint firstItem="ZXK-Jf-Bj1" firstAttribute="centerY" secondItem="DFe-ap-xeo" secondAttribute="centerY" id="3Nc-D6-SWv"/>
                             <constraint firstItem="ZXK-Jf-Bj1" firstAttribute="centerX" secondItem="DFe-ap-xeo" secondAttribute="centerX" id="9r0-ZA-zwH"/>
+                            <constraint firstItem="ZXK-Jf-Bj1" firstAttribute="width" secondItem="DFe-ap-xeo" secondAttribute="width" multiplier="0.8" id="R7F-aa-zKF"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="DFe-ap-xeo"/>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="Fqr-cL-Sjm" appends="YES" id="VhK-da-jos"/>
                         </connections>
                     </view>
-                    <navigationItem key="navigationItem" id="AHp-YP-xce"/>
+                    <navigationItem key="navigationItem" title="Profile" id="pEK-9P-h34">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="trash" catalog="system" id="MGR-Hy-n8w">
+                            <connections>
+                                <action selector="deleteProfileButtonTapped:" destination="9Pl-td-hRs" id="2IN-gj-yzd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="ageLabel" destination="wLU-Yw-97n" id="BxG-6d-BSQ"/>
                         <outlet property="heightLabel" destination="S2B-Lz-Hrv" id="afP-ev-bCv"/>
@@ -1244,6 +1251,7 @@
         <image name="flag.fill" catalog="system" width="64" height="64"/>
         <image name="loading" width="256" height="256"/>
         <image name="runHistory" width="26.666666030883789" height="26.666666030883789"/>
+        <image name="trash" catalog="system" width="60" height="64"/>
         <namedColor name="BloodRed">
             <color red="0.73333333333333328" green="0.039215686274509803" blue="0.11764705882352941" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

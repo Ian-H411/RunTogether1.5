@@ -64,14 +64,14 @@ class RunTableViewCell: UITableViewCell {
                 usernameLabel.text = "Run From: \(opponent.name)"
             }
             
-            let dateFormatted = Converter.formatDate(date: run.date)
+            let dateFormatted = Converter.date(run.date)
             dateLabel.text = "\(dateFormatted)"
             
             
             let timeFormatted = Converter.formatTime(seconds: Int(run.totalTime))
             opponentsLabel.text = "Time: \n \(timeFormatted)"
-            
-           let distanceFormatted = Converter.measureMentFormatter(distance: Measurement(value: run.distance, unit: UnitLength.miles))
+            guard let selectedUser = run.user else {return}
+            let distanceFormatted = Converter.distance(run.distance, user: selectedUser) 
             myPointsLabel.text = "Distance: \(distanceFormatted)"
             
            

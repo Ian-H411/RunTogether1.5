@@ -89,15 +89,6 @@
 			path = CustomCell;
 			sourceTree = "<group>";
 		};
-		251FB0032327DE9A00AD991B /* View Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				251FB0012327DE9400AD991B /* LocationManager.swift */,
-				251FB0042327E5DA00AD991B /* ConverterManager.swift */,
-			);
-			path = "View Helpers";
-			sourceTree = "<group>";
-		};
 		254661F12322F4D7001BAE42 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -161,7 +152,6 @@
 			isa = PBXGroup;
 			children = (
 				25158045233421180011B8B7 /* CustomCell */,
-				251FB0032327DE9A00AD991B /* View Helpers */,
 				251FAFF92324618000AD991B /* GoOnARunViewController.swift */,
 				258BEF602339294E009B5801 /* ProfileDetailViewController.swift */,
 				25F19EBE233817410083BF5E /* CreateProfileDynamicallyViewController.swift */,
@@ -198,6 +188,8 @@
 				251FAFF023241C8200AD991B /* CKRecordKeys.swift */,
 				251FB0062327E80700AD991B /* UnitExtensions.swift */,
 				250B77C4233AB88000CD6C04 /* Reachability.swift */,
+				251FB0042327E5DA00AD991B /* ConverterManager.swift */,
+				251FB0012327DE9400AD991B /* LocationManager.swift */,
 			);
 			path = HelperFiles;
 			sourceTree = "<group>";

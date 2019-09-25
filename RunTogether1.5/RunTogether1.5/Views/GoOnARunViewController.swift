@@ -127,10 +127,11 @@ class GoOnARunViewController: UIViewController {
     }
     //to be used to update the label text
     func updateUIText(){
-        paceLabel.text = Converter.paceFormatter(distance: distance, seconds: seconds, outputUnit: UnitSpeed.minutesPerMile)
+        guard let user = CloudController.shared.user else {return}
+        paceLabel.text = Converter.pace(distance: distance, seconds: seconds, user: user)
         timeLabel.text = Converter.formatTime(seconds: seconds)
-        distanceLabel.text = Converter.measureMentFormatter(distance: distance)
-        elevationLabel.text = Converter.measureMentFormatter(distance: elevation)
+        distanceLabel.text = Converter.distance(distance)
+        elevationLabel.text = Converter.distance(elevation)
         caloriesLabel.text = "\(calories) CAL"
     }
     
@@ -166,7 +167,9 @@ class GoOnARunViewController: UIViewController {
     func stopRun(){
         timer?.invalidate()
         locationManager.stopUpdatingLocation()
+        if !listOfLocations.isEmpty{
         presentFinishedRunAlert()
+        }
     }
     
     func clearUpUI(){
@@ -228,7 +231,7 @@ extension GoOnARunViewController: CLLocationManagerDelegate{
             if let lastLocation = listOfLocations.last{
                 let changeInDistance = location.distance(from: lastLocation)
                 distance = distance + Measurement(value: changeInDistance, unit: UnitLength.feet)
-                let changeInElevation = location.altitude.distance(to: lastLocation.altitude)
+                let changeInElevation = abs(location.altitude.distance(to: lastLocation.altitude))
                 elevation = elevation + Measurement(value: changeInElevation, unit: UnitLength.feet)
             }
             listOfLocations.append(location)

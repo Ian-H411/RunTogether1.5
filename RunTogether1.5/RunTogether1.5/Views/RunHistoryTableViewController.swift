@@ -143,7 +143,7 @@ class RunHistoryTableViewController: UITableViewController {
         for run in user.runs{
             distance = distance + Measurement(value: run.distance, unit: UnitLength.miles)
         }
-        let formattedDistance = Converter.measureMentFormatter(distance: distance)
+        let formattedDistance = Converter.distance(distance)
         totalDistanceLabel.text = "Total Distance Ran: \(formattedDistance)"
         
     }

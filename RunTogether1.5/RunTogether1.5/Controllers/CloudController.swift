@@ -490,6 +490,44 @@ class CloudController {
             }
         }
     }
+    //MARK: - DELETE
+    
+    func deleteArun(run:Run){
+        guard let user = user else {return}
+        
+        for i in 0...user.runs.count - 1{
+            if user.runs[i] == run{
+                user.runs.remove(at: i)
+                let operation = CKModifyRecordsOperation(recordsToSave: nil, recordIDsToDelete: [run.ckRecordId])
+                operation.queuePriority = .normal
+                publicDatabase.add(operation)
+                print("run removed")
+                
+            }
+        }
+    }
+    func deleteUser(){
+        guard let user = user else {return}
+    
+        let operation = CKModifyRecordsOperation(recordsToSave: nil, recordIDsToDelete: [user.recordID])
+        
+        publicDatabase.add(operation)
+    }
+    
+    func removeFriend(friend:User){
+        guard let user = CloudController.shared.user else {return}
+        for i in 0...user.friends.count - 1{
+            if user.friends[i] == friend{
+                user.friends.remove(at: i)
+                let operation = CKModifyRecordsOperation(recordsToSave: nil, recordIDsToDelete: [friend.recordID])
+                operation.queuePriority = .normal
+                publicDatabase.add(operation)
+                print("friend removed")
+                
+            }
+        }
+    }
+    
     //MARK: - POINT SYSTEM
     //updates run points
     func calculatePoints(run1: Run, run2: Run){
