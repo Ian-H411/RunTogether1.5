@@ -94,6 +94,7 @@ class CreateProfileDynamicallyViewController: UIViewController {
     
     
     @IBAction func goBackButtonTapped(_ sender: Any) {
+        letsGoButton.isHidden = true
         let labelCarousel:[UILabel] = [usernameLabel,measurementLabel]
         labelCarousel[step - 1].isHidden = true
         goBackAstep()
@@ -111,6 +112,17 @@ class CreateProfileDynamicallyViewController: UIViewController {
             CloudController.shared.createNewUserAndPushWith(name: self.username, prefersMetric: self.isMetric) { (success) in
                 if success{
                     DispatchQueue.main.async {
+                        self.letsGoButton.isHidden = true
+                        let labelCarousel:[UILabel] = [self.usernameLabel,self.measurementLabel]
+                        labelCarousel[self.step - 1].isHidden = true
+                        labelCarousel[self.step - 2].isHidden = true
+                        self.goBackAstep()
+                        self.goBackAstep()
+                        self.refreshUI()
+                        self.answerTextField.becomeFirstResponder()
+                        self.answerTextField.inputView = nil
+                        self.answerTextField.becomeFirstResponder()
+                        self.gobackButton.isHidden = true
                         self.performSegue(withIdentifier: "toApp", sender: nil)
                     }
                 }
@@ -161,7 +173,12 @@ class CreateProfileDynamicallyViewController: UIViewController {
         
     }
     @objc func backButtonTapped(){
+        letsGoButton.isHidden = true
         let labelCarousel:[UILabel] = [usernameLabel,measurementLabel]
+        if step == 0{
+            answerTextField.text = ""
+        }
+        if step != 0{
         labelCarousel[step - 1].isHidden = true
         goBackAstep()
         
@@ -170,12 +187,16 @@ class CreateProfileDynamicallyViewController: UIViewController {
             answerTextField.resignFirstResponder()
             answerTextField.inputView = nil
             answerTextField.becomeFirstResponder()
+            }
         }
     }
     
     @objc func toolbarButtonTapped(){
         guard let answer = answerTextField.text else {return}
         if step == 0{
+            if answer.isEmpty{
+                return
+            }
             CloudController.shared.checkIfUserExists(username: answer) { (success) in
                 if !success{
                     DispatchQueue.main.async {
@@ -211,7 +232,9 @@ class CreateProfileDynamicallyViewController: UIViewController {
     }
     
     func refreshUI(){
-        
+        if step == 0{
+            answerTextField.text = ""
+        }
         
         if step == 1{
             guard let usernamerecieved = answerTextField.text else {return}
