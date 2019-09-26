@@ -34,9 +34,10 @@ class ProfileDetailViewController: UIViewController {
     func presentDeleteProfileAlert(){
         let alertController = UIAlertController(title: "DELETE PROFILE", message: "THIS WILL REMOVE YOUR ENITRE PROFILE AND CANNOT BE UNDONE", preferredStyle: .alert)
         let yesDeleteAction = UIAlertAction(title: "Yes delete my profile", style: .destructive) { (_) in
-            CloudController.shared.deleteUser()
+//            CloudController.shared.deleteUser()
             DispatchQueue.main.async {
-           //pop and dismiss until were at the begining
+//                self.navigationController?.popToRootViewController(animated: true)
+                self.tabBarController?.dismiss(animated: true, completion: nil)
             }
         }
         let noAction = UIAlertAction(title: "Keep my profile", style: .default, handler: nil)

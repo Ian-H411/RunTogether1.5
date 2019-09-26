@@ -13,8 +13,7 @@ class ChallengeAcceptedViewController: UIViewController {
     
     @IBOutlet weak var timeLabel: UILabel!
     
-    
-    @IBOutlet weak var caloriesLabel: UILabel!
+
     
     @IBOutlet weak var distanceLabel: UILabel!
     
@@ -82,9 +81,9 @@ class ChallengeAcceptedViewController: UIViewController {
     func initialUISetUP(){
         let labelColor: String = "SilverFox"
         let labelBorderWidth: CGFloat = 1
-        let cornerRadius: CGFloat = 35
+        let cornerRadius: CGFloat = 20
         
-        let labelArray: [UILabel] = [timeLabel,caloriesLabel,distanceLabel,elevationGained,paceLabel,timeToBeatLabel,challengerLabel]
+        let labelArray: [UILabel] = [timeLabel,distanceLabel,elevationGained,paceLabel,timeToBeatLabel,challengerLabel]
         self.view.backgroundColor = UIColor(named: "DarkSlate")!
         for label in labelArray {
             //set all labels border
@@ -125,7 +124,6 @@ class ChallengeAcceptedViewController: UIViewController {
         let time = Converter.formatTime(seconds: seconds)
         let distanceString = Converter.distance(distance)
         let elevationString = Converter.distance(elevation)
-        caloriesLabel.text = "\(calories) CAL"
         paceLabel.text = pace
         timeLabel.text = time
         distanceLabel.text = distanceString
@@ -187,10 +185,20 @@ class ChallengeAcceptedViewController: UIViewController {
     func addSecond(){
         seconds = seconds + 1
         updateUI()
+        if hasPassedDistance{
+            presentFinishedRunAlert()
+            self.stopRun()
+        }
     }
-    func caloriesBurnt (){
-        calories = Int(100 * distance.converted(to: UnitLength.miles).value)
-    }
+//    func passedFinishLineAlert(){
+//        let alertcontroller = UIAlertController(title: "CONGRATS", message: "you crossed the finish line", preferredStyle: .alert)
+//        let continueButton = UIAlertAction(title: "Continue", style: .default) { (_) in
+//            
+//        }
+//        alertcontroller.addAction(continueButton)
+//        self.present(alertcontroller, animated: true)
+//    }
+    
     func startRun(){
         //clear everything out and then go
         seconds = 0
@@ -200,7 +208,6 @@ class ChallengeAcceptedViewController: UIViewController {
         updateUI()
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
             self.addSecond()
-            self.caloriesBurnt()
         }
         startLocationTracking()
     }
@@ -228,7 +235,7 @@ class ChallengeAcceptedViewController: UIViewController {
         let saveAction = UIAlertAction(title: "Save", style: .default) { (_) in
             guard let opponentsRun = self.opponentRun else {return}
             
-            CloudController.shared.completeTheChallenge(opponentsRun: opponentsRun, distance: self.distance.value, elevation: self.elevation.value, calories: self.calories, totalTime: Double(self.seconds), coreLocations: self.listOfLocations) { (success) in
+            CloudController.shared.completeTheChallenge(opponentsRun: opponentsRun, distance: self.distance.value, elevation: self.elevation.value, totalTime: Double(self.seconds), coreLocations: self.listOfLocations) { (success) in
                 if success{
                     print("donesies")
                     DispatchQueue.main.async {

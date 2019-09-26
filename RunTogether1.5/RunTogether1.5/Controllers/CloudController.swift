@@ -24,10 +24,10 @@ class CloudController {
     //MARK: - PUSH TO SERVER FUNCTIONS
     
     ///must call fetch userID first
-    func createNewUserAndPushWith(name: String, height: Double, weight: Double, age: Int, gender: String,prefersMetric: Bool, completion: @escaping (Bool) -> Void){
+    func createNewUserAndPushWith(name: String,prefersMetric: Bool, completion: @escaping (Bool) -> Void){
         //create a user
         guard let ID = userID else {return}
-        let user = User(name: name, prefersMetric: prefersMetric, age: age, gender: gender, userReference: ID.recordName)
+        let user = User(name: name, prefersMetric: prefersMetric, userReference: ID.recordName)
         //convert to a record
         guard let record = CKRecord(user: user) else {return}
         publicDatabase.save(record) { (recordRecieved, error) in
@@ -49,11 +49,13 @@ class CloudController {
     }
     
     
-    func addRunAndPushToCloud(with distance: Double, elevation: Double, calories: Int, totalTime: Double, coreLocations: [CLLocation], completion: @escaping (Bool) -> Void){
+    func addRunAndPushToCloud(with distance: Measurement<UnitLength>, elevation: Measurement<UnitLength>, totalTime: Double, coreLocations: [CLLocation], completion: @escaping (Bool) -> Void){
         //unwrap user if no user then yo can run simple as that
         guard let user = user else {return}
         //create a run
-        let run = Run(distance: distance, elevation: elevation, calories: calories , totalTime: totalTime, coreLocationPoints: coreLocations, user: user)
+        let distance = distance.converted(to: UnitLength.miles)
+        let elevation = elevation.converted(to: UnitLength.feet)
+        let run = Run(distance: distance.value, elevation: elevation.value, totalTime: totalTime, coreLocationPoints: coreLocations, user: user)
         //create a record from it
         if var userReferences = user.runsReferenceList{
             userReferences.append(CKRecord.Reference(recordID: run.ckRecordId, action: .none))
@@ -109,14 +111,16 @@ class CloudController {
         publicDatabase.add(op)
     }
     
-    func completeTheChallenge(opponentsRun:Run, distance: Double, elevation: Double, calories: Int, totalTime: Double, coreLocations: [CLLocation], completion: @escaping (Bool) -> Void){
+    func completeTheChallenge(opponentsRun:Run, distance: Double, elevation: Double, totalTime: Double, coreLocations: [CLLocation], completion: @escaping (Bool) -> Void){
         guard let user = user else {completion(false);print("user not found");return}
-        let myRun = Run(distance: distance, elevation: elevation, calories: calories, totalTime: totalTime, coreLocationPoints: coreLocations, user: user)
+        let myRun = Run(distance: distance, elevation: elevation, totalTime: totalTime, coreLocationPoints: coreLocations, user: user)
         myRun.competingRun = opponentsRun
         opponentsRun.competingRun = myRun
         //first total up the points
         calculatePoints(run1: opponentsRun, run2: myRun)
         //save my run
+        
+        //check if i have any runs in my reference list if not i need to make one
         if var userReferences = user.runsReferenceList{
             userReferences.append(CKRecord.Reference(recordID: myRun.ckRecordId, action: .none))
         } else {
@@ -183,6 +187,8 @@ class CloudController {
     
     //MARK: - RETRIEVE FROM SERVER FUNCTIONS
     
+    
+    //MARK: - START UPS
     func performStartUpFetchs(completion: @escaping (Bool) -> Void){
         retrieveUserID { (success) in
             if success{
@@ -218,10 +224,10 @@ class CloudController {
     }
     // to be called every time the app starts up
     func retrieveUserProfile(completion: @escaping (Bool,Error?) -> Void){
-        
+         
         guard let userID = userID else {completion(false,nil);print("no user ID"); return}
         
-        //fake account login uncomment to login under dummy profile
+//        fake account login uncomment to login under dummy profile
 //        let fakeID = CKRecord.ID(recordName: "HIdummyprofile")
 //        userID = fakeID
         let predicate = NSPredicate(format: "UserReference = %@", userID.recordName)
@@ -274,6 +280,7 @@ class CloudController {
             }
         }
     }
+    //MARK: - RUN RETRIEVAL
     
     func retrieveOpposingRuns(completion: @escaping (Bool) -> Void){
         guard let user = user else {return}
@@ -410,6 +417,7 @@ class CloudController {
             })
         }
     }
+    //MARK: - users/friends
     
     func retrieveFriends(completion: @escaping (Bool) -> Void){
         guard let user = user else {return}
@@ -551,6 +559,8 @@ class CloudController {
             winningRunTime = run1
             losingRunTime = run2
             winningRunTime.timePoints = 60
+        } else {
+            winningRunTime.timePoints = 60
         }
         //get the difference between the two
         let timeDifference: Double = winningRunTime.totalTime.distance(to: run2.totalTime)
@@ -578,6 +588,7 @@ class CloudController {
                 run.elevationPoints = points
             }
         }
+        
     }
     //MARK: - MISC HELPERS
     

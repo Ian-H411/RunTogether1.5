@@ -19,17 +19,22 @@ class LoadingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+   
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         if isICloudContainerAvailable(){
-        updateUI()
-        if Reachability.isConnectedToNetwork(){
-        retrieveUser()
-        } else {
-            warmingUpLabel.text = "Check your internet then \n try again"
-        }
-        } else{
-            warmingUpLabel.text = "Sign into icloud,\n and check that your icloud drive is turned on.  then afterwards try again."
-            warmingUpLabel.font = UIFont(name: "System Bold", size: 23)
-        }
+           updateUI()
+           if Reachability.isConnectedToNetwork(){
+           retrieveUser()
+           } else {
+               warmingUpLabel.text = "Check your internet then \n try again"
+           }
+           } else{
+               warmingUpLabel.text = "Sign into icloud,\n and check that your icloud drive is turned on.  then afterwards try again."
+               warmingUpLabel.font = UIFont(name: "System Bold", size: 23)
+           }
     }
 
     func isICloudContainerAvailable()->Bool {

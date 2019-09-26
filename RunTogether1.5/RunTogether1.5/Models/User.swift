@@ -19,7 +19,17 @@ class User: Equatable{
     
     let totalMiles: Double
     
-    let racesWon: Int
+    var racesWon: Int{
+        var total = 0
+        for run in runs{
+            if let runwin = run.didWin {
+                if runwin{
+                    total = total + 1
+                }
+            }
+        }
+        return total
+    }
     
     var recordID: CKRecord.ID
     
@@ -38,13 +48,12 @@ class User: Equatable{
     var blockedByReferenceList: [CKRecord.Reference]?
     
     var userReference: String
-
+    
     var prefersMetric: Bool
     
-    init(name: String, totalMiles: Double = 0.0, racesWon: Int = 0,  prefersMetric: Bool, age: Int, gender: String, userReference:String, ckRecordId: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString), runs: [Run] = [],recievedRuns: [Run] = []){
+    init(name: String, totalMiles: Double = 0.0, prefersMetric: Bool, userReference:String, ckRecordId: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString), runs: [Run] = [],recievedRuns: [Run] = []){
         self.name = name
         self.totalMiles = totalMiles
-        self.racesWon = racesWon
         self.recordID = ckRecordId
         self.runs = runs
         self.prefersMetric = prefersMetric
@@ -55,7 +64,6 @@ class User: Equatable{
     init?(record: CKRecord){
         guard let name = record[UserKeys.nameKey] as? String,
             let totalMiles = record[UserKeys.totalMilesKey] as? Double,
-            let racesWon = record[UserKeys.racesWonKey] as? Int,
             let prefersMetric = record[UserKeys.preferedMeasureMent] as? Bool,
             let userReference = record[RunKeys.userReferenceKey] as? String
             else {return nil}
@@ -67,12 +75,12 @@ class User: Equatable{
         self.recordID = record.recordID
         self.name = name
         self.totalMiles = totalMiles
-        self.racesWon = racesWon
         self.prefersMetric = prefersMetric
         self.friendReferenceList = userFriendIds
         self.runsRecievedReferenceList = runsToDoIds
         self.userReference = userReference
         self.runsReferenceList = runInboxs
+        
     }
 }
 

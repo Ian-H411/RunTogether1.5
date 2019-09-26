@@ -108,7 +108,7 @@ class CreateProfileDynamicallyViewController: UIViewController {
     
     @IBAction func letsRunButtonTapped(_ sender: Any) {
         if !username.isEmpty{
-            CloudController.shared.createNewUserAndPushWith(name: self.username, height: Double(self.height), weight: Double(self.weight), age: self.age, gender: self.gender, prefersMetric: self.isMetric) { (success) in
+            CloudController.shared.createNewUserAndPushWith(name: self.username, prefersMetric: self.isMetric) { (success) in
                 if success{
                     DispatchQueue.main.async {
                         self.performSegue(withIdentifier: "toApp", sender: nil)

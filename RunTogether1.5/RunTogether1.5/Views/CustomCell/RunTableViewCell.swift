@@ -22,9 +22,7 @@ class RunTableViewCell: UITableViewCell {
     
     @IBOutlet weak var distanceLabel: UILabel!
     
-    
     @IBOutlet weak var dateLabel: UILabel!
-    
     
     var runLandingPad:Run?
     
@@ -43,8 +41,9 @@ class RunTableViewCell: UITableViewCell {
             }
         } else {
             usernameLabel.text = "Run from: \(ownerOfRun.name)"
+            envelopeImage.isHidden = false
         }
-        let dateAsString = Converter.date(runRecieved.date)
+        let dateAsString = Converter.dateFull(runRecieved.date)
         dateLabel.text = dateAsString
         let distanceAsString = Converter.distance(Measurement(value: runRecieved.distance, unit: UnitLength.meters))
         distanceLabel.text = distanceAsString
@@ -54,8 +53,8 @@ class RunTableViewCell: UITableViewCell {
     func isACompleteRun(){
         guard let runRecieved = run else {return}
         guard let opponent = runRecieved.competingRun?.user else {return}
-        let dateAsString = Converter.date(runRecieved.date)
-        dateLabel.text = dateAsString
+        let dateAsString = Converter.dateFull(runRecieved.date)
+        dateLabel.text = "  \(dateAsString)"
         usernameLabel.text = "My run  against: \(opponent.name)"
         let distanceAsString = Converter.distance(Measurement(value: runRecieved.distance, unit: UnitLength.meters))
         distanceLabel.text = distanceAsString

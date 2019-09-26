@@ -35,9 +35,7 @@ class GoOnARunViewController: UIViewController {
     var seconds = 0
     
     var isRunning: Bool = false
-    
-    var calories: Int = 0
-    
+
     var timer: Timer?
     
     var distance = Measurement(value: 0, unit: UnitLength.feet)
@@ -150,7 +148,7 @@ class GoOnARunViewController: UIViewController {
     func startRun(){
         //clear everything out and then go
         seconds = 0
-        calories = 0
+    
         distance = Measurement(value: 0, unit: UnitLength.meters)
         listOfLocations.removeAll()
         updateUIText()
@@ -178,10 +176,8 @@ class GoOnARunViewController: UIViewController {
     
     func saveAndShare(){
         guard let user = CloudController.shared.user else {return}
-        let distanceAsDouble:Double = self.distance.converted(to: UnitLength.miles).value
-        let elevationAsDouble:Double = self.elevation.converted(to: UnitLength.feet).value
         
-        CloudController.shared.addRunAndPushToCloud(with: distanceAsDouble, elevation: elevationAsDouble, calories: self.calories, totalTime: Double(self.seconds), coreLocations: self.listOfLocations, completion: { (success) in
+        CloudController.shared.addRunAndPushToCloud(with: distance, elevation: self.elevation, totalTime: Double(self.seconds), coreLocations: self.listOfLocations, completion: { (success) in
             if success{
                 print("saved")
                 self.run = user.runs.last
@@ -196,10 +192,8 @@ class GoOnARunViewController: UIViewController {
     
     
     func saveTheRun(){
-        let distanceAsDouble:Double = self.distance.converted(to: UnitLength.miles).value
-        let elevationAsDouble:Double = self.elevation.converted(to: UnitLength.feet).value
         
-        CloudController.shared.addRunAndPushToCloud(with: distanceAsDouble, elevation: elevationAsDouble, calories: self.calories, totalTime: Double(self.seconds), coreLocations: self.listOfLocations, completion: { (success) in
+        CloudController.shared.addRunAndPushToCloud(with: distance, elevation: elevation, totalTime: Double(self.seconds), coreLocations: self.listOfLocations, completion: { (success) in
             if success{
                 print("saved")
                 DispatchQueue.main.async {
@@ -212,7 +206,7 @@ class GoOnARunViewController: UIViewController {
     }
     func presentFinishedRunAlert(){
         let alert = UIAlertController(title: "Run complete congratulations!", message: "what would you like to do with this run?", preferredStyle: .actionSheet)
-        let saveAction = UIAlertAction(title: "just sve the run", style: .default) { (_) in
+        let saveAction = UIAlertAction(title: "just save the run", style: .default) { (_) in
             self.saveTheRun()
         }
         let shareAction = UIAlertAction(title: "Save and share this run", style: .default) { (_) in

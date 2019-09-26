@@ -521,17 +521,16 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Points" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R5q-VZ-3e7">
-                                                            <rect key="frame" x="137.5" y="0.0" width="77.5" height="70"/>
+                                                            <rect key="frame" x="137.5" y="0.0" width="57.5" height="70"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" name="DeepMatteGrey"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NyM-vA-GQk">
-                                                            <rect key="frame" x="255" y="0.0" width="80" height="70"/>
+                                                            <rect key="frame" x="235" y="0.0" width="100" height="70"/>
                                                             <color key="backgroundColor" name="areYaYellow"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="50" id="DbC-Su-4Ql"/>
-                                                                <constraint firstAttribute="width" constant="80" id="e8j-Ct-0g7"/>
                                                             </constraints>
                                                             <state key="normal" title="Challenge">
                                                                 <color key="titleColor" name="DarkSlate"/>
@@ -592,22 +591,22 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="fWn-BR-cyn">
-                                    <rect key="frame" x="0.0" y="13" width="414" height="237"/>
+                                    <rect key="frame" x="41.5" y="13" width="331" height="237"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RACES WON:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ft6-xH-SYG">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="54"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="331" height="54"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" name="SilverFox"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TOTAL DISTANCE RUN:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y9C-dW-KGs">
-                                            <rect key="frame" x="0.0" y="63" width="414" height="115"/>
+                                            <rect key="frame" x="0.0" y="63" width="331" height="115"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" name="SilverFox"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <segmentedControl opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="OFr-Z7-4jv">
-                                            <rect key="frame" x="41.5" y="187" width="331" height="51"/>
+                                            <rect key="frame" x="0.0" y="187" width="331" height="51"/>
                                             <color key="backgroundColor" name="DeepMatteGrey"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="HoW-4z-7BG"/>
@@ -636,7 +635,7 @@
                                 <constraint firstItem="fWn-BR-cyn" firstAttribute="centerX" secondItem="nbF-LS-p5u" secondAttribute="centerX" id="amU-XS-cbD"/>
                                 <constraint firstItem="fWn-BR-cyn" firstAttribute="centerY" secondItem="nbF-LS-p5u" secondAttribute="centerY" id="pcL-ww-DGk"/>
                                 <constraint firstItem="fWn-BR-cyn" firstAttribute="height" secondItem="nbF-LS-p5u" secondAttribute="height" multiplier="0.9" id="xIO-Wh-Q9z"/>
-                                <constraint firstItem="fWn-BR-cyn" firstAttribute="width" secondItem="nbF-LS-p5u" secondAttribute="width" id="zv4-Ao-AaC"/>
+                                <constraint firstItem="fWn-BR-cyn" firstAttribute="width" secondItem="nbF-LS-p5u" secondAttribute="width" multiplier="0.8" id="zv4-Ao-AaC"/>
                             </constraints>
                         </view>
                         <prototypes>
@@ -677,7 +676,7 @@
                                                         </stackView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="my personalRun/runagainst.." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hnM-06-vUB">
                                                             <rect key="frame" x="0.0" y="63.5" width="331" height="62"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                             <color key="textColor" name="DeepMatteGrey"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -690,6 +689,7 @@
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstItem="xmQ-Mf-OrV" firstAttribute="width" secondItem="22U-ZO-IND" secondAttribute="width" id="19e-0z-v6D"/>
+                                                        <constraint firstItem="hnM-06-vUB" firstAttribute="width" secondItem="22U-ZO-IND" secondAttribute="width" id="CDp-1a-L8l"/>
                                                         <constraint firstItem="SQ6-Lc-J3I" firstAttribute="height" secondItem="22U-ZO-IND" secondAttribute="height" multiplier="0.33" id="dO5-Qj-BVo"/>
                                                         <constraint firstItem="SQ6-Lc-J3I" firstAttribute="width" secondItem="22U-ZO-IND" secondAttribute="width" id="qHe-lG-pL7"/>
                                                     </constraints>
@@ -781,49 +781,43 @@
                                 <rect key="frame" x="20.5" y="84" width="373" height="516.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="nMm-k9-3fz">
-                                        <rect key="frame" x="0.0" y="0.0" width="373" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="373" height="44.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UserName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k3v-Ff-9qb">
-                                                <rect key="frame" x="0.0" y="0.0" width="182.5" height="40"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="182.5" height="44.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <color key="textColor" name="SilverFox"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SaK-1j-IiW">
-                                                <rect key="frame" x="190.5" y="0.0" width="182.5" height="40"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SaK-1j-IiW">
+                                                <rect key="frame" x="190.5" y="0.0" width="182.5" height="44.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <color key="textColor" name="SilverFox"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Distance" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NNg-jn-Rph">
-                                        <rect key="frame" x="0.0" y="50" width="373" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="54.5" width="373" height="44.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <color key="textColor" name="SilverFox"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nnx-gg-Oc5">
-                                        <rect key="frame" x="0.0" y="103.5" width="373" height="43"/>
+                                        <rect key="frame" x="0.0" y="109" width="373" height="59"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <color key="textColor" name="SilverFox"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" ElevationGain" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N4u-78-LcN">
-                                        <rect key="frame" x="0.0" y="156.5" width="373" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="178" width="373" height="59"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <color key="textColor" name="SilverFox"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Pace" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h6K-k6-Hns">
-                                        <rect key="frame" x="0.0" y="210" width="373" height="43"/>
+                                        <rect key="frame" x="0.0" y="247" width="373" height="59.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                        <color key="textColor" name="SilverFox"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Calories" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QNf-Uc-va7">
-                                        <rect key="frame" x="0.0" y="263" width="373" height="43.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <color key="textColor" name="SilverFox"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -873,15 +867,12 @@
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="QNf-Uc-va7" firstAttribute="height" secondItem="NNg-jn-Rph" secondAttribute="height" id="Bto-YH-F3W"/>
                                     <constraint firstItem="N4u-78-LcN" firstAttribute="width" secondItem="UnC-0w-EmG" secondAttribute="width" id="CPS-ES-H1w"/>
                                     <constraint firstItem="h6K-k6-Hns" firstAttribute="width" secondItem="UnC-0w-EmG" secondAttribute="width" id="PBy-fz-kgv"/>
-                                    <constraint firstItem="QNf-Uc-va7" firstAttribute="width" secondItem="UnC-0w-EmG" secondAttribute="width" id="QR4-8c-t6D"/>
                                     <constraint firstItem="nnx-gg-Oc5" firstAttribute="height" secondItem="N4u-78-LcN" secondAttribute="height" id="Vvm-Np-usx"/>
                                     <constraint firstItem="NNg-jn-Rph" firstAttribute="width" secondItem="UnC-0w-EmG" secondAttribute="width" id="X3d-Rg-1fR"/>
                                     <constraint firstItem="nMm-k9-3fz" firstAttribute="width" secondItem="UnC-0w-EmG" secondAttribute="width" id="a4k-mO-hX5"/>
                                     <constraint firstItem="h6K-k6-Hns" firstAttribute="height" secondItem="N4u-78-LcN" secondAttribute="height" id="hBo-Xy-osw"/>
-                                    <constraint firstItem="h6K-k6-Hns" firstAttribute="height" secondItem="QNf-Uc-va7" secondAttribute="height" id="hYc-36-Wa0"/>
                                     <constraint firstItem="Sgz-Qe-7VJ" firstAttribute="width" secondItem="UnC-0w-EmG" secondAttribute="width" id="vrh-RH-3hx"/>
                                     <constraint firstItem="nnx-gg-Oc5" firstAttribute="width" secondItem="UnC-0w-EmG" secondAttribute="width" id="w52-cq-0A4"/>
                                 </constraints>
@@ -934,7 +925,6 @@
                     <navigationItem key="navigationItem" id="gbt-7L-3yQ"/>
                     <connections>
                         <outlet property="averagePaceLabel" destination="h6K-k6-Hns" id="q4X-Vp-aLN"/>
-                        <outlet property="caloriesLabel" destination="QNf-Uc-va7" id="36L-B9-tsZ"/>
                         <outlet property="dateLabel" destination="SaK-1j-IiW" id="Tfh-Qi-XHY"/>
                         <outlet property="distanceLabel" destination="NNg-jn-Rph" id="nv9-Vt-81k"/>
                         <outlet property="elevationGainedLabel" destination="N4u-78-LcN" id="Ahf-ta-2XZ"/>
@@ -1037,11 +1027,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="X4n-DH-daA"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Go On A Run" id="TZH-ma-qep">
-                        <barButtonItem key="leftBarButtonItem" title="Profile" id="kkg-BZ-cDW">
-                            <color key="tintColor" name="SilverFox"/>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Go On A Run" id="TZH-ma-qep"/>
                     <connections>
                         <outlet property="distanceLabel" destination="tsW-XY-ZTe" id="8GC-Hv-GTa"/>
                         <outlet property="elevationLabel" destination="K0h-1p-xcj" id="gBR-JW-5Qc"/>
@@ -1446,7 +1432,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ZYh-jL-z0D"/>
-        <segue reference="ATV-gC-OnR"/>
-        <segue reference="Dbd-pf-KME"/>
+        <segue reference="lYb-BP-OSZ"/>
+        <segue reference="hNl-jx-9bH"/>
     </inferredMetricsTieBreakers>
 </document>

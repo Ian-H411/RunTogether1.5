@@ -58,11 +58,19 @@ struct Converter{
     
     static func distance(_ distance: Measurement<UnitLength>) -> String {
         let formatter = MeasurementFormatter()
+        formatter.unitOptions = .naturalScale
         return formatter.string(from: distance)
     }
     
-    static func date(_ timestamp: Date?) -> String {
+    static func dateFull(_ timestamp: Date?) -> String {
         guard let timestamp = timestamp as Date? else { return "" }
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM-dd-yyyy HH:mm"
+        return "Date: \(formatter.string(from: timestamp))"
+    }
+    
+    static func dateShort(_ timestamp: Date?) -> String{
+    guard let timestamp = timestamp as Date? else { return "" }
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         return formatter.string(from: timestamp)

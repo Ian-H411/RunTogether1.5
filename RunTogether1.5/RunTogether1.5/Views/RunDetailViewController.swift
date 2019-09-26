@@ -22,8 +22,7 @@ class RunDetailViewController: UIViewController {
     @IBOutlet weak var elevationGainedLabel: UILabel!
     
     @IBOutlet weak var averagePaceLabel: UILabel!
-    
-    @IBOutlet weak var caloriesLabel: UILabel!
+
     
     @IBOutlet weak var timePointsLabel: UILabel!
     
@@ -119,7 +118,7 @@ class RunDetailViewController: UIViewController {
         let labelBorderWidth: CGFloat = 1
         let cornerRadius: CGFloat = 10
         
-        let labelArray: [UILabel] = [distanceLabel,timeLabel,elevationGainedLabel,averagePaceLabel,caloriesLabel,timePointsLabel,elevationPointsLabel]
+        let labelArray: [UILabel] = [distanceLabel,timeLabel,elevationGainedLabel,averagePaceLabel,timePointsLabel,elevationPointsLabel]
    
         for label in labelArray {
             //set all labels border
@@ -146,12 +145,11 @@ class RunDetailViewController: UIViewController {
             selectedRun = opponentRun
         }
         usernameLabel.text = selectedRun.user?.name ?? ""
-        dateLabel.text = Converter.date(selectedRun.date)
+        dateLabel.text = Converter.dateShort(selectedRun.date)
         timeLabel.text = "  Time: \(Converter.formatTime(seconds: Int(selectedRun.totalTime)))"
         guard let selectedUser = selectedRun.user else {return}
         elevationGainedLabel.text = "  ElevationGained: \(Converter.distance(selectedRun.elevationGained,user:selectedUser))"
-        averagePaceLabel.text = "  AveragePace: \(Converter.pace(distance: Measurement(value: selectedRun.distance, unit: UnitLength.miles), seconds: Int(selectedRun.totalTime), user: selectedUser))"
-        caloriesLabel.text = "  CaloriesBurned: \(selectedRun.calories)"
+        averagePaceLabel.text = "  AveragePace: \(Converter.pace(distance: selectedRun.distanceInMeasurement, seconds: Int(selectedRun.totalTime), user: selectedUser ))"
         timePointsLabel.text = "\(selectedRun.timePoints)"
         elevationPointsLabel.text = "\(selectedRun.elevationPoints)"
         distanceLabel.text = "  Distance:  \(Converter.distance(selectedRun.distance,user: selectedUser))"
