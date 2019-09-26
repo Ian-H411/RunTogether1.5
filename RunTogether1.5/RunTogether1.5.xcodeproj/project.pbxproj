@@ -53,7 +53,7 @@
 		258CEF5C233973F200EAE21C /* ChallengeAcceptedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeAcceptedViewController.swift; sourceTree = "<group>"; };
 		25A65F28232EED5C00B2D64A /* RunHistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunHistoryTableViewController.swift; sourceTree = "<group>"; };
 		25A65F2A232FCCF100B2D64A /* RunTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunTableViewCell.swift; sourceTree = "<group>"; };
-		25AA4B4023229DE00051C4F9 /* RunTogether1.5.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RunTogether1.5.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		25AA4B4023229DE00051C4F9 /* RunTogether.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RunTogether.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25AA4B4323229DE00051C4F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		25AA4B4823229DE00051C4F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		25AA4B4A23229DE10051C4F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -109,7 +109,7 @@
 		25AA4B4123229DE00051C4F9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				25AA4B4023229DE00051C4F9 /* RunTogether1.5.app */,
+				25AA4B4023229DE00051C4F9 /* RunTogether.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -211,7 +211,7 @@
 			);
 			name = RunTogether1.5;
 			productName = RunTogether1.5;
-			productReference = 25AA4B4023229DE00051C4F9 /* RunTogether1.5.app */;
+			productReference = 25AA4B4023229DE00051C4F9 /* RunTogether.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -450,7 +450,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.IanH411.RunTogether1-5";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = RunTogether;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -470,7 +470,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.IanH411.RunTogether1-5";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = RunTogether;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

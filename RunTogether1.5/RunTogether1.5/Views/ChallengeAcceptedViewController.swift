@@ -119,8 +119,7 @@ class ChallengeAcceptedViewController: UIViewController {
     }
     
     func updateUI(){
-        guard let user = CloudController.shared.user else {return}
-        let pace = Converter.pace(distance: distance, seconds: seconds, user: user)
+        let pace = Converter.pace(distance: distance, seconds: seconds, user: nil)
         let time = Converter.formatTime(seconds: seconds)
         let distanceString = Converter.distance(distance)
         let elevationString = Converter.distance(elevation)

@@ -43,9 +43,11 @@ class RunHistoryTableViewController: UITableViewController {
         CloudController.shared.retrieveRuns { (success) in
             if success{
                 DispatchQueue.main.async {
+                    guard let user = CloudController.shared.user else {return}
                     self.setUpTotalDistance()
                     self.tableView.tableFooterView = UIView()
                     self.tableView.reloadData()
+                    self.RacesWonLabel.text = "RACES WON: \(user.racesWon)"
                 }
             }
         }
@@ -54,6 +56,10 @@ class RunHistoryTableViewController: UITableViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         hasFiredRunInbox = false
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        tableView.reloadData()
     }
     
     // MARK: - Table view data source
@@ -100,6 +106,7 @@ class RunHistoryTableViewController: UITableViewController {
         } else {
             displayInbox = true
             tableView.reloadData()
+            
         }
         
     }
@@ -111,8 +118,7 @@ class RunHistoryTableViewController: UITableViewController {
     //MARK: - HELPER FUNCTIONS
     
     func setUpUI(){
-        guard let user = CloudController.shared.user else {return}
-        RacesWonLabel.text = "RACES WON: \(user.racesWon)"
+        
         let labelColor: String = "SilverFox"
         let labelBorderWidth: CGFloat = 1
         let cornerRadius: CGFloat = 10

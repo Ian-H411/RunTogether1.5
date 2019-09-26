@@ -50,14 +50,17 @@ class GoOnARunViewController: UIViewController {
     
     var hasInternetBeenChecked:Bool = false
     
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        stopRun()
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
         CloudController.shared.retrieveFriends { (_) in
             
         }
-        
     }
     
     //MARK: - ACTIONS
@@ -123,8 +126,7 @@ class GoOnARunViewController: UIViewController {
     }
     //to be used to update the label text
     func updateUIText(){
-        guard let user = CloudController.shared.user else {return}
-        paceLabel.text = Converter.pace(distance: distance, seconds: seconds, user: user)
+        paceLabel.text = Converter.pace(distance: distance, seconds: seconds, user: nil)
         timeLabel.text = Converter.formatTime(seconds: seconds)
         distanceLabel.text = Converter.distance(distance)
         elevationLabel.text = Converter.distance(elevation)

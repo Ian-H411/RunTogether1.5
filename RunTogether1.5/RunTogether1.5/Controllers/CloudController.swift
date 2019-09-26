@@ -225,11 +225,11 @@ class CloudController {
     // to be called every time the app starts up
     func retrieveUserProfile(completion: @escaping (Bool,Error?) -> Void){
          
-        guard let userID = userID else {completion(false,nil);print("no user ID"); return}
+        guard var userID = userID else {completion(false,nil);print("no user ID"); return}
         
 //        fake account login uncomment to login under dummy profile
-//        let fakeID = CKRecord.ID(recordName: "HIdummyprofile")
-//        userID = fakeID
+        let fakeID = CKRecord.ID(recordName: "HIdummyprofile")
+        userID = fakeID
         let predicate = NSPredicate(format: "UserReference = %@", userID.recordName)
         let query = CKQuery(recordType: UserKeys.userObjectKey, predicate: predicate)
         

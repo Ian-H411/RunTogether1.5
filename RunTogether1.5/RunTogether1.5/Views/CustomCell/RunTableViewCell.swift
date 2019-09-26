@@ -45,7 +45,7 @@ class RunTableViewCell: UITableViewCell {
         }
         let dateAsString = Converter.dateFull(runRecieved.date)
         dateLabel.text = dateAsString
-        let distanceAsString = Converter.distance(Measurement(value: runRecieved.distance, unit: UnitLength.meters))
+        let distanceAsString = Converter.distance(runRecieved.distanceInMeasurement)
         distanceLabel.text = distanceAsString
     }
     
@@ -56,7 +56,7 @@ class RunTableViewCell: UITableViewCell {
         let dateAsString = Converter.dateFull(runRecieved.date)
         dateLabel.text = "  \(dateAsString)"
         usernameLabel.text = "My run  against: \(opponent.name)"
-        let distanceAsString = Converter.distance(Measurement(value: runRecieved.distance, unit: UnitLength.meters))
+        let distanceAsString = Converter.distance(runRecieved.distanceInMeasurement)
         distanceLabel.text = distanceAsString
    
     }

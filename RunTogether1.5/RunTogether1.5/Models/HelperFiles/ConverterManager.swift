@@ -23,14 +23,24 @@ struct Converter{
         return timeFormatter.string(from: TimeInterval(seconds))!
     }
     
-    static func pace(distance: Measurement<UnitLength>, seconds: Int,user: User) -> String {
-        
-        var outputUnit = UnitSpeed.minutesPerMile
-        if user.prefersMetric{
-            outputUnit = UnitSpeed.minutesPerKilometer
+    static func pace(distance: Measurement<UnitLength>, seconds: Int, user: User?) -> String {
+        guard let owner = CloudController.shared.user else {return ""}
+        var distance = distance
+        var outputUnit = UnitSpeed.minutesPerKilometer
+        if !owner.prefersMetric{
+            outputUnit = UnitSpeed.minutesPerMile
+            distance.convert(to: UnitLength.feet)
         }
         let formatter = MeasurementFormatter()
         formatter.unitOptions = [.providedUnit] // 1
+        if let otherUser = user{
+            if !otherUser.prefersMetric && owner.prefersMetric{
+                distance.convert(to: UnitLength.meters)
+            }
+            else if otherUser.prefersMetric && !owner.prefersMetric{
+                distance.convert(to: UnitLength.feet)
+            }
+        }
         let speedMagnitude = seconds != 0 ? distance.value / Double(seconds) : 0
         let speed = Measurement(value: speedMagnitude, unit: UnitSpeed.metersPerSecond)
         return formatter.string(from: speed.converted(to: outputUnit))
@@ -47,7 +57,8 @@ struct Converter{
     //    }
     
     
-    static func distance(_ distance: Double,user:User) -> String {
+    static func distance(_ distance: Double) -> String {
+        guard let user = CloudController.shared.user else {return ""}
         var preferedLength = UnitLength.kilometers
         if !user.prefersMetric{
             preferedLength = UnitLength.miles
@@ -58,6 +69,11 @@ struct Converter{
     
     static func distance(_ distance: Measurement<UnitLength>) -> String {
         let formatter = MeasurementFormatter()
+        guard let user = CloudController.shared.user else {return ""}
+        if user.prefersMetric{
+            formatter.unitOptions = .providedUnit
+            return formatter.string(from: distance.converted(to: UnitLength.kilometers))
+        }
         formatter.unitOptions = .naturalScale
         return formatter.string(from: distance)
     }

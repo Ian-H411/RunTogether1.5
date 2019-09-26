@@ -144,15 +144,15 @@ class RunDetailViewController: UIViewController {
             guard let opponentRun = landingPadOpponentRun else {return}
             selectedRun = opponentRun
         }
+        guard let selectedUser = selectedRun.user else {return}
         usernameLabel.text = selectedRun.user?.name ?? ""
         dateLabel.text = Converter.dateShort(selectedRun.date)
         timeLabel.text = "  Time: \(Converter.formatTime(seconds: Int(selectedRun.totalTime)))"
-        guard let selectedUser = selectedRun.user else {return}
-        elevationGainedLabel.text = "  ElevationGained: \(Converter.distance(selectedRun.elevationGained,user:selectedUser))"
-        averagePaceLabel.text = "  AveragePace: \(Converter.pace(distance: selectedRun.distanceInMeasurement, seconds: Int(selectedRun.totalTime), user: selectedUser ))"
+        elevationGainedLabel.text = "  ElevationGained: \(Converter.distance(selectedRun.elevationGained))"
+        averagePaceLabel.text = "  AveragePace: \(Converter.pace(distance: selectedRun.distanceInMeasurement, seconds: Int(selectedRun.totalTime), user:selectedUser ))"
         timePointsLabel.text = "\(selectedRun.timePoints)"
         elevationPointsLabel.text = "\(selectedRun.elevationPoints)"
-        distanceLabel.text = "  Distance:  \(Converter.distance(selectedRun.distance,user: selectedUser))"
+        distanceLabel.text = "  Distance:  \(Converter.distance(selectedRun.distance))"
     }
     // MARK: - Navigation
     
