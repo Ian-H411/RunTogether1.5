@@ -35,7 +35,7 @@ class GoOnARunViewController: UIViewController {
     var seconds = 0
     
     var isRunning: Bool = false
-
+    
     var timer: Timer?
     
     var distance = Measurement(value: 0, unit: UnitLength.feet)
@@ -52,7 +52,9 @@ class GoOnARunViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
-        stopRun()
+        if isRunning{
+            stopRun()
+        }
         
     }
     override func viewDidLoad() {
@@ -150,7 +152,7 @@ class GoOnARunViewController: UIViewController {
     func startRun(){
         //clear everything out and then go
         seconds = 0
-    
+        
         distance = Measurement(value: 0, unit: UnitLength.meters)
         listOfLocations.removeAll()
         updateUIText()
@@ -174,7 +176,7 @@ class GoOnARunViewController: UIViewController {
         updateUIText()
     }
     
- 
+    
     
     func saveAndShare(){
         guard let user = CloudController.shared.user else {return}
@@ -219,7 +221,7 @@ class GoOnARunViewController: UIViewController {
             DispatchQueue.main.async {
                 self.clearUpUI()
             }
-         
+            
         }
         guard let user = CloudController.shared.user else {return}
         if !user.friends.isEmpty{

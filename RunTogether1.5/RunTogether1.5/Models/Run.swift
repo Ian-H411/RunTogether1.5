@@ -11,19 +11,15 @@ import CloudKit
 
 class Run {
     
-    //average pace held by the race during the race in mph
- 
-
-    // calories burnt throughout the run
-    
     // specific timestamp for when the user hit the start button
     var date: Date {
-         let date = coreLocationPoints[0].timestamp
+        let date = coreLocationPoints[0].timestamp
         return date
     }
     
     // amount of distance run by the racer in miles
     let distance: Double
+    
     //comes down from the cloud in a double in the form of miles
     var distanceInMeasurement:Measurement<UnitLength>{
         guard let user = user else {return Measurement(value: 0, unit: UnitLength.miles)}
@@ -87,12 +83,12 @@ class Run {
         guard let user  = user else {return nil}
         return CKRecord.Reference(recordID: user.recordID, action: .deleteSelf)
     }
-    
+    //creates a reference to the opponent
     var opponentRunReference: CKRecord.Reference?{
         guard let opposingRun = competingRun else {return nil}
         return CKRecord.Reference(recordID: opposingRun.ckRecordId, action: .none)
     }
-    
+    //default initializer
     init(distance: Double, elevation: Double, totalTime: Double, coreLocationPoints: [CLLocation], user: User, ckRecordId: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString)){
         self.distance = distance
         self.totalTime = totalTime
@@ -104,15 +100,15 @@ class Run {
         
     }
     
-    
+    //initializes run from ckrecord
     init?(record: CKRecord, user: User){
         guard let distance =  record[RunKeys.distanceKey] as? Double,
             let totalTime = record[RunKeys.totalTimeKey] as? Double,
             let coreLocationPoints = record[RunKeys.coreLocationsKey] as? [CLLocation],
             let elevationPoints = record[RunKeys.elevationPoints] as? Int,
-        let consistencyPoints = record[RunKeys.consistencyPointsKey] as? Int,
+            let consistencyPoints = record[RunKeys.consistencyPointsKey] as? Int,
             let timePoints = record[RunKeys.timePointsKey] as? Int,
-        let elevationGained = record[RunKeys.elevationGained] as? Double
+            let elevationGained = record[RunKeys.elevationGained] as? Double
             else {return nil}
         let sentToKey = record[RunKeys.sendToKey] as? CKRecord.Reference
         self.distance = distance
@@ -125,10 +121,11 @@ class Run {
         self.timePoints = timePoints
         self.elevationGained = elevationGained
         self.sendTo = sentToKey
-       
+        
     }
-   
+    
 }
+
 extension CKRecord{
     convenience init?(run: Run){
         self.init(recordType: RunKeys.runObjectKey, recordID: run.ckRecordId)
@@ -143,7 +140,7 @@ extension CKRecord{
         self.setValue(run.opponentRunReference, forKey: RunKeys.opposingRunReferenceKey)
         guard let reciever = run.sendTo else {return}
         self.setValue(reciever, forKey: RunKeys.sendToKey)
-       
+        
     }
 }
 

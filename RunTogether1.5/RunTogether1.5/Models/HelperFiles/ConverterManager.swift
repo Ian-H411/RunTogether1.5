@@ -9,11 +9,7 @@
 import Foundation
 
 struct Converter{
-    //    static func formatDate(date:Date) -> String {
-    //        let dateFormatter = DateFormatter()
-    //        dateFormatter.dateStyle = .medium
-    //        return dateFormatter.string(from: date)
-    //    }
+
     
     static func formatTime(seconds: Int) -> String{
         let timeFormatter = DateComponentsFormatter()
@@ -45,16 +41,6 @@ struct Converter{
         let speed = Measurement(value: speedMagnitude, unit: UnitSpeed.metersPerSecond)
         return formatter.string(from: speed.converted(to: outputUnit))
     }
-    
-    //    static func paceFormatter(distance:Measurement<UnitLength>, seconds: Int, outputUnit: UnitSpeed) -> String{
-    //        let formatter = MeasurementFormatter()
-    //        formatter.unitOptions = [.providedUnit]
-    //        if seconds == 0 {return ""}
-    //        //thank you professor mortenson for finally providing me with some usefull info DVT
-    //        let speedMagnitude = distance.value / Double(seconds)
-    //        let speed = Measurement(value: speedMagnitude, unit: UnitSpeed.metersPerSecond)
-    //        return formatter.string(from: speed.converted(to: outputUnit))
-    //    }
     
     
     static func distance(_ distance: Double) -> String {
@@ -91,11 +77,5 @@ struct Converter{
         formatter.dateStyle = .medium
         return formatter.string(from: timestamp)
     }
-    
-    //    static func measureMentFormatter(distance: Measurement<UnitLength>) -> String {
-    //        let formatter = MeasurementFormatter()
-    //        formatter.unitOptions = .naturalScale
-    //        return formatter.string(from: distance)
-    //
-    //    }
+
 }

@@ -19,9 +19,11 @@ class ProfileDetailViewController: UIViewController {
     
     @IBOutlet weak var totalDistanceLabel: UILabel!
     
+    @IBOutlet weak var privacyPolicyLink: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        initialSetUp()
         
     }
     
@@ -45,7 +47,36 @@ class ProfileDetailViewController: UIViewController {
     func initialSetUp(){
         guard let user = CloudController.shared.user else {return}
         usernameLabel.text = user.name
+        totalPointsLabel.text = "\(retrieveUserPoints()) Total Points"
+        let distance = Converter.distance(retrieveDistance())
+        totalDistanceLabel.text = "Total distance: \(distance)"
+        numberOfRunsLabel.text = "Run Count: \(user.runs.count)"
+        
+        let labelCarousel:[UILabel] = [usernameLabel,totalDistanceLabel,numberOfRunsLabel,totalPointsLabel]
+        for label in labelCarousel{
+            label.layer.borderColor = UIColor(named: "SilverFox")!.cgColor
+            label.layer.borderWidth = 4
+            label.layer.cornerRadius = 10
+        }
     }
+    func retrieveUserPoints() -> Int{
+        guard let user = CloudController.shared.user else {return 0 }
+        var points = 0
+        for run in user.runs{
+            points = points + run.totalPoints
+        }
+        return points
+    }
+    
+    func retrieveDistance() ->Measurement<UnitLength>{
+        guard let user = CloudController.shared.user else {return Measurement(value: 0, unit: UnitLength.miles)}
+        var distance = Measurement(value: 0, unit: UnitLength.miles)
+        for run in user.runs{
+            distance = distance + run.distanceInMeasurement
+        }
+        return distance
+    }
+    
     
     func presentDeleteProfileAlert(){
         let alertController = UIAlertController(title: "DELETE PROFILE", message: "THIS WILL REMOVE YOUR ENITRE PROFILE AND CANNOT BE UNDONE", preferredStyle: .alert)

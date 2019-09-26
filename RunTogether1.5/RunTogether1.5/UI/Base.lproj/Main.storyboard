@@ -519,6 +519,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="numberOfRunsLabel" destination="jiO-20-IoM" id="Vd7-cj-YSB"/>
+                        <outlet property="privacyPolicyLink" destination="PZS-te-qZT" id="VzK-40-63Y"/>
                         <outlet property="totalDistanceLabel" destination="oOC-G5-MUv" id="oyz-BF-2v6"/>
                         <outlet property="totalPointsLabel" destination="XgK-4B-fSS" id="4Fg-gs-Iol"/>
                         <outlet property="usernameLabel" destination="usI-tx-9bc" id="Yui-WU-9eN"/>
@@ -540,8 +541,8 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="RfL-Hr-bwU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="759"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" name="DeepMatteGrey"/>
-                        <color key="separatorColor" name="DeepMatteGrey"/>
+                        <color key="backgroundColor" name="DarkSlate"/>
+                        <color key="separatorColor" name="DarkSlate"/>
                         <color key="sectionIndexColor" name="SilverFox"/>
                         <color key="sectionIndexBackgroundColor" name="DeepMatteGrey"/>
                         <prototypes>
@@ -599,7 +600,7 @@
                                         <constraint firstItem="MYy-QJ-SIe" firstAttribute="height" secondItem="SkF-Hn-6bl" secondAttribute="height" multiplier="0.8" id="iV9-AQ-qub"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" name="DeepMatteGrey"/>
+                                <color key="backgroundColor" name="DarkSlate"/>
                                 <connections>
                                     <outlet property="cardView" destination="MYy-QJ-SIe" id="yo9-ih-FcA"/>
                                     <outlet property="challengeLabel" destination="NyM-vA-GQk" id="Ays-Pe-Y9o"/>
@@ -1210,14 +1211,7 @@
                             <outlet property="delegate" destination="xl8-fX-oog" id="R82-MB-J5f"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="My Friends" id="mMS-pd-UbW">
-                        <barButtonItem key="leftBarButtonItem" title="Profile" id="ubL-zP-rHl">
-                            <color key="tintColor" name="SilverFox"/>
-                            <connections>
-                                <segue destination="9Pl-td-hRs" kind="show" identifier="toProfile" id="h9X-Mm-i6g"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="My Friends" id="mMS-pd-UbW"/>
                     <connections>
                         <outlet property="cancelButton" destination="uLC-X1-jRk" id="kYl-vW-PA5"/>
                         <outlet property="findNewFriendsSearchBar" destination="q5j-pa-64T" id="x0J-te-Cdv"/>
@@ -1462,6 +1456,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="ZYh-jL-z0D"/>
         <segue reference="lYb-BP-OSZ"/>
-        <segue reference="h9X-Mm-i6g"/>
+        <segue reference="Dbd-pf-KME"/>
     </inferredMetricsTieBreakers>
 </document>

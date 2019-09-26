@@ -12,9 +12,7 @@ class ChallengeAcceptedViewController: UIViewController {
     //MARK: -OUTLETS
     
     @IBOutlet weak var timeLabel: UILabel!
-    
 
-    
     @IBOutlet weak var distanceLabel: UILabel!
     
     @IBOutlet weak var elevationGained: UILabel!
@@ -69,10 +67,11 @@ class ChallengeAcceptedViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-            super.viewWillDisappear(true)
+        super.viewWillDisappear(true)
+        if isRunning{
             stopRun()
-            
         }
+    }
     
     
     
@@ -132,7 +131,7 @@ class ChallengeAcceptedViewController: UIViewController {
         
     }
     
- 
+    
     
     
     @IBAction func startStopButtonTapped(_ sender: Any) {
@@ -213,7 +212,7 @@ class ChallengeAcceptedViewController: UIViewController {
             return
         }
         if hasPassedDistance{
-        presentFinishedRunAlert()
+            presentFinishedRunAlert()
         }
     }
     
@@ -223,7 +222,7 @@ class ChallengeAcceptedViewController: UIViewController {
         let alert = UIAlertController(title: "Run complete congratulations!", message: "what would you like to do with this run?", preferredStyle: .actionSheet)
         
         let deleteAction = UIAlertAction(title: "Delete This Run", style: .destructive) { (_) in
-
+            
         }
         let saveAction = UIAlertAction(title: "Save", style: .default) { (_) in
             guard let opponentsRun = self.opponentRun else {return}
@@ -232,8 +231,8 @@ class ChallengeAcceptedViewController: UIViewController {
                 if success{
                     print("donesies")
                     DispatchQueue.main.async {
-                     
-                    self.navigationController? .popViewController(animated: true)
+                        
+                        self.navigationController? .popViewController(animated: true)
                     }
                 }
             }

@@ -94,6 +94,8 @@ extension CKRecord {
             if !friendList.isEmpty{
                 self.setValue(user.friendReferenceList, forKey: UserKeys.friendReferenceIDKey)
                 
+            } else {
+                setValue(nil, forKey: UserKeys.friendReferenceIDKey)
             }
         }
         if let runsToDo = user.runsRecievedReferenceList{

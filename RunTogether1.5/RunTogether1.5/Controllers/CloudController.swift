@@ -80,6 +80,7 @@ class CloudController {
             guard let recordToSave = recordToSave else {completion(false);return}
             guard let runToSave = Run(record: recordToSave, user: user) else {completion(false);return}
             user.runs.append(runToSave)
+            user.runs = self.organizeRunsByDate(runs: user.runs)
             self.publicDatabase.add(operation)
             completion(true)
         }
@@ -400,8 +401,8 @@ class CloudController {
                         }
                     }
                     if !tripped{
-                    guard let newUser = User(record: record) else {return}
-                    users.append(newUser)
+                        guard let newUser = User(record: record) else {return}
+                        users.append(newUser)
                     }
                 }
                 var runs = [Run]()
@@ -558,13 +559,23 @@ class CloudController {
         for i in 0...user.friends.count - 1{
             if user.friends[i] == friend{
                 user.friends.remove(at: i)
-                let operation = CKModifyRecordsOperation(recordsToSave: nil, recordIDsToDelete: [friend.recordID])
-                operation.queuePriority = .normal
-                publicDatabase.add(operation)
-                print("friend removed")
-                
+
             }
         }
+        if var friendsFriendList = friend.friendReferenceList {
+            for i in 0...friendsFriendList.count - 1{
+                if friendsFriendList[i].recordID.recordName == user.recordID.recordName{
+                    friendsFriendList.remove(at: i)
+                    friend.friendReferenceList = friendsFriendList
+                }
+            }
+        }
+        guard let friendRecord = CKRecord(user: friend) else {return}
+        let operation = CKModifyRecordsOperation(recordsToSave:[friendRecord] , recordIDsToDelete: nil)
+        operation.queuePriority = .high
+        operation.savePolicy = .changedKeys
+        publicDatabase.add(operation)
+        print("friend removed")
     }
     
     //MARK: - POINT SYSTEM

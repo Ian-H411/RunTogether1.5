@@ -136,6 +136,9 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate, Fr
         let alertcontroller = UIAlertController(title: "Remove Friend", message: "This Will remove \(oldFriend.name) from your friend list", preferredStyle: .alert)
         let removeAction = UIAlertAction(title: "Remove", style: .destructive) { (_) in
             CloudController.shared.removeFriend(friend: oldFriend)
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
         alertcontroller.addAction(removeAction)
