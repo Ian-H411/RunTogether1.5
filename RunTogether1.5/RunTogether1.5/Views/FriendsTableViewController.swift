@@ -94,7 +94,9 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate, Fr
         return cell
     }
     
-    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 217
+    }
     
     
     //MARK: - ACTIONS

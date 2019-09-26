@@ -69,9 +69,10 @@ class ChallengeAcceptedViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        timer?.invalidate()
-        locationManager.stopUpdatingLocation()
-    }
+            super.viewWillDisappear(true)
+            stopRun()
+            
+        }
     
     
     
@@ -189,14 +190,8 @@ class ChallengeAcceptedViewController: UIViewController {
             self.stopRun()
         }
     }
-//    func passedFinishLineAlert(){
-//        let alertcontroller = UIAlertController(title: "CONGRATS", message: "you crossed the finish line", preferredStyle: .alert)
-//        let continueButton = UIAlertAction(title: "Continue", style: .default) { (_) in
-//            
-//        }
-//        alertcontroller.addAction(continueButton)
-//        self.present(alertcontroller, animated: true)
-//    }
+    
+    
     
     func startRun(){
         //clear everything out and then go
@@ -228,8 +223,7 @@ class ChallengeAcceptedViewController: UIViewController {
         let alert = UIAlertController(title: "Run complete congratulations!", message: "what would you like to do with this run?", preferredStyle: .actionSheet)
         
         let deleteAction = UIAlertAction(title: "Delete This Run", style: .destructive) { (_) in
-            //TODO: - present a alert that double checks if this is really what they want
-            
+
         }
         let saveAction = UIAlertAction(title: "Save", style: .default) { (_) in
             guard let opponentsRun = self.opponentRun else {return}

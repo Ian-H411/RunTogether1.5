@@ -47,9 +47,7 @@ extension ChallengeTableViewCell {
         
         
         userInCell = user
-        usernameLabel.text = user.name
-        pointsLabel.text = "\(user.totalMiles)"
-        
+        usernameLabel.text = user.name        
     }
     
 }

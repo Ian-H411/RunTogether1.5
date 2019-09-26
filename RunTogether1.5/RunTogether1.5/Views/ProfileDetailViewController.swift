@@ -13,16 +13,27 @@ class ProfileDetailViewController: UIViewController {
     
     @IBOutlet weak var usernameLabel: UILabel!
     
-
+    @IBOutlet weak var totalPointsLabel: UILabel!
     
+    @IBOutlet weak var numberOfRunsLabel: UILabel!
+    
+    @IBOutlet weak var totalDistanceLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let user = CloudController.shared.user else {return}
-        usernameLabel.text = user.name
-       
-            }
-  
+        
+        
+    }
+    
+    //MARK: - ACTIONS
+    
+    @IBAction func SendToPrivacyPolicyLink(_ sender: Any) {
+        if let url = URL(string: "https://sites.google.com/view/runagainstfriends") {
+            UIApplication.shared.open(url)
+        }
+    }
+    
+    
     @IBAction func deleteProfileButtonTapped(_ sender: Any) {
         presentDeleteProfileAlert()
     }
@@ -31,12 +42,17 @@ class ProfileDetailViewController: UIViewController {
     
     //MARK: - HELPERS
     
+    func initialSetUp(){
+        guard let user = CloudController.shared.user else {return}
+        usernameLabel.text = user.name
+    }
+    
     func presentDeleteProfileAlert(){
         let alertController = UIAlertController(title: "DELETE PROFILE", message: "THIS WILL REMOVE YOUR ENITRE PROFILE AND CANNOT BE UNDONE", preferredStyle: .alert)
         let yesDeleteAction = UIAlertAction(title: "Yes delete my profile", style: .destructive) { (_) in
-//            CloudController.shared.deleteUser()
+            CloudController.shared.deleteUser()
             DispatchQueue.main.async {
-//                self.navigationController?.popToRootViewController(animated: true)
+                
                 self.tabBarController?.dismiss(animated: true, completion: nil)
             }
         }
