@@ -18,8 +18,7 @@ class CloudController {
     var userID:CKRecord.ID?
     
     let publicDatabase = CKContainer.default().publicCloudDatabase
-    
-    var testID = "huiuljoijiokjik"
+
     
     //MARK: - PUSH TO SERVER FUNCTIONS
     
@@ -127,11 +126,10 @@ class CloudController {
         } else {
             user.runsReferenceList = [CKRecord.Reference(recordID: myRun.ckRecordId, action: .none)]
         }
-        guard let recordUser = CKRecord(user: user) else {return}
-        guard let recordOpponentRun = CKRecord(run: opponentsRun) else {return}
-        let operation = CKModifyRecordsOperation(recordsToSave: [recordUser,recordOpponentRun], recordIDsToDelete: nil)
-        operation.savePolicy = .changedKeys
-        operation.queuePriority = .high
+       
+        
+        
+        
         guard let recordToPush = CKRecord(run: myRun) else {return}
         //save it
         publicDatabase.save(recordToPush) { (recordToSave, error) in
@@ -145,7 +143,15 @@ class CloudController {
             }
             guard let recordToSave = recordToSave else {completion(false);return}
             guard let runToSave = Run(record: recordToSave, user: user) else {completion(false);return}
-            user.runs.append(runToSave)
+            runToSave.competingRun = opponentsRun
+            opponentsRun.competingRun = runToSave
+             user.runs.append(runToSave)
+            guard let recordOpponentRun = CKRecord(run: opponentsRun) else {return}
+             guard let recordUser = CKRecord(user: user) else {return}
+           
+            let operation = CKModifyRecordsOperation(recordsToSave: [recordUser,recordOpponentRun], recordIDsToDelete: nil)
+            operation.savePolicy = .changedKeys
+            operation.queuePriority = .high
             self.publicDatabase.add(operation)
             completion(true)
         }

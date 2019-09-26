@@ -12,7 +12,7 @@ class ChallengeAcceptedViewController: UIViewController {
     //MARK: -OUTLETS
     
     @IBOutlet weak var timeLabel: UILabel!
-
+    
     @IBOutlet weak var distanceLabel: UILabel!
     
     @IBOutlet weak var elevationGained: UILabel!
@@ -168,7 +168,9 @@ class ChallengeAcceptedViewController: UIViewController {
         self.present(alert,animated: true)
     }
     func tryAgain(){
-        
+        isRunning = true
+        startStopButton.setTitle("Stop", for: .normal)
+        startRun()
     }
     func startLocationTracking(){
         //set the delegate

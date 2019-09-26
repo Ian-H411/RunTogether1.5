@@ -178,21 +178,21 @@ class GoOnARunViewController: UIViewController {
     
     
     
-    func saveAndShare(){
-        guard let user = CloudController.shared.user else {return}
-        
-        CloudController.shared.addRunAndPushToCloud(with: distance, elevation: self.elevation, totalTime: Double(self.seconds), coreLocations: self.listOfLocations, completion: { (success) in
-            if success{
-                print("saved")
-                self.run = user.runs.last
-                DispatchQueue.main.async {
-                    self.performSegue(withIdentifier: "sendThisRun", sender: nil)
-                }
-            } else {
-                print("error")
-            }
-        })
-    }
+//    func saveAndShare(){
+//        guard let user = CloudController.shared.user else {return}
+//
+//        CloudController.shared.addRunAndPushToCloud(with: distance, elevation: self.elevation, totalTime: Double(self.seconds), coreLocations: self.listOfLocations, completion: { (success) in
+//            if success{
+//                print("saved")
+//                self.run = user.runs.last
+//                DispatchQueue.main.async {
+//                    self.performSegue(withIdentifier: "sendThisRun", sender: nil)
+//                }
+//            } else {
+//                print("error")
+//            }
+//        })
+//    }
     
     
     func saveTheRun(){
@@ -213,9 +213,9 @@ class GoOnARunViewController: UIViewController {
         let saveAction = UIAlertAction(title: "just save the run", style: .default) { (_) in
             self.saveTheRun()
         }
-        let shareAction = UIAlertAction(title: "Save and share this run", style: .default) { (_) in
-            self.saveAndShare()
-        }
+//        let shareAction = UIAlertAction(title: "Save and share this run", style: .default) { (_) in
+//            self.saveAndShare()
+//        }
         let deleteAction = UIAlertAction(title: "Delete This Run", style: .destructive) { (_) in
             //TODO: - present a alert that double checks if this is really what they want
             DispatchQueue.main.async {
@@ -225,7 +225,7 @@ class GoOnARunViewController: UIViewController {
         }
         guard let user = CloudController.shared.user else {return}
         if !user.friends.isEmpty{
-            alert.addAction(shareAction)
+//            alert.addAction(shareAction)
         }
         alert.addAction(saveAction)
         alert.addAction(deleteAction)
