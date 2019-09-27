@@ -28,8 +28,7 @@ class RunHistoryTableViewController: UITableViewController {
         if displayInbox{
             return user.runsRecieved
         } else {
-            
-            return user.runs
+            return CloudController.shared.organizeRunsByDate(runs: user.runs)
         }
     }
     
@@ -151,7 +150,7 @@ class RunHistoryTableViewController: UITableViewController {
         var distance = Measurement(value: 0.0, unit: UnitLength.miles)
         guard let user = CloudController.shared.user else {return}
         for run in user.runs{
-            distance = distance + Measurement(value: run.distance, unit: UnitLength.miles)
+            distance = distance + run.distanceInMeasurement
         }
         let formattedDistance = Converter.distance(distance)
         totalDistanceLabel.text = "Total Distance Ran: \(formattedDistance)"

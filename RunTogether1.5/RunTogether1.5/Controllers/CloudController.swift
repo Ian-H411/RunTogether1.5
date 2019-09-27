@@ -18,8 +18,7 @@ class CloudController {
     var userID:CKRecord.ID?
     
     let publicDatabase = CKContainer.default().publicCloudDatabase
-    
-    var testID = "huiuljoijiokjik"
+
     
     //MARK: - PUSH TO SERVER FUNCTIONS
     
@@ -80,6 +79,7 @@ class CloudController {
             guard let recordToSave = recordToSave else {completion(false);return}
             guard let runToSave = Run(record: recordToSave, user: user) else {completion(false);return}
             user.runs.append(runToSave)
+            user.runs = self.organizeRunsByDate(runs: user.runs)
             self.publicDatabase.add(operation)
             completion(true)
         }
@@ -126,11 +126,10 @@ class CloudController {
         } else {
             user.runsReferenceList = [CKRecord.Reference(recordID: myRun.ckRecordId, action: .none)]
         }
-        guard let recordUser = CKRecord(user: user) else {return}
-        guard let recordOpponentRun = CKRecord(run: opponentsRun) else {return}
-        let operation = CKModifyRecordsOperation(recordsToSave: [recordUser,recordOpponentRun], recordIDsToDelete: nil)
-        operation.savePolicy = .changedKeys
-        operation.queuePriority = .high
+       
+        
+        
+        
         guard let recordToPush = CKRecord(run: myRun) else {return}
         //save it
         publicDatabase.save(recordToPush) { (recordToSave, error) in
@@ -144,7 +143,15 @@ class CloudController {
             }
             guard let recordToSave = recordToSave else {completion(false);return}
             guard let runToSave = Run(record: recordToSave, user: user) else {completion(false);return}
-            user.runs.append(runToSave)
+            runToSave.competingRun = opponentsRun
+            opponentsRun.competingRun = runToSave
+             user.runs.append(runToSave)
+            guard let recordOpponentRun = CKRecord(run: opponentsRun) else {return}
+             guard let recordUser = CKRecord(user: user) else {return}
+           
+            let operation = CKModifyRecordsOperation(recordsToSave: [recordUser,recordOpponentRun], recordIDsToDelete: nil)
+            operation.savePolicy = .changedKeys
+            operation.queuePriority = .high
             self.publicDatabase.add(operation)
             completion(true)
         }
@@ -163,8 +170,15 @@ class CloudController {
         //remove from friendList references and objects
         if var friendList = userToBlock.friendReferenceList{
             for i in 0...friendList.count - 1{
-                if friendList[i] == CKRecord.Reference(recordID: user.recordID, action: .none){
+                if friendList[i].recordID.recordName == user.recordID.recordName{
                     friendList.remove(at: i)
+                }
+            }
+        }
+        if var userFriendList = user.friendReferenceList{
+            for i in 0...userFriendList.count - 1{
+                if userFriendList[i].recordID.recordName == userToBlock.recordID.recordName{
+                    userFriendList.remove(at: i)
                 }
             }
         }
@@ -176,8 +190,9 @@ class CloudController {
         }
         
         //and then push to the server
+        guard let recordOfUser = CKRecord(user: user) else {return}
         guard let recordOfBlockedUser = CKRecord(user: userToBlock) else {return}
-        let operation = CKModifyRecordsOperation(recordsToSave: [recordOfBlockedUser], recordIDsToDelete: nil)
+        let operation = CKModifyRecordsOperation(recordsToSave: [recordOfBlockedUser,recordOfUser], recordIDsToDelete: nil)
         operation.savePolicy = .changedKeys
         operation.queuePriority = .high
         publicDatabase.add(operation)
@@ -224,12 +239,9 @@ class CloudController {
     }
     // to be called every time the app starts up
     func retrieveUserProfile(completion: @escaping (Bool,Error?) -> Void){
-         
-        guard var userID = userID else {completion(false,nil);print("no user ID"); return}
         
-//        fake account login uncomment to login under dummy profile
-        let fakeID = CKRecord.ID(recordName: "HIdummyprofile")
-        userID = fakeID
+        guard let userID = userID else {completion(false,nil);print("no user ID"); return}
+        
         let predicate = NSPredicate(format: "UserReference = %@", userID.recordName)
         let query = CKQuery(recordType: UserKeys.userObjectKey, predicate: predicate)
         
@@ -374,7 +386,7 @@ class CloudController {
                 print("Inbox empty")
                 return
             }
-
+            
             let predicate = NSPredicate(format: "\(UserKeys.friendReferenceIDKey) CONTAINS %@", user.recordID)
             let query2 = CKQuery(recordType: UserKeys.userObjectKey, predicate: predicate)
             self.publicDatabase.perform(query2, inZoneWith: nil, completionHandler: { (recordsUsers, error) in
@@ -385,16 +397,19 @@ class CloudController {
                 }
                 guard let recordListUsers = recordsUsers else {completion(false); print("record list of users was nil");return}
                 var users:[User] = []
+                var tripped = false
                 for record in recordListUsers{
                     if let BlockedByList = record[UserKeys.blockedByUsers] as? [CKRecord.Reference]{
                         for userWhoBlocked in BlockedByList{
                             if userWhoBlocked.recordID.recordName == user.recordID.recordName{
-                                continue
+                                tripped = true
                             }
                         }
                     }
-                    guard let newUser = User(record: record) else {return}
-                    users.append(newUser)
+                    if !tripped{
+                        guard let newUser = User(record: record) else {return}
+                        users.append(newUser)
+                    }
                 }
                 var runs = [Run]()
                 for record in recordListRuns{
@@ -430,15 +445,25 @@ class CloudController {
                 return
             }
             guard let recordList = records else {completion(true);print("error decoding friends");return}
+            var tripped = false
             for record in recordList{
                 guard let friend = User(record: record) else {completion(true);print("error decoding friends");return}
-                if !user.friends.contains(friend){
-                    user.friends.append(friend)
+                if let bannedbylist = friend.blockedByReferenceList{
+                    for ban in bannedbylist{
+                        if ban.recordID.recordName == user.recordID.recordName{
+                            tripped = true
+                        }
+                    }
                 }
-                let friendsSorted = self.organizeUsersAlphabetically(users: user.friends)
-                user.friends = friendsSorted
-                completion(true)
-                return
+                if !tripped{
+                    if !user.friends.contains(friend){
+                        user.friends.append(friend)
+                    }
+                    let friendsSorted = self.organizeUsersAlphabetically(users: user.friends)
+                    user.friends = friendsSorted
+                    completion(true)
+                    return
+                }
             }
         }
     }
@@ -499,8 +524,8 @@ class CloudController {
                             }
                         }
                         if !tripwire{
-                        guard let newUser = User(record: record) else {completion([]); return}
-                        foundUsers.append(newUser)
+                            guard let newUser = User(record: record) else {completion([]); return}
+                            foundUsers.append(newUser)
                         }
                         tripwire = false
                     }
@@ -529,7 +554,7 @@ class CloudController {
     }
     func deleteUser(){
         guard let user = user else {return}
-    
+        
         let operation = CKModifyRecordsOperation(recordsToSave: nil, recordIDsToDelete: [user.recordID])
         
         publicDatabase.add(operation)
@@ -540,13 +565,23 @@ class CloudController {
         for i in 0...user.friends.count - 1{
             if user.friends[i] == friend{
                 user.friends.remove(at: i)
-                let operation = CKModifyRecordsOperation(recordsToSave: nil, recordIDsToDelete: [friend.recordID])
-                operation.queuePriority = .normal
-                publicDatabase.add(operation)
-                print("friend removed")
-                
+
             }
         }
+        if var friendsFriendList = friend.friendReferenceList {
+            for i in 0...friendsFriendList.count - 1{
+                if friendsFriendList[i].recordID.recordName == user.recordID.recordName{
+                    friendsFriendList.remove(at: i)
+                    friend.friendReferenceList = friendsFriendList
+                }
+            }
+        }
+        guard let friendRecord = CKRecord(user: friend) else {return}
+        let operation = CKModifyRecordsOperation(recordsToSave:[friendRecord] , recordIDsToDelete: nil)
+        operation.queuePriority = .high
+        operation.savePolicy = .changedKeys
+        publicDatabase.add(operation)
+        print("friend removed")
     }
     
     //MARK: - POINT SYSTEM

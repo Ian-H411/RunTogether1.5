@@ -13,8 +13,6 @@ class ChallengeAcceptedViewController: UIViewController {
     
     @IBOutlet weak var timeLabel: UILabel!
     
-
-    
     @IBOutlet weak var distanceLabel: UILabel!
     
     @IBOutlet weak var elevationGained: UILabel!
@@ -69,8 +67,10 @@ class ChallengeAcceptedViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        timer?.invalidate()
-        locationManager.stopUpdatingLocation()
+        super.viewWillDisappear(true)
+        if isRunning{
+            stopRun()
+        }
     }
     
     
@@ -131,7 +131,7 @@ class ChallengeAcceptedViewController: UIViewController {
         
     }
     
- 
+    
     
     
     @IBAction func startStopButtonTapped(_ sender: Any) {
@@ -168,7 +168,9 @@ class ChallengeAcceptedViewController: UIViewController {
         self.present(alert,animated: true)
     }
     func tryAgain(){
-        
+        isRunning = true
+        startStopButton.setTitle("Stop", for: .normal)
+        startRun()
     }
     func startLocationTracking(){
         //set the delegate
@@ -189,14 +191,8 @@ class ChallengeAcceptedViewController: UIViewController {
             self.stopRun()
         }
     }
-//    func passedFinishLineAlert(){
-//        let alertcontroller = UIAlertController(title: "CONGRATS", message: "you crossed the finish line", preferredStyle: .alert)
-//        let continueButton = UIAlertAction(title: "Continue", style: .default) { (_) in
-//            
-//        }
-//        alertcontroller.addAction(continueButton)
-//        self.present(alertcontroller, animated: true)
-//    }
+    
+    
     
     func startRun(){
         //clear everything out and then go
@@ -218,7 +214,7 @@ class ChallengeAcceptedViewController: UIViewController {
             return
         }
         if hasPassedDistance{
-        presentFinishedRunAlert()
+            presentFinishedRunAlert()
         }
     }
     
@@ -228,7 +224,6 @@ class ChallengeAcceptedViewController: UIViewController {
         let alert = UIAlertController(title: "Run complete congratulations!", message: "what would you like to do with this run?", preferredStyle: .actionSheet)
         
         let deleteAction = UIAlertAction(title: "Delete This Run", style: .destructive) { (_) in
-            //TODO: - present a alert that double checks if this is really what they want
             
         }
         let saveAction = UIAlertAction(title: "Save", style: .default) { (_) in
@@ -238,8 +233,8 @@ class ChallengeAcceptedViewController: UIViewController {
                 if success{
                     print("donesies")
                     DispatchQueue.main.async {
-                     
-                    self.navigationController? .popViewController(animated: true)
+                        
+                        self.navigationController? .popViewController(animated: true)
                     }
                 }
             }

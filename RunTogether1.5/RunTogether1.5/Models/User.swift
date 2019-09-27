@@ -17,8 +17,7 @@ class User: Equatable{
     
     let name:String
     
-    let totalMiles: Double
-    
+        
     var racesWon: Int{
         var total = 0
         for run in runs{
@@ -51,9 +50,8 @@ class User: Equatable{
     
     var prefersMetric: Bool
     
-    init(name: String, totalMiles: Double = 0.0, prefersMetric: Bool, userReference:String, ckRecordId: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString), runs: [Run] = [],recievedRuns: [Run] = []){
+    init(name: String, prefersMetric: Bool, userReference:String, ckRecordId: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString), runs: [Run] = [],recievedRuns: [Run] = []){
         self.name = name
-        self.totalMiles = totalMiles
         self.recordID = ckRecordId
         self.runs = runs
         self.prefersMetric = prefersMetric
@@ -63,23 +61,23 @@ class User: Equatable{
     
     init?(record: CKRecord){
         guard let name = record[UserKeys.nameKey] as? String,
-            let totalMiles = record[UserKeys.totalMilesKey] as? Double,
             let prefersMetric = record[UserKeys.preferedMeasureMent] as? Bool,
             let userReference = record[RunKeys.userReferenceKey] as? String
             else {return nil}
         let userFriendIds = record[UserKeys.friendReferenceIDKey] as? [CKRecord.Reference]
         let runsToDoIds = record[UserKeys.runsToDoReferenceIDs] as? [CKRecord.Reference]
         let runInboxs = record[UserKeys.runsReferenceList] as? [CKRecord.Reference]
+        let blockedList = record[UserKeys.blockedByUsers] as? [CKRecord.Reference]
         self.runs = []
         self.runsRecieved = []
         self.recordID = record.recordID
         self.name = name
-        self.totalMiles = totalMiles
         self.prefersMetric = prefersMetric
         self.friendReferenceList = userFriendIds
         self.runsRecievedReferenceList = runsToDoIds
         self.userReference = userReference
         self.runsReferenceList = runInboxs
+        self.blockedByReferenceList = blockedList
         
     }
 }
@@ -88,7 +86,6 @@ extension CKRecord {
     convenience init?(user: User){
         self.init(recordType: UserKeys.userObjectKey, recordID: user.recordID)
         self.setValue(user.name, forKey: UserKeys.nameKey)
-        self.setValue(user.totalMiles, forKey: UserKeys.totalMilesKey)
         self.setValue(user.racesWon, forKey: UserKeys.racesWonKey)
         self.setValue(user.prefersMetric, forKey: UserKeys.preferedMeasureMent)
         self.setValue(user.userReference, forKey: RunKeys.userReferenceKey)
@@ -97,6 +94,8 @@ extension CKRecord {
             if !friendList.isEmpty{
                 self.setValue(user.friendReferenceList, forKey: UserKeys.friendReferenceIDKey)
                 
+            } else {
+                setValue(nil, forKey: UserKeys.friendReferenceIDKey)
             }
         }
         if let runsToDo = user.runsRecievedReferenceList{

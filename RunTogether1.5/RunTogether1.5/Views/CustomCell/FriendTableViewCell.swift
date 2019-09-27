@@ -16,9 +16,6 @@ class FriendTableViewCell: UITableViewCell {
     
     @IBOutlet weak var addButton: UIButton!
     
-    @IBOutlet weak var iconView: UIImageView!
-    
-    
     @IBOutlet weak var usernameLabel: UILabel!
     
     var isASearchResult:Bool = false
@@ -54,12 +51,7 @@ extension FriendTableViewCell {
         cardView.layer.shadowOffset = .zero
         cardView.layer.shadowOpacity = 0.5
         cardView.layer.cornerRadius = 5
-        iconView.layer.cornerRadius = 15
-        iconView.layer.masksToBounds = true
-        iconView.layer.shadowColor = UIColor(named: "DeepMatteGrey")!.cgColor
-        iconView.layer.shadowRadius = 5
-        iconView.layer.shadowOffset = .zero
-        iconView.layer.shadowOpacity = 0.5
+        
         userInCell = user
         usernameLabel.text = "\(user.name)"
         addButton.layer.cornerRadius = 10
