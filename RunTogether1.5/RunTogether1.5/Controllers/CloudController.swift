@@ -204,19 +204,21 @@ class CloudController {
     
     
     //MARK: - START UPS
-    func performStartUpFetchs(completion: @escaping (Bool) -> Void){
+    func performStartUpFetchs(completion: @escaping (Bool,Error?) -> Void){
         retrieveUserID { (success) in
             if success{
                 self.retrieveUserProfile(completion: { (success, error) in
                     if let error = error{
                         print("there was an error in \(#function) :\(error) : \(error.localizedDescription)")
+                        completion(false,error)
+                        
                     }
-                    completion(success)
+                    completion(success,nil)
                     return
                 })
             } else {
                 print("hit")
-                completion(false)
+                completion(false,nil)
                 return
             }
         }

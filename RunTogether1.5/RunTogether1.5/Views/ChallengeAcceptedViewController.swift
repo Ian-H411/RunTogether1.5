@@ -145,7 +145,12 @@ class ChallengeAcceptedViewController: UIViewController {
                 stopRun()
                 isRunning = false
             }
+            
         } else {
+            if !Reachability.isConnectedToNetwork(){
+                presentNoInternetAlert()
+                return
+            }
             startRun()
             isRunning = true
             startStopButton.setTitle("Stop", for: .normal)
@@ -192,7 +197,11 @@ class ChallengeAcceptedViewController: UIViewController {
         }
     }
     
-    
+    func presentNoInternetAlert(){
+        let alertcontroller = UIAlertController(title: "Internet Connection Error", message: "Looks like your not connected to the internet try again later", preferredStyle: .alert)
+        alertcontroller.addAction(UIAlertAction(title: "okay", style: .default, handler: nil))
+        self.present(alertcontroller, animated:  true)
+    }
     
     func startRun(){
         //clear everything out and then go

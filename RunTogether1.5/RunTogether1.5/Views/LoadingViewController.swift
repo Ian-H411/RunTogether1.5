@@ -19,24 +19,24 @@ class LoadingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-   
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         if isICloudContainerAvailable(){
-           updateUI()
-           if Reachability.isConnectedToNetwork(){
-           retrieveUser()
-           } else {
-               warmingUpLabel.text = "Check your internet then \n try again"
-           }
-           } else{
-               warmingUpLabel.text = "Sign into icloud,\n and check that your icloud drive is turned on.  then afterwards try again."
-               warmingUpLabel.font = UIFont(name: "System Bold", size: 23)
-           }
+            updateUI()
+            if Reachability.isConnectedToNetwork(){
+                retrieveUser()
+            } else {
+                warmingUpLabel.text = "Check your internet then \n try again"
+            }
+        } else{
+            warmingUpLabel.text = "Sign into icloud,\n and check that your icloud drive is turned on.  then afterwards try again."
+            warmingUpLabel.font = UIFont(name: "System Bold", size: 23)
+        }
     }
-
+    
     func isICloudContainerAvailable()->Bool {
         if let _ = FileManager.default.ubiquityIdentityToken {
             return true
@@ -53,12 +53,18 @@ class LoadingViewController: UIViewController {
         }
     }
     func retrieveUser(){
-        CloudController.shared.performStartUpFetchs { (success) in
+        CloudController.shared.performStartUpFetchs { (success,error) in
+            if let error = error{
+                DispatchQueue.main.async {
+                    self.displayErrorAlert(error: error)
+                    return
+                }
+            }
             DispatchQueue.main.async {
-            if success{
-                self.performSegue(withIdentifier: "returningUser", sender: nil)
-            } else {
-            self.performSegue(withIdentifier: "newUser", sender: nil)
+                if success{
+                    self.performSegue(withIdentifier: "returningUser", sender: nil)
+                } else {
+                    self.performSegue(withIdentifier: "newUser", sender: nil)
                 }
             }
         }
@@ -70,20 +76,26 @@ class LoadingViewController: UIViewController {
         alertController.addAction(okayButton)
         self.present(alertController,animated: true)
     }
+    func displayErrorAlert(error:Error){
+        let alertcontroller = UIAlertController(title: "ICloudError", message: error.localizedDescription, preferredStyle: .alert)
+        let okayButton = UIAlertAction(title: "okay", style: .default, handler: nil)
+        alertcontroller.addAction(okayButton)
+        self.present(alertcontroller,animated: true)
+    }
     
     
 }
-    extension UIView {
-        func rotate360Degrees(duration: CFTimeInterval = 20.0, completionDelegate: AnyObject? = nil) {
-            let rotateAnimation = CABasicAnimation(keyPath: "transform.rotation")
-            rotateAnimation.fromValue = 0.0
-            rotateAnimation.toValue = CGFloat(.pi * 2.0)
-            rotateAnimation.duration = duration
+extension UIView {
+    func rotate360Degrees(duration: CFTimeInterval = 20.0, completionDelegate: AnyObject? = nil) {
+        let rotateAnimation = CABasicAnimation(keyPath: "transform.rotation")
+        rotateAnimation.fromValue = 0.0
+        rotateAnimation.toValue = CGFloat(.pi * 2.0)
+        rotateAnimation.duration = duration
+        
+        if let delegate: AnyObject = completionDelegate {
+            rotateAnimation.delegate = (delegate as! CAAnimationDelegate)
             
-            if let delegate: AnyObject = completionDelegate {
-                rotateAnimation.delegate = (delegate as! CAAnimationDelegate)
-                
-            }
-            self.layer.add(rotateAnimation, forKey: nil)
         }
+        self.layer.add(rotateAnimation, forKey: nil)
+    }
 }
