@@ -12,6 +12,7 @@ class ChallengeTableViewController: UITableViewController ,ChallengeTableViewCel
     func cellSettingHasChanged(_ sender: ChallengeTableViewCell) {
         if !Reachability.isConnectedToNetwork(){
             presentNoInternetAlert()
+            return
         }
         guard let friend = sender.userInCell else {return}
         guard let run = runToSend else {return}

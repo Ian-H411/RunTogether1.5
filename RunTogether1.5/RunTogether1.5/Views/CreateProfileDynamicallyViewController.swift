@@ -18,14 +18,11 @@ class CreateProfileDynamicallyViewController: UIViewController {
     
     @IBOutlet weak var letsGoButton: UIButton!
     
-    
     @IBOutlet weak var answerTextField: UITextField!
     
     @IBOutlet weak var questionLabel: UILabel!
     
     @IBOutlet weak var gobackButton: UIButton!
-    
-    
     
     //MARK: - Variables for user profile creation
     
@@ -64,14 +61,12 @@ class CreateProfileDynamicallyViewController: UIViewController {
     
     var measurementStylePicker:[[String]] = [["Customary", "Metric"]]
     
-   
-    
     var currentPickerData:[[String]] {
         let pickers = [userNamePicker,measurementStylePicker]
         return pickers[step]
     }
     
-    
+
     var toolbar:UIToolbar?
     
     var picker: UIPickerView?
@@ -108,6 +103,10 @@ class CreateProfileDynamicallyViewController: UIViewController {
     
     
     @IBAction func letsRunButtonTapped(_ sender: Any) {
+        if !Reachability.isConnectedToNetwork(){
+            presentNoInternetAlert()
+            return
+        }
         if !username.isEmpty{
             CloudController.shared.createNewUserAndPushWith(name: self.username, prefersMetric: self.isMetric) { (success) in
                 if success{
@@ -175,6 +174,7 @@ class CreateProfileDynamicallyViewController: UIViewController {
     @objc func backButtonTapped(){
         letsGoButton.isHidden = true
         let labelCarousel:[UILabel] = [usernameLabel,measurementLabel]
+        
         if step == 0{
             answerTextField.text = ""
         }
@@ -193,8 +193,19 @@ class CreateProfileDynamicallyViewController: UIViewController {
     
     @objc func toolbarButtonTapped(){
         guard let answer = answerTextField.text else {return}
+        if step == 1{
+            if isMetric == false{
+                measurementLabel.text = "Customary"
+                
+            }
+            
+        }
         if step == 0{
             if answer.isEmpty{
+                return
+            }
+            if !Reachability.isConnectedToNetwork(){
+                presentNoInternetAlert()
                 return
             }
             CloudController.shared.checkIfUserExists(username: answer) { (success) in
@@ -217,6 +228,11 @@ class CreateProfileDynamicallyViewController: UIViewController {
                 refreshUI()
                 view.reloadInputViews()
         }
+    }
+    func presentNoInternetAlert(){
+        let alertcontroller = UIAlertController(title: "Internet Connection Error", message: "Looks like your not connected to the internet try again later", preferredStyle: .alert)
+        alertcontroller.addAction(UIAlertAction(title: "okay", style: .default, handler: nil))
+        self.present(alertcontroller, animated:  true)
     }
     
     func addToStep(){
@@ -242,6 +258,7 @@ class CreateProfileDynamicallyViewController: UIViewController {
                 username = usernamerecieved
             }
             usernameLabel.isHidden = false
+            questionLabel.text = questions[step]
             answerTextField.text = textFieldstuff[step]
             guard let picker = picker else {return}
             answerTextField.inputView = picker
@@ -312,7 +329,7 @@ class CreateProfileDynamicallyViewController: UIViewController {
     }
     
     func presentUserExistsAlert(){
-        let alertcontroller = UIAlertController(title: "Sorry", message: "Sorry That UserName is already taken try another!", preferredStyle: .alert)
+        let alertcontroller = UIAlertController(title: "Sorry", message: "Sorry That Username is already taken try another!", preferredStyle: .alert)
         let alertButton = UIAlertAction(title: "Okay", style: .default, handler: nil)
         alertcontroller.addAction(alertButton)
         self.present(alertcontroller, animated: true)
@@ -353,7 +370,6 @@ extension CreateProfileDynamicallyViewController: UIPickerViewDelegate,UIPickerV
             
         }
     }
-    
-    
+
 }
 

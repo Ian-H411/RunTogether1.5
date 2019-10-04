@@ -11,6 +11,10 @@ import UIKit
 class FriendsTableViewController: UITableViewController, UISearchBarDelegate, FriendTableViewCellDelegate {
     func cellSettingHasChanged(_ sender: FriendTableViewCell, wasBlockPressed: Bool) {
       guard let newFriend = sender.userInCell else {return}
+        if !Reachability.isConnectedToNetwork(){
+            presentNoInternetAlert()
+            return
+        }
         if !wasBlockPressed{
             if !sender.isASearchResult{
                 presentRemoveFriend(oldFriend: newFriend)
@@ -55,6 +59,9 @@ class FriendsTableViewController: UITableViewController, UISearchBarDelegate, Fr
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
+        if !Reachability.isConnectedToNetwork(){
+            presentNoInternetAlert()
+        }
         super.viewDidLoad()
         findNewFriendsSearchBar.delegate = self
         CloudController.shared.retrieveFriends { (success) in

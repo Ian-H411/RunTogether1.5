@@ -30,6 +30,10 @@ class ProfileDetailViewController: UIViewController {
     //MARK: - ACTIONS
     
     @IBAction func SendToPrivacyPolicyLink(_ sender: Any) {
+        if !Reachability.isConnectedToNetwork(){
+            presentNoInternetAlert()
+            return
+        }
         if let url = URL(string: "https://sites.google.com/view/runagainstfriends") {
             UIApplication.shared.open(url)
         }
@@ -37,6 +41,10 @@ class ProfileDetailViewController: UIViewController {
     
     
     @IBAction func deleteProfileButtonTapped(_ sender: Any) {
+        if !Reachability.isConnectedToNetwork(){
+            presentNoInternetAlert()
+            return
+        }
         presentDeleteProfileAlert()
     }
     
@@ -77,6 +85,11 @@ class ProfileDetailViewController: UIViewController {
         return distance
     }
     
+    func presentNoInternetAlert(){
+        let alertcontroller = UIAlertController(title: "Internet Connection Error", message: "Looks like your not connected to the internet try again later", preferredStyle: .alert)
+        alertcontroller.addAction(UIAlertAction(title: "okay", style: .default, handler: nil))
+        self.present(alertcontroller, animated:  true)
+    }
     
     func presentDeleteProfileAlert(){
         let alertController = UIAlertController(title: "DELETE PROFILE", message: "THIS WILL REMOVE YOUR ENITRE PROFILE AND CANNOT BE UNDONE", preferredStyle: .alert)

@@ -23,6 +23,13 @@ class RunHistoryTableViewController: UITableViewController {
     
     var hasFiredRunInbox = false
     
+    lazy var refresh: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(RunHistoryTableViewController.handleRefresh(_:)), for: .valueChanged)
+        refreshControl.tintColor = UIColor(named: "SilverFox")!
+        return refreshControl
+    }()
+    
     var dataSource: [Run]{
         guard let user = CloudController.shared.user else {return []}
         if displayInbox{
@@ -62,6 +69,40 @@ class RunHistoryTableViewController: UITableViewController {
     }
     
     // MARK: - Table view data source
+    
+    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+        if !Reachability.isConnectedToNetwork(){
+           refresh.endRefreshing()
+            presentNoInternetAlert()
+
+        }
+        else if displayInbox{
+            CloudController.shared.retrieveRunsToDO { (success) in
+                if success{
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                        print("success")
+                        self.refresh.endRefreshing()
+                        return
+                    }
+                }
+                
+            }
+        } else {
+            CloudController.shared.retrieveRuns { (success) in
+                if success{
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                        print("success")
+                        self.refresh.endRefreshing()
+                        return
+                    }
+                }
+            }
+        }
+        self.refresh.endRefreshing()
+        return
+    }
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -118,6 +159,7 @@ class RunHistoryTableViewController: UITableViewController {
     
     func setUpUI(){
         
+        self.tableView.addSubview(self.refresh)
         let labelColor: String = "SilverFox"
         let labelBorderWidth: CGFloat = 1
         let cornerRadius: CGFloat = 10
@@ -143,7 +185,13 @@ class RunHistoryTableViewController: UITableViewController {
         }
         
     }
-  
+    func presentNoInternetAlert(){
+        let alertcontroller = UIAlertController(title: "Internet Connection Error", message: "Looks like your not connected to the internet try again later", preferredStyle: .alert)
+        alertcontroller.addAction(UIAlertAction(title: "okay", style: .default, handler: { (_) in
+            self.refresh.endRefreshing()
+        }))
+        self.present(alertcontroller, animated:  true)
+    }
     
     
     func setUpTotalDistance(){
