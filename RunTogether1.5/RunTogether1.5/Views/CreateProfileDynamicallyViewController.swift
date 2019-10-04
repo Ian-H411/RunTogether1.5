@@ -18,14 +18,11 @@ class CreateProfileDynamicallyViewController: UIViewController {
     
     @IBOutlet weak var letsGoButton: UIButton!
     
-    
     @IBOutlet weak var answerTextField: UITextField!
     
     @IBOutlet weak var questionLabel: UILabel!
     
     @IBOutlet weak var gobackButton: UIButton!
-    
-    
     
     //MARK: - Variables for user profile creation
     
@@ -64,14 +61,12 @@ class CreateProfileDynamicallyViewController: UIViewController {
     
     var measurementStylePicker:[[String]] = [["Customary", "Metric"]]
     
-   
-    
     var currentPickerData:[[String]] {
         let pickers = [userNamePicker,measurementStylePicker]
         return pickers[step]
     }
     
-    
+
     var toolbar:UIToolbar?
     
     var picker: UIPickerView?
@@ -179,6 +174,7 @@ class CreateProfileDynamicallyViewController: UIViewController {
     @objc func backButtonTapped(){
         letsGoButton.isHidden = true
         let labelCarousel:[UILabel] = [usernameLabel,measurementLabel]
+        
         if step == 0{
             answerTextField.text = ""
         }
@@ -197,6 +193,13 @@ class CreateProfileDynamicallyViewController: UIViewController {
     
     @objc func toolbarButtonTapped(){
         guard let answer = answerTextField.text else {return}
+        if step == 1{
+            if isMetric == false{
+                measurementLabel.text = "Customary"
+                
+            }
+            
+        }
         if step == 0{
             if answer.isEmpty{
                 return
@@ -255,6 +258,7 @@ class CreateProfileDynamicallyViewController: UIViewController {
                 username = usernamerecieved
             }
             usernameLabel.isHidden = false
+            questionLabel.text = questions[step]
             answerTextField.text = textFieldstuff[step]
             guard let picker = picker else {return}
             answerTextField.inputView = picker
@@ -366,7 +370,6 @@ extension CreateProfileDynamicallyViewController: UIPickerViewDelegate,UIPickerV
             
         }
     }
-    
-    
+
 }
 

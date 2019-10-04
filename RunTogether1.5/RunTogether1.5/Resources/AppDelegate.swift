@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let locationManager = LocationManager.shared
         CloudController.shared.retrieveUserID { (_) in
         }
-        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestAlwaysAuthorization()
         requestUserDiscoverability()
         return true
     }
